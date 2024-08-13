@@ -246,7 +246,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: "/admin/babin/delete", // Ubah sesuai dengan URL
+                            url: site_url("/admin/babin/delete"), // Ubah sesuai dengan URL
                             data: {
                                 id_babin: id_babin,
                                 _method: 'DELETE'
