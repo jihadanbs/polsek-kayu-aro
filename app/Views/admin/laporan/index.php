@@ -209,7 +209,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: "/admin/laporan/delete",
+                            url: '<?= site_url('/admin/laporan/delete') ?>',
                             data: {
                                 id_laporan_babin: id_laporan_babin,
                                 _method: 'DELETE'

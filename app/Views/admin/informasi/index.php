@@ -220,7 +220,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: "/admin/informasi/delete", // Ubah sesuai dengan URL
+                            url: '<?= site_url("/admin/informasi/delete") ?>', // Ubah sesuai dengan URL
                             data: {
                                 id_informasi: id_informasi,
                                 _method: 'DELETE'

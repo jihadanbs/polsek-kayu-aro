@@ -212,7 +212,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: "/admin/feedback/delete",
+                            url: '<?= site_url('/admin/feedback/delete') ?>',
                             data: {
                                 id_feedback: id_feedback
                             },

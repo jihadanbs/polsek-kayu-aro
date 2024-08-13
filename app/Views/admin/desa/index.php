@@ -229,7 +229,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: "/admin/desa/delete",
+                            url: '<?= site_url('/admin/desa/delete') ?>',
                             data: {
                                 id_desa: id_desa,
                                 _method: 'DELETE'

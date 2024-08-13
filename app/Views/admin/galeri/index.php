@@ -237,7 +237,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: "/admin/galeri/delete",
+                            url: '<?= site_url('/admin/galeri/delete') ?>',
                             data: {
                                 id_foto: id_foto,
                                 _method: 'DELETE'
