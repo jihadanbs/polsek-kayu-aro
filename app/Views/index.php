@@ -505,6 +505,15 @@
             <div class="container section-title" data-aos="fade-up">
                 <h2>Galeri Polsek</h2>
                 <p>Temukan berbagai foto yang menggambarkan aktivitas, acara, dan layanan kami. Galeri ini menyajikan momen berharga dan usaha kami dalam menjaga keamanan dan ketertiban di masyarakat.</p>
+                <!-- Cek apakah galeri kosong -->
+                <?php if (empty($tb_foto)) : ?>
+                    <!-- Jika galeri kosong, tampilkan gambar 404 -->
+                    <div class="col-12 text-center">
+                        <img src="assets/img/404.gif" alt="Galeri Kosong" class="img-fluid" style="max-width: 500px;">
+                        <p class="fw-bold">Tidak ada foto di galeri saat ini</p>
+                    </div>
+                <?php else : ?>
+                <?php endif; ?>
             </div>
             <!-- End Section Title -->
 
@@ -532,7 +541,6 @@
             <div class="container">
                 <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
                     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
                         <!-- galeri Item with multiple images in a carousel -->
                         <?php foreach ($currentItems as $index => $row) : ?>
                             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
@@ -672,6 +680,15 @@
             <div class="container section-title" data-aos="fade-up">
                 <h2>Informasi-Edukasi</h2>
                 <p>Konten Informasi dan Edukasi Untuk Masyarakat</p>
+                <!-- Cek apakah galeri kosong -->
+                <?php if (empty($tb_informasi_edukasi)) : ?>
+                    <!-- Jika galeri kosong, tampilkan gambar 404 -->
+                    <div class="col-12 text-center">
+                        <img src="assets/img/404.gif" alt="Galeri Kosong" class="img-fluid" style="max-width: 500px;">
+                        <p class="fw-bold">Tidak ada informasi-edukasi saat ini</p>
+                    </div>
+                <?php else : ?>
+                <?php endif; ?>
             </div><!-- End Section Title -->
 
             <!-- format tanggal -->
