@@ -509,7 +509,7 @@
                 <?php if (empty($tb_foto)) : ?>
                     <!-- Jika galeri kosong, tampilkan gambar 404 -->
                     <div class="col-12 text-center">
-                        <img src="assets/img/404.gif" alt="Galeri Kosong" class="img-fluid" style="max-width: 500px;">
+                        <img src="assets/img/404.gif" alt="Galeri Kosong" class="img-fluid" style="max-width: 300px;">
                         <p class="fw-bold">Tidak ada foto di galeri saat ini</p>
                     </div>
                 <?php else : ?>
@@ -684,7 +684,7 @@
                 <?php if (empty($tb_informasi_edukasi)) : ?>
                     <!-- Jika informasi-edukasi kosong, tampilkan gambar 404 -->
                     <div class="col-12 text-center">
-                        <img src="assets/img/404.gif" alt="informasi-edukasi Kosong" class="img-fluid" style="max-width: 500px;">
+                        <img src="assets/img/404.gif" alt="informasi-edukasi Kosong" class="img-fluid" style="max-width: 300px;">
                         <p class="fw-bold">Tidak ada informasi-edukasi saat ini</p>
                     </div>
                 <?php else : ?>
