@@ -55,20 +55,20 @@
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section accent-background">
+        <section id="hero" class="hero">
 
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row gy-5 justify-content-between">
                     <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                        <h2><span>Selamat Datang di </span><span class="accent">Polsek Kayu Aro</span></h2>
-                        <p>Dedikasi kami adalah memberikan pelayanan prima untuk keamanan dan kenyamanan masyarakat.</p>
+                        <h2><span style="color: #ffffff;">Selamat Datang di </span><span style="color: #ffffff;">Polsek Kayu Aro</span></h2>
+                        <p style="color: #ffffff;">Dedikasi kami adalah memberikan pelayanan prima untuk keamanan dan kenyamanan masyarakat.</p>
                         <div class="d-flex">
                             <a href="#tentang-kami" class="btn-get-started">Mulai</a>
                             <a href="https://youtu.be/O7q2ed2uZE4?feature=shared" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Lihat Video</span></a>
                         </div>
                     </div>
-                    <div class="col-lg-5 order-1 order-lg-2">
-                        <img src="assets/img/hero-img.svg" class="img-fluid" alt="">
+                    <div class="col-lg-4 order-1 order-lg-2">
+                        <img src="assets/img/police.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>

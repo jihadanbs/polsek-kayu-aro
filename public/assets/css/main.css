@@ -9,7 +9,7 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #222222; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #172a28; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #008374; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: #C62E2E; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -17,11 +17,11 @@
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #ffffff;  /* The default color of the main navmenu links */
-  --nav-hover-color: #008374; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #C62E2E; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #01433c; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #008374; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-color: #393d3d; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #C62E2E; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -40,11 +40,11 @@
 }
 
 .accent-background {
-  --background-color: #008374;
+  --background-color: #3C3D37;
   --default-color: #ffffff;
   --heading-color: #ffffff;
   --accent-color: #ffffff;
-  --surface-color: #00b6a1;
+  --surface-color: #C62E2E;
   --contrast-color: #ffffff;
 }
 
@@ -218,7 +218,7 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: #008374;
+  --background-color: #FF204E;
   --heading-color: #ffffff;
   color: var(--default-color);
   transition: all 0.5s;
@@ -874,6 +874,7 @@ section,
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
+  background: url("../../assets/img/indonesia.png");
   width: 100%;
   position: relative;
   padding: 140px 0 0 0;
@@ -911,7 +912,7 @@ section,
   padding: 14px 40px;
   border-radius: 50px;
   transition: 0.3s;
-  border: 2px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border: 2px solid color-mix(in srgb, #FFFFFF, transparent 90%);
   background-color: color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
@@ -924,11 +925,11 @@ section,
   transition: 0.5s;
   margin-left: 25px;
   font-weight: 600;
-  color: var(--default-color);
+  color: #FFFFFF;
 }
 
 .hero .btn-watch-video i {
-  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  color: color-mix(in srgb, #FFFFFF, transparent 50%);
   font-size: 32px;
   transition: 0.3s;
   line-height: 0;
@@ -963,8 +964,8 @@ section,
     left: 0;
     right: 0;
     height: calc(50% + 20px);
-    background-color: var(--default-color);
-    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    background-color: #3C3D37;
+    border-top: 1px solid color-mix(in srgb, #3C3D37, transparent 90%);
   }
 }
 
@@ -972,7 +973,7 @@ section,
   padding: 60px 30px;
   position: relative;
   overflow: hidden;
-  background: var(--background-color);
+  background: #FF204E;
   box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
@@ -1004,7 +1005,7 @@ section,
 }
 
 .hero .icon-box:hover {
-  background-color: color-mix(in srgb, var(--background-color), white 10%);
+  background-color: color-mix(in srgb, #3C3D37, white 10%);
 }
 
 .hero .icon-box:hover .title a,
