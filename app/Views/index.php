@@ -680,11 +680,11 @@
             <div class="container section-title" data-aos="fade-up">
                 <h2>Informasi-Edukasi</h2>
                 <p>Konten Informasi dan Edukasi Untuk Masyarakat</p>
-                <!-- Cek apakah galeri kosong -->
+                <!-- Cek apakah informasi-edukasi kosong -->
                 <?php if (empty($tb_informasi_edukasi)) : ?>
-                    <!-- Jika galeri kosong, tampilkan gambar 404 -->
+                    <!-- Jika informasi-edukasi kosong, tampilkan gambar 404 -->
                     <div class="col-12 text-center">
-                        <img src="assets/img/404.gif" alt="Galeri Kosong" class="img-fluid" style="max-width: 500px;">
+                        <img src="assets/img/404.gif" alt="informasi-edukasi Kosong" class="img-fluid" style="max-width: 500px;">
                         <p class="fw-bold">Tidak ada informasi-edukasi saat ini</p>
                     </div>
                 <?php else : ?>
