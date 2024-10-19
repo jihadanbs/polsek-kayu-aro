@@ -50,7 +50,7 @@
                                 <div class="mb-3">
                                     <label for="judul_foto" class="col-form-label">Judul Foto :</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control <?= ($validation->hasError('judul_foto')) ? 'is-invalid' : ''; ?>" id="judul_foto" name="judul_foto" placeholder="Masukkan Judul Foto" style="background-color: white;" autofocus value="<?= esc(old('judul_foto'), 'attr'); ?>">
+                                        <input type="text" class="form-control <?= ($validation->hasError('judul_foto')) ? 'is-invalid' : ''; ?>" id="judul_foto" name="judul_foto" placeholder="Masukkan Judul Foto" style="background-color: white;" autofocus value="<?= esc(old('judul_foto'), 'attr'); ?>" autocomplete="off">
                                         <small class="form-text text-muted">Judul Singkat Saja Maksimal 2-4 Kalimat. Cth: Kerja Bakti Desa Gedang</small>
 
                                         <div class="invalid-feedback">
@@ -61,7 +61,7 @@
 
                                 <div class="mb-3">
                                     <label for="deskripsi" class="col-form-label">Deskripsi Foto :</label>
-                                    <textarea class="form-control custom-border <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>" required name="deskripsi" placeholder="Masukkan Deskripsi dari Foto" id="deskripsi" cols="30" rows="5" style="background-color: white;"><?= esc(old('deskripsi'), 'attr'); ?></textarea>
+                                    <textarea class="form-control custom-border <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>" required name="deskripsi" placeholder="Masukkan Deskripsi dari Foto" id="deskripsi" cols="30" rows="5" style="background-color: white;" autocomplete="off"><?= esc(old('deskripsi'), 'attr'); ?></textarea>
 
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('deskripsi'); ?>
