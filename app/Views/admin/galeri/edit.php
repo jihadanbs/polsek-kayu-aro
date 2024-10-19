@@ -51,8 +51,8 @@
                                 <div class="mb-3">
                                     <label for="judul_foto" class="col-form-label">Judul Foto :</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control <?= ($validation->hasError('judul_foto')) ? 'is-invalid' : ''; ?>" id="judul_foto" style="background-color: white;" placeholder="Masukkan Judul Foto" name="judul_foto" value="<?= esc(old('judul_foto', $tb_foto['judul_foto']), 'attr'); ?>">
-                                        <small class="form-text text-muted">Judul Singkat Saja Maksimal 2-3 Kalimat. Cth: Kegiatan Bupati Pesawaran</small>
+                                        <input type="text" class="form-control <?= ($validation->hasError('judul_foto')) ? 'is-invalid' : ''; ?>" id="judul_foto" style="background-color: white;" placeholder="Masukkan Judul Foto" name="judul_foto" value="<?= esc(old('judul_foto', $tb_foto['judul_foto']), 'attr'); ?>" autocomplete="off">
+                                        <small class="form-text text-muted">Judul Singkat Saja Maksimal 2-3 Kalimat. Cth: Kegiatan Warga Kerinci, Jambi</small>
                                         <div class="invalid-feedback">
                                             <?= $validation->getError('judul_foto'); ?>
                                         </div>
@@ -61,7 +61,7 @@
 
                                 <div class="mb-3">
                                     <label for="deskripsi" class="col-form-label">Deskripsi :</label>
-                                    <textarea class="form-control custom-border <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>" id="deskripsi" cols="30" rows="5" style="background-color: white;" placeholder="Masukkan Deskripsi" name="deskripsi"><?= esc(old('deskripsi', $tb_foto['deskripsi']), 'attr'); ?></textarea>
+                                    <textarea class="form-control custom-border <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>" id="deskripsi" cols="30" rows="5" style="background-color: white;" placeholder="Masukkan Deskripsi" name="deskripsi" autocomplete="off"><?= esc(old('deskripsi', $tb_foto['deskripsi']), 'attr'); ?></textarea>
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('deskripsi'); ?>
                                     </div>
