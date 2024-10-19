@@ -81,7 +81,7 @@
                             <div class="icon-box">
                                 <div class="icon"><i class="bi bi-camera2"></i></div>
                                 <h4 class="title">
-                                    <a href="#portfolio" class="stretched-link">Galeri</a>
+                                    <a href="#galeri" class="stretched-link">Galeri</a>
                                 </h4>
                             </div>
                         </div>
@@ -499,7 +499,7 @@
         </section><!-- /Testimonials Section -->
 
         <!-- galeri Section -->
-        <section id="galeri" class="portfolio section">
+        <section id="galeri" class="galeri section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -543,8 +543,8 @@
                     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
                         <!-- galeri Item with multiple images in a carousel -->
                         <?php foreach ($currentItems as $index => $row) : ?>
-                            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                                <div class="portfolio-content h-100">
+                            <div class="col-lg-4 col-md-6 galeri-item isotope-item filter-app">
+                                <div class="galeri-content h-100">
                                     <div id="carouselExampleControls<?= $index ?>" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <?php
@@ -553,7 +553,7 @@
                                             ?>
                                             <?php foreach ($files as $file) : ?>
                                                 <div class="carousel-item <?= $isActive ? 'active' : '' ?>">
-                                                    <a href="<?= esc(base_url($file), 'attr') ?>" data-glightbox="title: <?= esc($row['judul_foto'], 'html') ?> - Image <?= $index ?>">
+                                                    <a href="<?= esc(base_url($file), 'attr') ?>" data-fancybox="title: <?= esc($row['judul_foto'], 'html') ?> - Image <?= $index ?>">
                                                         <img src="<?= esc(base_url($file), 'attr') ?>" class="d-block w-100 carousel-image img-fluid" alt="...">
                                                     </a>
                                                 </div>
@@ -569,7 +569,7 @@
                                             <span class="visually-hidden">Next</span>
                                         </button>
                                     </div>
-                                    <div class="portfolio-info">
+                                    <div class="galeri-info">
                                         <h4 class="text-center fw-bold"><?= esc($row['judul_foto'], 'html') ?></h4>
                                         <p><?= esc($row['deskripsi'], 'html') ?></p>
                                     </div>
@@ -594,17 +594,19 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Initialize Glightbox -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
             <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    // Initialize GLightbox for all elements with 'data-glightbox' attribute
-                    const lightbox = GLightbox({
-                        selector: 'a[data-glightbox]'
+                $(document).ready(function() {
+                    $('[data-fancybox="gallery"]').fancybox({
+                        buttons: [
+                            'download',
+                            'thumbs',
+                            'close'
+                        ]
                     });
                 });
             </script>
-
         </section><!-- /galeri Section -->
 
         <!-- Faq Section -->

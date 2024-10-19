@@ -1436,16 +1436,16 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Portfolio Section
+# Galeri Section
 --------------------------------------------------------------*/
-.portfolio .portfolio-filters {
+.galeri .galeri-filters {
   padding: 0 0 20px 0;
   margin: 0 auto;
   list-style: none;
   text-align: center;
 }
 
-.portfolio .portfolio-filters li {
+.galeri .galeri-filters li {
   cursor: pointer;
   display: inline-block;
   padding: 0;
@@ -1456,40 +1456,40 @@ section,
   transition: all 0.3s ease-in-out;
 }
 
-.portfolio .portfolio-filters li:hover,
-.portfolio .portfolio-filters li.filter-active {
+.galeri .galeri-filters li:hover,
+.galeri .galeri-filters li.filter-active {
   color: var(--accent-color);
 }
 
-.portfolio .portfolio-filters li:first-child {
+.galeri .galeri-filters li:first-child {
   margin-left: 0;
 }
 
-.portfolio .portfolio-filters li:last-child {
+.galeri .galeri-filters li:last-child {
   margin-right: 0;
 }
 
 @media (max-width: 575px) {
-  .portfolio .portfolio-filters li {
+  .galeri .galeri-filters li {
     font-size: 14px;
     margin: 0 5px;
   }
 }
 
-.portfolio .portfolio-content {
+.galeri .galeri-content {
   background-color: var(--surface-color);
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   height: 100%;
   overflow: hidden;
 }
 
-.portfolio .portfolio-content img {
+.galeri .galeri-content img {
   transition: 0.3s;
   position: relative;
   z-index: 1;
 }
 
-.portfolio .portfolio-content .portfolio-info {
+.galeri .galeri-content .galeri-info {
   background-color: var(--background-color);
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   padding: 25px 20px;
@@ -1497,29 +1497,29 @@ section,
   z-index: 2;
 }
 
-.portfolio .portfolio-content .portfolio-info h4 {
+.galeri .galeri-content .galeri-info h4 {
   font-size: 18px;
   font-weight: 600;
   padding-right: 50px;
 }
 
-.portfolio .portfolio-content .portfolio-info h4 a {
+.galeri .galeri-content .galeri-info h4 a {
   color: var(--heading-color);
   transition: 0.3s;
 }
 
-.portfolio .portfolio-content .portfolio-info h4 a:hover {
+.galeri .galeri-content .galeri-info h4 a:hover {
   color: var(--accent-color);
 }
 
-.portfolio .portfolio-content .portfolio-info p {
+.galeri .galeri-content .galeri-info p {
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   font-size: 14px;
   margin-bottom: 0;
   padding-right: 50px;
 }
 
-.portfolio .portfolio-content:hover img {
+.galeri .galeri-content:hover img {
   transform: scale(1.1);
 }
 
@@ -2050,24 +2050,24 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Portfolio Details Section
+# galeri Details Section
 --------------------------------------------------------------*/
-.portfolio-details .portfolio-details-slider img {
+.galeri-details .galeri-details-slider img {
   width: 100%;
 }
 
-.portfolio-details .swiper-wrapper {
+.galeri-details .swiper-wrapper {
   height: auto;
 }
 
-.portfolio-details .swiper-button-prev,
-.portfolio-details .swiper-button-next {
+.galeri-details .swiper-button-prev,
+.galeri-details .swiper-button-next {
   width: 48px;
   height: 48px;
 }
 
-.portfolio-details .swiper-button-prev:after,
-.portfolio-details .swiper-button-next:after {
+.galeri-details .swiper-button-prev:after,
+.galeri-details .swiper-button-next:after {
   color: rgba(255, 255, 255, 0.8);
   background-color: rgba(0, 0, 0, 0.15);
   font-size: 24px;
@@ -2080,36 +2080,36 @@ section,
   transition: 0.3s;
 }
 
-.portfolio-details .swiper-button-prev:hover:after,
-.portfolio-details .swiper-button-next:hover:after {
+.galeri-details .swiper-button-prev:hover:after,
+.galeri-details .swiper-button-next:hover:after {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 575px) {
 
-  .portfolio-details .swiper-button-prev,
-  .portfolio-details .swiper-button-next {
+  .galeri-details .swiper-button-prev,
+  .galeri-details .swiper-button-next {
     display: none;
   }
 }
 
-.portfolio-details .swiper-pagination {
+.galeri-details .swiper-pagination {
   margin-top: 20px;
   position: relative;
 }
 
-.portfolio-details .swiper-pagination .swiper-pagination-bullet {
+.galeri-details .swiper-pagination .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
   background-color: color-mix(in srgb, var(--default-color), transparent 85%);
   opacity: 1;
 }
 
-.portfolio-details .swiper-pagination .swiper-pagination-bullet-active {
+.galeri-details .swiper-pagination .swiper-pagination-bullet-active {
   background-color: var(--accent-color);
 }
 
-.portfolio-details .portfolio-info h3 {
+.galeri-details .galeri-info h3 {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -2117,7 +2117,7 @@ section,
   position: relative;
 }
 
-.portfolio-details .portfolio-info h3:after {
+.galeri-details .galeri-info h3:after {
   content: "";
   position: absolute;
   display: block;
@@ -2128,26 +2128,26 @@ section,
   bottom: 0;
 }
 
-.portfolio-details .portfolio-info ul {
+.galeri-details .galeri-info ul {
   list-style: none;
   padding: 0;
   font-size: 15px;
 }
 
-.portfolio-details .portfolio-info ul li {
+.galeri-details .galeri-info ul li {
   display: flex;
   flex-direction: column;
   padding-bottom: 15px;
 }
 
-.portfolio-details .portfolio-info ul strong {
+.galeri-details .galeri-info ul strong {
   text-transform: uppercase;
   font-weight: 400;
   color: color-mix(in srgb, var(--default-color), transparent 50%);
   font-size: 14px;
 }
 
-.portfolio-details .portfolio-info .btn-visit {
+.galeri-details .galeri-info .btn-visit {
   padding: 8px 40px;
   background: var(--accent-color);
   color: var(--contrast-color);
@@ -2155,28 +2155,28 @@ section,
   transition: 0.3s;
 }
 
-.portfolio-details .portfolio-info .btn-visit:hover {
+.galeri-details .galeri-info .btn-visit:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
-.portfolio-details .portfolio-description h2 {
+.galeri-details .galeri-description h2 {
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-.portfolio-details .portfolio-description p {
+.galeri-details .galeri-description p {
   padding: 0;
 }
 
-.portfolio-details .portfolio-description .testimonial-item {
+.galeri-details .galeri-description .testimonial-item {
   padding: 30px 30px 0 30px;
   position: relative;
   background: color-mix(in srgb, var(--default-color), transparent 97%);
   margin-bottom: 50px;
 }
 
-.portfolio-details .portfolio-description .testimonial-item .testimonial-img {
+.galeri-details .galeri-description .testimonial-item .testimonial-img {
   width: 90px;
   border-radius: 50px;
   border: 6px solid var(--background-color);
@@ -2184,33 +2184,33 @@ section,
   margin: 0 10px 0 0;
 }
 
-.portfolio-details .portfolio-description .testimonial-item h3 {
+.galeri-details .galeri-description .testimonial-item h3 {
   font-size: 18px;
   font-weight: bold;
   margin: 15px 0 5px 0;
   padding-top: 20px;
 }
 
-.portfolio-details .portfolio-description .testimonial-item h4 {
+.galeri-details .galeri-description .testimonial-item h4 {
   font-size: 14px;
   color: #6c757d;
   margin: 0;
 }
 
-.portfolio-details .portfolio-description .testimonial-item .quote-icon-left,
-.portfolio-details .portfolio-description .testimonial-item .quote-icon-right {
+.galeri-details .galeri-description .testimonial-item .quote-icon-left,
+.galeri-details .galeri-description .testimonial-item .quote-icon-right {
   color: color-mix(in srgb, var(--accent-color), transparent 50%);
   font-size: 26px;
   line-height: 0;
 }
 
-.portfolio-details .portfolio-description .testimonial-item .quote-icon-left {
+.galeri-details .galeri-description .testimonial-item .quote-icon-left {
   display: inline-block;
   left: -5px;
   position: relative;
 }
 
-.portfolio-details .portfolio-description .testimonial-item .quote-icon-right {
+.galeri-details .galeri-description .testimonial-item .quote-icon-right {
   display: inline-block;
   right: -5px;
   position: relative;
@@ -2218,7 +2218,7 @@ section,
   transform: scale(-1, -1);
 }
 
-.portfolio-details .portfolio-description .testimonial-item p {
+.galeri-details .galeri-description .testimonial-item p {
   font-style: italic;
   margin: 0 0 15px 0 0 0;
   padding: 0;
@@ -2835,4 +2835,98 @@ section,
   padding-left: 5px;
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
+}
+
+/* card galeri*/
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .8);
+  z-index: 100;
+  text-align: center;
+  padding: 130px 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all .1 ease-out;
+}
+.overlay img{
+  top: 200px;
+  width: 50%;
+  margin: auto 0;
+}
+.overlay:target{
+  bottom: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  background-color: rgba(0, 0, 0, .8);
+  transition: all .1 ease-in;
+}
+
+.card-body1 {
+  overflow: hidden; /* Menghindari teks keluar dari kartu */
+}
+
+.card-title1 {
+  white-space: nowrap; /* Mencegah teks melintasi batas kartu */
+  overflow: hidden; /* Menghindari teks keluar dari kartu */
+  text-overflow: ellipsis; /* Tambahkan titik-titik jika teks terlalu panjang */
+  color: #28527A;
+  padding: 0 15px; /* Tambahkan padding di sisi kanan dan kiri */
+  margin: 10px 0; /* Tambahkan margin atas dan bawah */
+}
+
+.card-item {
+  display: none;
+  padding-top: 30px;
+}
+
+.card-item.active {
+  display: block;
+}
+
+.carousel-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* new */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #28527A;
+  border-radius: 50px;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: #F4D160;
+  /* Warna berubah saat hover */
+}
+
+.card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* card galeri*/
+
+/* Card Galeri */
+.custom-card2{
+  background-color: #f4d160;
+  height: 90px;
+  width: 80%;
+  top: 55px;
+  font-weight: 700;
+  color: #28527A; /* for text-light */
+}
+.custom-card-body {
+  margin-top: 15px;
 }
