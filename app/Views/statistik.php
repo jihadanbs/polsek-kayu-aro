@@ -10,8 +10,8 @@
                 <div class="container">
                     <div class="row d-flex justify-content-center text-center">
                         <div class="col-lg-8">
-                            <h1>Detail Informasi dan Edukasi</h1>
-                            <p class="mb-0">Temukan Penjelasan Mendalam dan Bermanfaat dalam Informasi dan Edukasi Kami</p>
+                            <h1>Statistik Wilayah</h1>
+                            <p class="mb-0">Temukan Data Informasi Setiap Wilayahnya</p>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="container">
                     <ol>
                         <li><a href="/">Beranda</a></li>
-                        <li class="current">Detail Informasi-Edukasi</li>
+                        <li class="current">Statistik</li>
                     </ol>
                 </div>
             </nav>
@@ -31,28 +31,13 @@
 
                 <div class="col-lg-8">
 
-                    <!-- Blog Details Section -->
                     <section id="blog-details" class="blog-details section">
 
-                    </section><!-- /Blog Details Section -->
+                    </section>
                 </div>
 
                 <div class="col-lg-4 sidebar">
 
-                    <div class="widgets-container">
-
-                        <!-- Search Widget -->
-                        <div class="search-widget widget-item">
-
-                            <h3 class="widget-title">Search</h3>
-                            <form action="">
-                                <input type="text">
-                                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                            </form>
-
-                        </div><!--/Search Widget -->
-
-                    </div>
 
                 </div>
 
