@@ -517,6 +517,39 @@
             </div>
             <!-- End Section Title -->
 
+            <!-- format tanggal -->
+            <?php
+
+            if (!function_exists('formatTanggal')) {
+                function formatTanggal($date)
+                {
+                    $bulanIndonesia = [
+                        1 => 'Januari',
+                        2 => 'Februari',
+                        3 => 'Maret',
+                        4 => 'April',
+                        5 => 'Mei',
+                        6 => 'Juni',
+                        7 => 'Juli',
+                        8 => 'Agustus',
+                        9 => 'September',
+                        10 => 'Oktober',
+                        11 => 'November',
+                        12 => 'Desember'
+                    ];
+
+                    $timestamp = strtotime($date);
+                    $day = date('d', $timestamp);
+                    $month = date('n', $timestamp);
+                    $year = date('Y', $timestamp);
+
+                    return "$day " . $bulanIndonesia[$month] . " $year";
+                }
+            }
+
+            ?>
+            <!-- end format tanggal -->
+
             <?php
             // Jumlah item per halaman
             $itemsPerPage = 6;
@@ -571,6 +604,9 @@
                                     </div>
                                     <div class="galeri-info">
                                         <h4 class="text-center fw-bold"><?= esc($row['judul_foto'], 'html') ?></h4>
+                                        <p class="post-date">
+                                            <time datetime="<?= esc($row['tanggal_foto'], 'html'); ?>"><?= esc(formatTanggal($row['tanggal_foto']), 'html'); ?></time>
+                                        </p>
                                         <p><?= esc($row['deskripsi'], 'html') ?></p>
                                     </div>
                                 </div>
