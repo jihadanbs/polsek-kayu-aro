@@ -55,9 +55,110 @@ class TbDesa extends Migration
                 'constraint' => 255,
                 'null' => TRUE,
             ],
+            'jumlah_kepala_keluarga' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
             'website' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+                'null' => TRUE,
+            ],
+            // Jenis Kelamin
+            'jumlah_penduduk_pria' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_wanita' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            // Usia
+            'jumlah_penduduk_usia_0_14' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_usia_15_64' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_usia_65_keatas' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            // Pendidikan
+            'jumlah_penduduk_tidak_sekolah' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_sd' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_smp' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_sma_smk' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_diploma_sarjana' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            // Pekerjaan
+            'jumlah_penduduk_bekerja' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_tidak_bekerja' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            // Status Pernikahan
+            'jumlah_penduduk_belum_menikah' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_menikah' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_penduduk_cerai' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            // Sarana dan Prasarana
+            'jumlah_sekolah' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_posyandu' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
+            'jumlah_tempat_ibadah' => [
+                'type' => 'INT',
+                'constraint' => 11,
                 'null' => TRUE,
             ],
             'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP',

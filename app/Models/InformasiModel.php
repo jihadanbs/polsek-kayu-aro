@@ -117,7 +117,7 @@ class InformasiModel extends Model
     public function getFilesById($id_informasi)
     {
         // Ambil hanya kolom yang dibutuhkan
-        return $this->select('gambar')->where('id_informasi', $id_informasi)->findAll();
+        return $this->select('gambar, profile_penulis')->where('id_informasi', $id_informasi)->findAll();
     }
 
     public function deleteById($id_informasi)
