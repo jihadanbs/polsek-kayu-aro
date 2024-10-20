@@ -79,9 +79,9 @@
 
                         <div class="col-xl-3 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class="bi bi-camera2"></i></div>
+                                <div class="icon"><i class="bi bi-clipboard-data"></i></div>
                                 <h4 class="title">
-                                    <a href="#galeri" class="stretched-link">Galeri</a>
+                                    <a href=<?= esc(site_url('statistik'), 'attr') ?> class="stretched-link">Statistik</a>
                                 </h4>
                             </div>
                         </div>

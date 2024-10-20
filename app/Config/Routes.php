@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->GET('/', 'Home::index');
 $routes->GET('/', 'Home::detail-informasi');
 $routes->get('detail-informasi/(:segment)', 'Home::blog/$1');
+$routes->get('statistik', 'Home::statistik');
 
 
 //TOKEN CSRF

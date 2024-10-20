@@ -54,4 +54,27 @@ class Home extends BaseController
 
         return view('detail-informasi', $data);
     }
+
+    public function statistik()
+    {
+        $id_user = 1;
+
+        // WAJIB //
+        $tb_feedback = $this->m_feedback->getFeedback();
+        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
+        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
+        // END WAJIB //
+
+        $data = [
+            'title' => 'Statistik Wilayah',
+            // WAJIB //
+            'tb_feedback' => $tb_feedback,
+            'tb_informasi_edukasi' => $tb_informasi_edukasi,
+            'tb_foto' => $tb_foto,
+            'id_user' => $id_user
+            // END WAJIB //
+        ];
+
+        return view('statistik', $data);
+    }
 }
