@@ -109,7 +109,7 @@
 
                 <li>
                     <a href="galeri">
-                        <i data-feather="image"></i>
+                        <i data-feather="camera"></i>
                         <span data-key="t-dashboard">Galeri</span>
                     </a>
                 </li>
@@ -127,6 +127,13 @@
                     <a href="faq">
                         <i data-feather="help-circle"></i>
                         <span data-key="t-dashboard">FAQ</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="slider">
+                        <i data-feather="image"></i>
+                        <span data-key="t-dashboard">Slider Beranda</span>
                     </a>
                 </li>
 
