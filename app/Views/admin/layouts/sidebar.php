@@ -124,6 +124,13 @@
                 <li class="menu-title mt-2" data-key="t-components">Menu Umum</li>
 
                 <li>
+                    <a href="faq">
+                        <i data-feather="help-circle"></i>
+                        <span data-key="t-dashboard">FAQ</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="feedback">
                         <i data-feather="phone-call"></i>
                         <span data-key="t-dashboard">Feedback Pengunjung</span>
