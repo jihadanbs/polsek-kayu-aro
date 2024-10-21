@@ -662,53 +662,31 @@
                     </div>
 
                     <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-
                         <div class="faq-container">
-                            <div class="faq-item faq-active">
-                                <h3><span class="num">1.</span> <span>Bagaimana cara melaporkan tindak kejahatan?</span></h3>
-                                <div class="faq-content">
-                                    <p>Anda bisa melaporkan tindak kejahatan dengan datang langsung ke kantor Polsek kami atau melalui hotline yang tersedia. Kami juga menerima laporan melalui aplikasi resmi Polsek.</p>
+                            <!-- Cek apakah faq kosong -->
+                            <?php if (empty($tb_faq)) : ?>
+                                <!-- Jika faq kosong, tampilkan gambar 404 -->
+                                <div class="col-12 text-center">
+                                    <img src="assets/img/404.gif" alt="faq Kosong" class="img-fluid" style="max-width: 300px;">
+                                    <p class="fw-bold">Tidak ada faq saat ini</p>
                                 </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
-
-                            <div class="faq-item">
-                                <h3><span class="num">2.</span> <span>Apa yang harus dilakukan jika menemukan barang hilang?</span></h3>
-                                <div class="faq-content">
-                                    <p>Jika Anda menemukan barang hilang, segera laporkan kepada kami dengan menyertakan deskripsi barang dan lokasi ditemukannya. Kami akan membantu menghubungi pemilik barang tersebut.</p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
-
-                            <div class="faq-item">
-                                <h3><span class="num">3.</span> <span>Bagaimana prosedur pengurusan surat kehilangan?</span></h3>
-                                <div class="faq-content">
-                                    <p>Untuk mengurus surat kehilangan, Anda perlu datang ke kantor Polsek kami dengan membawa identitas diri dan detail barang atau dokumen yang hilang. Petugas kami akan membantu proses pengurusan surat tersebut.</p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
-
-                            <div class="faq-item">
-                                <h3><span class="num">4.</span> <span>Apakah Polsek menyediakan layanan pengawalan acara?</span></h3>
-                                <div class="faq-content">
-                                    <p>Ya, kami menyediakan layanan pengawalan untuk acara-acara penting. Anda bisa mengajukan permohonan pengawalan melalui kantor Polsek kami dengan menyertakan detail acara dan kebutuhan pengawalan.</p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
-
-                            <div class="faq-item">
-                                <h3><span class="num">5.</span> <span>Bagaimana cara menghubungi Polsek untuk keadaan darurat?</span></h3>
-                                <div class="faq-content">
-                                    <p>Dalam keadaan darurat, Anda bisa menghubungi kami melalui nomor darurat yang tersedia di website kami atau langsung menghubungi kantor Polsek terdekat. Kami siap membantu Anda 24 jam.</p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div><!-- End Faq item-->
-
+                            <?php else : ?>
+                            <?php endif; ?>
+                            <!-- looping data -->
+                            <?php $i = 1; ?>
+                            <?php foreach ($tb_faq as $row) : ?>
+                                <div class="faq-item">
+                                    <h3><span class="num"><?= $i++; ?>.</span> <span><?= strip_tags($row['pertanyaan']); ?></span></h3>
+                                    <div class="faq-content">
+                                        <p><?= strip_tags($row['jawaban']); ?></p>
+                                    </div>
+                                    <i class="faq-toggle bi bi-chevron-right"></i>
+                                </div><!-- End Faq item-->
+                            <?php endforeach; ?>
                         </div>
 
                     </div>
                 </div>
-
             </div>
         </section><!-- /Faq Section -->
 
