@@ -139,7 +139,7 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->PUT('update/(:num)', 'FaqController::update/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('cek_judul', 'FaqController::cek_judul', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('cek_data/(:segment)', 'FaqController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('delete', 'FaqController::delete/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete/(:num)', 'FaqController::delete/$1', ['namespace' => 'App\Controllers\Admin']);
     });
 
     /*=================================== WEB OPTION ====================================*/

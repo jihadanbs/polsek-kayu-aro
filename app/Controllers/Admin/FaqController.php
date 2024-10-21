@@ -18,7 +18,7 @@ class FaqController extends BaseController
             return redirect()->to('authentication/login');
         }
 
-        $tb_faq = $this->m_faq->getAllSorted();
+        $tb_faq = $this->m_faq->getAllData();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -116,7 +116,7 @@ class FaqController extends BaseController
         return redirect()->to('/admin/faq');
     }
 
-    public function delete()
+    public function delete($id_faq)
     {
         // Cek session
         if (!$this->session->has('islogin')) {
@@ -127,14 +127,19 @@ class FaqController extends BaseController
             return redirect()->to('authentication/login');
         }
 
-        $id_faq = $this->request->getPost('id_faq');
-
-        if ($this->m_faq->delete($id_faq)) {
-            return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
-        } else {
-            return $this->response->setJSON(['error' => 'Gagal menghapus data']);
+        // Cek apakah metode yang digunakan adalah DELETE
+        if ($this->request->getMethod() === 'delete') {
+            // Hapus data berdasarkan ID yang diterima di URL
+            if ($this->m_faq->delete($id_faq)) {
+                return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
+            } else {
+                return $this->response->setJSON(['error' => 'Gagal menghapus data']);
+            }
         }
+
+        return $this->response->setJSON(['error' => 'Metode tidak diizinkan']);
     }
+
 
     public function edit($id_faq)
     {
