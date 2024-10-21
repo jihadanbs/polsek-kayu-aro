@@ -153,6 +153,17 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->GET('cek_data/(:segment)', 'WebOptionController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('delete', 'WebOptionController::delete/$1', ['namespace' => 'App\Controllers\Admin']);
     });
+
+    /*=================================== SLIDER ====================================*/
+    $routes->get('slider', 'SliderController::index', ['namespace' => 'App\Controllers\Admin']);
+    $routes->group('slider', static function ($routes) {
+        $routes->get('tambah', 'SliderController::tambah', ['namespace' => 'App\Controllers\Admin']);
+        $routes->post('save', 'SliderController::save', ['namespace' => 'App\Controllers\Admin']);
+        $routes->get('edit/(:segment)', 'SliderController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->put('update/(:num)', 'SliderController::update/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->get('cek_data/(:segment)', 'SliderController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->post('delete', 'SliderController::delete', ['namespace' => 'App\Controllers\Admin']);
+    });
 });
 
 //ROLE STAFF
