@@ -14,6 +14,7 @@ use App\Models\FileFotoModel;
 use App\Models\InformasiModel;
 use App\Models\KategoriInformasiModel;
 use App\Models\FaqModel;
+use App\Models\SliderModel;
 use CodeIgniter\Config\Services;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -75,6 +76,7 @@ abstract class BaseController extends Controller
     protected $m_informasi;
     protected $m_kategori_informasi;
     protected $m_faq;
+    protected $m_slider;
     protected $db;
     protected $email;
 
@@ -108,5 +110,6 @@ abstract class BaseController extends Controller
         $this->m_informasi = new InformasiModel();
         $this->m_kategori_informasi = new KategoriInformasiModel();
         $this->m_faq = new FaqModel();
+        $this->m_slider = new SliderModel();
     }
 }
