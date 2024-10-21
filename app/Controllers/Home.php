@@ -13,6 +13,7 @@ class Home extends BaseController
         $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
         $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
         $tb_faq = $this->m_faq->getAllData();
+        $tb_slider_beranda = $this->m_slider->getAllData();
         // END WAJIB //
 
         $data = [
@@ -23,6 +24,7 @@ class Home extends BaseController
             'tb_informasi_edukasi' => $tb_informasi_edukasi,
             'tb_foto' => $tb_foto,
             'tb_faq' => $tb_faq,
+            'tb_slider_beranda' => $tb_slider_beranda,
             'id_user' => $id_user
             // END WAJIB //
         ];

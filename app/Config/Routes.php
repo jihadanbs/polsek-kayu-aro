@@ -155,14 +155,14 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     });
 
     /*=================================== SLIDER ====================================*/
-    $routes->get('slider', 'SliderController::index', ['namespace' => 'App\Controllers\Admin']);
-    $routes->group('slider', static function ($routes) {
-        $routes->get('tambah', 'SliderController::tambah', ['namespace' => 'App\Controllers\Admin']);
-        $routes->post('save', 'SliderController::save', ['namespace' => 'App\Controllers\Admin']);
-        $routes->get('edit/(:segment)', 'SliderController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->put('update/(:num)', 'SliderController::update/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->get('cek_data/(:segment)', 'SliderController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->post('delete', 'SliderController::delete', ['namespace' => 'App\Controllers\Admin']);
+    $routes->GET('slider', 'SliderController::index', ['namespace' => 'App\Controllers\Admin']);
+    $routes->GROUP('slider', static function ($routes) {
+        $routes->GET('tambah', 'SliderController::tambah', ['namespace' => 'App\Controllers\Admin']);
+        $routes->POST('save', 'SliderController::save', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('edit/(:segment)', 'SliderController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->PUT('update/(:num)', 'SliderController::update/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('cek_data/(:segment)', 'SliderController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->POST('delete', 'SliderController::delete', ['namespace' => 'App\Controllers\Admin']);
     });
 });
 

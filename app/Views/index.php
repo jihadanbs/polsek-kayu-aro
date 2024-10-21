@@ -184,15 +184,23 @@
                         }
                     </script>
                     <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+                        <!-- Cek apakah slider kosong -->
+                        <?php if (empty($tb_slider_beranda)) : ?>
+                            <!-- Jika slider kosong, tampilkan gambar 404 -->
+                            <div class="col-12 text-center">
+                                <img src="assets/img/404.gif" alt="slider Kosong" class="img-fluid" style="max-width: 300px;">
+                                <p class="fw-bold">Tidak ada foto di slider saat ini</p>
+                            </div>
+                        <?php else : ?>
+                        <?php endif; ?>
+
+                        <?php foreach ($tb_slider_beranda as $row) : ?>
+                            <div class="swiper-slide">
+                                <img src="<?= base_url($row['gambar_slider']); ?>" class="img-fluid" alt="Gambar Slider">
+                            </div>
+                        <?php endforeach; ?>
                     </div>
+
                 </div>
 
             </div>
