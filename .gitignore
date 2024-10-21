@@ -1,2 +1,3 @@
 /writable/debugbar/*
 /writable/session/*
+.env
