@@ -81,4 +81,27 @@ class Home extends BaseController
 
         return view('statistik', $data);
     }
+
+    public function review()
+    {
+        $id_user = 1;
+
+        // WAJIB //
+        $tb_feedback = $this->m_feedback->getFeedback();
+        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
+        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
+        // END WAJIB //
+
+        $data = [
+            'title' => 'Review Pengunjung',
+            // WAJIB //
+            'tb_feedback' => $tb_feedback,
+            'tb_informasi_edukasi' => $tb_informasi_edukasi,
+            'tb_foto' => $tb_foto,
+            'id_user' => $id_user
+            // END WAJIB //
+        ];
+
+        return view('review', $data);
+    }
 }

@@ -10,8 +10,8 @@
                 <div class="container">
                     <div class="row d-flex justify-content-center text-center">
                         <div class="col-lg-8">
-                            <h1>Statistik Wilayah</h1>
-                            <p class="mb-0">Temukan Data Informasi Setiap Wilayahnya</p>
+                            <h1>Review Pengunjung</h1>
+                            <p class="mb-0">Review Pengunjung Polsek Kayu Aro</p>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="container">
                     <ol>
                         <li><a href="/">Beranda</a></li>
-                        <li class="current">Statistik</li>
+                        <li class="current">Review Pengunjung</li>
                     </ol>
                 </div>
             </nav>
