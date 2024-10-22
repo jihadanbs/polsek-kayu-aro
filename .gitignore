@@ -1,4 +1,5 @@
 /writable/debugbar/*
 /writable/session/*
 /writable/logs/*
+app/Config/Email.php
 .env
