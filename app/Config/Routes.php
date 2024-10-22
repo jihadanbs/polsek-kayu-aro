@@ -28,6 +28,10 @@ $routes->GROUP('authentication', function ($routes) { //catatan : pastikan POST 
     $routes->POST('lupaPassword', 'Authentication::lupaPassword/$1');
     $routes->GET('resetPassword', 'Authentication::resetPassword/$1');
     $routes->POST('resetPassword', 'Authentication::resetPassword/$1');
+    $routes->GET('tidakBisaLogin', 'Authentication::tidakBisaLogin/$1');
+    $routes->POST('tidakBisaLogin', 'Authentication::tidakBisaLogin/$1');
+    $routes->GET('resetStatusLogin', 'Authentication::resetStatusLogin/$1');
+    $routes->POST('resetStatusLogin', 'Authentication::resetStatusLogin/$1');
 });
 
 //ROLE

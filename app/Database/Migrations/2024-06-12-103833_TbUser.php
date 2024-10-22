@@ -61,6 +61,10 @@ class TbUser extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            'kode_verifikasi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'is_logged_in' => [
                 'type' => 'BOOLEAN',
                 'default' => false,

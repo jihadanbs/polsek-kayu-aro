@@ -51,6 +51,14 @@
                                         </div>
                                     <?php endif; ?>
 
+                                    <?php if (session()->getFlashdata('warning')) : ?>
+                                        <div class="alert alert-warning alert-border-left alert-dismissible fade show" role="alert">
+                                            <i class="mdi mdi-alert-outline align-middle me-3"></i><strong>Peringatan</strong> -
+                                            <?= session()->getFlashdata('warning') ?>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    <?php endif; ?>
+
                                     <form action="" method="POST" class="mt-4 pt-2" autocomplete="off">
                                         <?= csrf_field() ?>
 

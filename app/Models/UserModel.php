@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $useTimestamps = true;
     protected $primaryKey = 'id_user';
     // protected $primaryKey = 'id_user';
-    protected $allowedFields = ['nama_lengkap', 'username', 'id_jabatan', 'password', 'email', 'no_telepon', 'token', 'file_profil', 'terakhir_login', 'is_logged_in', 'status', 'last_activity'];
+    protected $allowedFields = ['nama_lengkap', 'username', 'id_jabatan', 'password', 'email', 'no_telepon', 'token', 'file_profil', 'terakhir_login', 'is_logged_in', 'status', 'last_activity', 'kode_verifikasi'];
 
     public function getAll()
     {
@@ -88,5 +88,15 @@ class UserModel extends Model
     public function setLoginStatus($id_user, $status)
     {
         return $this->update($id_user, ['is_logged_in' => $status]);
+    }
+
+    public function generateKodeStatusLogin()
+    {
+        $part1 = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1); // 1 huruf
+        $part2 = mt_rand(0, 9); // 1 angka
+        $part3 = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 1); // 1 huruf
+        $part4 = mt_rand(0, 9); // 1 angka
+
+        return "{$part1}-{$part2}-{$part3}-{$part4}";
     }
 }

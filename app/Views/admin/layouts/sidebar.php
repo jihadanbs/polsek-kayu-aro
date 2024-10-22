@@ -156,19 +156,6 @@
                     </ul>
                 </li>
             </ul>
-
-            <!-- peringatan logout -->
-            <div class="card sidebar-alert border-0 text-center mx-4 mb-0 mt-3">
-                <div class="card-body">
-                    <img src="<?= base_url('assets/img/like.gif') ?>" alt="" style="width: 100px; height: 100px;">
-                    <div class="mt-4">
-                        <h5 class="alertcard-title font-size-16">PERINGATAN !</h5>
-                        <p class="font-size-13">Jangan Lupa Untuk Logout Ketika Selesai Melakukan Pekerjaan Anda</p>
-                        <a href="<?= esc(site_url('/authentication/logout'), 'attr') ?>" class="btn btn-primary mt-2">Logout</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
         <!-- Sidebar -->
     </div>

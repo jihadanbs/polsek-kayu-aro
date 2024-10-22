@@ -290,7 +290,7 @@ class Authentication extends BaseController
         }
 
         $data = [
-            'title' => 'Lupa Password PPID',
+            'title' => 'Lupa Password Polsek Kayu Aro',
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
         ];
 
@@ -353,7 +353,7 @@ class Authentication extends BaseController
         }
 
         $data = [
-            'title' => 'Reset Password PPID',
+            'title' => 'Reset Password Polsek Kayu Aro',
             'validation' => session()->getFlashdata('validation') ?? [],
             'old_input' => $this->request->getPost(), // Menggunakan input yang baru saja dikirimkan
         ];
@@ -361,10 +361,168 @@ class Authentication extends BaseController
         return view('users/resetPassword', $data);
     }
 
+    public function tidakBisaLogin()
+    {
+        $err = [];
+
+        if ($this->request->getPost()) {
+            $username = $this->request->getVar('username');
+
+            // Validasi username/email tidak boleh kosong
+            if (empty($username)) {
+                $err['username'] = "Silahkan masukkan username atau email yang sudah terdaftar";
+            } elseif (!filter_var($username, FILTER_VALIDATE_EMAIL) && !preg_match('/^[a-zA-Z0-9]+$/', $username)) {
+                $err['username'] = "Format username atau email tidak valid";
+            }
+
+            if (empty($err)) {
+                $userModel = new UserModel();
+                $data = $userModel->getData($username);
+
+                if (empty($data)) {
+                    $err['username'] = "Akun yang kamu masukkan tidak terdaftar";
+                }
+            }
+
+            if (empty($err)) {
+                $email = $data['email'];
+                $token = md5(date('ymdhis'));
+                $kode_verifikasi = $this->m_user->generateKodeStatusLogin();
+                $link = site_url("authentication/resetStatusLogin/?email=$email&token=$token");
+
+                // Load template php dari file
+                $emailTemplate = file_get_contents(APPPATH . 'Views/gmail/reset_login_gmail.php');
+
+                // Replace placeholders dengan nilai sebenarnya
+                $emailContent = str_replace(['{link_reset}', '{token}', '{kode_verifikasi}'], [$link, $token, $kode_verifikasi], $emailTemplate);
+
+                // Konfigurasi email
+                $this->email->setNewline("\r\n");
+                $this->email->setMailType('html');
+                $this->email->setTo($email);
+                $this->email->setSubject('Reset Status Login');
+                $this->email->setMessage($emailContent);
+
+                if ($this->email->send()) {
+                    $dataUpdate = [
+                        'token' => $token,
+                        'kode_verifikasi' => $kode_verifikasi
+                    ];
+                    $userModel->updateData($data['id_user'], $dataUpdate);
+                    session()->setFlashdata("success", "Link recovery sudah kami kirimkan ke email anda");
+                } else {
+                    session()->setFlashdata("error", "Gagal mengirim email.");
+                }
+            }
+
+            if ($err) {
+                session()->setFlashdata("username", $username);
+                session()->setFlashdata("validation", $err);
+            }
+
+            return redirect()->to("authentication/tidakBisaLogin");
+        }
+
+        $data = [
+            'title' => 'Tidak Dapat Login',
+            'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
+        ];
+
+        return view('users/tidakBisaLogin', $data);
+    }
+
+    public function resetStatusLogin()
+    {
+        $dataAkun = null;
+        $email = $this->request->getVar('email');
+        $token = $this->request->getVar('token');
+
+        if ($email != '' && $token != '') {
+            $dataAkun = $this->m_user->getData($email);
+            if (!$dataAkun || $dataAkun['token'] != $token) {
+                // Jika tidak ada data akun atau token tidak valid, arahkan pengguna ke halaman yang sesuai
+                return redirect()->to('authentication/tidakBisaLogin')->with('warning', 'Token Sudah Tidak Valid');
+            }
+            // Jika email dan token valid, ambil email untuk ditampilkan
+            $userEmail = $dataAkun['email'];
+        } else {
+            // Jika email atau token kosong, arahkan pengguna ke halaman yang sesuai
+            return redirect()->to('authentication/tidakBisaLogin')->with('warning', 'Parameter Yang Dikirimkan Tidak Valid');
+        }
+
+        if ($this->request->getPost()) {
+            // Validasi setiap digit
+            $rules = [
+                'digit1' => 'required',
+                'digit2' => 'required',
+                'digit3' => 'required',
+                'digit4' => 'required',
+            ];
+
+            $errors = [
+                'digit1' => [
+                    'required' => 'Digit pertama harus diisi!',
+                ],
+                'digit2' => [
+                    'required' => 'Digit kedua harus diisi!',
+                ],
+                'digit3' => [
+                    'required' => 'Digit ketiga harus diisi!',
+                ],
+                'digit4' => [
+                    'required' => 'Digit keempat harus diisi!',
+                ],
+            ];
+
+            if (!$this->validate($rules, $errors)) {
+                // Jika validasi gagal, simpan pesan error
+                session()->setFlashdata('validation', $this->validator->getErrors());
+            } else {
+                // Validasi berhasil, proses kode verifikasi
+                $digit1 = $this->request->getPost('digit1');
+                $digit2 = $this->request->getPost('digit2');
+                $digit3 = $this->request->getPost('digit3');
+                $digit4 = $this->request->getPost('digit4');
+
+                // Gabungkan digit menjadi kode verifikasi
+                $kode_verifikasi = "{$digit1}-{$digit2}-{$digit3}-{$digit4}";
+
+                // Mengecek apakah kode verifikasi cocok dengan yang tersimpan di database
+                if ($kode_verifikasi === $dataAkun['kode_verifikasi']) {
+                    // Jika cocok, reset kode verifikasi dan token
+                    if ($dataAkun && isset($dataAkun['id_user'])) {
+                        $id_user = $dataAkun['id_user'];
+                        $dataUpdate = [
+                            'token' => null,
+                            'kode_verifikasi' => null, // Set kode verifikasi menjadi null
+                            'is_logged_in' => 0
+                        ];
+                        $this->m_user->updateData($id_user, $dataUpdate);
+                        session()->setFlashdata('success', 'Akun anda telah dipulihkan, silahkan login!');
+                        return redirect()->to('authentication/login');
+                    } else {
+                        session()->setFlashdata('gagal', 'Terjadi kesalahan saat mereset status login, silahkan coba lagi !');
+                    }
+                } else {
+                    // Jika kode verifikasi tidak cocok
+                    session()->setFlashdata('gagal', 'Kode tidak valid !');
+                }
+            }
+        }
+
+        $data = [
+            'title' => 'Reset Status Login',
+            'validation' => session()->getFlashdata('validation') ?? [],
+            'old_input' => $this->request->getPost(), // Menggunakan input yang baru saja dikirimkan
+            'userEmail' => isset($userEmail) ? $userEmail : null,
+        ];
+
+        return view('users/resetStatusLogin', $data);
+    }
+
     public function logout()
     {
-        $userModel = new UserModel();
-        $userModel->setLoginStatus(session()->get('id_user'), false);
+        $this->m_user->setLoginStatus(session()->get('id_user'), false);
 
         $this->session->destroy();
         return redirect()->to('authentication/login')->with('pesan', 'Anda sudah logout');
