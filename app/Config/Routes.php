@@ -9,6 +9,7 @@ $routes->GET('/', 'Home::index');
 $routes->GET('/', 'Home::detail-informasi');
 $routes->get('detail-informasi/(:segment)', 'Home::blog/$1');
 $routes->get('statistik', 'Home::statistik');
+$routes->get('review', 'Home::review');
 
 
 //TOKEN CSRF
