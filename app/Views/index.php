@@ -89,9 +89,9 @@
 
                         <div class="col-xl-3 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class="bi bi-geo-alt"></i></div>
+                                <div class="icon"><i class="bi bi-star-half"></i></div>
                                 <h4 class="title">
-                                    <a href="https://maps.app.goo.gl/eXdYFFwJE7VA2qtx8?g_st=iw" class="stretched-link" target="_blank">Lokasi</a>
+                                    <a href="<?= esc(site_url('review'), 'attr') ?>" class="stretched-link">Review</a>
                                 </h4>
                             </div>
                         </div>
