@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Tambah Data FAQ</h2>
 
-                            <form action="<?= site_url('/admin/faq/save'); ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="<?= site_url('/admin/faq/save'); ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="mb-3">

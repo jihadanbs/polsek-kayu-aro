@@ -35,7 +35,7 @@
                     <div class="card border border-secondary rounded p-4">
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Ubah Data FAQ</h2>
-                            <form action="/admin/faq/update/<?= $tb_faq['id_faq']; ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="/admin/faq/update/<?= $tb_faq['id_faq']; ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <!-- dengan id tersebut -> kategori -> judul  2x cek-->
                                 <input type="hidden" name="_method" value="PUT">
                                 <?= csrf_field(); ?>

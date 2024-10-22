@@ -35,7 +35,7 @@
                     <div class="card border border-secondary rounded p-4">
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Ubah Gambar Slider</h2>
-                            <form action="/admin/slider/update/<?= $tb_slider_beranda['id_slider_beranda']; ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="/admin/slider/update/<?= $tb_slider_beranda['id_slider_beranda']; ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <!-- dengan id tersebut -> kategori -> judul  2x cek-->
                                 <input type="hidden" name="_method" value="PUT">
                                 <?= csrf_field(); ?>

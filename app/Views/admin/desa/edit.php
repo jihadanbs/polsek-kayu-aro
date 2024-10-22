@@ -43,7 +43,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Ubah Data Desa</h2>
 
-                            <form action="<?= esc(site_url('admin/desa/update/' . $tb_desa['id_desa']), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="<?= esc(site_url('admin/desa/update/' . $tb_desa['id_desa']), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <input type="hidden" name="_method" value="PUT">
                                 <?= csrf_field(); ?>
 

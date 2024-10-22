@@ -273,7 +273,7 @@
                                 <?php endif; ?>
                             </div>
 
-                            <form action="/admin/profile/updateSandi/<?= session('id_user'); ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate>
+                            <form action="/admin/profile/updateSandi/<?= session('id_user'); ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="custom-form-group">

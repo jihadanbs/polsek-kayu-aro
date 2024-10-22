@@ -207,7 +207,7 @@
                                 <?php endif; ?>
                             </div>
 
-                            <form action="/admin/profile/update/<?= session('id_user') ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate>
+                            <form action="/admin/profile/update/<?= session('id_user') ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="mb-3">

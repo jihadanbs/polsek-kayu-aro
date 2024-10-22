@@ -44,7 +44,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Tambah Data Foto</h2>
 
-                            <form action="<?= esc(site_url('admin/galeri/save'), 'attr') ?>" method="POST" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="<?= esc(site_url('admin/galeri/save'), 'attr') ?>" method="POST" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="mb-3">

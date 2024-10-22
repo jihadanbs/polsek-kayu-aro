@@ -42,7 +42,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Ubah Data Laporan</h2>
 
-                            <form action="<?= esc(site_url('admin/laporan/update/' . urlencode($tb_laporan_babin['id_laporan_babin'])), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="<?= esc(site_url('admin/laporan/update/' . urlencode($tb_laporan_babin['id_laporan_babin'])), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="file_foto" value="<?= esc($tb_laporan_babin['file_foto'], 'attr'); ?>">

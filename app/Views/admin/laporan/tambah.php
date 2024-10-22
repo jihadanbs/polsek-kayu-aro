@@ -48,7 +48,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Tambah Data Laporan</h2>
 
-                            <form action="<?= esc(site_url('admin/laporan/save'), 'attr'); ?>" method="POST" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="<?= esc(site_url('admin/laporan/save'), 'attr'); ?>" method="POST" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="row">

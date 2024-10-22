@@ -111,7 +111,7 @@
                                                     </div>
                                                     <!-- Modal Body -->
                                                     <div class="modal-body">
-                                                        <form action="<?= esc(site_url('/admin/kategori/save'), 'attr') ?>" method="POST">
+                                                        <form action="<?= esc(site_url('/admin/kategori/save'), 'attr') ?>" method="POST" autocomplete="off">
                                                             <?= csrf_field(); ?>
                                                             <div class="mb-3">
                                                                 <label for="nama_kategori" class="col-form-label">Nama Kategori Informasi :</label>

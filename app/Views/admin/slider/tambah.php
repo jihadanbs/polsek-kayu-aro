@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Tambah Data Slider Beranda</h2>
 
-                            <form action="/admin/slider/save" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate>
+                            <form action="/admin/slider/save" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="mb-3">

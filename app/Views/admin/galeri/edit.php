@@ -42,7 +42,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Ubah Data Foto</h2>
 
-                            <form action="<?= esc(site_url('admin/galeri/update/' . urlencode($tb_foto['id_foto'])), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="<?= esc(site_url('admin/galeri/update/' . urlencode($tb_foto['id_foto'])), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="slug" value="<?= esc($tb_foto['slug'], 'attr'); ?>">

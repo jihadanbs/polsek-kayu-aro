@@ -44,7 +44,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Tambah Data Desa</h2>
 
-                            <form action="<?= esc(site_url('admin/desa/save'), 'attr') ?>" method="post" enctype="multipart/form-data" novalidate>
+                            <form action="<?= esc(site_url('admin/desa/save'), 'attr') ?>" method="post" enctype="multipart/form-data" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">

@@ -43,7 +43,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Ubah Data Bhabin</h2>
 
-                            <form action="<?= esc(site_url('/admin/babin/update/' . $tb_babin['id_babin']), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate>
+                            <form action="<?= esc(site_url('/admin/babin/update/' . $tb_babin['id_babin']), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <input type="hidden" name="_method" value="PUT">
                                 <?= csrf_field() ?>
 
