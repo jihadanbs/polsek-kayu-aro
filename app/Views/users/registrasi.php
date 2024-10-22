@@ -50,7 +50,7 @@
                                         </div>
                                     <?php endif; ?>
 
-                                    <form action="<?= base_url('authentication/cekRegistrasi') ?>" method="post" class="mt-4 pt-2">
+                                    <form action="<?= base_url('authentication/cekRegistrasi') ?>" method="post" class="mt-4 pt-2" autocomplete="off">
                                         <?= csrf_field() ?>
 
                                         <div class="mb-3">

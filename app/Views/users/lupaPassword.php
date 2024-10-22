@@ -51,7 +51,7 @@
                                         </div>
                                     <?php endif; ?>
 
-                                    <form action="" method="POST" class="mt-4 pt-2">
+                                    <form action="" method="POST" class="mt-4 pt-2" autocomplete="off">
                                         <?= csrf_field() ?>
 
                                         <div class="mb-3">
