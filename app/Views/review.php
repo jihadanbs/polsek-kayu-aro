@@ -130,7 +130,7 @@
                     <section id="blog-details" class="blog-details section">
                         <div class="review-container">
                             <h2 class="widget-title" style="text-align: center">Beri Review Anda</h2>
-                            <form action="<?= esc(site_url('/review'), 'attr'); ?>" id="formReview" method="post" enctype="multipart/form-data" class="review-form">
+                            <form action="<?= esc(site_url('/review'), 'attr'); ?>" id="formReview" method="post" enctype="multipart/form-data" class="review-form" autocomplete="off">
                                 <?= csrf_field(); ?>
                                 <div class="form-group">
                                     <label for="nama_lengkap" class="widget-title">Nama Lengkap</label><span style="color: red;">*</span>

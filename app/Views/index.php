@@ -846,7 +846,7 @@
                     </div>
 
                     <div class="col-lg-8">
-                        <form id="contactForm" action="/admin/feedback/send" method="post" class="php-email-form needs-validation" novalidate data-aos="fade" data-aos-delay="100">
+                        <form id="contactForm" action="/admin/feedback/send" method="post" class="php-email-form needs-validation" novalidate data-aos="fade" data-aos-delay="100" autocomplete="off">
                             <div class="row gy-4">
                                 <div class="col-md-6">
                                     <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
