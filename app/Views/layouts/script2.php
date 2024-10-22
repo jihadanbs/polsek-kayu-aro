@@ -36,7 +36,6 @@
  <script src="<?= base_url('assets/admin/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') ?>"></script>
  <!-- Sweet alert init js-->
  <script src="<?= base_url('assets/admin/libs/sweetalert2/sweetalert2.min.js') ?>"></script>
- <script src="<?= base_url('assets/admin/js/pages/sweetalert.init.js') ?>"></script>
  <!-- Datatable init js -->
  <script src="<?= base_url('assets/admin/js/pages/datatables.init.js') ?>"></script>
  <script src="<?= base_url('assets/admin/js/app.js') ?>"></script>

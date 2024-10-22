@@ -14,6 +14,7 @@ class Home extends BaseController
         $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
         $tb_faq = $this->m_faq->getAllData();
         $tb_slider_beranda = $this->m_slider->getAllData();
+        $tb_review = $this->m_review->getAllData();
         // END WAJIB //
 
         $data = [
@@ -25,6 +26,7 @@ class Home extends BaseController
             'tb_foto' => $tb_foto,
             'tb_faq' => $tb_faq,
             'tb_slider_beranda' => $tb_slider_beranda,
+            'tb_review' => $tb_review,
             'id_user' => $id_user
             // END WAJIB //
         ];
@@ -103,5 +105,29 @@ class Home extends BaseController
         ];
 
         return view('review', $data);
+    }
+
+    public function save_review()
+    {
+        // Ambil data dari request
+        $nama_lengkap = $this->request->getVar('nama_lengkap');
+        $pekerjaan = $this->request->getVar('pekerjaan');
+        $pesan_review = $this->request->getVar('pesan_review');
+        $rating = $this->request->getPost('rating');
+
+        // Upload gambar
+        $uploadFotoPengunjung = uploadFile('file_foto', 'dokumen/foto_pengunjung_review/');
+
+        $this->m_review->save([
+            'nama_lengkap' => $nama_lengkap,
+            'pekerjaan' => $pekerjaan,
+            'pesan_review' => $pesan_review,
+            'rating' => $rating,
+            'file_foto' => $uploadFotoPengunjung,
+        ]);
+
+        session()->setFlashdata('pesan', 'Terimakasih Telah Memberikan Review Anda !');
+
+        return redirect()->to('review');
     }
 }

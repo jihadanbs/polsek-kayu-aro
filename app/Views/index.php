@@ -417,86 +417,54 @@
                     </script>
                     <div class="swiper-wrapper">
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="<?= base_url('assets/img/foto5.jpg') ?>" class="testimonial-img" alt="">
-                                <h3>Suyamto</h3>
-                                <h4>Ustadz</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Pelayanan yang sangat baik dan cepat. Saya merasa lebih aman dan nyaman dengan kehadiran polsek di lingkungan kami.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
+                        <!-- Cek apakah review kosong -->
+                        <?php if (empty($tb_review)) : ?>
+                            <!-- Jika review kosong, tampilkan gambar 404 -->
+                            <div class="col-12 text-center">
+                                <img src="assets/img/404.gif" alt="review Kosong" class="img-fluid" style="max-width: 300px;">
+                                <p class="fw-bold">Tidak ada review pengunjung untuk saat ini</p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        <?php else : ?>
+                        <?php endif; ?>
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="<?= base_url('assets/img/foto1.jpg') ?>" class="testimonial-img" alt="">
-                                <h3>Reissa Giana Azaria</h3>
-                                <h4>Mahasiswi</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        <!-- Loop Data -->
+                        <?php foreach ($tb_review as $row) : ?>
+                            <div class="swiper-slide">
+                                <div class="testimonial-item">
+                                    <img src="<?= $row['file_foto'] ?>" class="testimonial-img" alt="">
+                                    <h3><?= strip_tags($row['nama_lengkap']); ?></h3>
+                                    <h4><?= strip_tags($row['pekerjaan']); ?></h4>
+                                    <div class="stars">
+                                        <?php
+                                        $rating = (float) $row['rating']; // Mengkonversi rating menjadi float
+                                        $fullStars = floor($rating); // Menghitung bintang penuh
+                                        $halfStars = ($rating - $fullStars >= 0.5) ? 1 : 0; // Menghitung setengah bintang
+                                        $emptyStars = 5 - ($fullStars + $halfStars); // Menghitung bintang kosong
+                                        ?>
+
+                                        <!-- Menampilkan bintang penuh -->
+                                        <?php for ($i = 0; $i < $fullStars; $i++): ?>
+                                            <i class="bi bi-star-fill"></i>
+                                        <?php endfor; ?>
+
+                                        <!-- Menampilkan setengah bintang -->
+                                        <?php if ($halfStars): ?>
+                                            <i class="bi bi-star-half"></i>
+                                        <?php endif; ?>
+
+                                        <!-- Menampilkan bintang kosong -->
+                                        <?php for ($i = 0; $i < $emptyStars; $i++): ?>
+                                            <i class="bi bi-star"></i>
+                                        <?php endfor; ?>
+                                    </div>
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        <span><?= strip_tags($row['pesan_review']); ?></span>
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
                                 </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Layanan pengamanan yang sangat responsif dan profesional. Tim polsek selalu siap membantu kapan saja dibutuhkan.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="<?= base_url('assets/img/foto4.jpg') ?>" class="testimonial-img" alt="">
-                                <h3>Sakura</h3>
-                                <h4>Anonymus</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Proses pelaporan sangat mudah dan cepat. Terima kasih polsek atas pelayanan yang ramah dan efektif.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="<?= base_url('assets/img/foto2.jpg') ?>" class="testimonial-img" alt="">
-                                <h3>Rakha Gian Raksyaka</h3>
-                                <h4>Mahasiswa</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Keamanan di sekitar lingkungan saya meningkat drastis berkat patroli rutin dari polsek. Layanan yang sangat memuaskan.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="<?= base_url('assets/img/foto3.jpg') ?>" class="testimonial-img" alt="">
-                                <h3>Purgiyono</h3>
-                                <h4>Bisnis Man</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Penyuluhan keamanan dari polsek sangat informatif dan membantu saya dalam menjaga keamanan bisnis saya.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
+                            </div><!-- End testimonial item -->
+                        <?php endforeach; ?>
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>

@@ -9,6 +9,7 @@ $routes->GET('/', 'Home::index');
 $routes->GET('/', 'Home::detail-informasi');
 $routes->get('detail-informasi/(:segment)', 'Home::blog/$1');
 $routes->get('statistik', 'Home::statistik');
+$routes->POST('review', 'Home::save_review');
 $routes->get('review', 'Home::review');
 
 

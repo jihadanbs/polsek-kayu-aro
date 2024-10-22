@@ -21,13 +21,21 @@
     <!-- Glightbox JS -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <!-- Sweet Alert -->
-    <link href="<?= base_url('assets/admin/libs/sweetalert2/sweetalert2.min.css') ?>" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs@1.1.4/dist/purecounter_vanilla.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="<?= base_url('assets/admin/css/bootstrap.min.css') ?>" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="<?= base_url('assets/admin/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/rater-js/lib/style.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rater-js/index.min.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/rater-jquery@1.0.0/rater.min.js"></script> -->
 
     <!-- SEO untuk Polsek Kayu Aro -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -77,7 +85,6 @@
     form-action 'self';"> -->
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="no-referrer">
 
@@ -94,4 +101,184 @@
 
     <!-- Main CSS File -->
     <link href="<?= base_url('assets/css/main.css') ?>" rel="stylesheet">
+
+    <!-- Script Form Review -->
+    <script>
+        $(document).ready(function() {
+            $("#formReview").submit(function(event) {
+                event.preventDefault(); // Mencegah form dari submit default
+
+                // Mengambil nilai dari input field
+                var namaLengkap = $("#nama_lengkap").val();
+                var pekerjaan = $("#pekerjaan").val();
+                var pesanReview = $("#pesan_review").val();
+                var rating = myRater.getRating(); // Mendapatkan nilai rating
+                var fileFoto = $("#file_foto").val();
+
+                // console.log("Rating before validation: ", rating); // Debugging
+                // console.log("Nama Lengkap: ", namaLengkap);
+                // console.log("Pekerjaan: ", pekerjaan);
+                // console.log("Pesan Review: ", pesanReview);
+                // console.log("File Foto: ", fileFoto);
+
+                // Array untuk menyimpan field-field yang belum diisi
+                var fieldsKosong = [];
+
+                // Validasi setiap input, jika kosong tambahkan ke fieldsKosong
+                if (namaLengkap === "") {
+                    fieldsKosong.push("Nama Lengkap");
+                }
+                if (pekerjaan === "") {
+                    fieldsKosong.push("Pekerjaan");
+                }
+                if (pesanReview === "") {
+                    fieldsKosong.push("Text Review");
+                }
+
+                // Validasi Rating
+                if (rating === null || rating === 0) { // Memastikan rating tidak null atau 0
+                    fieldsKosong.push("Rating");
+                }
+                if (fileFoto === "") {
+                    fieldsKosong.push("Unggah Foto");
+                }
+
+                // Jika ada field yang belum diisi, tampilkan pesan peringatan
+                if (fieldsKosong.length > 0) {
+                    var pesanPeringatan = "Kolom " + fieldsKosong.join(", ") + " belum diisi. Mohon isi terlebih dahulu.";
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Peringatan',
+                        text: pesanPeringatan,
+                    });
+                    return; // Keluar dari fungsi jika ada field yang kosong
+                }
+
+                // Proses pengiriman form
+                var formData = new FormData(this);
+                formData.append("rating", rating); // Menyisipkan rating ke form data
+
+                // Kirim data formulir ke server menggunakan AJAX
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Tampilkan pesan sukses jika berhasil
+                        Swal.fire({
+                            html: '<img src="<?= base_url('assets/img/validation.gif') ?>" style="width: 200px;">' +
+                                '<p style="margin-top: 20px;">Review berhasil disimpan ! Terima kasih atas Review Yang Anda Berikan.</p>',
+                            showCloseButton: true,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+
+                        // Merefresh halaman setelah 3 detik
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    },
+                    error: function(xhr, status, error) {
+                        // Tampilkan pesan error jika ada kesalahan
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan dalam mengirim data. Silakan coba lagi.',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+    <!-- <script>
+        $(document).ready(function() {
+            $("#formReview").submit(function(event) {
+                event.preventDefault(); // Mencegah form dari submit default
+
+                // Mengambil nilai dari input field
+                var namaLengkap = $("#nama_lengkap").val();
+                var pekerjaan = $("#pekerjaan").val();
+                var pesanReview = $("#pesan_review").val();
+                var rating = myRater.getRating(); // Mendapatkan nilai rating
+                var fileFoto = $("#file_foto").val();
+
+                // Array untuk menyimpan field-field yang belum diisi
+                var fieldsKosong = [];
+
+                // Validasi setiap input, jika kosong tambahkan ke fieldsKosong
+                if (namaLengkap === "") {
+                    fieldsKosong.push("Nama Lengkap");
+                }
+                if (pekerjaan === "") {
+                    fieldsKosong.push("Pekerjaan");
+                }
+                if (pesanReview === "") {
+                    fieldsKosong.push("Text Review");
+                }
+                if (rating === 0 || isNaN(rating)) { // Memastikan rating tidak 0 atau undefined
+                    fieldsKosong.push("Rating");
+                }
+                if (fileFoto === "") {
+                    fieldsKosong.push("Unggah Foto");
+                }
+
+                // Jika ada field yang belum diisi, tampilkan pesan peringatan
+                if (fieldsKosong.length > 0) {
+                    var pesanPeringatan = "Kolom " + fieldsKosong.join(", ") + " belum diisi. Mohon isi terlebih dahulu.";
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Peringatan',
+                        text: pesanPeringatan,
+                    });
+                    return; // Keluar dari fungsi jika ada field yang kosong
+                }
+
+                // Menggunakan FormData untuk mengirim file dan data lainnya
+                var formData = new FormData(this);
+                formData.append("rating", rating); // Menyisipkan rating ke form data
+
+                // Kirim data formulir ke server menggunakan AJAX
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Tampilkan pesan sukses jika berhasil
+                        Swal.fire({
+                            html: '<img src="<?= base_url('assets/img/validation.gif') ?>" style="width: 200px;">' +
+                                '<p style="margin-top: 20px;">Review berhasil diajukan! Terima kasih atas tanggapannya.</p>',
+                            showCloseButton: true,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+
+                        // Merefresh halaman setelah 3 detik
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    },
+                    error: function(xhr, status, error) {
+                        // Tampilkan pesan error jika ada kesalahan
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan dalam mengirim data. Silakan coba lagi.',
+                        });
+                    }
+                });
+            });
+        });
+    </script> -->
+
 </head>

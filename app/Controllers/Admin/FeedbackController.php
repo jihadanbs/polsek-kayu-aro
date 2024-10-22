@@ -391,6 +391,8 @@ class FeedbackController extends BaseController
                 'message' => 'Gagal Mengirim Email. Silakan Coba Lagi'
             ]);
         }
+
+        return view('index');
     }
 
     public function delete()
