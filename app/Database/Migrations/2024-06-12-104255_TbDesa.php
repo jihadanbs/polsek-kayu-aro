@@ -161,6 +161,11 @@ class TbDesa extends Migration
                 'constraint' => 11,
                 'null' => TRUE,
             ],
+            'jumlah_pos_ronda' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => TRUE,
+            ],
             'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
             'updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
         ]);
