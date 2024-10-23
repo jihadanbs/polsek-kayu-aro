@@ -93,7 +93,27 @@ class DesaController extends BaseController
         $kode_pos = $this->request->getVar('kode_pos');
         $luas_wilayah = $this->request->getVar('luas_wilayah');
         $jumlah_penduduk = $this->request->getVar('jumlah_penduduk');
-        $website = $this->request->getVar('website');
+        $website = $this->request->getVar('website'); //Novalidate
+        $jumlah_kepala_keluarga = $this->request->getVar('jumlah_kepala_keluarga');
+        $jumlah_penduduk_pria = $this->request->getVar('jumlah_penduduk_pria');
+        $jumlah_penduduk_wanita = $this->request->getVar('jumlah_penduduk_wanita');
+        $jumlah_penduduk_usia_0_14 = $this->request->getVar('jumlah_penduduk_usia_0_14');
+        $jumlah_penduduk_usia_15_64 = $this->request->getVar('jumlah_penduduk_usia_15_64');
+        $jumlah_penduduk_usia_65_keatas = $this->request->getVar('jumlah_penduduk_usia_65_keatas');
+        $jumlah_penduduk_tidak_sekolah = $this->request->getVar('jumlah_penduduk_tidak_sekolah');
+        $jumlah_penduduk_sd = $this->request->getVar('jumlah_penduduk_sd');
+        $jumlah_penduduk_smp = $this->request->getVar('jumlah_penduduk_smp');
+        $jumlah_penduduk_sma_smk = $this->request->getVar('jumlah_penduduk_sma_smk');
+        $jumlah_penduduk_diploma_sarjana = $this->request->getVar('jumlah_penduduk_diploma_sarjana');
+        $jumlah_penduduk_bekerja = $this->request->getVar('jumlah_penduduk_bekerja');
+        $jumlah_penduduk_tidak_bekerja = $this->request->getVar('jumlah_penduduk_tidak_bekerja');
+        $jumlah_penduduk_belum_menikah = $this->request->getVar('jumlah_penduduk_belum_menikah');
+        $jumlah_penduduk_menikah = $this->request->getVar('jumlah_penduduk_menikah');
+        $jumlah_penduduk_cerai = $this->request->getVar('jumlah_penduduk_cerai');
+        $jumlah_sekolah = $this->request->getVar('jumlah_sekolah');
+        $jumlah_posyandu = $this->request->getVar('jumlah_posyandu');
+        $jumlah_tempat_ibadah = $this->request->getVar('jumlah_tempat_ibadah');
+        $jumlah_pos_ronda = $this->request->getVar('jumlah_pos_ronda');
 
         // Validasi input
         if (!$this->validate([
@@ -142,6 +162,146 @@ class DesaController extends BaseController
                     'numeric' => 'Jumlah penduduk harus berupa angka !'
                 ]
             ],
+            'jumlah_kepala_keluarga' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Kepala Keluarga !',
+                    'numeric' => 'Jumlah Kepala Keluarga harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_pria' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Pria !',
+                    'numeric' => 'Jumlah penduduk Pria harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_wanita' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Wanita !',
+                    'numeric' => 'Jumlah penduduk Wanita harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_usia_0_14' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Usia 0-14 !',
+                    'numeric' => 'Jumlah penduduk Usia 0-14 harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_usia_15_64' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Usia 15-64 !',
+                    'numeric' => 'Jumlah penduduk Usia 15-64 harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_usia_65_keatas' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Usia 65-Keatas !',
+                    'numeric' => 'Jumlah penduduk Usia 65-Keatas harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_tidak_sekolah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Tidak Sekolah !',
+                    'numeric' => 'Jumlah penduduk Tidak Sekolah harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_sd' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Sekolah Dasar !',
+                    'numeric' => 'Jumlah penduduk Menempuh Sekolah Dasar harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_smp' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Sekolah Menengah Pertama !',
+                    'numeric' => 'Jumlah penduduk Menempuh Sekolah Menengah Pertama harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_sma_smk' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Sekolah Menengah Keatas !',
+                    'numeric' => 'Jumlah penduduk Menempuh Sekolah Menengah Keatas harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_diploma_sarjana' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Diploma Atau Sarjana !',
+                    'numeric' => 'Jumlah penduduk Menempuh Diploma Atau Sarjana harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_bekerja' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Memiliki Pekerjaan !',
+                    'numeric' => 'Jumlah penduduk Memiliki Pekerjaan harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_tidak_bekerja' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Tidak Memiliki Pekerjaan !',
+                    'numeric' => 'Jumlah penduduk Tidak Memiliki Pekerjaan harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_belum_menikah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Belum Menikah !',
+                    'numeric' => 'Jumlah penduduk Belum Menikah harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_menikah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Sudah Menikah !',
+                    'numeric' => 'Jumlah penduduk Sudah Menikah harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_cerai' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Bercerai !',
+                    'numeric' => 'Jumlah penduduk Bercerai harus berupa angka !'
+                ]
+            ],
+            'jumlah_sekolah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Sekolah !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Sekolah harus berupa angka !'
+                ]
+            ],
+            'jumlah_posyandu' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Posyandu !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Posyandu harus berupa angka !'
+                ]
+            ],
+            'jumlah_tempat_ibadah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Tempat Ibadah !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Tempat Ibadah harus berupa angka !'
+                ]
+            ],
+            'jumlah_pos_ronda' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Pos Ronda !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Pos Ronda harus berupa angka !'
+                ]
+            ],
         ])) {
             session()->setFlashdata('validation', \Config\Services::validation());
             return redirect()->to('/admin/desa/tambah/')->withInput();
@@ -152,6 +312,7 @@ class DesaController extends BaseController
 
         // Simpan data ke database
         $this->m_desa->save([
+            'id_user' => $id_user, // Menambahkan id_user
             'nama_desa' => $nama_desa,
             'kecamatan' => $kecamatan,
             'kabupaten' => $kabupaten,
@@ -160,14 +321,32 @@ class DesaController extends BaseController
             'luas_wilayah' => $luas_wilayah,
             'jumlah_penduduk' => $jumlah_penduduk,
             'website' => $website,
-            'id_user' => $id_user // Menambahkan id_user
+            'jumlah_kepala_keluarga' => $jumlah_kepala_keluarga,
+            'jumlah_penduduk_pria' => $jumlah_penduduk_pria,
+            'jumlah_penduduk_wanita' => $jumlah_penduduk_wanita,
+            'jumlah_penduduk_usia_0_14' => $jumlah_penduduk_usia_0_14,
+            'jumlah_penduduk_usia_15_64' => $jumlah_penduduk_usia_15_64,
+            'jumlah_penduduk_usia_65_keatas' => $jumlah_penduduk_usia_65_keatas,
+            'jumlah_penduduk_tidak_sekolah' => $jumlah_penduduk_tidak_sekolah,
+            'jumlah_penduduk_sd' => $jumlah_penduduk_sd,
+            'jumlah_penduduk_smp' => $jumlah_penduduk_smp,
+            'jumlah_penduduk_sma_smk' => $jumlah_penduduk_sma_smk,
+            'jumlah_penduduk_diploma_sarjana' => $jumlah_penduduk_diploma_sarjana,
+            'jumlah_penduduk_bekerja' => $jumlah_penduduk_bekerja,
+            'jumlah_penduduk_tidak_bekerja' => $jumlah_penduduk_tidak_bekerja,
+            'jumlah_penduduk_belum_menikah' => $jumlah_penduduk_belum_menikah,
+            'jumlah_penduduk_menikah' => $jumlah_penduduk_menikah,
+            'jumlah_penduduk_cerai' => $jumlah_penduduk_cerai,
+            'jumlah_sekolah' => $jumlah_sekolah,
+            'jumlah_posyandu' => $jumlah_posyandu,
+            'jumlah_tempat_ibadah' => $jumlah_tempat_ibadah,
+            'jumlah_pos_ronda' => $jumlah_pos_ronda, //29
         ]);
 
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan &#128077;');
 
         return redirect()->to('/admin/desa');
     }
-
 
     public function cek_data($id_desa)
     {
@@ -203,7 +382,6 @@ class DesaController extends BaseController
 
         return view('admin/desa/cek_data', $data);
     }
-
 
     public function edit($id_desa)
     {
@@ -312,6 +490,146 @@ class DesaController extends BaseController
                     'numeric' => 'Jumlah penduduk harus berupa angka !'
                 ]
             ],
+            'jumlah_kepala_keluarga' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Kepala Keluarga !',
+                    'numeric' => 'Jumlah Kepala Keluarga harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_pria' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Pria !',
+                    'numeric' => 'Jumlah penduduk Pria harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_wanita' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Wanita !',
+                    'numeric' => 'Jumlah penduduk Wanita harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_usia_0_14' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Usia 0-14 !',
+                    'numeric' => 'Jumlah penduduk Usia 0-14 harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_usia_15_64' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Usia 15-64 !',
+                    'numeric' => 'Jumlah penduduk Usia 15-64 harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_usia_65_keatas' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Usia 65-Keatas !',
+                    'numeric' => 'Jumlah penduduk Usia 65-Keatas harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_tidak_sekolah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Tidak Sekolah !',
+                    'numeric' => 'Jumlah penduduk Tidak Sekolah harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_sd' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Sekolah Dasar !',
+                    'numeric' => 'Jumlah penduduk Menempuh Sekolah Dasar harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_smp' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Sekolah Menengah Pertama !',
+                    'numeric' => 'Jumlah penduduk Menempuh Sekolah Menengah Pertama harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_sma_smk' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Sekolah Menengah Keatas !',
+                    'numeric' => 'Jumlah penduduk Menempuh Sekolah Menengah Keatas harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_diploma_sarjana' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Menempuh Diploma Atau Sarjana !',
+                    'numeric' => 'Jumlah penduduk Menempuh Diploma Atau Sarjana harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_bekerja' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Memiliki Pekerjaan !',
+                    'numeric' => 'Jumlah penduduk Memiliki Pekerjaan harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_tidak_bekerja' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Tidak Memiliki Pekerjaan !',
+                    'numeric' => 'Jumlah penduduk Tidak Memiliki Pekerjaan harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_belum_menikah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Belum Menikah !',
+                    'numeric' => 'Jumlah penduduk Belum Menikah harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_menikah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Sudah Menikah !',
+                    'numeric' => 'Jumlah penduduk Sudah Menikah harus berupa angka !'
+                ]
+            ],
+            'jumlah_penduduk_cerai' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah penduduk Bercerai !',
+                    'numeric' => 'Jumlah penduduk Bercerai harus berupa angka !'
+                ]
+            ],
+            'jumlah_sekolah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Sekolah !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Sekolah harus berupa angka !'
+                ]
+            ],
+            'jumlah_posyandu' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Posyandu !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Posyandu harus berupa angka !'
+                ]
+            ],
+            'jumlah_tempat_ibadah' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Tempat Ibadah !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Tempat Ibadah harus berupa angka !'
+                ]
+            ],
+            'jumlah_pos_ronda' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'Silahkan masukkan jumlah Sarana dan Prasarana Berupa Pos Ronda !',
+                    'numeric' => 'Jumlah Sarana dan Prasarana Berupa Pos Ronda harus berupa angka !'
+                ]
+            ],
         ])) {
             session()->setFlashdata('validation', \Config\Services::validation());
             return redirect()->back()->withInput();
@@ -319,6 +637,7 @@ class DesaController extends BaseController
 
         // Update data ke database
         $this->m_desa->save([
+            'id_user' => $id_user, // Menambahkan id_user
             'id_desa' => $id_desa,
             'nama_desa' => $this->request->getVar('nama_desa'),
             'kecamatan' => $this->request->getVar('kecamatan'),
@@ -328,7 +647,27 @@ class DesaController extends BaseController
             'luas_wilayah' => $this->request->getVar('luas_wilayah'),
             'jumlah_penduduk' => $this->request->getVar('jumlah_penduduk'),
             'website' => $this->request->getVar('website'),
-            'id_user' => $id_user // Menambahkan id_user
+            'jumlah_kepala_keluarga' => $this->request->getVar('jumlah_kepala_keluarga'),
+            'jumlah_penduduk_pria' => $this->request->getVar('jumlah_penduduk_pria'),
+            'jumlah_penduduk_wanita' => $this->request->getVar('jumlah_penduduk_wanita'),
+            'jumlah_penduduk_usia_0_14' => $this->request->getVar('jumlah_penduduk_usia_0_14'),
+            'jumlah_penduduk_usia_15_64' => $this->request->getVar('jumlah_penduduk_usia_15_64'),
+            'jumlah_penduduk_usia_65_keatas' => $this->request->getVar('jumlah_penduduk_usia_65_keatas'),
+            'jumlah_penduduk_tidak_sekolah' => $this->request->getVar('jumlah_penduduk_tidak_sekolah'),
+            'jumlah_penduduk_sd' => $this->request->getVar('jumlah_penduduk_sd'),
+            'jumlah_penduduk_smp' => $this->request->getVar('jumlah_penduduk_smp'),
+            'jumlah_penduduk_sma_smk' => $this->request->getVar('jumlah_penduduk_sma_smk'),
+            'jumlah_penduduk_diploma_sarjana' => $this->request->getVar('jumlah_penduduk_diploma_sarjana'),
+            'jumlah_penduduk_bekerja' => $this->request->getVar('jumlah_penduduk_bekerja'),
+            'jumlah_penduduk_tidak_bekerja' => $this->request->getVar('jumlah_penduduk_tidak_bekerja'),
+            'jumlah_penduduk_belum_menikah' => $this->request->getVar('jumlah_penduduk_belum_menikah'),
+            'jumlah_penduduk_menikah' => $this->request->getVar('jumlah_penduduk_menikah'),
+            'jumlah_penduduk_cerai' => $this->request->getVar('jumlah_penduduk_cerai'),
+            'jumlah_sekolah' => $this->request->getVar('jumlah_sekolah'),
+            'jumlah_posyandu' => $this->request->getVar('jumlah_posyandu'),
+            'jumlah_tempat_ibadah' => $this->request->getVar('jumlah_tempat_ibadah'),
+            'jumlah_pos_ronda' => $this->request->getVar('jumlah_pos_ronda'),
+
         ]);
 
         // Set flash message untuk sukses
