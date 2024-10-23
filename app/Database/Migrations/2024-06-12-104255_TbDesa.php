@@ -41,18 +41,18 @@ class TbDesa extends Migration
                 'null' => TRUE,
             ],
             'kode_pos' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+                'type' => 'INT',
+                'constraint' => 11,
                 'null' => TRUE,
             ],
             'luas_wilayah' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+                'type' => 'INT',
+                'constraint' => 11,
                 'null' => TRUE,
             ],
             'jumlah_penduduk' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+                'type' => 'INT',
+                'constraint' => 11,
                 'null' => TRUE,
             ],
             'jumlah_kepala_keluarga' => [
