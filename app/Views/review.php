@@ -108,7 +108,7 @@
                     <div class="row d-flex justify-content-center text-center">
                         <div class="col-lg-8">
                             <h1>Review Pengunjung</h1>
-                            <p class="mb-0">Review Pengunjung Polsek Kayu Aro</p>
+                            <p class="mb-0">Berikan Review Untuk Polsek Kayu Aro</p>
                         </div>
                     </div>
                 </div>
