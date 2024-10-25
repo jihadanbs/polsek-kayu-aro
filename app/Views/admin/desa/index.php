@@ -137,7 +137,7 @@
                                             <td data-field="kabupaten"><?= esc($row['kabupaten'], 'html'); ?></td>
                                             <td data-field="kode_pos"><?= esc($row['kode_pos'], 'html'); ?></td>
                                             <td data-field="jumlah_penduduk">
-                                                <span class="text-success"><?= esc($row['jumlah_penduduk'], 'html'); ?> Jiwa</span>
+                                                <span class="text-success"><?= isset($row['jumlah_penduduk']) ? number_format(esc($row['jumlah_penduduk'], 'html'), 0, ',', '.') : '' ?> Jiwa</span>
                                             </td>
                                             <td style="width: 155px">
                                                 <a href="<?= esc(site_url('admin/desa/cek_data/' . urlencode($row['id_desa'])), 'attr') ?>" class="btn btn-info btn-sm view">
@@ -151,6 +151,24 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
+
+                            <!-- memformat angka dengan pemisah ribuan berupa titik  -->
+                            <script>
+                                function formatNumber() {
+                                    // Ambil nilai dari input
+                                    let number = document.getElementById('numberInput').value;
+
+                                    // Pastikan hanya angka yang diformat
+                                    let formattedNumber = number.replace(/\D/g, '');
+
+                                    // Format angka dengan titik sebagai pemisah ribuan
+                                    formattedNumber = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+                                    // Tampilkan angka yang diformat
+                                    document.getElementById('formattedNumber').innerText = formattedNumber;
+                                }
+                            </script>
+                            <!-- end memformat angka -->
 
                         </div>
                     </div>
