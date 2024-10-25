@@ -696,10 +696,58 @@ class DesaController extends BaseController
         }
     }
 
+    // Client Side
     public function totalData($id_user)
     {
         $totalData = $this->m_desa->getTotalDesa($id_user);
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
+    }
+
+    public function getDesaData($id_desa, $kategori)
+    {
+        $data = $this->m_desa->find($id_desa);
+        $filteredData = [];
+
+        switch ($kategori) {
+            case 'Jenis Kelamin':
+                $filteredData = [
+                    'Pria' => $data['jumlah_penduduk_pria'],
+                    'Wanita' => $data['jumlah_penduduk_wanita']
+                ];
+                break;
+            case 'Usia':
+                $filteredData = [
+                    '0-14 Tahun' => $data['jumlah_penduduk_usia_0_14'],
+                    '15-64 Tahun' => $data['jumlah_penduduk_usia_15_64'],
+                    '65 Tahun Keatas' => $data['jumlah_penduduk_usia_65_keatas']
+                ];
+                break;
+            case 'Pendidikan':
+                $filteredData = [
+                    'Tidak Sekolah' => $data['jumlah_penduduk_tidak_sekolah'],
+                    'SD' => $data['jumlah_penduduk_sd'],
+                    'SMP' => $data['jumlah_penduduk_smp'],
+                    'SMA/SMK' => $data['jumlah_penduduk_sma_smk'],
+                    'Diploma/Sarjana' => $data['jumlah_penduduk_diploma_sarjana']
+                ];
+                break;
+            case 'Pekerjaan':
+                $filteredData = [
+                    'Bekerja' => $data['jumlah_penduduk_bekerja'],
+                    'Tidak Bekerja' => $data['jumlah_penduduk_tidak_bekerja']
+                ];
+                break;
+            case 'Infrastruktur':
+                $filteredData = [
+                    'Sekolah' => $data['jumlah_sekolah'],
+                    'Tempat Ibadah' => $data['jumlah_tempat_ibadah'],
+                    'Posyandu' => $data['jumlah_posyandu'],
+                    'Pos Ronda' => $data['jumlah_pos_ronda']
+                ];
+                break;
+        }
+
+        return $this->response->setJSON($filteredData);
     }
 }

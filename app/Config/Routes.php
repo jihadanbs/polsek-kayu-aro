@@ -53,6 +53,7 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     /*=================================== DESA ====================================*/
     $routes->GET('desa', 'DesaController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('desa', static function ($routes) {
+        $routes->GET('getDesaData/(:num)/(:segment)', 'DesaController::getDesaData/$1/$2', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('totalData/(:num)', 'DesaController::totalData/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('tambah', 'DesaController::tambah', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('save', 'DesaController::save', ['namespace' => 'App\Controllers\Admin']);

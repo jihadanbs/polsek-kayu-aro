@@ -278,7 +278,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="jumlah_penduduk_bekerja" class="col-form-label">Jumlah Penduduk Bekerja</label><span style="color: red;">*</span>
+                                        <label for="jumlah_penduduk_bekerja" class="col-form-label">Jumlah Penduduk Sudah Bekerja</label><span style="color: red;">*</span>
                                         <div class="col-sm-12 input-group">
                                             <input type="text" oninput="formatNumber(this)" class="form-control <?= ($validation->hasError('jumlah_penduduk_bekerja')) ? 'is-invalid' : ''; ?>" id="jumlah_penduduk_bekerja" name="jumlah_penduduk_bekerja" placeholder="Jumlah Penduduk Tidak Menganggur" style="background-color: white;" value="<?= esc(old('jumlah_penduduk_bekerja'), 'html'); ?>">
                                             <span class="input-group-text">Jiwa</span>

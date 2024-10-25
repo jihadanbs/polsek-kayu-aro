@@ -64,6 +64,7 @@ class Home extends BaseController
     public function statistik()
     {
         $id_user = 1;
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
 
         // WAJIB //
         $tb_feedback = $this->m_feedback->getFeedback();
@@ -73,6 +74,7 @@ class Home extends BaseController
 
         $data = [
             'title' => 'Statistik Wilayah',
+            'tb_desa' => $tb_desa,
             // WAJIB //
             'tb_feedback' => $tb_feedback,
             'tb_informasi_edukasi' => $tb_informasi_edukasi,

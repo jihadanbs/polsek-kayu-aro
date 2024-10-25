@@ -217,7 +217,7 @@
                                     <th>~ B2. Pekerjaan<span style="color: red;">*</span></th>
                                 </tr>
                                 <tr>
-                                    <th>Jumlah Penduduk Bekerja</th>
+                                    <th>Jumlah Penduduk Sudah Bekerja</th>
                                     <th class="text-center">:</th>
                                     <td>
                                         <span class="text-success"><?= isset($tb_desa['jumlah_penduduk_bekerja']) ? number_format(esc($tb_desa['jumlah_penduduk_bekerja'], 'html'), 0, ',', '.') : '' ?> Jiwa</span>
