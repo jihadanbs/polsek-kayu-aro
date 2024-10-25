@@ -131,6 +131,13 @@
                 </li>
 
                 <li>
+                    <a href="review">
+                        <i data-feather="star"></i>
+                        <span data-key="t-dashboard">Review</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="slider">
                         <i data-feather="image"></i>
                         <span data-key="t-dashboard">Slider Beranda</span>

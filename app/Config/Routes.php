@@ -171,6 +171,12 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->GET('cek_data/(:segment)', 'SliderController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('delete', 'SliderController::delete', ['namespace' => 'App\Controllers\Admin']);
     });
+
+    /*=================================== REVIEWS ====================================*/
+    $routes->GET('review', 'ReviewController::index', ['namespace' => 'App\Controllers\Admin']);
+    $routes->GROUP('review', static function ($routes) {
+        $routes->POST('delete', 'ReviewController::delete', ['namespace' => 'App\Controllers\Admin']);
+    });
 });
 
 //ROLE STAFF
