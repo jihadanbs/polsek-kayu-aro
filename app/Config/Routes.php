@@ -169,13 +169,15 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->GET('edit/(:segment)', 'SliderController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->PUT('update/(:num)', 'SliderController::update/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('cek_data/(:segment)', 'SliderController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('delete', 'SliderController::delete', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete', 'SliderController::delete', ['namespace' => 'App\Controllers\Admin']);
     });
 
     /*=================================== REVIEWS ====================================*/
     $routes->GET('review', 'ReviewController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('review', static function ($routes) {
-        $routes->POST('delete', 'ReviewController::delete', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('cek_data/(:segment)', 'ReviewController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete2', 'ReviewController::delete2', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete', 'ReviewController::delete', ['namespace' => 'App\Controllers\Admin']);
     });
 });
 
