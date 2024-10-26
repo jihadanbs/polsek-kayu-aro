@@ -215,9 +215,10 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: "<?= site_url('/admin/slider/delete') ?>",
+                            url: '<?= site_url('/admin/slider/delete') ?>',
                             data: {
-                                id_slider_beranda: id_slider_beranda
+                                id_slider_beranda: id_slider_beranda,
+                                _method: 'DELETE'
                             },
                             dataType: 'json',
                             success: function(response) {
@@ -238,6 +239,7 @@
                                 }
                             },
                             error: function(xhr, status, error) {
+                                console.log("Error details:", xhr.responseText); // Tambahkan ini untuk debugging
                                 Swal.fire({
                                     title: "Error",
                                     text: "Terjadi kesalahan. Silakan coba lagi.",
@@ -251,7 +253,6 @@
         });
     </script>
     <!-- HAPUS -->
-
 
     </body>
 

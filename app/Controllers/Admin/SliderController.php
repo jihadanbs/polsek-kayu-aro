@@ -114,15 +114,6 @@ class SliderController extends BaseController
 
     public function delete()
     {
-        // Cek session
-        if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
-        }
-
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
-        }
-
         $id_slider_beranda = $this->request->getPost('id_slider_beranda');
 
         $db = \Config\Database::connect();

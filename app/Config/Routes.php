@@ -149,18 +149,6 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->DELETE('delete/(:num)', 'FaqController::delete/$1', ['namespace' => 'App\Controllers\Admin']);
     });
 
-    /*=================================== WEB OPTION ====================================*/
-    $routes->GET('web_option', 'WebOptionController::index', ['namespace' => 'App\Controllers\Admin']);
-    $routes->GROUP('web_option', static function ($routes) {
-        $routes->GET('tambah', 'WebOptionController::tambah', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('save', 'WebOptionController::save', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('edit/(:segment)', 'WebOptionController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->PUT('update/(:num)', 'WebOptionController::update/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('cek_judul', 'WebOptionController::cek_judul', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('cek_data/(:segment)', 'WebOptionController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('delete', 'WebOptionController::delete/$1', ['namespace' => 'App\Controllers\Admin']);
-    });
-
     /*=================================== SLIDER ====================================*/
     $routes->GET('slider', 'SliderController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('slider', static function ($routes) {
@@ -178,6 +166,18 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->GET('cek_data/(:segment)', 'ReviewController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->DELETE('delete2', 'ReviewController::delete2', ['namespace' => 'App\Controllers\Admin']);
         $routes->DELETE('delete', 'ReviewController::delete', ['namespace' => 'App\Controllers\Admin']);
+    });
+
+    /*=================================== WEB OPTION ====================================*/
+    $routes->GET('web_option', 'WebOptionController::index', ['namespace' => 'App\Controllers\Admin']);
+    $routes->GROUP('web_option', static function ($routes) {
+        $routes->GET('tambah', 'WebOptionController::tambah', ['namespace' => 'App\Controllers\Admin']);
+        $routes->POST('save', 'WebOptionController::save', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('edit/(:segment)', 'WebOptionController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->PUT('update/(:num)', 'WebOptionController::update/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->POST('cek_judul', 'WebOptionController::cek_judul', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('cek_data/(:segment)', 'WebOptionController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->POST('delete', 'WebOptionController::delete/$1', ['namespace' => 'App\Controllers\Admin']);
     });
 });
 
