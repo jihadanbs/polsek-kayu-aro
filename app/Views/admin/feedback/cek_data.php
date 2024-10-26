@@ -223,7 +223,7 @@
     });
 </script>
 
-<!-- HAPUS -->
+<!-- Delete -->
 <script>
     $(document).ready(function() {
         $('.sa-warning').click(function(e) {
@@ -242,9 +242,10 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/admin/feedback/delete2",
+                        url: '<?= site_url('/admin/feedback/delete2') ?>',
                         data: {
-                            id_feedback: id_feedback
+                            id_feedback: id_feedback,
+                            _method: 'DELETE'
                         },
                         dataType: 'json',
                         success: function(response) {
@@ -254,7 +255,6 @@
                                     text: response.success,
                                     icon: "success"
                                 }).then(() => {
-                                    // Redirect ke halaman /admin/feedback setelah sukses menghapus
                                     window.location.href = '/admin/feedback';
                                 });
                             } else if (response.error) {
@@ -264,6 +264,13 @@
                                     icon: "error"
                                 });
                             }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: "Error",
+                                text: "Terjadi kesalahan. Silakan coba lagi.",
+                                icon: "error"
+                            });
                         }
                     });
                 }
@@ -272,7 +279,6 @@
     });
 </script>
 
-<!-- HAPUS -->
 </body>
 
 </html>

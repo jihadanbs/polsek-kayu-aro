@@ -15,7 +15,6 @@
     }
 </style>
 
-
 <?= $this->include('admin/layouts/navbar') ?>
 <?= $this->include('admin/layouts/sidebar') ?>
 <?= $this->include('admin/layouts/rightsidebar') ?>
@@ -214,7 +213,8 @@
                             type: "POST",
                             url: '<?= site_url('/admin/feedback/delete') ?>',
                             data: {
-                                id_feedback: id_feedback
+                                id_feedback: id_feedback,
+                                _method: 'DELETE'
                             },
                             dataType: 'json',
                             success: function(response) {
@@ -224,7 +224,6 @@
                                         text: response.success,
                                         icon: "success"
                                     }).then(() => {
-                                        // Refresh halaman setelah sukses menghapus
                                         location.reload();
                                     });
                                 } else if (response.error) {
@@ -234,6 +233,13 @@
                                         icon: "error"
                                     });
                                 }
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Terjadi kesalahan. Silakan coba lagi.",
+                                    icon: "error"
+                                });
                             }
                         });
                     }

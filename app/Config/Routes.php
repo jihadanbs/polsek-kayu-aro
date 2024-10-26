@@ -133,8 +133,8 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->GET('cek_data/(:segment)', 'FeedbackController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('balas/(:segment)', 'FeedbackController::balas/$1', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('kirim/(:num)', 'FeedbackController::kirim/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('delete2', 'FeedbackController::delete2', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('delete', 'FeedbackController::delete', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete2', 'FeedbackController::delete2', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete', 'FeedbackController::delete', ['namespace' => 'App\Controllers\Admin']);
     });
 
     /*=================================== FAQ ====================================*/
