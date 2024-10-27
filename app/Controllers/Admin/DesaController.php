@@ -709,6 +709,10 @@ class DesaController extends BaseController
     {
         $data = $this->m_desa->find($id_desa);
         $filteredData = [];
+        $additionalInfo = [
+            'luas_wilayah' => $data['luas_wilayah'], // Ambil dari model sesuai kebutuhan
+            'jumlah_penduduk' => $data['jumlah_penduduk'] // Ambil dari model sesuai kebutuhan
+        ];
 
         switch ($kategori) {
             case 'Jenis Kelamin':
@@ -749,6 +753,12 @@ class DesaController extends BaseController
                 break;
         }
 
-        return $this->response->setJSON($filteredData);
+        // Gabungkan filteredData dan additionalInfo
+        $responseData = [
+            'filteredData' => $filteredData,
+            'additionalInfo' => $additionalInfo
+        ];
+
+        return $this->response->setJSON($responseData);
     }
 }
