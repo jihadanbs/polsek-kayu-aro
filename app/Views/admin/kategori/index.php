@@ -286,16 +286,36 @@
             // Event klik untuk tombol Simpan
             $(document).on('click', '.save', function() {
                 var dataToSave = [];
+                var hasError = false; // Flag untuk memeriksa apakah ada error
 
                 // Loop melalui setiap id_kategori_informasi yang sedang diedit
                 editedIds.forEach(function(id_kategori_informasi) {
                     var tr = $('button.edit[data-id="' + id_kategori_informasi + '"]').closest('tr');
                     var nama_kategori = tr.find("[data-field='nama_kategori'] input").val().trim(); // Hapus spasi ekstra
+
+                    // Cek apakah nama_kategori kosong
+                    if (nama_kategori === '') {
+                        hasError = true; // Set flag ke true jika ada inputan kosong
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Peringatan!',
+                            text: 'Nama kategori informasi-edukasi tidak boleh kosong.',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                        return; // Hentikan eksekusi lebih lanjut
+                    }
+
                     dataToSave.push({
                         id_kategori_informasi: id_kategori_informasi,
                         nama_kategori: nama_kategori
                     });
                 });
+
+                // Jika ada error, tidak lanjut menyimpan data
+                if (hasError) {
+                    return; // Hentikan eksekusi jika ada error
+                }
 
                 // Lakukan AJAX untuk menyimpan perubahan ke database
                 $.ajax({
@@ -327,7 +347,6 @@
                                 text: response.message ? response.message : 'Nama kategori sudah ada dalam database !'
                             });
                         }
-
                     },
                     error: function(xhr, status, error) {
                         console.error('Terjadi kesalahan: ' + error);

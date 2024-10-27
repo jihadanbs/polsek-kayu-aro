@@ -131,7 +131,6 @@ class KategoriController extends BaseController
         }
     }
 
-
     public function simpan_perubahan()
     {
         // Cek session
