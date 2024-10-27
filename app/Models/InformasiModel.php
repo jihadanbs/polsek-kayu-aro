@@ -144,10 +144,11 @@ class InformasiModel extends Model
         return $query->getResult();
     }
 
-    public function getRecentPosts()
+    public function getRecentPosts($id_user)
     {
         $builder = $this->db->table('tb_informasi_edukasi');
-        $builder->select('tb_informasi_edukasi.judul, tb_informasi_edukasi.tanggal_diterbitkan, tb_informasi_edukasi.gambar');
+        $builder->select('tb_informasi_edukasi.judul, tb_informasi_edukasi.slug, tb_informasi_edukasi.tanggal_diterbitkan, tb_informasi_edukasi.gambar');
+        $builder->where('tb_informasi_edukasi.id_user', $id_user);
         $builder->orderBy('tb_informasi_edukasi.tanggal_diterbitkan', 'DESC'); // Order by date descending
         $builder->limit(5); // Limit to 5 most recent posts
         $query = $builder->get();

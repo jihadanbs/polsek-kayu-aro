@@ -279,68 +279,7 @@
                     }
                 </script>
                 <!-- End Chart -->
-
-                <div class="col-lg-4 sidebar">
-                    <div class="widgets-container">
-                        <!-- Search Widget -->
-                        <div class="search-widget widget-item">
-                            <h3 class="widget-title">Search</h3>
-                            <form action="">
-                                <input type="text">
-                                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-                            </form>
-                        </div>
-                        <!-- Categories Widget -->
-                        <div class="categories-widget widget-item">
-                            <h3 class="widget-title">Kategori</h3>
-                            <ul class="mt-3">
-                                <?php if (!empty($categories)) : ?>
-                                    <?php foreach ($categories as $category) : ?>
-                                        <li>
-                                            <a href="#"><?= esc($category->nama_kategori ?? '', 'html'); ?> <span>(<?= esc($category->count, 'html'); ?>)</span></a>
-                                        </li>
-                                    <?php endforeach; ?>
-                                <?php else : ?>
-                                    <li><a href="#">Tidak Ada Kategori</a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
-                        <!-- Recent Posts Widget -->
-                        <div class="recent-posts-widget widget-item">
-                            <h3 class="widget-title">Post Terbaru</h3>
-                            <?php if (!empty($recent_posts)) : ?>
-                                <?php foreach ($recent_posts as $post) : ?>
-                                    <div class="post-item">
-                                        <img src="<?= esc(base_url($post->gambar ?? ''), 'html'); ?>" alt="" class="flex-shrink-0">
-                                        <div>
-                                            <h4><a href="#"><?= esc($post->judul ?? '', 'html'); ?></a></h4>
-                                            <time datetime="<?= esc($post->tanggal_diterbitkan ?? '', 'html'); ?>"><?= esc(formatTanggal($post->tanggal_diterbitkan ?? ''), 'html'); ?></time>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <p>No recent posts available.</p>
-                            <?php endif; ?>
-                        </div>
-                        <!-- Tags Widget -->
-                        <div class="tags-widget widget-item">
-                            <h3 class="widget-title">Tags</h3>
-                            <ul>
-                                <li><a href="#">App</a></li>
-                                <li><a href="#">IT</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Mac</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Office</a></li>
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Studio</a></li>
-                                <li><a href="#">Smart</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <?= $this->include('layouts/sideInformasi') ?>
             </div>
         </div>
     </main>

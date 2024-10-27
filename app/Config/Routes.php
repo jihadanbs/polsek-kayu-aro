@@ -7,14 +7,14 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->GET('/', 'Home::index');
 $routes->GET('/', 'Home::detail-informasi');
-$routes->get('detail-informasi/(:segment)', 'Home::blog/$1');
-$routes->get('statistik', 'Home::statistik');
+$routes->GET('detail-informasi/(:segment)', 'Home::detailInformasi/$1');
+$routes->GET('statistik', 'Home::statistik');
 $routes->POST('review', 'Home::save_review');
-$routes->get('review', 'Home::review');
+$routes->GET('review', 'Home::review');
 
 
 //TOKEN CSRF
-$routes->get('get-new-csrf-token', 'SecurityController::getNewCSRFToken');
+$routes->GET('get-new-csrf-token', 'SecurityController::getNewCSRFToken');
 
 //AUTHENTICATION
 $routes->GROUP('authentication', function ($routes) { //catatan : pastikan POST / GET

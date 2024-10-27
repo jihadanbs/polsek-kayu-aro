@@ -34,16 +34,15 @@ class Home extends BaseController
         return view('index', $data);
     }
 
-    public function blog($id_informasi)
+    public function detailInformasi($id_informasi)
     {
         $id_user = 1;
 
         // WAJIB //
-        $tb_feedback = $this->m_feedback->getFeedback();
         $informasi = $this->m_informasi->getAllDataByUser($id_user);
         $tb_informasi_edukasi = $this->m_informasi->getInformasi($id_informasi);
         $categories = $this->m_informasi->getCategoriesWithCount();
-        $recent_posts = $this->m_informasi->getRecentPosts();
+        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
         // END WAJIB //
 
         $data = [
@@ -51,7 +50,6 @@ class Home extends BaseController
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
             // WAJIB //
             'informasi' => $informasi,
-            'tb_feedback' => $tb_feedback,
             'categories' => $categories,
             'recent_posts' => $recent_posts,
             'tb_informasi_edukasi' => $tb_informasi_edukasi
@@ -67,19 +65,19 @@ class Home extends BaseController
         $tb_desa = $this->m_desa->getAllDataByUser($id_user);
 
         // WAJIB //
-        $tb_feedback = $this->m_feedback->getFeedback();
-        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
-        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
+        $informasi = $this->m_informasi->getAllDataByUser($id_user);
+        $categories = $this->m_informasi->getCategoriesWithCount();
+        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
         // END WAJIB //
 
         $data = [
             'title' => 'Statistik Wilayah',
+            'id_user' => $id_user,
             'tb_desa' => $tb_desa,
             // WAJIB //
-            'tb_feedback' => $tb_feedback,
-            'tb_informasi_edukasi' => $tb_informasi_edukasi,
-            'tb_foto' => $tb_foto,
-            'id_user' => $id_user
+            'informasi' => $informasi,
+            'categories' => $categories,
+            'recent_posts' => $recent_posts,
             // END WAJIB //
         ];
 
@@ -91,18 +89,21 @@ class Home extends BaseController
         $id_user = 1;
 
         // WAJIB //
-        $tb_feedback = $this->m_feedback->getFeedback();
-        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
+        $informasi = $this->m_informasi->getAllDataByUser($id_user);
+        $categories = $this->m_informasi->getCategoriesWithCount();
+        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
         $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
         // END WAJIB //
 
         $data = [
             'title' => 'Review Pengunjung',
+            'id_user' => $id_user,
+
             // WAJIB //
-            'tb_feedback' => $tb_feedback,
-            'tb_informasi_edukasi' => $tb_informasi_edukasi,
+            'informasi' => $informasi,
+            'categories' => $categories,
+            'recent_posts' => $recent_posts,
             'tb_foto' => $tb_foto,
-            'id_user' => $id_user
             // END WAJIB //
         ];
 
