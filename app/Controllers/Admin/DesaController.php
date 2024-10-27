@@ -118,9 +118,10 @@ class DesaController extends BaseController
         // Validasi input
         if (!$this->validate([
             'nama_desa' => [
-                'rules' => 'required',
+                'rules' => 'required|is_unique_nama_desa[tb_desa,kecamatan]',
                 'errors' => [
-                    'required' => 'Silahkan masukkan nama desa !'
+                    'required' => 'Silahkan masukkan nama desa !',
+                    'is_unique_nama_desa' => 'Nama Desa Sudah Terdaftar Untuk Nama Kecamatan Yang Sama, Silahkan Ganti Nama Desa Lainnya !'
                 ]
             ],
             'kecamatan' => [

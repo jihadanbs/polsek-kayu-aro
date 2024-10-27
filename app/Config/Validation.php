@@ -8,6 +8,7 @@ use CodeIgniter\Validation\StrictRules\FileRules;
 use CodeIgniter\Validation\StrictRules\FormatRules;
 use CodeIgniter\Validation\StrictRules\Rules;
 use App\Models\UserModel;
+use App\Models\DesaModel;
 
 class Validation extends BaseConfig
 {
@@ -89,6 +90,28 @@ class Validation extends BaseConfig
         $user = $userModel->where('nama_lengkap', $str)->first();
 
         return $user === null;
+    }
+
+    public function is_unique_nama_desa($str, string $fields, array $data): bool
+    {
+        $params = explode(',', $fields);
+        $table = array_shift($params);
+        $builder = db_connect()->table($table);
+
+        // Mendapatkan kecamatan dari $data jika tersedia
+        $kecamatan = isset($data[$params[0]]) ? $data[$params[0]] : null;
+
+        // Memeriksa keunikan judul hanya jika kecamatan dan kecamatan telah dipilih
+        if ($kecamatan !== null) {
+            $builder->where('nama_desa', $str)
+                ->where('kecamatan', $kecamatan);
+        } else {
+            // Jika salah satu atau ketiga nilai tidak ada, abaikan periksa keunikan judul
+            return true;
+        }
+
+        // Menghitung jumlah baris yang sesuai dengan kriteria
+        return $builder->countAllResults() === 0;
     }
 
     // public function title_exists(string $str, string &$fields, array $data): bool
