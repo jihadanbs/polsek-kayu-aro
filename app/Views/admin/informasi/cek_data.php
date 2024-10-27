@@ -128,7 +128,7 @@
                                     <td rowspan="17" width="250px" class="text-center">
                                         <?php if ($tb_informasi_edukasi[0]->profile_penulis ?? '') : ?>
                                             <a href="<?= esc(base_url($tb_informasi_edukasi[0]->profile_penulis), 'attr') ?>" title="Lihat gambar" target="_blank">
-                                                <img src="<?= esc(base_url($tb_informasi_edukasi[0]->profile_penulis), 'attr') ?>" width="250px" height="200px" alt="Gambar Penulis" id="gambar_load">
+                                                <img src="<?= esc(base_url($tb_informasi_edukasi[0]->profile_penulis), 'attr') ?>" width="200px" height="200px" alt="Gambar Penulis" id="gambar_load">
                                             </a>
                                         <?php else : ?>
                                             <a href="#" title="File tidak tersedia">
@@ -160,9 +160,10 @@
                                     <th>Isi Konten</th>
                                     <th class="text-center">:</th>
                                     <td class="readmore">
-                                        <strong><?= esc(truncateText($tb_informasi_edukasi[0]->konten, 50) ?? 'Belum ada catatan lebih lanjut', 'html') ?>
-                                            <?php if (strlen(strip_tags($tb_informasi_edukasi[0]->konten)) > 50) : ?>
-                                                <a href="#" class="read-more-link" data-text="<?= esc(strip_tags($tb_informasi_edukasi[0]->konten), 'attr') ?>">Read more..</a>
+                                        <strong>
+                                            <?= htmlspecialchars_decode(truncateText($tb_informasi_edukasi[0]->konten, 500) ?? 'Belum ada catatan lebih lanjut'); ?>
+                                            <?php if (strlen(strip_tags($tb_informasi_edukasi[0]->konten)) > 100) : ?>
+                                                <a href="#" class="read-more-link" data-text="<?= esc(html_entity_decode(strip_tags($tb_informasi_edukasi[0]->konten)), 'attr'); ?>">Read more..</a>
                                             <?php endif; ?>
                                         </strong>
                                     </td>

@@ -49,7 +49,7 @@
                                 <input type="hidden" name="file_foto" value="<?= esc($tb_foto['file_foto'], 'attr'); ?>">
 
                                 <div class="mb-3">
-                                    <label for="judul_foto" class="col-form-label">Judul Foto :</label>
+                                    <label for="judul_foto" class="col-form-label">Judul Foto</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
                                         <input type="text" class="form-control <?= ($validation->hasError('judul_foto')) ? 'is-invalid' : ''; ?>" id="judul_foto" style="background-color: white;" placeholder="Masukkan Judul Foto" name="judul_foto" value="<?= esc(old('judul_foto', $tb_foto['judul_foto']), 'attr'); ?>" autocomplete="off">
                                         <small class="form-text text-muted">Judul Singkat Saja Maksimal 2-3 Kalimat. Cth: Kegiatan Warga Kerinci, Jambi</small>
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="deskripsi" class="col-form-label">Deskripsi :</label>
+                                    <label for="deskripsi" class="col-form-label">Deskripsi</label><span style="color: red;">*</span>
                                     <textarea class="form-control custom-border <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>" id="deskripsi" cols="30" rows="5" style="background-color: white;" placeholder="Masukkan Deskripsi" name="deskripsi" autocomplete="off"><?= esc(old('deskripsi', $tb_foto['deskripsi']), 'attr'); ?></textarea>
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('deskripsi'); ?>
@@ -69,7 +69,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="file_foto" class="col-form-label">File Foto :</label>
+                                        <label for="file_foto" class="col-form-label">File Foto</label><span style="color: red;">*</span>
                                         <input type="file" accept="image/*" class="form-control custom-border" id="file_foto" name="file_foto[]" style="background-color: white;" <?= (old('file_foto')) ? 'disabled' : 'required'; ?> multiple>
                                         <small class="form-text text-muted">
                                             <span style="color: blue;">NOTE : Untuk Menginputkan 3 Foto atau Lebih Anda Dapat Menggunakan CTRL Pada Keyboard Lalu<span style="color: red;"> TAHAN CTRL nya </span> Sambil Pilih Gambar yang Dimau Lalu Klik Kiri pada MOUSE ataupun TOUCHPAD (CTRL Masih Tetap Ditahan Ya!). Lakukan Hal Yang Sama Untuk Memilih Foto Lainnya.</span>
@@ -80,7 +80,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="tanggal_foto" class="col-form-label">Tanggal Ubah Upload Foto :</label>
+                                        <label for="tanggal_foto" class="col-form-label">Tanggal Ubah Upload Foto</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input type="date" class="form-control <?= ($validation->hasError('tanggal_foto')) ? 'is-invalid' : ''; ?>" id="tanggal_foto" style="background-color: white;" name="tanggal_foto" value="<?= esc(old('tanggal_foto', $tb_foto['tanggal_foto']), 'attr'); ?>">
                                             <div class="invalid-feedback">

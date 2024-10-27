@@ -48,14 +48,14 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="nama" class="col-form-label">Nama Lengkap :</label>
+                                        <label for="nama" class="col-form-label">Nama Lengkap</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input disabled type="text" class="form-control" id="nama" style="background-color: #C7C8CC;" name="nama" value="<?= old('nama', $tb_feedback->nama); ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="email" class="col-form-label">Email :</label>
+                                        <label for="email" class="col-form-label">Email</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input disabled type="text" class="form-control" id="email" style="background-color: #C7C8CC;" name="email" value="<?= old('email', $tb_feedback->email); ?>">
                                         </div>
@@ -63,19 +63,19 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="subjek" class="col-form-label">Subjek :</label>
+                                    <label for="subjek" class="col-form-label">Subjek</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
                                         <input disabled type="text" class="form-control" id="subjek" style="background-color: #C7C8CC;" name="subjek" value="<?= old('subjek', $tb_feedback->subjek); ?>">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="pesan" class="col-form-label">Isi Pesan :</label>
+                                    <label for="pesan" class="col-form-label">Isi Pesan</label><span style="color: red;">*</span>
                                     <textarea disabled class="form-control custom-border" id="pesan" cols="30" rows="5" style="background-color: #C7C8CC;" name="pesan"><?= old('pesan', $tb_feedback->pesan); ?></textarea>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="balasan" class="col-form-label">Isi balasan :</label>
+                                    <label for="balasan" class="col-form-label">Isi balasan</label><span style="color: red;">*</span>
                                     <textarea class="form-control custom-border <?= ($validation->hasError('balasan')) ? 'is-invalid' : ''; ?>" required name="balasan" placeholder="Masukkan Isi balasan Anda" id="balasan" cols="30" rows="5" style="background-color: white;"><?php echo old('balasan'); ?></textarea>
 
                                     <div class="invalid-feedback">

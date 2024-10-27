@@ -107,12 +107,11 @@ class InformasiController extends BaseController
                 ]
             ],
             'judul' => [
-                'rules' => "required|is_unique_judul[tb_informasi_edukasi,id_kategori_informasi]|trim|min_length[5]|max_length[25]",
+                'rules' => "required|is_unique_judul[tb_informasi_edukasi,id_kategori_informasi]|trim|min_length[5]",
                 'errors' => [
                     'required' => 'Kolom Judul Tidak Boleh Kosong !',
                     'is_unique_judul' => 'Judul Sudah Terdaftar Untuk Nama Kategori Informasi Yang Sama, Silahkan Ganti Judul Lainnya !',
                     'min_length' => 'Judul Tidak Boleh Kurang Dari 5 Karakter !',
-                    'max_length' => 'Judul Tidak Boleh Melebihi 25 Karakter !',
                 ]
             ],
             'konten' => [
@@ -315,11 +314,10 @@ class InformasiController extends BaseController
                 ]
             ],
             'judul' => [
-                'rules' => "required|trim|min_length[5]|max_length[25]",
+                'rules' => "required|trim|min_length[5]",
                 'errors' => [
                     'required' => 'Kolom Judul Tidak Boleh Kosong !',
                     'min_length' => 'Judul Tidak Boleh Kurang Dari 5 Karakter !',
-                    'max_length' => 'Judul Tidak Boleh Melebihi 25 Karakter !',
                 ]
             ],
             'konten' => [

@@ -49,7 +49,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="judul" class="col-form-label">Judul :</label>
+                                        <label for="judul" class="col-form-label">Judul</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : ''; ?>" id="judul" autofocus name="judul" placeholder="Masukkan Nama Lengkap Anda" style="background-color: white;" value="<?= esc(old('judul', $tb_informasi_edukasi['judul']), 'attr') ?>">
                                             <div class="invalid-feedback">
@@ -59,7 +59,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="id_kategori_informasi" class="col-form-label">Kategori Informasi :</label>
+                                        <label for="id_kategori_informasi" class="col-form-label">Kategori Informasi</label><span style="color: red;">*</span>
                                         <select class="form-select custom-border <?= ($validation->hasError('id_kategori_informasi')) ? 'is-invalid' : ''; ?>" id="id_kategori_informasi" name="id_kategori_informasi" aria-label="Default select example" style="background-color: white;" required>
                                             <option value="" selected disabled>Silahkan Pilih Nama Kategori Informasi --</option>
                                             <?php foreach ($tb_kategori_informasi as $value) : ?>
@@ -75,7 +75,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="penulis" class="col-form-label">Penulis :</label>
+                                        <label for="penulis" class="col-form-label">Penulis</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control <?= ($validation->hasError('penulis')) ? 'is-invalid' : ''; ?>" id="penulis" name="penulis" placeholder="Masukkan Nama Si Penulis" style="background-color: white;" value="<?= esc(old('penulis', $tb_informasi_edukasi['penulis']), 'attr') ?>" required>
                                             <div class="invalid-feedback">
@@ -85,7 +85,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="tanggal_diterbitkan" class="col-form-label">Tanggal Diterbitkan :</label>
+                                        <label for="tanggal_diterbitkan" class="col-form-label">Tanggal Diterbitkan</label><span style="color: red;">*</span>
                                         <input type="date" class="form-control <?= ($validation->hasError('tanggal_diterbitkan')) ? 'is-invalid' : ''; ?>" name="tanggal_diterbitkan" id="tanggal_diterbitkan" value="<?= esc(old('tanggal_diterbitkan', $tb_informasi_edukasi['tanggal_diterbitkan']), 'attr') ?>" style="background-color: white;">
                                         <div class="invalid-feedback">
                                             <?= esc($validation->getError('tanggal_diterbitkan'), 'html') ?>
@@ -94,21 +94,57 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="konten" class="col-form-label">Isi Konten :</label>
-                                    <textarea class="form-control custom-border <?= ($validation->hasError('konten')) ? 'is-invalid' : ''; ?>" name="konten" placeholder="Masukkan Isi konten Lengkap Anda" id="konten" cols="30" rows="5" style="background-color: white;"><?= esc(old('konten', $tb_informasi_edukasi['konten']), 'html') ?></textarea>
+                                    <label for="konten" class="col-form-label">Isi Konten</label><span style="color: red;">*</span>
+                                    <textarea class="form-control <?= ($validation->hasError('konten')) ? 'is-invalid' : ''; ?>" name="konten" id="konten" required><?= old('konten', htmlspecialchars($tb_informasi_edukasi['konten'], ENT_QUOTES)); ?></textarea>
+
+                                    <!-- Menambahkan div untuk menampilkan pesan validasi -->
                                     <div class="invalid-feedback">
-                                        <?= esc($validation->getError('konten'), 'html') ?>
+                                        <?= $validation->getError('konten'); ?>
                                     </div>
+                                    <script>
+                                        CKEDITOR.replace('konten', {
+                                            toolbar: [{
+                                                    name: 'clipboard',
+                                                    groups: ['clipboard', 'undo'],
+                                                    items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
+                                                },
+                                                {
+                                                    name: 'editing',
+                                                    groups: ['find', 'selection', 'spellchecker'],
+                                                    items: ['Find', 'Replace']
+                                                },
+                                                {
+                                                    name: 'basicstyles',
+                                                    groups: ['basicstyles', 'cleanup'],
+                                                    items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+                                                },
+                                                {
+                                                    name: 'paragraph',
+                                                    groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
+                                                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
+                                                },
+                                                {
+                                                    name: 'styles',
+                                                    items: ['Styles', 'Format', 'Font', 'FontSize']
+                                                },
+                                                {
+                                                    name: 'others',
+                                                    items: ['-']
+                                                },
+                                            ]
+                                        });
+                                    </script>
                                 </div>
 
+
                                 <div class="mb-3">
-                                    <label for="profile_penulis" class="col-form-label">Profile Penulis :</label>
+                                    <label for="profile_penulis" class="col-form-label">Profile Penulis</label><span style="color: red;">*</span>
                                     <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('profile_penulis')) ? 'is-invalid' : ''; ?>" id="profile_penulis" name="profile_penulis" style="background-color: white;">
                                     <input type="hidden" name="current_profile_penulis" value="<?= esc(old('current_profile_penulis', $tb_informasi_edukasi['profile_penulis']), 'attr') ?>">
-                                    <small class="form-text text-muted">Pastikan Foto Profile Yang Diunggah Tidak Lebih Dari 5MB</small>
+                                    <small class="form-text text-muted">Pastikan Foto Profile Yang Diunggah Tidak Lebih Dari 5MB</small> <br>
+                                    <small class="form-text" style="color: red;">Tidak Perlu Diinput Ulang Jika Tidak Ingin Mengganti</small>
                                     <?php if (old('current_profile_penulis', $tb_informasi_edukasi['profile_penulis'])) : ?>
                                         <div class="mt-2">
-                                            <p>profile_penulis saat ini: <?= esc(old('current_profile_penulis', $tb_informasi_edukasi['profile_penulis']), 'html') ?></p>
                                             <img src="<?= esc(base_url($tb_informasi_edukasi['profile_penulis']), 'attr') ?>" alt="Current Photo" style="max-width: 150px; max-height: 150px;">
                                         </div>
                                     <?php endif; ?>
@@ -118,13 +154,13 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="gambar" class="col-form-label">Gambar :</label>
+                                    <label for="gambar" class="col-form-label">Gambar</label><span style="color: red;">*</span>
                                     <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('gambar')) ? 'is-invalid' : ''; ?>" id="gambar" name="gambar" style="background-color: white;">
                                     <input type="hidden" name="current_gambar" value="<?= esc(old('current_gambar', $tb_informasi_edukasi['gambar']), 'attr') ?>">
-                                    <small class="form-text text-muted">Pastikan gambar Yang Diunggah Tidak Lebih Dari 5MB</small>
+                                    <small class="form-text text-muted">Pastikan gambar Yang Diunggah Tidak Lebih Dari 5MB</small> <br>
+                                    <small class="form-text" style="color: red;">Tidak Perlu Diinput Ulang Jika Tidak Ingin Mengganti</small>
                                     <?php if (old('current_gambar', $tb_informasi_edukasi['gambar'])) : ?>
                                         <div class="mt-2">
-                                            <p>Gambar saat ini: <?= esc(old('current_gambar', $tb_informasi_edukasi['gambar']), 'html') ?></p>
                                             <img src="<?= esc(base_url($tb_informasi_edukasi['gambar']), 'attr') ?>" alt="Current Photo" style="max-width: 150px; max-height: 150px;">
                                         </div>
                                     <?php endif; ?>

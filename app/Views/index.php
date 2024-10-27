@@ -788,10 +788,7 @@
                 </div>
 
             </div>
-
-
         </section>
-
         <!-- /Informasi-Edukasi -->
 
         <!-- Contact Section -->

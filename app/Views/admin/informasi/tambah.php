@@ -74,10 +74,48 @@
 
                                 <div class="mb-3">
                                     <label for="konten" class="col-form-label">Isi Konten :</label>
-                                    <textarea class="form-control custom-border <?= ($validation->hasError('konten')) ? 'is-invalid' : ''; ?>" required name="konten" placeholder="Masukkan Deskripsi Isi Konten Anda" id="konten" cols="30" rows="5" style="background-color: white;"><?php echo esc(old('konten'), 'html'); ?></textarea>
+                                    <textarea class="form-control <?= ($validation->hasError('value')) ? 'is-invalid' : ''; ?>" name="konten" id="konten" required><?php echo esc(old('konten'), 'html'); ?></textarea>
+
+                                    <!-- Menambahkan div untuk menampilkan pesan validasi -->
                                     <div class="invalid-feedback">
                                         <?= esc($validation->getError('konten'), 'html') ?>
                                     </div>
+                                    <script>
+                                        CKEDITOR.replace('konten', {
+                                            toolbar: [{
+                                                    name: 'clipboard',
+                                                    groups: ['clipboard', 'undo'],
+                                                    items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
+                                                },
+                                                {
+                                                    name: 'editing',
+                                                    groups: ['find', 'selection', 'spellchecker'],
+                                                    items: ['Find', 'Replace']
+                                                },
+                                                {
+                                                    name: 'basicstyles',
+                                                    groups: ['basicstyles', 'cleanup'],
+                                                    items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+                                                },
+                                                {
+                                                    name: 'paragraph',
+                                                    groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
+                                                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
+                                                },
+                                                // { name: 'links', items: [ 'Link', 'Unlink' ] },
+                                                // { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar' ] },
+                                                {
+                                                    name: 'styles',
+                                                    items: ['Styles', 'Format', 'Font', 'FontSize']
+                                                },
+                                                // { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                                                {
+                                                    name: 'others',
+                                                    items: ['-']
+                                                },
+                                            ]
+                                        });
+                                    </script>
                                 </div>
 
                                 <div class="row">
@@ -120,7 +158,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="gambar" class="col-form-label">Upload Gambar :</label>
+                                    <label for="gambar" class="col-form-label">Upload Gambar Thumbnail :</label>
                                     <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('gambar')) ? 'is-invalid' : ''; ?>" id="gambar" name="gambar" style="background-color: white;" <?= (old('gambar')) ? 'disabled' : 'required'; ?> onchange="previewImage(event)">
                                     <small class="form-text text-muted">Pastikan Gambar Yang Diunggah Tidak Lebih Dari 5MB</small>
                                     <br>

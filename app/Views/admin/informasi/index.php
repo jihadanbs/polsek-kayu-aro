@@ -114,7 +114,6 @@
                                     <tr class="highlight text-center" style="background-color: #28527A; color: white;">
                                         <th>Nomor</th>
                                         <th>Judul</th>
-                                        <th>Isi Konten</th>
                                         <th>Kategori</th>
                                         <th>Tanggal</th>
                                         <th>Aksi</th>
@@ -126,8 +125,7 @@
                                     <?php foreach ($tb_informasi_edukasi as $row) : ?>
                                         <tr>
                                             <td data-field="id_informasi" style="width: 10px" scope="row"><?= esc($i++, 'html'); ?></td>
-                                            <td data-field="judul"><?= esc($row['judul'], 'html'); ?></td>
-                                            <td data-field="konten"><?= esc(truncateText($row['konten'], 20), 'html'); ?></td>
+                                            <td data-field="judul"><?= esc(truncateText($row['judul'], 80), 'html'); ?></td>
                                             <td data-field="nama_kategori"><?= esc($row['nama_kategori'], 'html'); ?></td>
                                             <td data-field="tanggal_diterbitkan"><?= esc($row['tanggal_diterbitkan'], 'html'); ?></td>
                                             <td style="width: 155px">

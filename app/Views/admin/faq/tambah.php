@@ -41,7 +41,7 @@
                                 <?= csrf_field(); ?>
 
                                 <div class="mb-3">
-                                    <label for="pertanyaan" class="col-form-label">Pertanyaan :</label>
+                                    <label for="pertanyaan" class="col-form-label">Pertanyaan</label><span style="color: red;">*</span>
                                     <textarea class="form-control <?= ($validation->hasError('pertanyaan')) ? 'is-invalid' : ''; ?>" name="pertanyaan" id="pertanyaan" required><?php echo old('pertanyaan'); ?></textarea>
 
                                     <!-- Menambahkan div untuk menampilkan pesan validasi -->
@@ -87,7 +87,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="jawaban" class="col-form-label">Jawaban :</label>
+                                    <label for="jawaban" class="col-form-label">Jawaban</label><span style="color: red;">*</span>
                                     <textarea class="form-control <?= ($validation->hasError('jawaban')) ? 'is-invalid' : ''; ?>" name="jawaban" id="jawaban" required><?php echo old('jawaban'); ?></textarea>
 
                                     <!-- Menambahkan div untuk menampilkan pesan validasi -->

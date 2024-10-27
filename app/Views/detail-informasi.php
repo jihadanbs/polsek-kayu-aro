@@ -82,7 +82,7 @@
                 </div><!-- End meta top -->
 
                 <div class="content">
-                  <p><?= esc($tb_informasi_edukasi->konten ?? '', 'html'); ?></p>
+                  <?= htmlspecialchars_decode($tb_informasi_edukasi->konten ?? ''); ?>
                 </div><!-- End post content -->
 
                 <div class="meta-bottom">

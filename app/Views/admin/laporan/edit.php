@@ -49,7 +49,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="id_babin" class="col-form-label">Nama Bhabin Yang Bertanggung Jawab :</label>
+                                        <label for="id_babin" class="col-form-label">Nama Bhabin Yang Bertanggung Jawab</label><span style="color: red;">*</span>
                                         <select class="form-select custom-border <?= ($validation->hasError('id_babin')) ? 'is-invalid' : ''; ?>" id="id_babin" name="id_babin" aria-label="Default select example" style="background-color: white;" required>
                                             <option value="" selected disabled>~ Silahkan Pilih Nama Bhabin ~</option>
                                             <?php foreach ($tb_babin as $value) : ?>
@@ -63,7 +63,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="judul_laporan" class="col-form-label">Judul Laporan :</label>
+                                        <label for="judul_laporan" class="col-form-label">Judul Laporan</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control <?= ($validation->hasError('judul_laporan')) ? 'is-invalid' : ''; ?>" id="judul_laporan" style="background-color: white;" placeholder="Masukkan Judul Laporan" name="judul_laporan" value="<?= esc(old('judul_laporan', $tb_laporan_babin['judul_laporan']), 'attr'); ?>">
                                             <small class="form-text text-muted">Contoh: Laporan Kegiatan Kerja Bakti Desa Bukit Tinggi</small>
@@ -76,7 +76,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="tanggal_laporan" class="col-form-label">Tanggal Kegiatan :</label>
+                                        <label for="tanggal_laporan" class="col-form-label">Tanggal Kegiatan</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input type="date" class="form-control <?= ($validation->hasError('tanggal_laporan')) ? 'is-invalid' : ''; ?>" id="tanggal_laporan" style="background-color: white;" name="tanggal_laporan" value="<?= esc(old('tanggal_laporan', $tb_laporan_babin['tanggal_laporan']), 'attr'); ?>">
 
@@ -87,7 +87,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="jenis_kegiatan" class="col-form-label">Jenis Kegiatan :</label>
+                                        <label for="jenis_kegiatan" class="col-form-label">Jenis Kegiatan</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control <?= ($validation->hasError('jenis_kegiatan')) ? 'is-invalid' : ''; ?>" id="jenis_kegiatan" style="background-color: white;" placeholder="Masukkan Jenis Kegiatan" name="jenis_kegiatan" value="<?= esc(old('jenis_kegiatan', $tb_laporan_babin['jenis_kegiatan']), 'attr'); ?>">
 
@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="uraian_kegiatan" class="col-form-label">Isi Kegiatan :</label>
+                                    <label for="uraian_kegiatan" class="col-form-label">Isi Kegiatan</label><span style="color: red;">*</span>
                                     <textarea class="form-control custom-border <?= ($validation->hasError('uraian_kegiatan')) ? 'is-invalid' : ''; ?>" id="uraian_kegiatan" cols="30" rows="5" style="background-color: white;" placeholder="Masukkan Uraian Kegiatan" name="uraian_kegiatan"><?= esc(old('uraian_kegiatan', $tb_laporan_babin['uraian_kegiatan']), 'attr'); ?></textarea>
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('uraian_kegiatan'); ?>
@@ -107,7 +107,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="hasil_kegiatan" class="col-form-label">Hasil Kegiatan :</label>
+                                    <label for="hasil_kegiatan" class="col-form-label">Hasil Kegiatan</label><span style="color: red;">*</span>
                                     <textarea class="form-control custom-border <?= ($validation->hasError('hasil_kegiatan')) ? 'is-invalid' : ''; ?>" id="hasil_kegiatan" cols="30" rows="5" style="background-color: white;" placeholder="Masukkan Uraian Kegiatan" name="hasil_kegiatan"><?= esc(old('hasil_kegiatan', $tb_laporan_babin['hasil_kegiatan']), 'attr'); ?></textarea>
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('hasil_kegiatan'); ?>
@@ -115,7 +115,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="file_foto" class="col-form-label">File Foto :</label>
+                                    <label for="file_foto" class="col-form-label">File Foto</label><span style="color: red;">*</span>
                                     <input type="file" accept="image/*" class="form-control custom-border" id="file_foto" name="file_foto[]" style="background-color: white;" <?= (old('file_foto')) ? 'disabled' : 'required'; ?> multiple>
                                     <small class="form-text text-muted">
                                         <span style="color: blue;">NOTE : Untuk Menginputkan 3 Foto atau Lebih Anda Dapat Menggunakan CTRL Pada Keyboard Lalu<span style="color: red;"> TAHAN CTRL nya </span> Sambil Pilih Gambar yang Dimau Lalu Klik Kiri pada MOUSE ataupun TOUCHPAD (CTRL Masih Tetap Ditahan Ya!). Lakukan Hal Yang Sama Untuk Memilih Foto Lainnya.</span>
@@ -126,7 +126,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="lokasi_kegiatan" class="col-form-label">Lokasi Kegiatan :</label>
+                                    <label for="lokasi_kegiatan" class="col-form-label">Lokasi Kegiatan</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
                                         <div id="map" style="height: 400px;"></div>
                                         <input type="hidden" class="form-control <?= ($validation->hasError('lokasi_kegiatan')) ? 'is-invalid' : ''; ?>" id="lokasi_kegiatan" style="background-color: white;" name="lokasi_kegiatan" value="<?= esc(old('lokasi_kegiatan', $tb_laporan_babin['lokasi_kegiatan']), 'attr'); ?>">
