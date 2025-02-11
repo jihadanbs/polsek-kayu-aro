@@ -15,6 +15,8 @@ class Home extends BaseController
         $tb_faq = $this->m_faq->getAllData();
         $tb_slider_beranda = $this->m_slider->getAllData();
         $tb_review = $this->m_review->getAllData();
+        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
         // END WAJIB //
 
         $data = [
@@ -27,6 +29,8 @@ class Home extends BaseController
             'tb_faq' => $tb_faq,
             'tb_slider_beranda' => $tb_slider_beranda,
             'tb_review' => $tb_review,
+            'tb_babin' => $tb_babin,
+            'tb_desa' => $tb_desa,
             'id_user' => $id_user
             // END WAJIB //
         ];

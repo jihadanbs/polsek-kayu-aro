@@ -792,11 +792,11 @@
         <!-- /Informasi-Edukasi -->
 
         <!-- Contact Section -->
-        <section id="kontak" class="contact section">
+        <section id="pengaduan" class="contact section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Kontak</h2>
+                <h2>Pengaduan</h2>
                 <p>Silakan hubungi kami untuk pengaduan, laporan, atau informasi lebih lanjut. Kami siap melayani Anda dengan sebaik mungkin.</p>
             </div><!-- End Section Title -->
 
@@ -858,6 +858,41 @@
                                         Silakan isi email Anda yang valid !
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <select class="form-select custom-border <?= ($validation->hasError('id_desa')) ? 'is-invalid' : ''; ?>" id="id_desa" name="id_desa" aria-label="Default select example" style="background-color: white;" required>
+                                        <option value="" selected disabled>~ Silahkan Pilih Nama Desa ~</option>
+                                        <?php foreach ($tb_desa as $value) : ?>
+                                            <option value="<?= esc($value['id_desa'], 'attr') ?>" <?= old('id_desa') == $value['id_desa'] ? 'selected' : ''; ?>>
+                                                <?= esc($value['nama_desa'], 'html') ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Silakan pilih nama desa anda !
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-select custom-border <?= ($validation->hasError('id_babin')) ? 'is-invalid' : ''; ?>" id="id_babin" name="id_babin" aria-label="Default select example" style="background-color: white;" required>
+                                        <option value="" selected disabled>~ Silahkan Pilih Nama Bhabin ~</option>
+                                        <?php foreach ($tb_babin as $value) : ?>
+                                            <option value="<?= esc($value['id_babin'], 'attr') ?>" <?= old('id_babin') == $value['id_babin'] ? 'selected' : ''; ?>>
+                                                <?= esc($value['nama_lengkap'], 'html') ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Silakan pilih nama babin !
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="no_telepon" placeholder="Nomor Telepon" required>
+                                    <small class="text-muted custom-small-text">Pastikan Nomor Telepon Anda Aktif Untuk Memudahkan Pengiriman Tanggapan</small>
+                                    <div class="invalid-feedback">
+                                        Silakan isi nomor telepon !
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <input type="text" class="form-control" name="subjek" placeholder="Subjek" required>
                                     <div class="invalid-feedback">
@@ -868,6 +903,12 @@
                                     <textarea class="form-control" name="pesan" rows="8" placeholder="Pesan" required></textarea>
                                     <div class="invalid-feedback">
                                         Silakan isi pesan Anda !
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="file" accept="image/*" class="form-control" name="dokumentasi" placeholder="dokumentasi" required>
+                                    <div class="invalid-feedback">
+                                        Silakan masukkan dokumentasi !
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-center">

@@ -32,7 +32,7 @@
                     <li><a href="/#layanan">Layanan</a></li>
                     <li><a href="/#galeri">Galeri</a></li>
                     <li><a href="/#informasi-edukasi">Informasi-Edukasi</a></li>
-                    <li><a href="/#kontak">Kontak</a></li>
+                    <li><a href="/#pengaduan">Pengaduan</a></li>
                     <li><a href="authentication/login" target="_blank">Login</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

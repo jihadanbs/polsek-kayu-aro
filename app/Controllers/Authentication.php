@@ -17,7 +17,7 @@ class Authentication extends BaseController
         $this->session = session();
         $this->m_user = new UserModel();
         $this->validation = \Config\Services::validation();
-        $this->email = \Config\Services::email(); // inisialisasi properti email
+        $this->email = \Config\Services::email();
     }
 
     public function registrasi()
