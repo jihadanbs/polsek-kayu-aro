@@ -129,22 +129,6 @@ class TbDesa extends Migration
                 'constraint' => 20,
                 'null' => TRUE,
             ],
-            // Status Pernikahan
-            'jumlah_penduduk_belum_menikah' => [
-                'type' => 'INT',
-                'constraint' => 20,
-                'null' => TRUE,
-            ],
-            'jumlah_penduduk_menikah' => [
-                'type' => 'INT',
-                'constraint' => 20,
-                'null' => TRUE,
-            ],
-            'jumlah_penduduk_cerai' => [
-                'type' => 'INT',
-                'constraint' => 20,
-                'null' => TRUE,
-            ],
             // Sarana dan Prasarana
             'jumlah_sekolah' => [
                 'type' => 'INT',

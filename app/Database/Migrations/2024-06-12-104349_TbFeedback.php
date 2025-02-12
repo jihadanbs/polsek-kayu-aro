@@ -16,6 +16,16 @@ class TbFeedback extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
+            'id_desa' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE
+            ],
+            'id_babin' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE
+            ],
             'nama' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255
@@ -48,6 +58,8 @@ class TbFeedback extends Migration
         ]);
 
         $this->forge->addKey('id_feedback', TRUE);
+        $this->forge->addForeignKey('id_babin', 'tb_babin', 'id_babin', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_desa', 'tb_desa', 'id_desa', 'CASCADE', 'CASCADE');
         // Membuat tabel tb_feedback');
         $this->forge->createTable('tb_feedback');
     }
