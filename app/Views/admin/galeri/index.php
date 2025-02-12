@@ -146,7 +146,7 @@
                                                     </button>
                                                 </div>
                                             </td>
-                                            <td data-field="judul"><?= esc($row['judul_foto'], 'html'); ?></td>
+                                            <td><?= esc($row['judul_foto'], 'html'); ?></td>
                                             <td style="width: 155px">
                                                 <a href="<?= esc(site_url('admin/galeri/cek_data/' . urlencode($row['id_foto'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
