@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 
-class FeedbackController extends BaseController
+class PengaduanController extends BaseController
 {
     public function index()
     {
@@ -19,20 +19,20 @@ class FeedbackController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
-        $tb_feedback = $this->m_feedback->getAllData();
+        $tb_pengaduan = $this->m_pengaduan->getAllData();
 
         $data = [
-            'title' => 'Admin | Halaman Feedback Pengunjung',
+            'title' => 'Admin | Halaman Pengaduan Masyarakat',
             //WAJIB//
             'tb_user' => $tb_user,
             'unread' => $unread,
             'unreadCount' => $unreadCount,
             //END WAJIB//
-            'tb_feedback' => $tb_feedback,
+            'tb_pengaduan' => $tb_pengaduan,
         ];
 
         return view('admin/feedback/index', $data);
@@ -51,24 +51,24 @@ class FeedbackController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
-        $tb_feedback = $this->m_feedback->getFeedback();
+        $tb_pengaduan = $this->m_pengaduan->getFeedback();
 
         $data = [
-            'title' => 'Admin | Halaman Tambah Feedback Pengunjung',
+            'title' => 'Admin | Halaman Tambah Pengaduan Masyarakat',
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
             //WAJIB//
             'tb_user' => $tb_user,
             'unread' => $unread,
             'unreadCount' => $unreadCount,
             //END WAJIB//
-            'tb_feedback' => $tb_feedback
+            'tb_pengaduan' => $tb_pengaduan
         ];
 
-        return view('admin/feedback/tambah', $data);
+        return view('admin/pengaduan/tambah', $data);
     }
 
     public function save()
@@ -155,7 +155,7 @@ class FeedbackController extends BaseController
         }
 
         // Simpan data ke database
-        $this->m_feedback->save($data);
+        $this->m_pengaduan->save($data);
 
         return redirect()->back();
     }
@@ -173,10 +173,10 @@ class FeedbackController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_feedback = $this->m_feedback->getFeedback($id_feedback);
+        $tb_pengaduan = $this->m_pengaduan->getFeedback($id_feedback);
 
         $data = [
             'title' => 'Admin | Halaman Cek Data Feedback Pengunjung',
@@ -186,7 +186,7 @@ class FeedbackController extends BaseController
             'unread' => $unread,
             'unreadCount' => $unreadCount,
             //END WAJIB//
-            'tb_feedback' => $tb_feedback
+            'tb_pengaduan' => $tb_pengaduan
         ];
 
         return view('admin/feedback/cek_data', $data);
@@ -205,10 +205,10 @@ class FeedbackController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_feedback = $this->m_feedback->getFeedback($id_feedback);
+        $tb_pengaduan = $this->m_pengaduan->getFeedback($id_feedback);
 
         $data = [
             'title' => 'Admin | Halaman Balas Feedback Pengunjung',
@@ -218,7 +218,7 @@ class FeedbackController extends BaseController
             'unread' => $unread,
             'unreadCount' => $unreadCount,
             //END WAJIB//
-            'tb_feedback' => $tb_feedback
+            'tb_pengaduan' => $tb_pengaduan
         ];
 
         return view('admin/feedback/balas', $data);
@@ -257,16 +257,16 @@ class FeedbackController extends BaseController
         }
 
         // Ambil nama pemohon dari database
-        $tb_feedback = $this->m_feedback->getFeedback($id_feedback);
-        if (!$tb_feedback) {
+        $tb_pengaduan = $this->m_pengaduan->getFeedback($id_feedback);
+        if (!$tb_pengaduan) {
             session()->setFlashdata('gagal', 'Data pemohon tidak ditemukan.');
             return redirect()->to('/admin/feedback');
         }
 
-        $nama = $tb_feedback->nama;
-        $email = $tb_feedback->email;
-        $subjek = $tb_feedback->subjek;
-        $pesan = $tb_feedback->pesan;
+        $nama = $tb_pengaduan->nama;
+        $email = $tb_pengaduan->email;
+        $subjek = $tb_pengaduan->subjek;
+        $pesan = $tb_pengaduan->pesan;
 
         $data = [
             'id_feedback' => $id_feedback,
@@ -301,7 +301,7 @@ class FeedbackController extends BaseController
         }
 
         // Simpan data ke database
-        $this->m_feedback->save($data);
+        $this->m_pengaduan->save($data);
 
         return redirect()->to('/admin/feedback');
     }
@@ -379,7 +379,7 @@ class FeedbackController extends BaseController
         // Kirim email
         if ($this->email->send()) {
             // Simpan data ke database
-            $this->m_feedback->save($data);
+            $this->m_pengaduan->save($data);
 
             return $this->response->setJSON([
                 'status' => 'success',
@@ -406,7 +406,7 @@ class FeedbackController extends BaseController
 
         $id_feedback = $this->request->getPost('id_feedback');
 
-        if ($this->m_feedback->delete($id_feedback)) {
+        if ($this->m_pengaduan->delete($id_feedback)) {
             return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
         } else {
             return $this->response->setJSON(['error' => 'Gagal menghapus data']);
@@ -426,7 +426,7 @@ class FeedbackController extends BaseController
 
         $id_feedback = $this->request->getPost('id_feedback');
 
-        if ($this->m_feedback->delete($id_feedback)) {
+        if ($this->m_pengaduan->delete($id_feedback)) {
             return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
         } else {
             return $this->response->setJSON(['error' => 'Gagal menghapus data']);
@@ -435,14 +435,14 @@ class FeedbackController extends BaseController
 
     public function totalData()
     {
-        $totalData = $this->m_feedback->getTotalFeedback();
+        $totalData = $this->m_pengaduan->getTotalFeedback();
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }
 
     public function totalByStatus($status)
     {
-        $total = $this->m_feedback->getTotalByStatus($status);
+        $total = $this->m_pengaduan->getTotalByStatus($status);
         return $this->response->setJSON(['total' => $total]);
     }
 }

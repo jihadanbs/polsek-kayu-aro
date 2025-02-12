@@ -122,19 +122,19 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
         $routes->DELETE('delete', 'GaleriController::delete', ['namespace' => 'App\Controllers\Admin']);
     });
 
-    /*=================================== FEEDBACK ====================================*/
-    $routes->GET('feedback', 'FeedbackController::index', ['namespace' => 'App\Controllers\Admin']);
-    $routes->GROUP('feedback', static function ($routes) {
-        $routes->POST('send', 'FeedbackController::send', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('totalData', 'FeedbackController::totalData', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('totalByStatus/(:any)', 'FeedbackController::totalByStatus/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('tambah', 'FeedbackController::tambah', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('save', 'FeedbackController::save', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('cek_data/(:segment)', 'FeedbackController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('balas/(:segment)', 'FeedbackController::balas/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->POST('kirim/(:num)', 'FeedbackController::kirim/$1', ['namespace' => 'App\Controllers\Admin']);
-        $routes->DELETE('delete2', 'FeedbackController::delete2', ['namespace' => 'App\Controllers\Admin']);
-        $routes->DELETE('delete', 'FeedbackController::delete', ['namespace' => 'App\Controllers\Admin']);
+    /*=================================== PENGADUAN ====================================*/
+    $routes->GET('pengaduan', 'PengaduanController::index', ['namespace' => 'App\Controllers\Admin']);
+    $routes->GROUP('pengaduan', static function ($routes) {
+        $routes->POST('send', 'PengaduanController::send', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('totalData', 'PengaduanController::totalData', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('totalByStatus/(:any)', 'PengaduanController::totalByStatus/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('tambah', 'PengaduanController::tambah', ['namespace' => 'App\Controllers\Admin']);
+        $routes->POST('save', 'PengaduanController::save', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('cek_data/(:segment)', 'PengaduanController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('balas/(:segment)', 'PengaduanController::balas/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->POST('kirim/(:num)', 'PengaduanController::kirim/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete2', 'PengaduanController::delete2', ['namespace' => 'App\Controllers\Admin']);
+        $routes->DELETE('delete', 'PengaduanController::delete', ['namespace' => 'App\Controllers\Admin']);
     });
 
     /*=================================== FAQ ====================================*/

@@ -4,13 +4,13 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class TbFeedback extends Migration
+class TbPengaduan extends Migration
 {
     public function up()
     {
-        // Membuat tabel tb_feedback
+        // Membuat tabel tb_pengaduan
         $this->forge->addField([
-            'id_feedback' => [
+            'id_pengaduan' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => TRUE,
@@ -27,6 +27,10 @@ class TbFeedback extends Migration
                 'unsigned' => TRUE
             ],
             'nama' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255
+            ],
+            'no_telepon' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255
             ],
@@ -53,20 +57,24 @@ class TbFeedback extends Migration
                 'type' => 'BOOLEAN',
                 'default' => TRUE
             ],
+            'dokumentasi' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255
+            ],
             'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
             'updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
         ]);
 
-        $this->forge->addKey('id_feedback', TRUE);
+        $this->forge->addKey('id_pengaduan', TRUE);
         $this->forge->addForeignKey('id_babin', 'tb_babin', 'id_babin', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('id_desa', 'tb_desa', 'id_desa', 'CASCADE', 'CASCADE');
-        // Membuat tabel tb_feedback');
-        $this->forge->createTable('tb_feedback');
+        // Membuat tabel tb_pengaduan');
+        $this->forge->createTable('tb_pengaduan');
     }
 
     public function down()
     {
-        // Menghapus tabel tb_feedback');
-        $this->forge->dropTable('tb_feedback');
+        // Menghapus tabel tb_pengaduan');
+        $this->forge->dropTable('tb_pengaduan');
     }
 }

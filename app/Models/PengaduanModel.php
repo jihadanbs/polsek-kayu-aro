@@ -4,37 +4,37 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FeedbackModel extends Model
+class PengaduanModel extends Model
 {
-    protected $table = 'tb_feedback';
-    protected $primaryKey = 'id_feedback';
+    protected $table = 'tb_pengaduan';
+    protected $primaryKey = 'id_pengaduan';
     protected $returnType = 'object';
-    protected $allowedFields = ['nama', 'email', 'subjek', 'pesan', 'balasan', 'status'];
+    protected $allowedFields = ['id_desa', 'id_babin', 'nama', 'no_telepon', 'email', 'subjek', 'pesan', 'balasan', 'status', 'dokumentasi'];
     protected $useTimestamps = true;
     protected $useSoftDeletes = false;
 
-    public function getFeedback($id_feedback = false)
+    public function getFeedback($id_pengaduan = false)
     {
-        if ($id_feedback == false) {
+        if ($id_pengaduan == false) {
             return $this->findAll();
         }
 
-        return $this->where(['id_feedback' => $id_feedback])->first();
+        return $this->where(['id_pengaduan' => $id_pengaduan])->first();
     }
 
     public function getAllData()
     {
-        return $this->orderBy('id_feedback', 'DESC')->findAll();
+        return $this->orderBy('id_pengaduan', 'DESC')->findAll();
     }
 
-    public function getId($id_feedback)
+    public function getId($id_pengaduan)
     {
-        return $this->db->table('tb_feedback')->where('id_feedback', $id_feedback)->get()->getRowArray();
+        return $this->db->table('tb_pengaduan')->where('id_pengaduan', $id_pengaduan)->get()->getRowArray();
     }
 
-    public function updateStatusBaca($id_feedback)
+    public function updateStatusBaca($id_pengaduan)
     {
-        return $this->update($id_feedback, ['status_baca' => false]);
+        return $this->update($id_pengaduan, ['status_baca' => false]);
     }
 
     public function getTotalFeedback()
@@ -54,7 +54,7 @@ class FeedbackModel extends Model
 
     public function getUnreadEntries()
     {
-        return $this->db->table('tb_feedback')
+        return $this->db->table('tb_pengaduan')
             ->where('status', 'Belum dibalas')
             ->get()
             ->getResultObject();
@@ -62,7 +62,7 @@ class FeedbackModel extends Model
 
     public function countUnreadEntries()
     {
-        return $this->db->table('tb_feedback')
+        return $this->db->table('tb_pengaduan')
             ->where('status', 'Belum dibalas')
             ->countAllResults();
     }

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\JabatanModel;
 use App\Models\UserModel;
-use App\Models\FeedbackModel;
+use App\Models\PengaduanModel;
 use App\Models\DesaModel;
 use App\Models\BabinModel;
 use App\Models\LaporanModel;
@@ -69,7 +69,7 @@ abstract class BaseController extends Controller
     protected $m_jabatan;
     protected $m_user;
     protected $m_babin;
-    protected $m_feedback;
+    protected $m_pengaduan;
     protected $m_laporan;
     protected $m_file_laporan;
     protected $m_galeri;
@@ -104,7 +104,7 @@ abstract class BaseController extends Controller
         $this->m_user = new UserModel();
         $this->m_desa = new DesaModel();
         $this->m_babin = new BabinModel();
-        $this->m_feedback = new FeedbackModel();
+        $this->m_pengaduan = new PengaduanModel();
         $this->m_laporan = new LaporanModel();
         $this->m_file_laporan = new FileLaporanModel();
         $this->m_galeri = new GaleriModel();
