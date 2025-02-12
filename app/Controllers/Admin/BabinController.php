@@ -21,8 +21,8 @@ class BabinController extends BaseController
         }
 
         // Ambil data babin dan desa berdasarkan id_user
-        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
-        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
+        $tb_babin = $this->m_babin->getBabinByUserId();
+        $tb_desa = $this->m_desa->getAllData();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -58,8 +58,8 @@ class BabinController extends BaseController
         }
 
         // Ambil data babin dan desa berdasarkan id_user
-        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
-        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
+        $tb_babin = $this->m_babin->getBabinByUserId();
+        $tb_desa = $this->m_desa->getAllData();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -93,15 +93,7 @@ class BabinController extends BaseController
         }
 
         // Ambil data dari request
-        $nama_lengkap = $this->request->getVar('nama_lengkap');
         $id_desa = $this->request->getPost('id_desa'); // Mengambil sebagai array
-        $nrp = $this->request->getVar('nrp');
-        $jabatan = $this->request->getVar('jabatan');
-        $pangkat = $this->request->getVar('pangkat');
-        $no_telepon = $this->request->getVar('no_telepon');
-        $email = $this->request->getVar('email');
-        $alamat = $this->request->getVar('alamat');
-        $tanggal_mulai_tugas = $this->request->getVar('tanggal_mulai_tugas');
 
         // Validasi input
         if (!$this->validate([
@@ -166,23 +158,17 @@ class BabinController extends BaseController
             return redirect()->to('/admin/babin/tambah/')->withInput();
         }
 
-        // Upload foto
-        $uploadFoto = uploadFileUmum('foto', 'dokumen/foto-bhabin/');
-        // Ambil id_user dari session
-        $id_user = session()->get('id_user');
-
         // Simpan data ke tabel tb_babin
         $this->m_babin->save([
-            'nama_lengkap' => $nama_lengkap,
-            'nrp' => $nrp,
-            'jabatan' => $jabatan,
-            'pangkat' => $pangkat,
-            'no_telepon' => $no_telepon,
-            'email' => $email,
-            'alamat' => $alamat,
-            'tanggal_mulai_tugas' => $tanggal_mulai_tugas,
-            'foto' => $uploadFoto,
-            'id_user' => $id_user
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
+            'nrp' => $this->request->getPost('nrp'),
+            'jabatan' => $this->request->getPost('jabatan'),
+            'pangkat' => $this->request->getPost('pangkat'),
+            'no_telepon' => $this->request->getPost('no_telepon'),
+            'email' => $this->request->getPost('email'),
+            'alamat' => $this->request->getPost('alamat'),
+            'tanggal_mulai_tugas' => $this->request->getPost('tanggal_mulai_tugas'),
+            'foto' => uploadFileUmum('foto', 'dokumen/foto-bhabin/'),
         ]);
 
         // Dapatkan ID babin yang baru saja disimpan
@@ -193,7 +179,6 @@ class BabinController extends BaseController
             $this->db->table('tb_babin_desa')->insert([
                 'id_babin' => $id_babin,
                 'id_desa' => $desa,
-                'id_user' => $id_user
             ]);
         }
 
@@ -214,18 +199,18 @@ class BabinController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
-        $id_user = session()->get('id_user');
+        // $id_user = session()->get('id_user');
 
         // Ambil data babin berdasarkan id_babin
         $tb_babin = $this->m_babin->getBabinById($id_babin);
 
         // Jika data babin tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_babin || $tb_babin['id_user'] != $id_user) {
+        if (!$tb_babin) {
             return redirect()->back()->with('gagal', 'Data Bhabin tidak ditemukan atau Anda tidak memiliki akses');
         }
 
         // Ambil data desa dan user
-        $tb_desa = $this->m_desa->getAllDataByUser($id_user); // Filter berdasarkan id_user
+        $tb_desa = $this->m_desa->getAllData(); // Filter berdasarkan id_user
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -258,18 +243,16 @@ class BabinController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
-        $id_user = session()->get('id_user');
-
         // Ambil data babin berdasarkan id_babin
         $tb_babin = $this->m_babin->getBabinById($id_babin);
 
         // Jika data babin tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_babin || $tb_babin['id_user'] != $id_user) {
+        if (!$tb_babin) {
             return redirect()->back()->with('gagal', 'Data Bhabin tidak ditemukan atau Anda tidak memiliki akses');
         }
 
         // Ambil data desa dan user
-        $tb_desa = $this->m_desa->getAllDataByUser($id_user); // Filter berdasarkan id_user
+        $tb_desa = $this->m_desa->getAllData(); // Filter berdasarkan id_user
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -308,15 +291,7 @@ class BabinController extends BaseController
         }
 
         // Ambil data dari request
-        $nama_lengkap = $this->request->getVar('nama_lengkap');
         $id_desa = $this->request->getPost('id_desa'); // Mengambil sebagai array
-        $nrp = $this->request->getVar('nrp');
-        $jabatan = $this->request->getVar('jabatan');
-        $pangkat = $this->request->getVar('pangkat');
-        $no_telepon = $this->request->getVar('no_telepon');
-        $email = $this->request->getVar('email');
-        $alamat = $this->request->getVar('alamat');
-        $tanggal_mulai_tugas = $this->request->getVar('tanggal_mulai_tugas');
 
         // Validasi input
         if (!$this->validate([
@@ -383,23 +358,18 @@ class BabinController extends BaseController
 
         // Handle file upload
         $oldFileName = $this->request->getVar('current_foto'); // Nama file lama dari input hidden
-        $newFileName = updateFileUmum('foto', 'dokumen/foto-bhabin/', $oldFileName);
-
-        // Ambil id_user dari session
-        $id_user = session()->get('id_user');
 
         // Update data di tb_babin
         $this->m_babin->update($id_babin, [
-            'nama_lengkap' => $nama_lengkap,
-            'nrp' => $nrp,
-            'jabatan' => $jabatan,
-            'pangkat' => $pangkat,
-            'no_telepon' => $no_telepon,
-            'email' => $email,
-            'alamat' => $alamat,
-            'tanggal_mulai_tugas' => $tanggal_mulai_tugas,
-            'foto' => $newFileName,
-            'id_user' => $id_user
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
+            'nrp' => $this->request->getPost('nrp'),
+            'jabatan' => $this->request->getPost('jabatan'),
+            'pangkat' => $this->request->getPost('pangkat'),
+            'no_telepon' => $this->request->getPost('no_telepon'),
+            'email' =>  $this->request->getPost('email'),
+            'alamat' => $this->request->getPost('alamat'),
+            'tanggal_mulai_tugas' => $this->request->getPost('tanggal_mulai_tugas'),
+            'foto' => updateFileUmum('foto', 'dokumen/foto-bhabin/', $oldFileName),
         ]);
 
         // Update data di tb_babin_desa
@@ -411,7 +381,6 @@ class BabinController extends BaseController
             $this->db->table('tb_babin_desa')->insert([
                 'id_babin' => $id_babin,
                 'id_desa' => $desa,
-                'id_user' => $id_user
             ]);
         }
 
@@ -432,7 +401,7 @@ class BabinController extends BaseController
             $dataFiles = $this->m_babin->getFilesById($id_babin);
 
             if (empty($dataFiles)) {
-                throw new \Exception('Tidak ada file yang ditemukan untuk id_babin.');
+                throw new \Exception('Tidak ada file yang ditemukan untuk babin !');
             }
 
             foreach ($dataFiles[0] as $fileColumn => $filePath) {

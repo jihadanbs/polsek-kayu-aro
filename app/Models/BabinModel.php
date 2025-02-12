@@ -24,13 +24,12 @@ class BabinModel extends Model
             ->getResultArray();
     }
 
-    public function getBabinByUserId($id_user)
+    public function getBabinByUserId()
     {
         return $this->db->table('tb_babin')
             ->select('tb_babin.*, GROUP_CONCAT(tb_desa.nama_desa SEPARATOR ", ") as nama_desa')
             ->join('tb_babin_desa', 'tb_babin.id_babin = tb_babin_desa.id_babin')
             ->join('tb_desa', 'tb_babin_desa.id_desa = tb_desa.id_desa')
-            ->where('tb_babin.id_user', $id_user)
             ->groupBy('tb_babin.id_babin')
             ->orderBy('tb_babin.id_babin', 'DESC')
             ->get()
