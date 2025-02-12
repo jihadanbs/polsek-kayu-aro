@@ -248,7 +248,7 @@
                                     <i class="bi bi-headset flex-shrink-0"></i>
                                     <div>
                                         <span id="totalFeedbackCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="1" class="purecounter"></span>
-                                        <p><strong>Feedback Masyarakat</strong> <span>Kami menerima banyak feedback dari masyarakat untuk terus meningkatkan pelayanan kami.</span></p>
+                                        <p><strong>Aduan Masyarakat</strong> <span>Kami menerima banyak pengaduan dari masyarakat untuk terus meningkatkan pelayanan kami.</span></p>
                                     </div>
                                 </div>
                             </div><!-- End Stats Item -->
@@ -262,13 +262,9 @@
                                     </div>
                                 </div>
                             </div><!-- End Stats Item -->
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
         </section><!-- /Stats Section -->
@@ -990,8 +986,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>";
-                getTotalFeedback("/admin/desa/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/desa/totalData", function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalDesaCounter").attr("data-purecounter-end", total);
                     $("#totalDesaCounter").text(total);
@@ -1022,8 +1017,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>";
-                getTotalFeedback("/admin/laporan/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/laporan/totalData", function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalLaporanCounter").attr("data-purecounter-end", total);
                     $("#totalLaporanCounter").text(total);
@@ -1085,8 +1079,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>";
-                getTotalFeedback("/admin/babin/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/babin/totalData", function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalBabinCounter").attr("data-purecounter-end", total);
                     $("#totalBabinCounter").text(total);

@@ -377,27 +377,21 @@
     <?= $this->include('admin/layouts/script2') ?>
 
     <!-- Script Total Data Per Fitur -->
-
     <!-- Total Desa -->
     <script>
         $(document).ready(function() {
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/desa/totalData", function(responsePemohon) {
-                    // Update nilai total pada elemen dengan id "totalCounter"
-                    var total = parseInt(responsePemohon.total);
-                    $("#totalDesaCounter").attr("data-target", total);
-                    $("#totalDesaCounter").text(total);
-                });
-            }
-
-            function getTotalFeedback(url, callback) {
                 $.ajax({
-                    url: url, // URL untuk total Desa
+                    url: "<?= site_url('admin/desa/totalData'); ?>",
                     type: "GET",
-                    success: function(response) {
-                        callback(response);
+                    success: function(responseInformasi) {
+                        // Hitung total gabungan
+                        var total = parseInt(responseInformasi.total);
+                        // Update nilai total pada elemen dengan id "totalDesaCounter"
+                        $("#totalDesaCounter").attr("data-target", total);
+                        $("#totalDesaCounter").text(total);
                     },
                     error: function(xhr, status, error) {
                         console.error("Error:", error);

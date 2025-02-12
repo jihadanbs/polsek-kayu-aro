@@ -79,9 +79,9 @@ class LaporanModel extends Model
             ->delete();
     }
 
-    public function getTotalLaporan($id_user)
+    public function getTotalLaporan()
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }

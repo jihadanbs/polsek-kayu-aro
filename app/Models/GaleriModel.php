@@ -83,9 +83,9 @@ class GaleriModel extends Model
             ->delete();
     }
 
-    public function getTotalGaleri($id_user)
+    public function getTotalGaleri()
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }

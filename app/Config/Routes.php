@@ -54,7 +54,7 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     $routes->GET('desa', 'DesaController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('desa', static function ($routes) {
         $routes->GET('getDesaData/(:num)/(:segment)', 'DesaController::getDesaData/$1/$2', ['namespace' => 'App\Controllers\Admin']);
-        $routes->GET('totalData/(:num)', 'DesaController::totalData/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('totalData', 'DesaController::totalData', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('tambah', 'DesaController::tambah', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('save', 'DesaController::save', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('edit/(:segment)', 'DesaController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
@@ -66,7 +66,7 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     /*=================================== BABIN ====================================*/
     $routes->GET('babin', 'BabinController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('babin', static function ($routes) {
-        $routes->GET('totalData/(:num)', 'BabinController::totalData/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('totalData', 'BabinController::totalData', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('tambah', 'BabinController::tambah', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('save', 'BabinController::save', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('edit/(:segment)', 'BabinController::edit/$1', ['namespace' => 'App\Controllers\Admin']);
@@ -86,7 +86,7 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     /*=================================== INFORMASI EDUKASI ====================================*/
     $routes->GET('informasi', 'InformasiController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('informasi', static function ($routes) {
-        $routes->GET('totalData/(:num)', 'InformasiController::totalData/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('totalData', 'InformasiController::totalData', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('tambah', 'InformasiController::tambah', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('save', 'InformasiController::save', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('cek_data/(:segment)', 'InformasiController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
@@ -99,7 +99,7 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     /*=================================== LAPORAN BABIN ====================================*/
     $routes->GET('laporan', 'LaporanController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('laporan', static function ($routes) {
-        $routes->GET('totalData/(:num)', 'LaporanController::totalData/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('totalData', 'LaporanController::totalData', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('tambah', 'LaporanController::tambah', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('save', 'LaporanController::save', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('cek_data/(:segment)', 'LaporanController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);
@@ -112,7 +112,7 @@ $routes->GROUP('admin', ['namespace' => 'App\Controllers\Admin'], function ($rou
     /*=================================== GALERI ====================================*/
     $routes->GET('galeri', 'GaleriController::index', ['namespace' => 'App\Controllers\Admin']);
     $routes->GROUP('galeri', static function ($routes) {
-        $routes->GET('totalData/(:num)', 'GaleriController::totalData/$1', ['namespace' => 'App\Controllers\Admin']);
+        $routes->GET('totalData', 'GaleriController::totalData', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('tambah', 'GaleriController::tambah', ['namespace' => 'App\Controllers\Admin']);
         $routes->POST('save', 'GaleriController::save', ['namespace' => 'App\Controllers\Admin']);
         $routes->GET('cek_data/(:segment)', 'GaleriController::cek_data/$1', ['namespace' => 'App\Controllers\Admin']);

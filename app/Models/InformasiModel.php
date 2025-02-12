@@ -125,9 +125,9 @@ class InformasiModel extends Model
         return $this->where('id_informasi', $id_informasi)->delete();
     }
 
-    public function getTotalInformasi($id_user)
+    public function getTotalInformasi()
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }
