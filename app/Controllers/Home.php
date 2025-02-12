@@ -37,13 +37,11 @@ class Home extends BaseController
 
     public function detailInformasi($id_informasi)
     {
-        $id_user = 1;
-
         // WAJIB //
-        $informasi = $this->m_informasi->getAllDataByUser($id_user);
+        $informasi = $this->m_informasi->getAllDataByUser();
         $tb_informasi_edukasi = $this->m_informasi->getInformasi($id_informasi);
         $categories = $this->m_informasi->getCategoriesWithCount();
-        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
+        $recent_posts = $this->m_informasi->getRecentPosts();
         // END WAJIB //
 
         $data = [
@@ -62,18 +60,16 @@ class Home extends BaseController
 
     public function statistik()
     {
-        $id_user = 1;
-        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
+        $tb_desa = $this->m_desa->getAllData();
 
         // WAJIB //
-        $informasi = $this->m_informasi->getAllDataByUser($id_user);
+        $informasi = $this->m_informasi->getAllDataByUser();
         $categories = $this->m_informasi->getCategoriesWithCount();
-        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
+        $recent_posts = $this->m_informasi->getRecentPosts();
         // END WAJIB //
 
         $data = [
             'title' => 'Statistik Wilayah',
-            'id_user' => $id_user,
             'tb_desa' => $tb_desa,
             // WAJIB //
             'informasi' => $informasi,
@@ -87,18 +83,15 @@ class Home extends BaseController
 
     public function review()
     {
-        $id_user = 1;
-
         // WAJIB //
-        $informasi = $this->m_informasi->getAllDataByUser($id_user);
+        $informasi = $this->m_informasi->getAllDataByUser();
         $categories = $this->m_informasi->getCategoriesWithCount();
-        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
-        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
+        $recent_posts = $this->m_informasi->getRecentPosts();
+        $tb_foto = $this->m_galeri->getFotoWithFile();
         // END WAJIB //
 
         $data = [
             'title' => 'Review Pengunjung',
-            'id_user' => $id_user,
 
             // WAJIB //
             'informasi' => $informasi,
@@ -113,21 +106,12 @@ class Home extends BaseController
 
     public function save_review()
     {
-        // Ambil data dari request
-        $nama_lengkap = $this->request->getVar('nama_lengkap');
-        $pekerjaan = $this->request->getVar('pekerjaan');
-        $pesan_review = $this->request->getVar('pesan_review');
-        $rating = $this->request->getPost('rating');
-
-        // Upload gambar
-        $uploadFotoPengunjung = uploadFile('file_foto', 'dokumen/foto_pengunjung_review/');
-
         $this->m_review->save([
-            'nama_lengkap' => $nama_lengkap,
-            'pekerjaan' => $pekerjaan,
-            'pesan_review' => $pesan_review,
-            'rating' => $rating,
-            'file_foto' => $uploadFotoPengunjung,
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
+            'pekerjaan' => $this->request->getPost('pekerjaan'),
+            'pesan_review' => $this->request->getPost('pesan_review'),
+            'rating' => $this->request->getPost('rating'),
+            'file_foto' => uploadFile('file_foto', 'dokumen/foto_pengunjung_review/'),
         ]);
 
         session()->setFlashdata('pesan', 'Terimakasih Telah Memberikan Review Anda !');

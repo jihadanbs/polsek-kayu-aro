@@ -27,7 +27,7 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/#" class="active">Beranda<br></a></li>
+                    <li><a href="/#">Beranda<br></a></li>
                     <li><a href="/#tentang-kami">Tentang Kami</a></li>
                     <li><a href="/#layanan">Layanan</a></li>
                     <li><a href="/#galeri">Galeri</a></li>
