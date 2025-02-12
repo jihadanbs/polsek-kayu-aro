@@ -18,9 +18,9 @@ class KategoriInformasiModel extends Model
         return $this->orderBy('id_kategori_informasi', 'DESC')->findAll();
     }
 
-    public function getAllDataByUser($id_user)
+    public function getAllDataByUser()
     {
-        return $this->where('id_user', $id_user)->orderBy('id_kategori_informasi', 'DESC')->findAll();
+        return $this->orderBy('id_kategori_informasi', 'DESC')->findAll();
     }
 
     public function simpan_perubahan($id_kategori_informasi, $nama_kategori)

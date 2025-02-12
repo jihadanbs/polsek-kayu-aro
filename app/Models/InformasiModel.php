@@ -18,12 +18,11 @@ class InformasiModel extends Model
         return $this->where('id_user', $id_user)->orderBy('id_informasi', 'DESC')->findAll();
     }
 
-    public function getAllDataByUser($id_user)
+    public function getAllDataByUser()
     {
         return $this->db->table('tb_informasi_edukasi')
             ->select('tb_informasi_edukasi.*, GROUP_CONCAT(tb_kategori_informasi.nama_kategori SEPARATOR ", ") as nama_kategori')
             ->join('tb_kategori_informasi', 'tb_informasi_edukasi.id_kategori_informasi = tb_kategori_informasi.id_kategori_informasi')
-            ->where('tb_informasi_edukasi.id_user', $id_user)
             ->groupBy('tb_informasi_edukasi.id_informasi')
             ->orderBy('tb_informasi_edukasi.id_informasi', 'DESC')
             ->get()

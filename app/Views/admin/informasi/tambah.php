@@ -53,7 +53,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="judul" class="col-form-label">Judul :</label>
+                                        <label for="judul" class="col-form-label">Judul Informasi<span style="color: red;">*</span></label>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : ''; ?>" id="judul" name="judul" placeholder="Masukkan Judul Informasi-Edukasi" style="background-color: white;" value="<?= esc(old('judul'), 'attr') ?>" required>
                                             <small class="form-text text-muted">Cek Kembali Judul Anda</small>
@@ -64,7 +64,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="tanggal_diterbitkan" class="col-form-label">Tanggal Diterbitkan :</label>
+                                        <label for="tanggal_diterbitkan" class="col-form-label">Tanggal Diterbitkan<span style="color: red;">*</span></label>
                                         <input type="date" class="form-control <?= ($validation->hasError('tanggal_diterbitkan')) ? 'is-invalid' : ''; ?>" name="tanggal_diterbitkan" id="tanggal_diterbitkan" style="background-color: white;" value="<?= esc(old('tanggal_diterbitkan'), 'attr') ?>" required>
                                         <div class="invalid-feedback">
                                             <?= esc($validation->getError('tanggal_diterbitkan'), 'html') ?>
@@ -73,7 +73,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="konten" class="col-form-label">Isi Konten :</label>
+                                    <label for="konten" class="col-form-label">Isi Konten<span style="color: red;">*</span></label>
                                     <textarea class="form-control <?= ($validation->hasError('value')) ? 'is-invalid' : ''; ?>" name="konten" id="konten" required><?php echo esc(old('konten'), 'html'); ?></textarea>
 
                                     <!-- Menambahkan div untuk menampilkan pesan validasi -->
@@ -120,7 +120,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
-                                        <label for="penulis" class="col-form-label">Penulis :</label>
+                                        <label for="penulis" class="col-form-label">Penulis<span style="color: red;">*</span></label>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control <?= ($validation->hasError('penulis')) ? 'is-invalid' : ''; ?>" id="penulis" name="penulis" placeholder="Masukkan Penulis Konten" style="background-color: white;" value="<?= esc(old('penulis'), 'attr') ?>" required>
                                             <div class="invalid-feedback">
@@ -130,7 +130,9 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="id_kategori_informasi" class="col-form-label">Nama Kategori Informasi :</label>
+                                        <label for="id_kategori_informasi" class="col-form-label">Nama Kategori Informasi<span style="color: red;">*</span></label><a href="<?= esc(site_url('admin/kategori'), 'attr') ?>">
+                                            <i class="fas fa-plus" style="color: black; margin-left: 2px;"></i>
+                                        </a>
                                         <select class="form-select custom-border <?= ($validation->hasError('id_kategori_informasi')) ? 'is-invalid' : ''; ?>" id="id_kategori_informasi" name="id_kategori_informasi" aria-label="Default select example" style="background-color: white;" required>
                                             <option value="" selected disabled>~ Silahkan Pilih Nama Kategori Informasi ~</option>
                                             <!-- Populasi opsi dropdown dengan data dari controller -->
@@ -147,7 +149,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="profile_penulis" class="col-form-label">Foto Profile Penulis :</label>
+                                    <label for="profile_penulis" class="col-form-label">Foto Profile Penulis<span style="color: red;">*</span></label>
                                     <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('profile_penulis')) ? 'is-invalid' : ''; ?>" id="profile_penulis" name="profile_penulis" style="background-color: white;" <?= (old('profile_penulis')) ? 'disabled' : 'required'; ?> onchange="previewImage(event)">
                                     <small class="form-text text-muted">Pastikan Foto Profile Yang Diunggah Tidak Lebih Dari 5MB</small>
                                     <br>
@@ -158,7 +160,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="gambar" class="col-form-label">Upload Gambar Thumbnail :</label>
+                                    <label for="gambar" class="col-form-label">Upload Gambar Thumbnail<span style="color: red;">*</span></label>
                                     <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('gambar')) ? 'is-invalid' : ''; ?>" id="gambar" name="gambar" style="background-color: white;" <?= (old('gambar')) ? 'disabled' : 'required'; ?> onchange="previewImage(event)">
                                     <small class="form-text text-muted">Pastikan Gambar Yang Diunggah Tidak Lebih Dari 5MB</small>
                                     <br>

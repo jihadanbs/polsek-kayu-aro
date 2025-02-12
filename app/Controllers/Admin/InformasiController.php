@@ -26,7 +26,7 @@ class InformasiController extends BaseController
         $unreadCount = $this->m_feedback->countUnreadEntries();
         //END WAJIB//
 
-        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
+        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser();
         $tb_kategori_informasi = $this->m_kategori_informasi->getAllData();
 
         $data = [
@@ -62,8 +62,8 @@ class InformasiController extends BaseController
         $unreadCount = $this->m_feedback->countUnreadEntries();
         //END WAJIB//
 
-        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
-        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser($id_user);
+        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser();
+        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser();
 
         $data = [
             'title' => 'Admin | Halaman Tambah Informasi-Edukasi',
@@ -90,13 +90,6 @@ class InformasiController extends BaseController
         if (session()->get('id_jabatan') != 1) {
             return redirect()->to('authentication/login');
         }
-
-        // Ambil data dari request
-        $judul = $this->request->getVar('judul');
-        $konten = $this->request->getVar('konten');
-        $tanggal_diterbitkan = $this->request->getVar('tanggal_diterbitkan');
-        $penulis = $this->request->getVar('penulis');
-        $id_kategori_informasi = $this->request->getVar('id_kategori_informasi');
 
         //validasi input 
         if (!$this->validate([
@@ -138,26 +131,18 @@ class InformasiController extends BaseController
             return redirect()->back()->withInput();
         }
 
-        // Upload gambar
-        $uploadGambar = uploadFileUmum('gambar', 'dokumen/gambar-edukasi/');
-        $uploadProfile = uploadFileUmum('profile_penulis', 'dokumen/profile-penulis/');
-        // Ambil id_user dari session
-        $id_user = session()->get('id_user');
-        $slug = url_title($this->request->getVar('judul'), '-', true);
-
         $this->m_informasi->save([
-            'id_kategori_informasi' => $id_kategori_informasi,
-            'judul' => $judul,
-            'konten' => $konten,
-            'penulis' => $penulis,
-            'tanggal_diterbitkan' => $tanggal_diterbitkan,
-            'gambar' => $uploadGambar,
-            'profile_penulis' => $uploadProfile,
-            'id_user' => $id_user,
-            'slug' => $slug
+            'id_kategori_informasi' => $this->request->getPost('id_kategori_informasi'),
+            'judul' => $this->request->getPost('judul'),
+            'konten' => $this->request->getPost('konten'),
+            'penulis' => $this->request->getPost('penulis'),
+            'tanggal_diterbitkan' => $this->request->getPost('tanggal_diterbitkan'),
+            'gambar' => uploadFileUmum('gambar', 'dokumen/gambar-edukasi/'),
+            'profile_penulis' => uploadFileUmum('profile_penulis', 'dokumen/profile-penulis/'),
+            'slug' => url_title($this->request->getPost('judul'), '-', true)
         ]);
 
-        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan !');
 
         return redirect()->to('/admin/informasi');
     }
@@ -257,13 +242,10 @@ class InformasiController extends BaseController
             return redirect()->to('authentication/login');
         }
 
-        // Ambil id_user dari session
-        $id_user = session()->get('id_user');
-
         // Pastikan data desa milik user yang login
-        $tb_informasi_edukasi = $this->m_informasi->where('id_user', $id_user)->find($id_informasi);
+        $tb_informasi_edukasi = $this->m_informasi->find($id_informasi);
         if (!$tb_informasi_edukasi) {
-            return redirect()->back()->with('gagal', 'Data desa tidak ditemukan atau Anda tidak memiliki akses');
+            return redirect()->back()->with('gagal', 'Data informasi tidak ditemukan atau Anda tidak memiliki akses');
         }
 
         //WAJIB//
@@ -271,7 +253,7 @@ class InformasiController extends BaseController
         $unread = $this->m_feedback->getUnreadEntries();
         $unreadCount = $this->m_feedback->countUnreadEntries();
         //END WAJIB//
-        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser($id_user);
+        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser();
 
         $data = [
             'title' => 'Admin | Halaman Edit Informasi-Edukasi',
@@ -297,13 +279,6 @@ class InformasiController extends BaseController
         if (session()->get('id_jabatan') != 1) {
             return redirect()->to('authentication/login');
         }
-
-        // Ambil data dari request
-        $judul = $this->request->getVar('judul');
-        $konten = $this->request->getVar('konten');
-        $tanggal_diterbitkan = $this->request->getVar('tanggal_diterbitkan');
-        $penulis = $this->request->getVar('penulis');
-        $id_kategori_informasi = $this->request->getVar('id_kategori_informasi');
 
         //validasi input 
         if (!$this->validate([
@@ -345,31 +320,22 @@ class InformasiController extends BaseController
         }
 
         // Handle file upload
-        $oldFileName = $this->request->getVar('current_gambar'); // Nama file lama dari input hidden
-        $newFileName = updateFileUmum('gambar', 'dokumen/gambar-edukasi/', $oldFileName);
+        $oldFileName = $this->request->getPost('current_gambar'); // Nama file lama dari input hidden
+        $oldFileProfile = $this->request->getPost('current_profile_penulis'); // Nama file lama dari input hidden
 
-        $oldFileProfile = $this->request->getVar('current_profile_penulis'); // Nama file lama dari input hidden
-        $newFileProfile = updateFileUmum('profile_penulis', 'dokumen/profile-penulis/', $oldFileProfile);
-
-        // Ambil id_user dari session
-        $id_user = session()->get('id_user');
-        $slug = url_title($this->request->getVar('judul'), '-', true);
-
-        $this->m_informasi->save([
-            'id_informasi' => $id_informasi,
-            'judul' => $judul,
-            'konten' => $konten,
-            'penulis' => $penulis,
-            'tanggal_diterbitkan' => $tanggal_diterbitkan,
-            'gambar' => $newFileName,
-            'profile_penulis' => $newFileProfile,
-            'id_kategori_informasi' => $id_kategori_informasi,
-            'id_user' => $id_user,
-            'slug' => $slug
+        $this->m_informasi->update($id_informasi, [
+            'judul' => $this->request->getPost('judul'),
+            'konten' => $this->request->getPost('konten'),
+            'penulis' => $this->request->getPost('penulis'),
+            'slug' => url_title($this->request->getPost('judul'), '-', true),
+            'tanggal_diterbitkan' => $this->request->getPost('tanggal_diterbitkan'),
+            'id_kategori_informasi' => $this->request->getPost('id_kategori_informasi'),
+            'gambar' => updateFileUmum('gambar', 'dokumen/gambar-edukasi/', $oldFileName),
+            'profile_penulis' => updateFileUmum('profile_penulis', 'dokumen/profile-penulis/', $oldFileProfile)
         ]);
 
         // Set flash message untuk sukses
-        session()->setFlashdata('pesan', 'Data Berhasil Diubah &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Diubah !');
 
         return redirect()->to('/admin/informasi');
     }
@@ -386,14 +352,11 @@ class InformasiController extends BaseController
             return redirect()->to('authentication/login');
         }
 
-        // Ambil id_user dari session
-        $id_user_session = session()->get('id_user');
-
         // Ambil informasi berdasarkan id_informasi
         $informasi = $this->m_informasi->getInformasi($id_informasi);
 
         // Cek apakah informasi ada dan id_user yang login sama dengan id_user dari informasi
-        if (!$informasi || $informasi->id_user != $id_user_session) {
+        if (!$informasi) {
             return redirect()->back()->with('gagal', 'Data informasi tidak ditemukan atau Anda tidak memiliki akses');
         }
 
@@ -419,9 +382,9 @@ class InformasiController extends BaseController
         return view('admin/informasi/cek_data', $data);
     }
 
-    public function totalData($id_user)
+    public function totalData()
     {
-        $totalData = $this->m_informasi->getTotalInformasi($id_user);
+        $totalData = $this->m_informasi->getTotalInformasi();
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }
