@@ -37,9 +37,9 @@ class DesaModel extends Model
         return $this->find($id_desa);
     }
 
-    public function getTotalDesa($id_user)
+    public function getTotalDesa()
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }

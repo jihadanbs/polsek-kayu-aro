@@ -121,9 +121,9 @@ class BabinModel extends Model
         return $this->where('id_babin', $id_babin)->delete();
     }
 
-    public function getTotalBabin($id_user)
+    public function getTotalBabin()
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }

@@ -9,15 +9,15 @@ class Dashboard extends BaseController
     public function index()
     {
         // WAJIB //
-        $id_user = session()->get('id_user'); // Dapatkan id_user dari sesi
+        // $id_user = session()->get('id_user'); // Dapatkan id_user dari sesi
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
         $unreadCount = $this->m_feedback->countUnreadEntries();
         // END WAJIB //
 
         // Total data desa berdasarkan id_user
-        $totalDataDesa = $this->m_desa->getTotalDesa($id_user);
-        $totalDataBabin = $this->m_babin->getTotalBabin($id_user);
+        // $totalDataDesa = $this->m_desa->getTotalDesa();
+        // $totalDataBabin = $this->m_babin->getTotalBabin();
 
         $data = [
             'title' => 'Admin | Dashboard',
@@ -27,9 +27,9 @@ class Dashboard extends BaseController
             'unread' => $unread,
             'unreadCount' => $unreadCount,
             // END WAJIB //
-            'totalDataDesa' => $totalDataDesa,
-            'totalDataBabin' => $totalDataBabin,
-            'id_user' => $id_user // Kirim id_user ke view untuk digunakan di script
+            // 'totalDataDesa' => $totalDataDesa,
+            // 'totalDataBabin' => $totalDataBabin,
+            // 'id_user' => $id_user // Kirim id_user ke view untuk digunakan di script
         ];
 
         // Jika pengguna tidak login dan mencoba mengakses halaman admin dashboard, arahkan kembali dan beri pesan

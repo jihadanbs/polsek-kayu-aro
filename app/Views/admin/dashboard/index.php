@@ -384,8 +384,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>"; // Mendapatkan ID pengguna dari PHP
-                getTotalFeedback("/admin/desa/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/desa/totalData", function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalDesaCounter").attr("data-target", total);
@@ -414,8 +413,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>";
-                getTotalFeedback("/admin/babin/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/babin/totalData", function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalBabinCounter").attr("data-target", total);
@@ -444,8 +442,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>";
-                getTotalFeedback("/admin/laporan/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/laporan/totalData", function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalLaporanCounter").attr("data-target", total);
@@ -474,8 +471,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>";
-                getTotalFeedback("/admin/galeri/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/galeri/totalData", function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalFotoCounter").attr("data-target", total);
@@ -504,8 +500,7 @@
             updateTotal();
 
             function updateTotal() {
-                var id_user = "<?= $id_user ?>";
-                getTotalFeedback("/admin/informasi/totalData/" + id_user, function(responsePemohon) {
+                getTotalFeedback("/admin/informasi/totalData", function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalInformasiCounter").attr("data-target", total);

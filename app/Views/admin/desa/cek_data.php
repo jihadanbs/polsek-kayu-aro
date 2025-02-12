@@ -231,30 +231,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>~ B3. Pernikahan<span style="color: red;">*</span></th>
-                                </tr>
-                                <tr>
-                                    <th>Jumlah Penduduk Sudah Menikah</th>
-                                    <th class="text-center">:</th>
-                                    <td>
-                                        <span class="text-success"><?= isset($tb_desa['jumlah_penduduk_menikah']) ? number_format(esc($tb_desa['jumlah_penduduk_menikah'], 'html'), 0, ',', '.') : '' ?> Jiwa</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Jumlah Penduduk Belum Menikah</th>
-                                    <th class="text-center">:</th>
-                                    <td>
-                                        <span class="text-success"><?= isset($tb_desa['jumlah_penduduk_belum_menikah']) ? number_format(esc($tb_desa['jumlah_penduduk_belum_menikah'], 'html'), 0, ',', '.') : '' ?> Jiwa</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Jumlah Penduduk Cerai</th>
-                                    <th class="text-center">:</th>
-                                    <td>
-                                        <span class="text-success"><?= isset($tb_desa['jumlah_penduduk_cerai']) ? number_format(esc($tb_desa['jumlah_penduduk_cerai'], 'html'), 0, ',', '.') : '' ?> Jiwa</span>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td colspan="3">
                                         <hr>
                                     </td>
@@ -277,7 +253,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td rowspan="17" width="250px" class="text-center">
                                     </td>
                                     <th>Jumlah Posyandu</th>
                                     <th class="text-center">:</th>

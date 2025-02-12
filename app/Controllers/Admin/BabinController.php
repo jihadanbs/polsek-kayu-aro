@@ -463,9 +463,9 @@ class BabinController extends BaseController
         }
     }
 
-    public function totalData($id_user)
+    public function totalData()
     {
-        $totalData = $this->m_babin->getTotalBabin($id_user);
+        $totalData = $this->m_babin->getTotalBabin();
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }
