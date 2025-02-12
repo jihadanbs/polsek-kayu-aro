@@ -357,7 +357,7 @@ class BabinController extends BaseController
         }
 
         // Handle file upload
-        $oldFileName = $this->request->getVar('current_foto'); // Nama file lama dari input hidden
+        $oldFileName = $this->request->getPost('current_foto'); // Nama file lama dari input hidden
 
         // Update data di tb_babin
         $this->m_babin->update($id_babin, [

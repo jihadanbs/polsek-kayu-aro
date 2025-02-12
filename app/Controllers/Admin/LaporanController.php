@@ -25,8 +25,8 @@ class LaporanController extends BaseController
         $unread = $this->m_feedback->getUnreadEntries();
         $unreadCount = $this->m_feedback->countUnreadEntries();
         //END WAJIB//
-        $tb_laporan_babin = $this->m_laporan->getAllDataByUser($id_user);
-        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
+        $tb_laporan_babin = $this->m_laporan->getAllDataByUser();
+        $tb_babin = $this->m_babin->getBabinByUserId();
 
         $data = [
             'title' => 'Admin | Halaman Laporan',
@@ -48,6 +48,7 @@ class LaporanController extends BaseController
         if (!$this->session->has('islogin')) {
             return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
+
         $id_user = session()->get('id_user');
 
         // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
@@ -60,8 +61,8 @@ class LaporanController extends BaseController
         $unread = $this->m_feedback->getUnreadEntries();
         $unreadCount = $this->m_feedback->countUnreadEntries();
         //END WAJIB//
-        $tb_laporan_babin = $this->m_laporan->getAllDataByUser($id_user);
-        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
+        $tb_laporan_babin = $this->m_laporan->getAllDataByUser();
+        $tb_babin = $this->m_babin->getBabinByUserId();
 
         $data = [
             'title' => 'Admin | Halaman Tambah Laporan',
@@ -90,13 +91,7 @@ class LaporanController extends BaseController
         }
 
         // Ambil data dari request
-        $id_babin = $this->request->getVar('id_babin');
-        $judul_laporan = $this->request->getVar('judul_laporan');
-        $tanggal_laporan = $this->request->getVar('tanggal_laporan');
-        $jenis_kegiatan = $this->request->getVar('jenis_kegiatan');
-        $uraian_kegiatan = $this->request->getVar('uraian_kegiatan');
-        $hasil_kegiatan = $this->request->getVar('hasil_kegiatan');
-        $lokasi_kegiatan = $this->request->getVar('lokasi_kegiatan');
+        $id_babin = $this->request->getPost('id_babin');
 
         //validasi input 
         if (!$this->validate([
@@ -147,18 +142,16 @@ class LaporanController extends BaseController
 
         // Upload gambar
         $uploadFotoKegiatan = uploadMultiple('file_foto', 'dokumen/laporan_foto_kegiatan/');
-        // Ambil id_user dari session
-        $id_user = session()->get('id_user');
+
 
         $this->m_laporan->save([
             'id_babin' => $id_babin,
-            'judul_laporan' => $judul_laporan,
-            'tanggal_laporan' => $tanggal_laporan,
-            'jenis_kegiatan' => $jenis_kegiatan,
-            'uraian_kegiatan' => $uraian_kegiatan,
-            'hasil_kegiatan' => $hasil_kegiatan,
-            'lokasi_kegiatan' => $lokasi_kegiatan,
-            'id_user' => $id_user
+            'judul_laporan' => $this->request->getPost('judul_laporan'),
+            'tanggal_laporan' => $this->request->getPost('tanggal_laporan'),
+            'jenis_kegiatan' => $this->request->getPost('jenis_kegiatan'),
+            'uraian_kegiatan' => $this->request->getPost('uraian_kegiatan'),
+            'hasil_kegiatan' => $this->request->getPost('hasil_kegiatan'),
+            'lokasi_kegiatan' => $this->request->getPost('lokasi_kegiatan'),
         ]);
 
         // Dapatkan ID dari foto laporan yang baru saja disimpan
@@ -180,7 +173,7 @@ class LaporanController extends BaseController
             ]);
         }
 
-        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan !');
 
         return redirect()->to('/admin/laporan');
     }
@@ -197,19 +190,16 @@ class LaporanController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
-        // Ambil data user
-        $id_user = session()->get('id_user');
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
         $unreadCount = $this->m_feedback->countUnreadEntries();
         //END WAJIB//
 
-        // Ambil data foto berdasarkan id_laporan_babin
-        $tb_laporan_babin = $this->m_laporan->getLaporanById($id_laporan_babin);
+        $tb_laporan_babin = $this->m_laporan->getLaporanById();
 
         // Jika data foto tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_laporan_babin || $tb_laporan_babin['id_user'] != $id_user) {
+        if (!$tb_laporan_babin) {
             return redirect()->back()->with('gagal', 'Data Laporan Tidak Ditemukan dan Anda Tidak Memiliki Akses Laporan Tersebut &#128540');
         }
 
@@ -240,7 +230,7 @@ class LaporanController extends BaseController
         }
 
         // Ambil data user
-        $id_user = session()->get('id_user');
+        // $id_user = session()->get('id_user');
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -251,11 +241,11 @@ class LaporanController extends BaseController
         $tb_laporan_babin = $this->m_laporan->getLaporanById($id_laporan_babin);
 
         // Jika data laporan tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_laporan_babin || $tb_laporan_babin['id_user'] != $id_user) {
+        if (!$tb_laporan_babin) {
             return redirect()->back()->with('gagal', 'Data laporan Tidak Ditemukan dan Anda Tidak Memiliki Akses laporan Tersebut &#128540');
         }
 
-        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
+        $tb_babin = $this->m_babin->getBabinByUserId();
 
         $data = [
             'title' => 'Admin | Halaman Cek Data Laporan',
@@ -282,15 +272,6 @@ class LaporanController extends BaseController
         if (session()->get('id_jabatan') != 1) {
             return redirect()->to('authentication/login');
         }
-
-        // Ambil data dari request
-        $id_babin = $this->request->getVar('id_babin');
-        $judul_laporan = $this->request->getVar('judul_laporan');
-        $tanggal_laporan = $this->request->getVar('tanggal_laporan');
-        $jenis_kegiatan = $this->request->getVar('jenis_kegiatan');
-        $uraian_kegiatan = $this->request->getVar('uraian_kegiatan');
-        $hasil_kegiatan = $this->request->getVar('hasil_kegiatan');
-        $lokasi_kegiatan = $this->request->getVar('lokasi_kegiatan');
 
         // Validasi input
         if (!$this->validate([
@@ -346,7 +327,7 @@ class LaporanController extends BaseController
         // Jika ada file yang diunggah, simpan data file yang diunggah ke tb_file_foto dan relasinya ke tb_galeri
         if (!empty($uploadedFiles)) {
             // Hapus file lama jika ada file baru yang diunggah
-            $oldFileNames = explode(', ', $this->request->getVar('old_file_foto'));
+            $oldFileNames = explode(', ', $this->request->getPost('old_file_foto'));
             foreach ($oldFileNames as $oldFileName) {
                 if (file_exists(ROOTPATH . 'public/' . $oldFileName)) {
                     unlink(ROOTPATH . 'public/' . $oldFileName);
@@ -374,28 +355,23 @@ class LaporanController extends BaseController
             }
         } else {
             // Jika tidak ada file baru yang diunggah, gunakan file lama
-            $uploadedFiles = explode(', ', $this->request->getVar('old_file_foto'));
+            $uploadedFiles = explode(', ', $this->request->getPost('old_file_foto'));
         }
 
-        // Ambil id_user dari session
-        $id_user = session()->get('id_user');
-
         // Simpan data ke dalam database
-        $this->m_laporan->save([
-            'id_laporan_babin' => $id_laporan_babin,
-            'id_babin' => $id_babin,
-            'id_user' => $id_user,
-            'judul_laporan' => $judul_laporan,
-            'tanggal_laporan' => $tanggal_laporan,
-            'jenis_kegiatan' => $jenis_kegiatan,
-            'uraian_kegiatan' => $uraian_kegiatan,
-            'hasil_kegiatan' => $hasil_kegiatan,
-            'lokasi_kegiatan' => $lokasi_kegiatan,
+        $this->m_laporan->update($id_laporan_babin, [
+            'id_babin' => $this->request->getPost('id_babin'),
+            'judul_laporan' => $this->request->getPost('judul_laporan'),
+            'tanggal_laporan' => $this->request->getPost('tanggal_laporan'),
+            'jenis_kegiatan' => $this->request->getPost('jenis_kegiatan'),
+            'uraian_kegiatan' => $this->request->getPost('uraian_kegiatan'),
+            'hasil_kegiatan' => $this->request->getPost('hasil_kegiatan'),
+            'lokasi_kegiatan' => $this->request->getPost('lokasi_kegiatan'),
             'file_foto' => implode(', ', $uploadedFiles) // Simpan nama file baru atau lama ke database
         ]);
 
         // Set flash message untuk sukses
-        session()->setFlashdata('pesan', 'Data Berhasil Diubah &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Diubah !');
 
         return redirect()->to('/admin/laporan');
     }
@@ -512,9 +488,9 @@ class LaporanController extends BaseController
         }
     }
 
-    public function totalData($id_user)
+    public function totalData()
     {
-        $totalData = $this->m_laporan->getTotalLaporan($id_user);
+        $totalData = $this->m_laporan->getTotalLaporan();
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }
