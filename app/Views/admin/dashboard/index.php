@@ -93,6 +93,13 @@
                 <!-- Greeting Card -->
                 <div class="row mb-4">
                     <div class="col-12">
+                        <?php if (session()->getFlashdata('pesan')) : ?>
+                            <div class="alert alert-success alert-border-left alert-dismissible fade show custom-alert" role="alert">
+                                <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
+                                <?= session()->getFlashdata('pesan') ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
                         <div class="greeting-card">
                             <div class="row align-items-center">
                                 <div class="col-md-10">
@@ -165,7 +172,6 @@
                                 </div>
                                 <div class="text-nowrap mt-4">
                                     <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Jumlah Anggota Bhabin</span>
-                                    <!-- <span class="ms-0 text-muted font-size-16 d-block text-truncate" style="color: #f4d160 !important;">feedback Informasi</span> -->
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
@@ -197,7 +203,6 @@
                                 </div>
                                 <div class="text-nowrap mt-4">
                                     <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Jumlah Data Laporan</span>
-                                    <!-- <span class="ms-0 text-muted font-size-16 d-block text-truncate" style="color: #f4d160 !important;">feedback Informasi</span> -->
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
@@ -229,7 +234,6 @@
                                 </div>
                                 <div class="text-nowrap mt-4">
                                     <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Jumlah Data Galeri</span>
-                                    <!-- <span class="ms-0 text-muted font-size-16 d-block text-truncate" style="color: #f4d160 !important;">feedback Informasi</span> -->
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
@@ -261,13 +265,12 @@
                                 </div>
                                 <div class="text-nowrap mt-4">
                                     <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Jumlah Data Informasi-Edukasi</span>
-                                    <!-- <span class="ms-0 text-muted font-size-16 d-block text-truncate" style="color: #f4d160 !important;">feedback Informasi</span> -->
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
 
-                    <!-- Total Feedback -->
+                    <!-- Total Pengaduan -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
                         <div class="card card-h-100" style="background-color: #28527a;">
@@ -292,12 +295,12 @@
                                     </div>
                                 </div>
                                 <div class="text-nowrap mt-4">
-                                    <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Jumlah Semua Feedback</span>
+                                    <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Jumlah Pengaduan Masyarakat</span>
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
-                    <!-- End Total Feedback -->
+                    <!-- End Total Pengaduan -->
 
                     <!-- Total Belum Dibalas dan Sudah Ditanggapi -->
                     <div class="col-xl-3 col-md-6">
@@ -324,7 +327,7 @@
                                     </div>
                                 </div>
                                 <div class="text-nowrap mt-3">
-                                    <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Feedback Belum Dibalas</span>
+                                    <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Pengaduan Belum Dibalas</span>
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
@@ -355,7 +358,7 @@
                                     </div>
                                 </div>
                                 <div class="text-nowrap mt-3">
-                                    <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Feedback Sudah Ditanggapi</span>
+                                    <span class="ms-0 text-muted d-block text-truncate fw-bold" style="color: #f4d160 !important; font-size: 16px;">Pengaduan Sudah Ditanggapi</span>
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
@@ -523,7 +526,7 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/feedback/totalData", function(responsePemohon) {
+                getTotalFeedback("/admin/pengaduan/totalData", function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalCounter").attr("data-target", total);
@@ -562,7 +565,7 @@
             function updateCounter(status, counterId) {
                 // Ajax request untuk tb_pemohon
                 $.ajax({
-                    url: "/admin/feedback/totalByStatus/" + status,
+                    url: "/admin/pengaduan/totalByStatus/" + status,
                     type: "GET",
                     success: function(responsePemohon) {
                         // Menghitung total dari response

@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\KategoriInformasiModel;
 use App\Models\UserModel;
-use App\Models\FeedbackModel;
+use App\Models\PengaduanModel;
 
 class KategoriController extends BaseController
 {
@@ -13,14 +13,14 @@ class KategoriController extends BaseController
     protected $m_kategori_informasi;
     protected $m_user;
     protected $m_pemohon;
-    protected $m_feedback;
+    protected $m_pengaduan;
 
     public function __construct()
     {
         $this->session = session();
         $this->m_kategori_informasi = new KategoriInformasiModel();
         $this->m_user = new UserModel();
-        $this->m_feedback = new FeedbackModel();
+        $this->m_pengaduan = new PengaduanModel();
     }
 
     public function index()
@@ -41,8 +41,8 @@ class KategoriController extends BaseController
         $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $data = [

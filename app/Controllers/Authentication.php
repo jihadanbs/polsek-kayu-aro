@@ -207,7 +207,7 @@ class Authentication extends BaseController
                             ]);
 
                             if ($user['id_jabatan'] == 1) {
-                                return redirect()->to('admin/dashboard');
+                                return redirect()->to('admin/dashboard')->with('pesan', 'Selamat Datang Di Halaman Admin Polsek Kayu Aro');
                             } elseif ($user['id_jabatan'] == 2) {
                                 return redirect()->to('staff/dashboard');
                             }
@@ -523,8 +523,13 @@ class Authentication extends BaseController
     public function logout()
     {
         $this->m_user->setLoginStatus(session()->get('id_user'), false);
-
+        // Menghapus semua data sesi
         $this->session->destroy();
-        return redirect()->to('authentication/login')->with('pesan', 'Anda sudah logout');
+
+        // Set cookie dengan pesan
+        setcookie('logout_message', 'Berhasil logout !', time() + 5, "/");
+
+        // Redirect ke login
+        return redirect()->to('authentication/login');
     }
 }

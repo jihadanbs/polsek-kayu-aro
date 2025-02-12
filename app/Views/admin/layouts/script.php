@@ -36,7 +36,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <title>Admin Polsek Kayu Aro</title>
     <meta name="keywords" content="admin, polsek, kabupaten kerinci, kayu aro, kerinci">
     <meta http-equiv="Accept-CH" content="Sec-CH-UA-Platform-Version, Sec-CH-UA-Model" />
     <!-- Favicon -->

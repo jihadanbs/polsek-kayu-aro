@@ -207,7 +207,7 @@
                                 <?php endif; ?>
                             </div>
 
-                            <form action="/admin/profile/update/<?= session('id_user') ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
+                            <form action="<?= site_url('admin/profile/update/' . session('id_user')); ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="mb-3">
@@ -236,7 +236,7 @@
 
                                 <div class="mb-3">
                                     <label for="id_jabatan" class="col-form-label">Jabatan</label><span style="color: red;">*</span>
-                                    <select class="form-select custom-border" id="id_jabatan" name="id_jabatan" aria-label="Default select example" style="background-color: #C7C8CC;" required disabled>
+                                    <select class="form-select custom-border" id="id_jabatan" name="id_jabatan" aria-label="Default select example" style="background-color: white;" required disabled>
                                         <option value="" selected disabled>Silahkan Pilih Jabatan Anda --</option>
                                         <?php foreach ($tb_jabatan as $value) : ?>
                                             <?php
@@ -263,21 +263,21 @@
                                 <div class="mb-3">
                                     <label for="password_last_reset" class="col-form-label">Terakhir Update Password</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
-                                        <input disabled type="text" placeholder="Null" class="form-control" id="password_last_reset" name="password_last_reset" style="background-color: #C7C8CC;" value="<?= session('password_last_reset'); ?>">
+                                        <input disabled type="text" placeholder="Null" class="form-control" id="password_last_reset" name="password_last_reset" style="background-color: white;" value="<?= session('password_last_reset'); ?>">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password_last_reset" class="col-form-label">Password Berlaku Sampai</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
-                                        <input disabled type="text" placeholder="Null" class="form-control" id="password_last_reset" name="password_last_reset" style="background-color: #C7C8CC;" value="<?= session('password_last_reset'); ?>">
+                                        <input disabled type="text" placeholder="Null" class="form-control" id="password_last_reset" name="password_last_reset" style="background-color: white;" value="<?= session('password_last_reset'); ?>" readonly>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="terakhir_login" class="col-form-label">Waktu Terakhir Login Sebelumnya</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
-                                        <input disabled type="text" class="form-control" id="terakhir_login" name="terakhir_login" style="background-color: #C7C8CC;" value="<?= session('terakhir_login'); ?>">
+                                        <input disabled type="text" class="form-control" id="terakhir_login" name="terakhir_login" style="background-color: white;" value="<?= session('terakhir_login'); ?>" readonly>
                                     </div>
                                 </div>
 
@@ -289,7 +289,7 @@
                                             <p>File exists: <?= basename(session('file_profil')); ?></p>
                                             <input type="hidden" name="old_file_profil" value="<?= session('file_profil'); ?>">
                                         <?php else : ?>
-                                            <img src="<?= base_url('assets/admin/images/user.png'); ?>" alt="Profile Photo" id="profilePhotoPreview" style="max-width: 150px;">
+                                            <img src="<?= base_url('assets/img/404.gif'); ?>" alt="Profile Photo" id="profilePhotoPreview" style="max-width: 150px;">
                                         <?php endif; ?>
                                     </div>
                                     <input type="file" accept="image/*" class="form-control <?= isset($validation) && $validation->hasError('file_profil') ? 'is-invalid' : ''; ?>" style="background-color: white;" id="file_profil" name="file_profil">

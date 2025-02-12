@@ -22,8 +22,8 @@ class LaporanController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
         $tb_laporan_babin = $this->m_laporan->getAllDataByUser();
         $tb_babin = $this->m_babin->getBabinByUserId();
@@ -58,8 +58,8 @@ class LaporanController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
         $tb_laporan_babin = $this->m_laporan->getAllDataByUser();
         $tb_babin = $this->m_babin->getBabinByUserId();
@@ -192,8 +192,8 @@ class LaporanController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $tb_laporan_babin = $this->m_laporan->getLaporanById();
@@ -233,8 +233,8 @@ class LaporanController extends BaseController
         // $id_user = session()->get('id_user');
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         // Ambil data laporan berdasarkan id_laporan

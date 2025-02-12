@@ -43,7 +43,7 @@
                         <div class="card-body">
                             <h2 class="text-center mb-4">Formulir Balas Feedback Pengunjung</h2>
 
-                            <form action="/admin/feedback/kirim/<?= $tb_feedback->id_feedback ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
+                            <form action="<?= site_url('admin/feedback/kirim/' . $tb_pengaduan->id_feedback); ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="row">
@@ -84,7 +84,7 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <a href="/admin/feedback/cek_data/<?= $tb_feedback->id_feedback ?>" class="btn btn-secondary btn-md ml-3">
+                                    <a href="<?= site_url('admin/feedback/cek_data/' .  $tb_pengaduan->id_feedback); ?>" class="btn btn-secondary btn-md ml-3">
                                         <i class="fas fa-arrow-left"></i> Batal
                                     </a>
                                     <button type="submit" class="btn btn-primary btn-md ml-3" style="margin-left: 10px;">

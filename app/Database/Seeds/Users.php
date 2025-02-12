@@ -14,21 +14,21 @@ class Users extends Seeder
                 'nama_lengkap' => 'Reissa Giana Azaria',
                 'username' => 'reissa',
                 'id_jabatan' => '1',
-                'password' => password_hash('1234', PASSWORD_DEFAULT),
+                'password' => password_hash('1234', PASSWORD_BCRYPT),
                 'status' => 'aktif',
                 'email' => 'jihadanb@gmail.com',
                 'no_telepon' => '088215212122',
-                'file_profil' => 'gambar.jpg'
+                'file_profil' => ''
             ],
             [
                 'nama_lengkap' => 'Arhan Pratama',
                 'username' => 'arhan',
                 'id_jabatan' => '2',
                 'status' => 'aktif',
-                'password' => password_hash('12345', PASSWORD_DEFAULT),
+                'password' => password_hash('12345', PASSWORD_BCRYPT),
                 'email' => 'arhanp@gmail.com',
                 'no_telepon' => '088212342233',
-                'file_profil' => 'gambar.jpg'
+                'file_profil' => ''
             ],
         ];
 

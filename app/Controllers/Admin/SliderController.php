@@ -20,8 +20,8 @@ class SliderController extends BaseController
         $tb_slider_beranda = $this->m_slider->getAllData();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $data = [
@@ -50,8 +50,8 @@ class SliderController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $data = [
@@ -168,8 +168,8 @@ class SliderController extends BaseController
         $tb_slider_beranda = $this->m_slider->getSlider($id_slider_beranda);
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $data = [

@@ -21,8 +21,8 @@ class FaqController extends BaseController
         $tb_faq = $this->m_faq->getAllData();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
 
@@ -52,8 +52,8 @@ class FaqController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $data = [
@@ -155,8 +155,8 @@ class FaqController extends BaseController
         $tb_faq = $this->m_faq->getFaq($id_faq);
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $data = [
@@ -233,8 +233,8 @@ class FaqController extends BaseController
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
         $data = [

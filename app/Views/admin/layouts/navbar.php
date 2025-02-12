@@ -179,7 +179,7 @@
                     <div class="p-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h6 class="m-0">Feedback</h6>
+                                <h6 class="m-0">Pengaduan Masyarakat</h6>
                             </div>
                             <div class="col-auto">
                                 <a href="#!" class="small text-reset text-decoration-underline">Belum Dibalas (<?= $unreadCount ?>)</a>
@@ -190,18 +190,18 @@
                         <?php if (empty($unread)) : ?>
                             <p class="text-center mt-3">Tidak ada notifikasi terbaru</p>
                         <?php else : ?>
-                            <?php foreach ($unread as $feedback) : ?>
-                                <?php if ($feedback->status == 'Belum dibalas') : ?>
-                                    <a href="<?= base_url('/admin/feedback/cek_data/' . $feedback->id_feedback) ?>" class="text-reset notification-item">
+                            <?php foreach ($unread as $pengaduan) : ?>
+                                <?php if ($pengaduan->status == 'Belum dibalas') : ?>
+                                    <a href="<?= base_url('/admin/pengaduan/cek_data/' . $pengaduan->id_pengaduan) ?>" class="text-reset notification-item">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <img src="<?= base_url('assets/img/internalserver.gif') ?>" class="rounded-circle avatar-sm" alt="user-pic">
                                             </div>
                                             <div class="flex-grow-1">
-                                                <h6 class="mb-1"><?= esc($feedback->email) ?></h6>
+                                                <h6 class="mb-1"><?= esc($pengaduan->email) ?></h6>
                                                 <div class="font-size-13 text-muted">
-                                                    <p class="mb-1"><?= esc($feedback->nama) ?></p>
-                                                    <p class="mb-0"><i class="mdi mdi-message-text-outline"></i> <span><?= esc($feedback->subjek) ?></span></p>
+                                                    <p class="mb-1"><?= esc($pengaduan->nama) ?></p>
+                                                    <p class="mb-0"><i class="mdi mdi-message-text-outline"></i> <span><?= esc($pengaduan->subjek) ?></span></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@
                     </div>
 
                     <div class="p-2 border-top d-grid">
-                        <a class="btn btn-sm btn-link font-size-14 text-center" href="feedback">
+                        <a class="btn btn-sm btn-link font-size-14 text-center" href="pengaduan">
                             <i class="mdi mdi-arrow-right-circle me-1"></i> <span>View More..</span>
                         </a>
                     </div>
@@ -222,7 +222,7 @@
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="<?= base_url(session('file_profil') ? session('file_profil') : 'assets/admin/images/user.png'); ?>" alt="<?= session()->has('nama_lengkap') ? session('nama_lengkap') : 'Profile Image'; ?>">
+                    <img class="rounded-circle header-profile-user" src="<?= base_url(session('file_profil') ? session('file_profil') : 'assets/img/404.gif'); ?>" alt="<?= session()->has('nama_lengkap') ? session('nama_lengkap') : 'Profile Image'; ?>">
                     <?php if (session()->has('islogin')) : ?>
                         <span class="d-none d-xl-inline-block ms-1 fw-medium"><?= session('username') ?></span>
                     <?php endif; ?>
@@ -233,7 +233,7 @@
                     <!-- item-->
                     <a class="dropdown-item" href="profile"><i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Akun</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/authentication/logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                    <a class="dropdown-item" href="<?= site_url('authentication/logout'); ?>"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                 </div>
             </div>
 

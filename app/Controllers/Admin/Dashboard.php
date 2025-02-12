@@ -11,8 +11,8 @@ class Dashboard extends BaseController
         // WAJIB //
         // $id_user = session()->get('id_user'); // Dapatkan id_user dari sesi
         $tb_user = $this->m_user->getAll();
-        $unread = $this->m_feedback->getUnreadEntries();
-        $unreadCount = $this->m_feedback->countUnreadEntries();
+        $unread = $this->m_pengaduan->getUnreadEntries();
+        $unreadCount = $this->m_pengaduan->countUnreadEntries();
         // END WAJIB //
 
         // Total data desa berdasarkan id_user

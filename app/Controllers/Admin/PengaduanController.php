@@ -35,7 +35,7 @@ class PengaduanController extends BaseController
             'tb_pengaduan' => $tb_pengaduan,
         ];
 
-        return view('admin/feedback/index', $data);
+        return view('admin/pengaduan/index', $data);
     }
 
     public function tambah()
@@ -55,7 +55,7 @@ class PengaduanController extends BaseController
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
-        $tb_pengaduan = $this->m_pengaduan->getFeedback();
+        $tb_pengaduan = $this->m_pengaduan->getPengaduan();
 
         $data = [
             'title' => 'Admin | Halaman Tambah Pengaduan Masyarakat',
@@ -144,12 +144,12 @@ class PengaduanController extends BaseController
         $this->email->setNewline("\r\n");
         $this->email->setMailType('html');
         $this->email->setTo($email);
-        $this->email->setSubject('Terima Kasih Atas Feedback Anda');
+        $this->email->setSubject('Terima Kasih Atas Pengaduan Anda');
         $this->email->setMessage($emailBody);
 
         // Kirim email
         if ($this->email->send()) {
-            session()->setFlashdata('pesan', 'Feedback Berhasil Diajukan Dan Email Telah Dikirim.');
+            session()->setFlashdata('pesan', 'Pengaduan Berhasil Diajukan Dan Email Telah Dikirim.');
         } else {
             session()->setFlashdata('gagal', 'Gagal Mengirim Email. Silakan Coba Lagi.');
         }
@@ -160,7 +160,7 @@ class PengaduanController extends BaseController
         return redirect()->back();
     }
 
-    public function cek_data($id_feedback)
+    public function cek_data($id_pengaduan)
     {
         // Cek session
         if (!$this->session->has('islogin')) {
@@ -176,10 +176,10 @@ class PengaduanController extends BaseController
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_pengaduan = $this->m_pengaduan->getFeedback($id_feedback);
+        $tb_pengaduan = $this->m_pengaduan->getPengaduan($id_pengaduan);
 
         $data = [
-            'title' => 'Admin | Halaman Cek Data Feedback Pengunjung',
+            'title' => 'Admin | Halaman Cek Data Pengaduan Masyarakat',
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
             //WAJIB//
             'tb_user' => $tb_user,
@@ -189,10 +189,10 @@ class PengaduanController extends BaseController
             'tb_pengaduan' => $tb_pengaduan
         ];
 
-        return view('admin/feedback/cek_data', $data);
+        return view('admin/pengaduan/cek_data', $data);
     }
 
-    public function balas($id_feedback)
+    public function balas($id_pengaduan)
     {
         // Cek session
         if (!$this->session->has('islogin')) {
@@ -208,10 +208,10 @@ class PengaduanController extends BaseController
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_pengaduan = $this->m_pengaduan->getFeedback($id_feedback);
+        $tb_pengaduan = $this->m_pengaduan->getPengaduan($id_pengaduan);
 
         $data = [
-            'title' => 'Admin | Halaman Balas Feedback Pengunjung',
+            'title' => 'Admin | Halaman Balas Pengaduan Masyarakat',
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
             //WAJIB//
             'tb_user' => $tb_user,
@@ -221,10 +221,10 @@ class PengaduanController extends BaseController
             'tb_pengaduan' => $tb_pengaduan
         ];
 
-        return view('admin/feedback/balas', $data);
+        return view('admin/pengaduan/balas', $data);
     }
 
-    public function kirim($id_feedback)
+    public function kirim($id_pengaduan)
     {
         // Cek session
         if (!$this->session->has('islogin')) {
@@ -256,11 +256,11 @@ class PengaduanController extends BaseController
             return redirect()->back()->withInput();
         }
 
-        // Ambil nama pemohon dari database
-        $tb_pengaduan = $this->m_pengaduan->getFeedback($id_feedback);
+        // Ambil nama masyarakat dari database
+        $tb_pengaduan = $this->m_pengaduan->getPengaduan($id_pengaduan);
         if (!$tb_pengaduan) {
-            session()->setFlashdata('gagal', 'Data pemohon tidak ditemukan.');
-            return redirect()->to('/admin/feedback');
+            session()->setFlashdata('gagal', 'Data masyarakat tidak ditemukan.');
+            return redirect()->to('/admin/pengaduan');
         }
 
         $nama = $tb_pengaduan->nama;
@@ -269,7 +269,7 @@ class PengaduanController extends BaseController
         $pesan = $tb_pengaduan->pesan;
 
         $data = [
-            'id_feedback' => $id_feedback,
+            'id_pengaduan' => $id_pengaduan,
             'balasan' => $balasan,
             'status' => 'Sudah Ditanggapi'
         ];
@@ -290,7 +290,7 @@ class PengaduanController extends BaseController
         $this->email->setNewline("\r\n");
         $this->email->setMailType('html');
         $this->email->setTo($email);
-        $this->email->setSubject('Balasan Feedback untuk ' . $nama);
+        $this->email->setSubject('Balasan Pengaduan untuk ' . $nama);
         $this->email->setMessage($emailBody);
 
         // Kirim email
@@ -303,7 +303,7 @@ class PengaduanController extends BaseController
         // Simpan data ke database
         $this->m_pengaduan->save($data);
 
-        return redirect()->to('/admin/feedback');
+        return redirect()->to('/admin/pengaduan');
     }
 
     public function send()
@@ -373,7 +373,7 @@ class PengaduanController extends BaseController
         $this->email->setNewline("\r\n");
         $this->email->setMailType('html');
         $this->email->setTo($email);
-        $this->email->setSubject('Terima Kasih Atas Feedback Anda');
+        $this->email->setSubject('Terima Kasih Atas Pengaduan Anda');
         $this->email->setMessage($emailBody);
 
         // Kirim email
@@ -383,7 +383,7 @@ class PengaduanController extends BaseController
 
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Feedback Berhasil Diajukan Dan Email Telah Dikirim'
+                'message' => 'Pengaduan Berhasil Diajukan Dan Email Telah Dikirim'
             ]);
         } else {
             return $this->response->setJSON([
@@ -404,9 +404,9 @@ class PengaduanController extends BaseController
             return redirect()->to('authentication/login');
         }
 
-        $id_feedback = $this->request->getPost('id_feedback');
+        $id_pengaduan = $this->request->getPost('id_pengaduan');
 
-        if ($this->m_pengaduan->delete($id_feedback)) {
+        if ($this->m_pengaduan->delete($id_pengaduan)) {
             return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
         } else {
             return $this->response->setJSON(['error' => 'Gagal menghapus data']);
@@ -424,9 +424,9 @@ class PengaduanController extends BaseController
             return redirect()->to('authentication/login');
         }
 
-        $id_feedback = $this->request->getPost('id_feedback');
+        $id_pengaduan = $this->request->getPost('id_pengaduan');
 
-        if ($this->m_pengaduan->delete($id_feedback)) {
+        if ($this->m_pengaduan->delete($id_pengaduan)) {
             return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
         } else {
             return $this->response->setJSON(['error' => 'Gagal menghapus data']);

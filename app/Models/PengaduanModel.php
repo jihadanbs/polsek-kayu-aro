@@ -13,7 +13,7 @@ class PengaduanModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = false;
 
-    public function getFeedback($id_pengaduan = false)
+    public function getPengaduan($id_pengaduan = false)
     {
         if ($id_pengaduan == false) {
             return $this->findAll();

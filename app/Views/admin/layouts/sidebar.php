@@ -145,9 +145,9 @@
                 </li>
 
                 <li>
-                    <a href="feedback">
+                    <a href="pengaduan">
                         <i data-feather="phone-call"></i>
-                        <span data-key="t-dashboard">Feedback Pengunjung</span>
+                        <span data-key="t-dashboard">Pengaduan Masyarakat</span>
                     </a>
                 </li>
 

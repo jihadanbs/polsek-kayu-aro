@@ -50,6 +50,16 @@
                                         </div>
                                     <?php endif; ?>
 
+                                    <?php if (isset($_COOKIE['logout_message'])) : ?>
+                                        <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
+                                            <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
+                                            <?= $_COOKIE['logout_message']; ?>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        <?php setcookie('logout_message', '', time() - 3600, "/"); // Hapus cookie setelah ditampilkan 
+                                        ?>
+                                    <?php endif; ?>
+
                                     <form action="<?= base_url('authentication/cekLogin') ?>" method="post" class="mt-4 pt-2" autocomplete="off">
                                         <?= csrf_field() ?>
                                         <div class="mb-3">

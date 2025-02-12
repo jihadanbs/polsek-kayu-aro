@@ -108,13 +108,13 @@
 
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($tb_feedback as $row) : ?>
+                                    <?php foreach ($tb_pengaduan as $row) : ?>
                                         <tr>
                                             <td data-field="id_feedback" style="width: 10px" scope="row"><?= $i++; ?></td>
-                                            <td data-field="nama"><?= truncateText($row->nama, 10); ?></td>
-                                            <td data-field="email"><?= $row->email; ?></td>
-                                            <td data-field="subjek"><?= truncateText($row->subjek, 10); ?></td>
-                                            <td data-field="pesan"><?= truncateText($row->pesan, 10); ?></td>
+                                            <td><?= truncateText($row->nama, 10); ?></td>
+                                            <td><?= $row->email; ?></td>
+                                            <td><?= truncateText($row->subjek, 10); ?></td>
+                                            <td><?= truncateText($row->pesan, 10); ?></td>
                                             <td data-field="status">
                                                 <?php
                                                 $statusClass = '';
@@ -127,7 +127,7 @@
                                                 <span class="<?= $statusClass; ?>"><strong><?= $row->status; ?></strong></span>
                                             </td>
                                             <td style="width: 155px">
-                                                <a href="/admin/feedback/cek_data/<?= $row->id_feedback ?>" class="btn btn-info btn-sm view"><i class="fa fa-eye"></i> Cek</a>
+                                                <a href="<?= site_url('admin/feedback/cek_data/' . $row->id_feedback); ?>" class="btn btn-info btn-sm view"><i class="fa fa-eye"></i> Cek</a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= $row->id_feedback ?>">
                                                     <i class="fas fa-trash-alt"></i> Delete
                                                 </button>

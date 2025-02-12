@@ -514,7 +514,7 @@
                               </tr>
                               <tr>
                                 <td align="center" style="padding:0;Margin:0;padding-bottom:35px">
-                                  <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;letter-spacing:0;color:#333333;font-size:12px">Copyright © 2024, Polsek Kayu Aro. All Rights Reserved.</p>
+                                  <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;letter-spacing:0;color:#333333;font-size:12px">Copyright © 2025, Polsek Kayu Aro. All Rights Reserved.</p>
                                   <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;letter-spacing:0;color:#333333;font-size:12px">Jl. Raya Kayu Aro, Lindung Jaya, Kec. Kayu Aro, Kabupaten Kerinci, Jambi 37163</p>
                                 </td>
                               </tr>

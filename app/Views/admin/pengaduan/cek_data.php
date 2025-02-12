@@ -175,10 +175,10 @@
 
                         <div class="form-group mb-4 mt-4">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="/admin/feedback" class="btn btn-secondary btn-md ml-3">
+                                <a href="<?= site_url('/admin/feedback'); ?>" class="btn btn-secondary btn-md ml-3">
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
-                                <a href="/admin/feedback/balas/<?= $tb_feedback->id_feedback ?>" class="btn btn-success btn-md ml-3 <?= $tb_feedback->status == 'Sudah Ditanggapi' ? 'disabled' : '' ?>">
+                                <a href="<?= site_url('/admin/feedback/balas/' . $tb_pengaduan->id_feedback); ?>" class="btn btn-success btn-md ml-3 <?= $tb_feedback->status == 'Sudah Ditanggapi' ? 'disabled' : '' ?>">
                                     <i class="fas fa-reply"></i> Balas
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_feedback->id_feedback ?>">

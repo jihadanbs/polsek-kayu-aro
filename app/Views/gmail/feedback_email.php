@@ -590,12 +590,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <td align="center" class="es-m-txt-c es-text-2968" style="padding:0;Margin:0;padding-bottom:10px">
-                                                                    <h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:36px;font-style:normal;font-weight:bold;line-height:54px;color:#333333" align="center">Terima Kasih Atas Feedback Yang Anda Berikan</h1>
+                                                                    <h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:36px;font-style:normal;font-weight:bold;line-height:54px;color:#333333" align="center">Terima Kasih Atas Pengaduan Yang Anda Berikan</h1>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="center" class="es-m-p0r es-m-p0l es-text-9928" style="Margin:0;padding-top:5px;padding-right:40px;padding-bottom:5px;padding-left:40px">
-                                                                    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Kami akan memberikan tanggapan atas feedback yang Anda berikan segera melalui pesan email, Terima Kasih Salam <strong>Makasih Yo</strong></p>
+                                                                    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Kami akan memberikan tanggapan atas pengaduan yang Anda berikan segera melalui pesan email, Terima Kasih Salam <strong>Makasih Yo</strong></p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -658,7 +658,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td align="center" class="es-text-4991" style="padding:0;Margin:0;padding-bottom:35px">
-                                                                    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;letter-spacing:0;color:#333333;font-size:12px">Copyright © 2024, Polsek Kayu Aro. All Rights Reserved.</p>
+                                                                    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;letter-spacing:0;color:#333333;font-size:12px">Copyright © 2025, Polsek Kayu Aro. All Rights Reserved.</p>
                                                                     <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;letter-spacing:0;color:#333333;font-size:12px">Jl. Raya Kayu Aro, Lindung Jaya, Kec. Kayu Aro, Kabupaten Kerinci, Jambi 37163</p>
                                                                 </td>
                                                             </tr>
@@ -666,7 +666,7 @@
                                                                 <td style="padding:0;Margin:0">
                                                                     <table cellpadding="0" cellspacing="0" width="100%" class="es-menu" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                                         <tr class="links">
-                                                                            <td align="center" valign="top" width="33.33%" style="Margin:0;border:0;padding-top:5px;padding-bottom:5px;padding-right:5px;padding-left:5px"><a target="_blank" href="http://www.kominfo.pesawarankab.go.id/" style="mso-line-height-rule:exactly;text-decoration:none;font-family:arial, 'helvetica neue', helvetica, sans-serif;display:block;color:#999999;font-size:12px">Visit Us </a></td>
+                                                                            <td align="center" valign="top" width="33.33%" style="Margin:0;border:0;padding-top:5px;padding-bottom:5px;padding-right:5px;padding-left:5px"><a target="_blank" href="" style="mso-line-height-rule:exactly;text-decoration:none;font-family:arial, 'helvetica neue', helvetica, sans-serif;display:block;color:#999999;font-size:12px">Visit Us </a></td>
                                                                             <td align="center" valign="top" width="33.33%" style="Margin:0;border:0;padding-top:5px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-left:1px solid #cccccc"><a target="_blank" href="" style="mso-line-height-rule:exactly;text-decoration:none;font-family:arial, 'helvetica neue', helvetica, sans-serif;display:block;color:#999999;font-size:12px">Privacy Policy</a></td>
                                                                             <td align="center" valign="top" width="33.33%" style="Margin:0;border:0;padding-top:5px;padding-bottom:5px;padding-right:5px;padding-left:5px;border-left:1px solid #cccccc"><a target="_blank" href="" style="mso-line-height-rule:exactly;text-decoration:none;font-family:arial, 'helvetica neue', helvetica, sans-serif;display:block;color:#999999;font-size:12px">Terms of Use</a></td>
                                                                         </tr>
