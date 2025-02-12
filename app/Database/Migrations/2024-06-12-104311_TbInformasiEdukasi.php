@@ -16,11 +16,11 @@ class TbInformasiEdukasi extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
-            'id_user' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
-            ],
+            // 'id_user' => [
+            //     'type' => 'INT',
+            //     'constraint' => 11,
+            //     'unsigned' => true,
+            // ],
             'judul' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -62,7 +62,7 @@ class TbInformasiEdukasi extends Migration
         $this->forge->addKey('id_informasi', TRUE);
         // Menambahkan foreign key
         $this->forge->addForeignKey('id_kategori_informasi', 'tb_kategori_informasi', 'id_kategori_informasi', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
+        // $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tb_informasi_edukasi');
     }
 

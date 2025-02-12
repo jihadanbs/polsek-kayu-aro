@@ -13,14 +13,14 @@ class DesaController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        $id_user = session()->get('id_user');
+        // $id_user = session()->get('id_user');
 
         // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        if (session()->get('id_user') != $id_user) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
-        }
+        // if (session()->get('id_user') != $id_user) {
+        //     return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+        // }
 
-        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
+        $tb_desa = $this->m_desa->getAllData();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -47,13 +47,13 @@ class DesaController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        $id_user = session()->get('id_user');
-        if (session()->get('id_user') != $id_user) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
-        }
+        // // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        // $id_user = session()->get('id_user');
+        // if (session()->get('id_user') != $id_user) {
+        //     return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+        // }
 
-        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
+        $tb_desa = $this->m_desa->getAllData();
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_feedback->getUnreadEntries();
@@ -84,36 +84,6 @@ class DesaController extends BaseController
         if (session()->get('id_jabatan') != 1) {
             return redirect()->to('authentication/login');
         }
-
-        // Ambil data dari request
-        $nama_desa = $this->request->getVar('nama_desa');
-        $kecamatan = $this->request->getVar('kecamatan');
-        $kabupaten = $this->request->getVar('kabupaten');
-        $provinsi = $this->request->getVar('provinsi');
-        $kode_pos = $this->request->getVar('kode_pos');
-        $luas_wilayah = $this->request->getVar('luas_wilayah');
-        $jumlah_penduduk = $this->request->getVar('jumlah_penduduk');
-        $website = $this->request->getVar('website'); //Novalidate
-        $jumlah_kepala_keluarga = $this->request->getVar('jumlah_kepala_keluarga');
-        $jumlah_penduduk_pria = $this->request->getVar('jumlah_penduduk_pria');
-        $jumlah_penduduk_wanita = $this->request->getVar('jumlah_penduduk_wanita');
-        $jumlah_penduduk_usia_0_14 = $this->request->getVar('jumlah_penduduk_usia_0_14');
-        $jumlah_penduduk_usia_15_64 = $this->request->getVar('jumlah_penduduk_usia_15_64');
-        $jumlah_penduduk_usia_65_keatas = $this->request->getVar('jumlah_penduduk_usia_65_keatas');
-        $jumlah_penduduk_tidak_sekolah = $this->request->getVar('jumlah_penduduk_tidak_sekolah');
-        $jumlah_penduduk_sd = $this->request->getVar('jumlah_penduduk_sd');
-        $jumlah_penduduk_smp = $this->request->getVar('jumlah_penduduk_smp');
-        $jumlah_penduduk_sma_smk = $this->request->getVar('jumlah_penduduk_sma_smk');
-        $jumlah_penduduk_diploma_sarjana = $this->request->getVar('jumlah_penduduk_diploma_sarjana');
-        $jumlah_penduduk_bekerja = $this->request->getVar('jumlah_penduduk_bekerja');
-        $jumlah_penduduk_tidak_bekerja = $this->request->getVar('jumlah_penduduk_tidak_bekerja');
-        $jumlah_penduduk_belum_menikah = $this->request->getVar('jumlah_penduduk_belum_menikah');
-        $jumlah_penduduk_menikah = $this->request->getVar('jumlah_penduduk_menikah');
-        $jumlah_penduduk_cerai = $this->request->getVar('jumlah_penduduk_cerai');
-        $jumlah_sekolah = $this->request->getVar('jumlah_sekolah');
-        $jumlah_posyandu = $this->request->getVar('jumlah_posyandu');
-        $jumlah_tempat_ibadah = $this->request->getVar('jumlah_tempat_ibadah');
-        $jumlah_pos_ronda = $this->request->getVar('jumlah_pos_ronda');
 
         // Validasi input
         if (!$this->validate([
@@ -254,27 +224,6 @@ class DesaController extends BaseController
                     'numeric' => 'Jumlah penduduk Tidak Memiliki Pekerjaan harus berupa angka !'
                 ]
             ],
-            'jumlah_penduduk_belum_menikah' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Silahkan masukkan jumlah penduduk Belum Menikah !',
-                    'numeric' => 'Jumlah penduduk Belum Menikah harus berupa angka !'
-                ]
-            ],
-            'jumlah_penduduk_menikah' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Silahkan masukkan jumlah penduduk Sudah Menikah !',
-                    'numeric' => 'Jumlah penduduk Sudah Menikah harus berupa angka !'
-                ]
-            ],
-            'jumlah_penduduk_cerai' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Silahkan masukkan jumlah penduduk Bercerai !',
-                    'numeric' => 'Jumlah penduduk Bercerai harus berupa angka !'
-                ]
-            ],
             'jumlah_sekolah' => [
                 'rules' => 'required|numeric',
                 'errors' => [
@@ -309,39 +258,36 @@ class DesaController extends BaseController
         }
 
         // Ambil id_user dari session
-        $id_user = session()->get('id_user');
+        // $id_user = session()->get('id_user');
 
         // Simpan data ke database
         $this->m_desa->save([
-            'id_user' => $id_user, // Menambahkan id_user
-            'nama_desa' => $nama_desa,
-            'kecamatan' => $kecamatan,
-            'kabupaten' => $kabupaten,
-            'provinsi' => $provinsi,
-            'kode_pos' => $kode_pos,
-            'luas_wilayah' => $luas_wilayah,
-            'jumlah_penduduk' => $jumlah_penduduk,
-            'website' => $website,
-            'jumlah_kepala_keluarga' => $jumlah_kepala_keluarga,
-            'jumlah_penduduk_pria' => $jumlah_penduduk_pria,
-            'jumlah_penduduk_wanita' => $jumlah_penduduk_wanita,
-            'jumlah_penduduk_usia_0_14' => $jumlah_penduduk_usia_0_14,
-            'jumlah_penduduk_usia_15_64' => $jumlah_penduduk_usia_15_64,
-            'jumlah_penduduk_usia_65_keatas' => $jumlah_penduduk_usia_65_keatas,
-            'jumlah_penduduk_tidak_sekolah' => $jumlah_penduduk_tidak_sekolah,
-            'jumlah_penduduk_sd' => $jumlah_penduduk_sd,
-            'jumlah_penduduk_smp' => $jumlah_penduduk_smp,
-            'jumlah_penduduk_sma_smk' => $jumlah_penduduk_sma_smk,
-            'jumlah_penduduk_diploma_sarjana' => $jumlah_penduduk_diploma_sarjana,
-            'jumlah_penduduk_bekerja' => $jumlah_penduduk_bekerja,
-            'jumlah_penduduk_tidak_bekerja' => $jumlah_penduduk_tidak_bekerja,
-            'jumlah_penduduk_belum_menikah' => $jumlah_penduduk_belum_menikah,
-            'jumlah_penduduk_menikah' => $jumlah_penduduk_menikah,
-            'jumlah_penduduk_cerai' => $jumlah_penduduk_cerai,
-            'jumlah_sekolah' => $jumlah_sekolah,
-            'jumlah_posyandu' => $jumlah_posyandu,
-            'jumlah_tempat_ibadah' => $jumlah_tempat_ibadah,
-            'jumlah_pos_ronda' => $jumlah_pos_ronda, //29
+            // 'id_user' => $id_user, // Menambahkan id_user
+            'nama_desa' => $this->request->getPost('nama_desa'),
+            'kecamatan' => $this->request->getPost('kecamatan'),
+            'kabupaten' => $this->request->getPost('kabupaten'),
+            'provinsi' => $this->request->getPost('provinsi'),
+            'kode_pos' => $this->request->getPost('kode_pos'),
+            'luas_wilayah' => $this->request->getPost('luas_wilayah'),
+            'jumlah_penduduk' => $this->request->getPost('jumlah_penduduk'),
+            'website' => $this->request->getPost('website'),
+            'jumlah_kepala_keluarga' => $this->request->getPost('jumlah_kepala_keluarga'),
+            'jumlah_penduduk_pria' => $this->request->getPost('jumlah_penduduk_pria'),
+            'jumlah_penduduk_wanita' => $this->request->getPost('jumlah_penduduk_wanita'),
+            'jumlah_penduduk_usia_0_14' => $this->request->getPost('jumlah_penduduk_usia_0_14'),
+            'jumlah_penduduk_usia_15_64' => $this->request->getPost('jumlah_penduduk_usia_15_64'),
+            'jumlah_penduduk_usia_65_keatas' => $this->request->getPost('jumlah_penduduk_usia_65_keatas'),
+            'jumlah_penduduk_tidak_sekolah' => $this->request->getPost('jumlah_penduduk_tidak_sekolah'),
+            'jumlah_penduduk_sd' => $this->request->getPost('jumlah_penduduk_sd'),
+            'jumlah_penduduk_smp' => $this->request->getPost('jumlah_penduduk_smp'),
+            'jumlah_penduduk_sma_smk' => $this->request->getPost('jumlah_penduduk_sma_smk'),
+            'jumlah_penduduk_diploma_sarjana' => $this->request->getPost('jumlah_penduduk_diploma_sarjana'),
+            'jumlah_penduduk_bekerja' => $this->request->getPost('jumlah_penduduk_bekerja'),
+            'jumlah_penduduk_tidak_bekerja' => $this->request->getPost('jumlah_penduduk_tidak_bekerja'),
+            'jumlah_sekolah' => $this->request->getPost('jumlah_sekolah'),
+            'jumlah_posyandu' => $this->request->getPost('jumlah_posyandu'),
+            'jumlah_tempat_ibadah' => $this->request->getPost('jumlah_tempat_ibadah'),
+            'jumlah_pos_ronda' => $this->request->getPost('jumlah_pos_ronda'), //29
         ]);
 
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan &#128077;');

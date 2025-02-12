@@ -300,44 +300,6 @@
                                     </div>
                                 </div>
 
-                                <label class="col-form-label" style="font-size: 20px; text-align: center; display: block;">- B3. Pernikahan -</label>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3 separator">
-                                        <label for="jumlah_penduduk_menikah" class="col-form-label">Jumlah Penduduk Sudah Menikah</label><span style="color: red;">*</span>
-                                        <div class="col-sm-12 input-group">
-                                            <input type="text" oninput="formatNumber(this)" class="form-control <?= ($validation->hasError('jumlah_penduduk_menikah')) ? 'is-invalid' : ''; ?>" id="jumlah_penduduk_menikah" name="jumlah_penduduk_menikah" placeholder="Jumlah Penduduk Sudah Menikah" style="background-color: white;" value="<?= esc(old('jumlah_penduduk_menikah'), 'html'); ?>">
-                                            <span class="input-group-text">Jiwa</span>
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('jumlah_penduduk_menikah'), 'html'); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label for="jumlah_penduduk_belum_menikah" class="col-form-label">Jumlah Penduduk Belum Menikah (Lajang)</label><span style="color: red;">*</span>
-                                        <div class="col-sm-12 input-group">
-                                            <input type="text" oninput="formatNumber(this)" class="form-control <?= ($validation->hasError('jumlah_penduduk_belum_menikah')) ? 'is-invalid' : ''; ?>" id="jumlah_penduduk_belum_menikah" name="jumlah_penduduk_belum_menikah" placeholder="Jumlah Penduduk Masih Lajang" style="background-color: white;" value="<?= esc(old('jumlah_penduduk_belum_menikah'), 'html'); ?>">
-                                            <span class="input-group-text">Jiwa</span>
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('jumlah_penduduk_belum_menikah'), 'html'); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-mb-3">
-                                    <label for="jumlah_penduduk_cerai" class="col-form-label">Jumlah Penduduk Cerai</label><span style="color: red;">*</span>
-                                    <div class="col-sm-12 input-group">
-                                        <input type="text" oninput="formatNumber(this)" class="form-control <?= ($validation->hasError('jumlah_penduduk_cerai')) ? 'is-invalid' : ''; ?>" id="jumlah_penduduk_cerai" name="jumlah_penduduk_cerai" placeholder="Jumlah Penduduk Cerai" style="background-color: white;" value="<?= esc(old('jumlah_penduduk_cerai'), 'html'); ?>">
-                                        <span class="input-group-text">Jiwa</span>
-                                        <div class="invalid-feedback">
-                                            <?= esc($validation->getError('jumlah_penduduk_cerai'), 'html'); ?>
-                                        </div>
-                                    </div>
-                                    <hr style="border: 1px solid #ccc; margin-top: 20px; margin-bottom: 20px;">
-                                </div>
-
                                 <label class="col-form-label" style="font-size: 25px;">C. Infrastruktur dan Layanan Umum</label>
 
                                 <div class="row">

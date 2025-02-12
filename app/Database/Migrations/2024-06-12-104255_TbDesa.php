@@ -16,11 +16,11 @@ class TbDesa extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
-            'id_user' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => TRUE
-            ],
+            // 'id_user' => [
+            //     'type' => 'INT',
+            //     'constraint' => 11,
+            //     'unsigned' => TRUE
+            // ],
             'nama_desa' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -171,7 +171,7 @@ class TbDesa extends Migration
         ]);
 
         $this->forge->addKey('id_desa', TRUE);
-        $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
+        // $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tb_desa');
     }
 
