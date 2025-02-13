@@ -308,7 +308,6 @@
                             </div>
                             <h3>Pengamanan Lingkungan</h3>
                             <p>Kami menyediakan layanan pengamanan 24/7 untuk menjaga keamanan dan kenyamanan lingkungan Anda.</p>
-                            <!-- <a href="service-details.html" class="readmore stretched-link">Selengkapnya <i class="bi bi-arrow-right"></i></a> -->
                         </div>
                     </div><!-- End Service Item -->
 
@@ -319,7 +318,6 @@
                             </div>
                             <h3>Pelaporan Kriminal</h3>
                             <p>Kami siap menerima dan menangani laporan kriminal dengan cepat dan efisien untuk menjaga ketertiban.</p>
-                            <!-- <a href="service-details.html" class="readmore stretched-link">Selengkapnya <i class="bi bi-arrow-right"></i></a> -->
                         </div>
                     </div><!-- End Service Item -->
 
@@ -330,7 +328,6 @@
                             </div>
                             <h3>Penyuluhan Keamanan</h3>
                             <p>Kami mengadakan penyuluhan untuk meningkatkan kesadaran masyarakat akan pentingnya keamanan dan ketertiban.</p>
-                            <!-- <a href="service-details.html" class="readmore stretched-link">Selengkapnya <i class="bi bi-arrow-right"></i></a> -->
                         </div>
                     </div><!-- End Service Item -->
 
@@ -341,7 +338,6 @@
                             </div>
                             <h3>Layanan Darurat 24/7</h3>
                             <p>Tim kami siap merespon situasi darurat kapan pun untuk memberikan bantuan cepat dan efektif.</p>
-                            <!-- <a href="service-details.html" class="readmore stretched-link">Selengkapnya <i class="bi bi-arrow-right"></i></a> -->
                         </div>
                     </div><!-- End Service Item -->
 
@@ -352,7 +348,6 @@
                             </div>
                             <h3>Pengurusan Surat Keterangan</h3>
                             <p>Kami membantu pengurusan surat keterangan seperti SKCK, surat kehilangan, dan lainnya dengan cepat dan mudah.</p>
-                            <!-- <a href="service-details.html" class="readmore stretched-link">Selengkapnya <i class="bi bi-arrow-right"></i></a> -->
                         </div>
                     </div><!-- End Service Item -->
 
@@ -363,7 +358,6 @@
                             </div>
                             <h3>Konsultasi dan Pengaduan</h3>
                             <p>Kami menyediakan layanan konsultasi dan menerima pengaduan masyarakat terkait isu keamanan dan ketertiban.</p>
-                            <!-- <a href="service-details.html" class="readmore stretched-link">Selengkapnya <i class="bi bi-arrow-right"></i></a> -->
                         </div>
                     </div><!-- End Service Item -->
 

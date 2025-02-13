@@ -96,7 +96,7 @@
                                     </form>
 
                                     <div class="mt-5 text-center">
-                                        <p class="text-muted mb-0">Lupa Password ? <a href="/authentication/lupaPassword" class="text-primary fw-semibold">Klik disini</a> </p>
+                                        <p class="text-muted mb-0">Lupa Password ? <a href="<?= site_url('/authentication/lupaPassword'); ?>" class="text-primary fw-semibold">Klik disini</a> </p>
                                     </div>
                                 </div>
                                 <div class="mt-4 mt-md-5 text-center">

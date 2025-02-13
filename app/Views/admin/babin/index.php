@@ -116,7 +116,7 @@
                                 <!-- end script truncate -->
 
                                 <div class="col-md-3 mb-3">
-                                    <a href="<?= esc(base_url('admin/babin/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
+                                    <a href="<?= esc(site_url('/admin/babin/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
                                         <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
                                     </a>
                                 </div>
@@ -142,7 +142,7 @@
                                             <td><?= esc($row['jabatan'], 'html'); ?></td>
                                             <td><?= esc(truncateText($row['nama_desa'], 20), 'html'); ?></td>
                                             <td style="width: 155px">
-                                                <a href="<?= esc(site_url('admin/babin/cek_data/' . urlencode($row['id_babin'])), 'attr') ?>" class="btn btn-info btn-sm view">
+                                                <a href="<?= esc(site_url('/admin/babin/cek_data/' . urlencode($row['id_babin'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_babin'], 'attr') ?>">

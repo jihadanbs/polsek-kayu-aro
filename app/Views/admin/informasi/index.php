@@ -91,7 +91,7 @@
                                 <!-- end script truncate -->
 
                                 <div class="col-md-3 mb-3">
-                                    <a href="<?= esc(site_url('admin/informasi/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
+                                    <a href="<?= esc(site_url('/admin/informasi/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
                                         <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
                                     </a>
                                 </div>
@@ -115,7 +115,7 @@
                                             <td><?= esc($row['nama_kategori'], 'html'); ?></td>
                                             <td><?= formatTanggalIndo($row['tanggal_diterbitkan'], 'html'); ?></td>
                                             <td style="width: 155px">
-                                                <a href="<?= esc(site_url('admin/informasi/cek_data/' . urlencode($row['slug'])), 'attr') ?>" class="btn btn-info btn-sm view">
+                                                <a href="<?= esc(site_url('/admin/informasi/cek_data/' . urlencode($row['slug'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_informasi'], 'attr') ?>">

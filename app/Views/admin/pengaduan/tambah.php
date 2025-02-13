@@ -89,7 +89,7 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <a href="/admin/feedback" class="btn btn-secondary btn-md ml-3">
+                                    <a href="<?= site_url('/admin/feedback'); ?>" class="btn btn-secondary btn-md ml-3">
                                         <i class="fas fa-arrow-left"></i> Batal
                                     </a>
                                     <button type="submit" class="btn btn-primary" style="background-color: #28527A; color:white; margin-left: 10px;">Tambah</button>

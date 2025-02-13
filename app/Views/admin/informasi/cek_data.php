@@ -211,10 +211,10 @@
 
                         <div class="form-group mb-4 mt-4">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="<?= esc(site_url('admin/informasi'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
+                                <a href="<?= esc(site_url('/admin/informasi'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
-                                <a href="<?= esc(site_url('admin/informasi/edit/' . $value->id_informasi), 'attr') ?>" class="btn btn-warning btn-md edit">
+                                <a href="<?= esc(site_url('/admin/informasi/edit/' . $value->id_informasi), 'attr') ?>" class="btn btn-warning btn-md edit">
                                     <i class="fas fa-edit"></i> Ubah Data Informasi
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $value->id_informasi ?>">

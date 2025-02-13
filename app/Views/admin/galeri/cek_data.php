@@ -271,10 +271,10 @@
 
                         <div class="form-group mb-4 mt-4">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="<?= esc(site_url('admin/galeri'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
+                                <a href="<?= esc(site_url('/admin/galeri'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
-                                <a href="<?= esc(site_url('admin/galeri/edit/' . urlencode($tb_foto['slug'])), 'attr') ?>" class="btn btn-warning btn-md edit">
+                                <a href="<?= esc(site_url('/admin/galeri/edit/' . urlencode($tb_foto['slug'])), 'attr') ?>" class="btn btn-warning btn-md edit">
                                     <i class="fas fa-edit"></i> Ubah Data Foto
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_foto['id_foto'] ?>">

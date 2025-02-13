@@ -203,7 +203,7 @@
                                 <!-- End Script Maps -->
 
                                 <div class="modal-footer">
-                                    <a href="<?= esc(site_url('admin/laporan'), 'attr'); ?>" class="btn btn-secondary btn-md ml-3">
+                                    <a href="<?= esc(site_url('/admin/laporan'), 'attr'); ?>" class="btn btn-secondary btn-md ml-3">
                                         <i class="fas fa-times"></i> Batal Tambah
                                     </a>
                                     <button type="submit" class="btn btn-primary" style="background-color: #28527A; color: white; margin-left: 10px;"><i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah Data Laporan</button>

@@ -304,7 +304,7 @@
 
                 // Lakukan AJAX untuk menyimpan perubahan ke database
                 $.ajax({
-                    url: '<?= site_url('admin/kategori/simpan_perubahan') ?>',
+                    url: '<?= site_url('/admin/kategori/simpan_perubahan') ?>',
                     method: 'POST',
                     data: {
                         dataToSave: dataToSave,

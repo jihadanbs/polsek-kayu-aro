@@ -64,7 +64,7 @@
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
                                 <?= $this->include('alert/alert'); ?>
                                 <div class="col-md-3 mb-3">
-                                    <a href="<?= esc(site_url('admin/laporan/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
+                                    <a href="<?= esc(site_url('/admin/laporan/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
                                         <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
                                     </a>
                                 </div>
@@ -109,7 +109,7 @@
                                             <td><?= formatTanggalIndo($row['tanggal_laporan'], 'html'); ?></td>
                                             <td><?= esc($row['jenis_kegiatan'], 'html'); ?></td>
                                             <td style="width: 155px">
-                                                <a href="<?= esc(site_url('admin/laporan/cek_data/' . urlencode($row['id_laporan_babin'])), 'attr') ?>" class="btn btn-info btn-sm view">
+                                                <a href="<?= esc(site_url('/admin/laporan/cek_data/' . urlencode($row['id_laporan_babin'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_laporan_babin'], 'attr') ?>">

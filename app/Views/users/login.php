@@ -78,7 +78,7 @@
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <div class="">
-                                                        <a href="/authentication/lupaPassword" class="text-muted">lupa password?</a>
+                                                        <a href="<?= site_url('/authentication/lupaPassword'); ?>" class="text-muted">lupa password?</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,7 +106,7 @@
 
                                                     <!-- Link Lupa Password -->
                                                     <div class="flex-shrink-0">
-                                                        <a href="/authentication/tidakBisaLogin" class="text-muted">Tidak dapat login?</a>
+                                                        <a href="<?= site_url('/authentication/tidakBisaLogin'); ?>" class="text-muted">Tidak dapat login?</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,7 +118,7 @@
                                     </form>
 
                                     <div class="mt-5 text-center">
-                                        <p class="text-muted mb-0">Belum Punya Akun ? <a href="/authentication/registrasi" class="text-primary fw-semibold"> Registrasi Sekarang </a> </p>
+                                        <p class="text-muted mb-0">Belum Punya Akun ? <a href="<?= site_url('/authentication/registrasi'); ?>" class="text-primary fw-semibold"> Registrasi Sekarang </a> </p>
                                     </div>
                                 </div>
                                 <div class="mt-4 mt-md-5 text-center">

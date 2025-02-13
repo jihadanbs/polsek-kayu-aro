@@ -106,7 +106,7 @@
                                                 <?php endfor; ?>
                                             </td>
                                             <td style="width: 155px">
-                                                <a href="<?= esc(site_url('admin/review/cek_data/' . urlencode($row['id_reviewer'])), 'attr') ?>" class="btn btn-info btn-sm view">
+                                                <a href="<?= esc(site_url('/admin/review/cek_data/' . urlencode($row['id_reviewer'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_reviewer'], 'attr') ?>">

@@ -251,7 +251,7 @@
                     <div class="mt-4 card">
                         <div class="card-body">
                             <div class="informasi-pribadi-section">
-                                <a href="/admin/profile" class="btn btn-link">
+                                <a href="<?= ('/admin/profile'); ?>" class="btn btn-link">
                                     <i class="fas fa-arrow-left" style="font-size: 16px;"></i> Kembali
                                 </a>
                                 <h5 class="card-title">Ubah Kata Sandi</h5>

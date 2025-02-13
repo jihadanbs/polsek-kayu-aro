@@ -79,7 +79,7 @@
                                     </form>
 
                                     <div class="mt-5 text-center">
-                                        <p class="text-muted mb-0">Mendadak Ingat ? <a href="/authentication/login" class="text-primary fw-semibold">Login</a> </p>
+                                        <p class="text-muted mb-0">Mendadak Ingat ? <a href="<?= site_url('/authentication/login'); ?>" class="text-primary fw-semibold">Login</a> </p>
                                     </div>
                                 </div>
                                 <div class="mt-4 mt-md-5 text-center">

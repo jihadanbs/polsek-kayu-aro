@@ -139,7 +139,7 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <a href="<?= site_url('admin/pengaduan/cek_data/' .  $tb_pengaduan['id_pengaduan']); ?>" class="btn btn-secondary btn-md ml-3">
+                                    <a href="<?= site_url('/admin/pengaduan/cek_data/' .  $tb_pengaduan['id_pengaduan']); ?>" class="btn btn-secondary btn-md ml-3">
                                         <i class="fas fa-times"></i> Batal Kirim
                                     </a>
                                     <button type="submit" class="btn btn-success btn-md ml-3" style="margin-left: 10px;">

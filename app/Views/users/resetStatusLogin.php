@@ -121,7 +121,7 @@
                                     </div>
 
                                     <div class="mt-5 text-center">
-                                        <p class="text-muted mb-0">Tidak Menerima Email ? <a href="/authentication/tidakBisaLogin"
+                                        <p class="text-muted mb-0">Tidak Menerima Email ? <a href="<?= site_url('/authentication/tidakBisaLogin'); ?>"
                                                 class="text-primary fw-semibold"> Kirim Ulang </a> </p>
                                     </div>
                                 </div>

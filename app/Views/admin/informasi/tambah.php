@@ -103,7 +103,7 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label for="id_kategori_informasi" class="col-form-label">Nama Kategori Informasi<span style="color: red;">*</span></label><a href="<?= esc(site_url('admin/kategori'), 'attr') ?>">
+                                        <label for="id_kategori_informasi" class="col-form-label">Nama Kategori Informasi<span style="color: red;">*</span></label><a href="<?= esc(site_url('/admin/kategori'), 'attr') ?>">
                                             <i class="fas fa-plus" style="color: black; margin-left: 2px;"></i>
                                         </a>
                                         <select class="form-select custom-border <?= ($validation->hasError('id_kategori_informasi')) ? 'is-invalid' : ''; ?>" id="id_kategori_informasi" name="id_kategori_informasi" aria-label="Default select example" style="background-color: white;" required>
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <a href="<?= esc(site_url('admin/informasi'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
+                                    <a href="<?= esc(site_url('/admin/informasi'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
                                         <i class="fas fa-times"></i> Batal Tambah
                                     </a>
                                     <button type="submit" class="btn btn-primary" style="background-color: #28527A; color: white; margin-left: 10px;"><i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah Data Informasi</button>
