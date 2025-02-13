@@ -11,11 +11,11 @@ class FaqController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         $tb_faq = $this->m_faq->getAllData();
@@ -24,7 +24,6 @@ class FaqController extends BaseController
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-
 
         $data = [
             'title' => 'Admin | Halaman FAQ',
@@ -43,11 +42,11 @@ class FaqController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -73,16 +72,16 @@ class FaqController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Ambil data dari request
-        $pertanyaan = $this->request->getVar('pertanyaan');
-        $jawaban = $this->request->getVar('jawaban');
+        $pertanyaan = $this->request->getPost('pertanyaan');
+        $jawaban = $this->request->getPost('jawaban');
 
         //validasi input 
         if (!$this->validate([
@@ -111,7 +110,7 @@ class FaqController extends BaseController
             'jawaban' => $jawaban,
         ]);
 
-        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan !');
 
         return redirect()->to('/admin/faq');
     }
@@ -120,11 +119,11 @@ class FaqController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Cek apakah metode yang digunakan adalah DELETE
@@ -145,11 +144,11 @@ class FaqController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         $tb_faq = $this->m_faq->getFaq($id_faq);
@@ -172,15 +171,16 @@ class FaqController extends BaseController
 
         return view('admin/faq/edit', $data);
     }
+
     public function update($id_faq)
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Validasi input
@@ -208,14 +208,13 @@ class FaqController extends BaseController
         }
 
         // Simpan data ke dalam database
-        $this->m_faq->save([
-            'id_faq' => $id_faq,
-            'pertanyaan' => $this->request->getVar('pertanyaan'),
-            'jawaban' => $this->request->getVar('jawaban'),
+        $this->m_faq->update($id_faq, [
+            'pertanyaan' => $this->request->getPost('pertanyaan'),
+            'jawaban' => $this->request->getPost('jawaban'),
         ]);
 
         // Set flash message untuk sukses
-        session()->setFlashdata('pesan', 'Data Berhasil Diubah &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Diubah !');
 
         return redirect()->to('/admin/faq');
     }
@@ -224,11 +223,11 @@ class FaqController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//

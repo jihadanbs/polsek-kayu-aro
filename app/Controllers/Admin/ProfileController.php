@@ -10,11 +10,11 @@ class ProfileController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         $tb_jabatan = $this->m_jabatan->getAll();
@@ -41,12 +41,12 @@ class ProfileController extends BaseController
     public function update($id_user)
     {
         // Cek session
-        if (!session()->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Validasi input
@@ -90,32 +90,31 @@ class ProfileController extends BaseController
         }
 
         // Panggil helper updateFile
-        $oldFileName = $this->request->getVar('old_file_profil'); // Nama file lama harus diambil dari input hidden
+        $oldFileName = $this->request->getPost('old_file_profil'); // Nama file lama harus diambil dari input hidden
         $newFileName = $this->request->getFile('file_profil')->isValid() ?
             updateFile('file_profil', 'dokumen/profile/', $oldFileName) :
             $oldFileName;
 
         // Simpan data ke dalam database
-        $this->m_user->save([
-            'id_user' => $id_user,
-            'nama_lengkap' => $this->request->getVar('nama_lengkap'),
-            'username' => $this->request->getVar('username'),
-            'email' => $this->request->getVar('email'),
-            'no_telepon' => $this->request->getVar('no_telepon'),
+        $this->m_user->update($id_user, [
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
+            'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email'),
+            'no_telepon' => $this->request->getPost('no_telepon'),
             'file_profil' => $newFileName
         ]);
 
         // Perbarui nilai sesi setelah menyimpan ke database
         session()->set([
-            'nama_lengkap' => $this->request->getVar('nama_lengkap'),
-            'username' => $this->request->getVar('username'),
-            'email' => $this->request->getVar('email'),
-            'no_telepon' => $this->request->getVar('no_telepon'),
+            'nama_lengkap' => $this->request->getPost('nama_lengkap'),
+            'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email'),
+            'no_telepon' => $this->request->getPost('no_telepon'),
             'file_profil' => $newFileName
         ]);
 
         // Set flash message untuk sukses
-        session()->setFlashdata('pesan', 'Data Berhasil Diubah &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Diubah !');
 
         return redirect()->to('/admin/profile');
     }
@@ -124,11 +123,11 @@ class ProfileController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         $tb_jabatan = $this->m_jabatan->getAll();
@@ -154,6 +153,15 @@ class ProfileController extends BaseController
 
     public function updateSandi()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         // Validasi input
         if (!$this->validate([
             'sandi_lama' => [
@@ -187,7 +195,7 @@ class ProfileController extends BaseController
 
         // Pastikan id_user ada dalam sesi
         if (!$id_user) {
-            session()->setFlashdata('gagal', 'ID pengguna tidak ditemukan dalam sesi');
+            session()->setFlashdata('gagal', 'Pengguna tidak ditemukan !');
             return redirect()->to('authentication/login');
         }
 
@@ -195,9 +203,9 @@ class ProfileController extends BaseController
         $user = $this->m_user->getUserById($id_user);
 
         // Pastikan $user adalah objek sebelum mengakses propertinya
-        if ($user && password_verify($this->request->getVar('sandi_lama'), $user->password)) {
+        if ($user && password_verify($this->request->getPost('sandi_lama'), $user->password)) {
             // Generate hash baru untuk kata sandi baru
-            $new_password_hash = password_hash($this->request->getVar('sandi_baru'), PASSWORD_DEFAULT);
+            $new_password_hash = password_hash($this->request->getPost('sandi_baru'), PASSWORD_DEFAULT);
 
             // Update kata sandi baru dan kolom password_last_reset
             $this->m_user->updateData($id_user, [
@@ -211,11 +219,11 @@ class ProfileController extends BaseController
             ]);
 
             // Setelah update sukses, tampilkan pesan berhasil
-            session()->setFlashdata('pesan', 'Kata sandi berhasil diubah');
+            session()->setFlashdata('pesan', 'Kata sandi berhasil diubah !');
             return redirect()->to('admin/profile/resetpassword');
         } else {
             // Jika kata sandi lama tidak cocok
-            session()->setFlashdata('gagal', 'Kata sandi lama tidak cocok');
+            session()->setFlashdata('gagal', 'Kata sandi lama tidak cocok !');
             return redirect()->to('admin/profile/resetpassword')->withInput();
         }
     }

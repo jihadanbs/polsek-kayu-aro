@@ -10,15 +10,12 @@ class DesaController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        // $id_user = session()->get('id_user');
-
-        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        // if (session()->get('id_user') != $id_user) {
-        //     return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
-        // }
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
 
         $tb_desa = $this->m_desa->getAllData();
         //WAJIB//
@@ -44,14 +41,12 @@ class DesaController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        // // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        // $id_user = session()->get('id_user');
-        // if (session()->get('id_user') != $id_user) {
-        //     return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
-        // }
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
 
         $tb_desa = $this->m_desa->getAllData();
         //WAJIB//
@@ -78,11 +73,11 @@ class DesaController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Validasi input
@@ -257,9 +252,6 @@ class DesaController extends BaseController
             return redirect()->to('/admin/desa/tambah/')->withInput();
         }
 
-        // Ambil id_user dari session
-        // $id_user = session()->get('id_user');
-
         // Simpan data ke database
         $this->m_desa->save([
             // 'id_user' => $id_user, // Menambahkan id_user
@@ -290,7 +282,7 @@ class DesaController extends BaseController
             'jumlah_pos_ronda' => $this->request->getPost('jumlah_pos_ronda'), //29
         ]);
 
-        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan !');
 
         return redirect()->to('/admin/desa');
     }
@@ -299,11 +291,13 @@ class DesaController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        // Pastikan id_desa adalah milik id_user yang sedang login
-        // $id_user = session()->get('id_user');
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $desa = $this->m_desa->getDesa($id_desa);
 
         if (!$desa) {
@@ -334,15 +328,12 @@ class DesaController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
-
-        // Ambil id_user dari session
-        // $id_user = session()->get('id_user');
 
         // Pastikan data desa milik user yang login
         $tb_desa = $this->m_desa->find($id_desa);
@@ -374,15 +365,12 @@ class DesaController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
-
-        // Ambil id_user dari session
-        // $id_user = session()->get('id_user');
 
         // Pastikan data desa milik user yang login
         $tb_desa = $this->m_desa->find($id_desa);
@@ -562,9 +550,7 @@ class DesaController extends BaseController
         }
 
         // Update data ke database
-        $this->m_desa->save([
-            // 'id_user' => $id_user, // Menambahkan id_user
-            'id_desa' => $id_desa,
+        $this->m_desa->update($id_desa, [
             'nama_desa' => $this->request->getPost('nama_desa'),
             'kecamatan' => $this->request->getPost('kecamatan'),
             'kabupaten' => $this->request->getPost('kabupaten'),
@@ -594,7 +580,7 @@ class DesaController extends BaseController
         ]);
 
         // Set flash message untuk sukses
-        session()->setFlashdata('pesan', 'Data Berhasil Diubah &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Diubah !');
 
         return redirect()->to('/admin/desa');
     }
@@ -603,14 +589,14 @@ class DesaController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
-        $id_desa = $this->request->getVar('id_desa');
+        $id_desa = $this->request->getPost('id_desa');
 
         if ($this->m_desa->delete($id_desa)) {
             return $this->response->setJSON(['success' => 'Data berhasil dihapus.']);

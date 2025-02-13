@@ -10,14 +10,11 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        $id_user = session()->get('id_user');
-
-        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        if (session()->get('id_user') != $id_user) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -47,13 +44,11 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
-        $id_user = session()->get('id_user');
 
-        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        if (session()->get('id_user') != $id_user) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -84,11 +79,11 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //validasi input 
@@ -149,6 +144,15 @@ class InformasiController extends BaseController
 
     public function delete()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $id_informasi = $this->request->getPost('id_informasi');
 
         $db = \Config\Database::connect();
@@ -191,6 +195,15 @@ class InformasiController extends BaseController
 
     public function delete2()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $id_informasi = $this->request->getPost('id_informasi');
 
         $db = \Config\Database::connect();
@@ -235,11 +248,11 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Pastikan data desa milik user yang login
@@ -273,11 +286,11 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //validasi input 
@@ -344,12 +357,11 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        // Cek apakah user adalah admin
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Ambil informasi berdasarkan id_informasi

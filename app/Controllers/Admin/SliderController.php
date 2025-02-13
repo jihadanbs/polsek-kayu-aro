@@ -10,11 +10,11 @@ class SliderController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         $tb_slider_beranda = $this->m_slider->getAllData();
@@ -41,11 +41,11 @@ class SliderController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -71,11 +71,11 @@ class SliderController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Validasi input 
@@ -114,6 +114,15 @@ class SliderController extends BaseController
 
     public function delete()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $id_slider_beranda = $this->request->getPost('id_slider_beranda');
 
         $db = \Config\Database::connect();
@@ -158,6 +167,15 @@ class SliderController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
+        // Cek session
+        if (!$this->session->has('islogin')) {
             return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
@@ -187,6 +205,15 @@ class SliderController extends BaseController
     }
     public function update($id_slider_beranda)
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         // Cek session
         if (!$this->session->has('islogin')) {
             return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');

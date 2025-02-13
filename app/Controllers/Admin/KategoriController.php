@@ -3,40 +3,19 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\KategoriInformasiModel;
-use App\Models\UserModel;
-use App\Models\PengaduanModel;
 
 class KategoriController extends BaseController
 {
-    protected $session;
-    protected $m_kategori_informasi;
-    protected $m_user;
-    protected $m_pemohon;
-    protected $m_pengaduan;
-
-    public function __construct()
-    {
-        $this->session = session();
-        $this->m_kategori_informasi = new KategoriInformasiModel();
-        $this->m_user = new UserModel();
-        $this->m_pengaduan = new PengaduanModel();
-    }
-
     public function index()
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        $id_user = session()->get('id_user');
-
-        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        if (session()->get('id_user') != $id_user) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
-
 
         $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser();
         //WAJIB//
@@ -62,11 +41,11 @@ class KategoriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Cek apakah request datang dari AJAX
@@ -80,8 +59,7 @@ class KategoriController extends BaseController
             }
 
             // Cek apakah nama_kategori sudah ada dalam database
-            $model = new KategoriInformasiModel();
-            $existing_data = $model->where('nama_kategori', $nama_kategori)->first();
+            $existing_data = $this->m_kategori_informasi->where('nama_kategori', $nama_kategori)->first();
 
             if ($existing_data) {
                 // Jika nama_kategori sudah ada dalam database, kirim pesan error
@@ -89,7 +67,7 @@ class KategoriController extends BaseController
             }
 
             // Simpan data ke dalam database dengan id_user
-            $model->save([
+            $this->m_kategori_informasi->save([
                 'nama_kategori' => $nama_kategori,
             ]);
 
@@ -105,11 +83,11 @@ class KategoriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         $id_kategori_informasi = $this->request->getPost('id_kategori_informasi');
@@ -132,11 +110,11 @@ class KategoriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         $dataToSave = $this->request->getPost('dataToSave');

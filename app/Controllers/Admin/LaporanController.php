@@ -10,14 +10,11 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        $id_user = session()->get('id_user');
-
-        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        if (session()->get('id_user') != $id_user) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -46,14 +43,11 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        $id_user = session()->get('id_user');
-
-        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
-        if (session()->get('id_user') != $id_user) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -83,11 +77,11 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //validasi input 
@@ -179,12 +173,11 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        // Pastikan hanya admin yang dapat mengakses halaman ini
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -197,11 +190,11 @@ class LaporanController extends BaseController
 
         // Jika data foto tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
         if (!$tb_laporan_babin) {
-            return redirect()->back()->with('gagal', 'Data Laporan Tidak Ditemukan dan Anda Tidak Memiliki Akses Laporan Tersebut &#128540');
+            return redirect()->back()->with('gagal', 'Data Laporan Tidak Ditemukan dan Anda Tidak Memiliki Akses Laporan Tersebut !');
         }
 
         $data = [
-            'title' => 'Admin | Halaman Cek Data Foto',
+            'title' => 'Admin | Halaman Cek Data Laporan',
             //WAJIB//
             'tb_user' => $tb_user,
             'unread' => $unread,
@@ -218,16 +211,13 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
-        // Pastikan hanya admin yang dapat mengakses halaman ini
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
-        // Ambil data user
-        // $id_user = session()->get('id_user');
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
@@ -245,7 +235,7 @@ class LaporanController extends BaseController
         $tb_babin = $this->m_babin->getBabinByUserId();
 
         $data = [
-            'title' => 'Admin | Halaman Cek Data Laporan',
+            'title' => 'Admin | Halaman Ubah Data Laporan',
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
             //WAJIB//
             'tb_user' => $tb_user,
@@ -263,11 +253,11 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Validasi input
@@ -375,6 +365,15 @@ class LaporanController extends BaseController
 
     public function delete()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $id_laporan_babin = $this->request->getPost('id_laporan_babin');
 
         $db = \Config\Database::connect();
@@ -431,6 +430,15 @@ class LaporanController extends BaseController
 
     public function delete2()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $id_laporan_babin = $this->request->getPost('id_laporan_babin');
 
         $db = \Config\Database::connect();

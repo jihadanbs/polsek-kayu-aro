@@ -10,11 +10,11 @@ class PengaduanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -42,11 +42,11 @@ class PengaduanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -75,18 +75,18 @@ class PengaduanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Ambil data dari form
-        $nama = $this->request->getVar('nama');
-        $email = $this->request->getVar('email');
-        $subjek = $this->request->getVar('subjek');
-        $pesan = $this->request->getVar('pesan');
+        $nama = $this->request->getPost('nama');
+        $email = $this->request->getPost('email');
+        $subjek = $this->request->getPost('subjek');
+        $pesan = $this->request->getPost('pesan');
 
         // Validasi input dasar
         $validationRules = [
@@ -149,9 +149,9 @@ class PengaduanController extends BaseController
 
         // Kirim email
         if ($this->email->send()) {
-            session()->setFlashdata('pesan', 'Pengaduan Berhasil Diajukan Dan Email Telah Dikirim.');
+            session()->setFlashdata('pesan', 'Pengaduan Berhasil Diajukan Dan Email Telah Dikirim !');
         } else {
-            session()->setFlashdata('gagal', 'Gagal Mengirim Email. Silakan Coba Lagi.');
+            session()->setFlashdata('gagal', 'Gagal Mengirim Email. Silakan Coba Lagi !');
         }
 
         // Simpan data ke database
@@ -164,11 +164,11 @@ class PengaduanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -196,11 +196,11 @@ class PengaduanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         //WAJIB//
@@ -228,11 +228,11 @@ class PengaduanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
         // Ambil data dari form
@@ -310,7 +310,7 @@ class PengaduanController extends BaseController
         if ($this->email->send()) {
             session()->setFlashdata('pesan', 'Anda telah melakukan pemberian tanggapan ' . htmlspecialchars($nama) . ' dan pengiriman email ke alamat ' . htmlspecialchars($email) . ' !');
         } else {
-            session()->setFlashdata('gagal', 'Gagal Mengirim Email ke alamat' . htmlspecialchars($email) . 'Silakan Coba Lagi Atau Mungkin Email Tidak Aktif');
+            session()->setFlashdata('gagal', 'Gagal Mengirim Email ke alamat' . htmlspecialchars($email) . 'Silakan Coba Lagi Atau Mungkin Email Tidak Aktif !');
         }
 
         // Simpan data ke database
@@ -444,6 +444,15 @@ class PengaduanController extends BaseController
 
     public function delete()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $id_pengaduan = $this->request->getPost('id_pengaduan');
 
         $db = \Config\Database::connect();
@@ -486,6 +495,15 @@ class PengaduanController extends BaseController
 
     public function delete2()
     {
+        // Cek session
+        if (!$this->session->has('islogin')) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+        }
+
+        if (session()->get('id_jabatan') != 1) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        }
+
         $id_pengaduan = $this->request->getPost('id_pengaduan');
 
         $db = \Config\Database::connect();
