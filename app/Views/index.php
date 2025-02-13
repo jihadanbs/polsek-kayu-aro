@@ -839,15 +839,17 @@
                     </div>
 
                     <div class="col-lg-8">
-                        <form id="contactForm" action="<?= site_url('/admin/feedback/send');  ?>" method="post" class="php-email-form needs-validation" novalidate data-aos="fade" data-aos-delay="100" autocomplete="off">
+                        <form id="contactForm" action="<?= site_url('/admin/pengaduan/send');  ?>" method="post" class="php-email-form needs-validation" novalidate data-aos="fade" data-aos-delay="100" autocomplete="off">
                             <div class="row gy-4">
                                 <div class="col-md-6">
+                                    <label class="col-form-label">Nama Lengkap</label><span style="color: red;">*</span>
                                     <input type="text" name="nama" class="form-control" placeholder="Nama Anda" required>
                                     <div class="invalid-feedback">
                                         Silakan isi nama Anda !
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <label class="col-form-label">Email</label><span style="color: red;">*</span>
                                     <input type="email" class="form-control" name="email" placeholder="Email Anda" required>
                                     <small class="text-muted custom-small-text">Pastikan Email Anda Aktif Untuk Memudahkan Pengiriman Tanggapan</small>
                                     <div class="invalid-feedback">
@@ -856,6 +858,7 @@
                                 </div>
 
                                 <div class="col-md-6">
+                                    <label class="col-form-label">Nama Desa</label><span style="color: red;">*</span>
                                     <select class="form-select custom-border <?= ($validation->hasError('id_desa')) ? 'is-invalid' : ''; ?>" id="id_desa" name="id_desa" aria-label="Default select example" style="background-color: white;" required>
                                         <option value="" selected disabled>~ Silahkan Pilih Nama Desa ~</option>
                                         <?php foreach ($tb_desa as $value) : ?>
@@ -869,8 +872,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <label class="col-form-label">Nama Babin</label><span style="color: red;">*</span>
                                     <select class="form-select custom-border <?= ($validation->hasError('id_babin')) ? 'is-invalid' : ''; ?>" id="id_babin" name="id_babin" aria-label="Default select example" style="background-color: white;" required>
-                                        <option value="" selected disabled>~ Silahkan Pilih Nama Bhabin ~</option>
+                                        <option value="" selected disabled>~ Silahkan Pilih Nama Babin ~</option>
                                         <?php foreach ($tb_babin as $value) : ?>
                                             <option value="<?= esc($value['id_babin'], 'attr') ?>" <?= old('id_babin') == $value['id_babin'] ? 'selected' : ''; ?>>
                                                 <?= esc($value['nama_lengkap'], 'html') ?>
@@ -883,6 +887,7 @@
                                 </div>
 
                                 <div class="col-md-12">
+                                    <label class="col-form-label">No Telepon</label><span style="color: red;">*</span>
                                     <input type="text" class="form-control" name="no_telepon" placeholder="Nomor Telepon" required>
                                     <small class="text-muted custom-small-text">Pastikan Nomor Telepon Anda Aktif Untuk Memudahkan Pengiriman Tanggapan</small>
                                     <div class="invalid-feedback">
@@ -890,18 +895,21 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <label class="col-form-label">Subjek</label><span style="color: red;">*</span>
                                     <input type="text" class="form-control" name="subjek" placeholder="Subjek" required>
                                     <div class="invalid-feedback">
                                         Silakan isi subjek !
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <label class="col-form-label">Pesan Pengaduan</label><span style="color: red;">*</span>
                                     <textarea class="form-control" name="pesan" rows="8" placeholder="Pesan" required></textarea>
                                     <div class="invalid-feedback">
                                         Silakan isi pesan Anda !
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <label class="col-form-label">Dokumentasi</label><span style="color: red;">*</span>
                                     <input type="file" accept="image/*" class="form-control" name="dokumentasi" placeholder="dokumentasi" required>
                                     <div class="invalid-feedback">
                                         Silakan masukkan dokumentasi !
@@ -933,22 +941,37 @@
 
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        // Periksa respons dari server
-                        if (xhr.responseText.includes('Feedback Berhasil Diajukan Dan Email Telah Dikirim')) {
-                            // Jika berhasil
-                            Swal.fire({
-                                title: 'Pesan Terkirim!',
-                                text: 'Pesan berhasil dikirim. Terima kasih atas feedback Anda. Kami akan segera menindaklanjutinya!',
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            }).then(() => {
-                                location.reload(); // Muat ulang halaman setelah menutup SweetAlert
-                            });
-                        } else if (xhr.responseText.includes('Gagal Mengirim Email. Silakan Coba Lagi')) {
-                            // Jika gagal
+                        try {
+                            // Parse JSON response
+                            const response = JSON.parse(xhr.responseText);
+
+                            if (response.status === 'success') {
+                                // Jika berhasil
+                                Swal.fire({
+                                    title: 'Pesan Terkirim!',
+                                    html: `Pesan berhasil dikirim. Terima kasih atas pengaduan Anda.<br><br>
+                                    Kami akan segera menindaklanjutinya!<br><br>
+                              <strong>Kode Pengaduan Anda: ${response.kode_pengaduan}</strong><br><br>
+                              Simpan Kode Pengaduan Anda Untuk Pengecekan Berkala !`,
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                }).then(() => {
+                                    location.reload(); // Muat ulang halaman setelah menutup SweetAlert
+                                });
+                            } else {
+                                // Jika gagal
+                                Swal.fire({
+                                    title: 'Gagal!',
+                                    text: response.message || 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi!',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        } catch (e) {
+                            // Tangani kesalahan parsing JSON
                             Swal.fire({
                                 title: 'Gagal!',
-                                text: 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.',
+                                text: 'Terjadi kesalahan dalam memproses respons server!',
                                 icon: 'error',
                                 confirmButtonText: 'OK'
                             });
@@ -957,7 +980,7 @@
                         // Tangani jika terjadi kesalahan pada permintaan
                         Swal.fire({
                             title: 'Gagal!',
-                            text: 'Terjadi kesalahan saat mengirim pesan.',
+                            text: 'Terjadi kesalahan saat mengirim pesan!',
                             icon: 'error',
                             confirmButtonText: 'OK'
                         });
@@ -1048,7 +1071,7 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/feedback/totalData", function(responsePemohon) {
+                getTotalFeedback("/admin/pengaduan/totalData", function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalFeedbackCounter").attr("data-purecounter-end", total);
                     $("#totalFeedbackCounter").text(total);

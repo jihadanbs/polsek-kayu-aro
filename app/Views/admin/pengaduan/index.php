@@ -29,12 +29,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Data Feedback Pengunjung</h4>
+                        <h4 class="mb-sm-0 font-size-18">Data Pengaduan Masyarakat</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Feedback Pengunjung</a></li>
-                                <li class="breadcrumb-item active">Data Feedback Pengunjung</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Pengaduan Masyarakat</a></li>
+                                <li class="breadcrumb-item active">Data Pengaduan Masyarakat</li>
                             </ol>
                         </div>
 
@@ -98,9 +98,9 @@
                                     <tr class="highlight text-center" style="background-color: #28527A; color: white;">
                                         <th>Nomor</th>
                                         <th>Nama</th>
+                                        <th>No Telepon</th>
                                         <th>Email</th>
                                         <th>Subjek</th>
-                                        <th>Isi Pesan</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -110,11 +110,11 @@
                                     <?php $i = 1; ?>
                                     <?php foreach ($tb_pengaduan as $row) : ?>
                                         <tr>
-                                            <td data-field="id_feedback" style="width: 10px" scope="row"><?= $i++; ?></td>
-                                            <td><?= truncateText($row->nama, 10); ?></td>
+                                            <td data-field="id_pengaduan" style="width: 10px" scope="row"><?= $i++; ?></td>
+                                            <td><?= truncateText($row->nama, 70); ?></td>
+                                            <td><?= $row->no_telepon; ?></td>
                                             <td><?= $row->email; ?></td>
-                                            <td><?= truncateText($row->subjek, 10); ?></td>
-                                            <td><?= truncateText($row->pesan, 10); ?></td>
+                                            <td><?= truncateText($row->subjek, 70); ?></td>
                                             <td data-field="status">
                                                 <?php
                                                 $statusClass = '';
@@ -127,8 +127,8 @@
                                                 <span class="<?= $statusClass; ?>"><strong><?= $row->status; ?></strong></span>
                                             </td>
                                             <td style="width: 155px">
-                                                <a href="<?= site_url('admin/feedback/cek_data/' . $row->id_feedback); ?>" class="btn btn-info btn-sm view"><i class="fa fa-eye"></i> Cek</a>
-                                                <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= $row->id_feedback ?>">
+                                                <a href="<?= site_url('admin/pengaduan/cek_data/' . $row->id_pengaduan); ?>" class="btn btn-info btn-sm view"><i class="fa fa-eye"></i> Cek</a>
+                                                <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= $row->id_pengaduan ?>">
                                                     <i class="fas fa-trash-alt"></i> Delete
                                                 </button>
                                             </td>
@@ -136,7 +136,7 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <small class="form-text text-danger">Note : Bila Tidak Bisa Melakukan Delete Dihalaman Ini, Anda Bisa Melakukannya Pada Halaman CEK DATA FEEDBACK PENGUNJUNG</small>
+                            <small class="form-text text-danger">Note : Bila Tidak Bisa Melakukan Delete Dihalaman Ini, Anda Bisa Melakukannya Pada Halaman CEK DATA PENGADUAN MASYARAKAT</small>
                         </div>
                     </div>
                 </div> <!-- end col -->
@@ -197,7 +197,7 @@
         $(document).ready(function() {
             $('.sa-warning').click(function(e) {
                 e.preventDefault();
-                var id_feedback = $(this).data('id');
+                var id_pengaduan = $(this).data('id');
 
                 Swal.fire({
                     title: "Anda Yakin Ingin Menghapus?",
@@ -211,25 +211,25 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: "POST",
-                            url: '<?= site_url('/admin/feedback/delete') ?>',
+                            url: '<?= site_url("/admin/pengaduan/delete") ?>',
                             data: {
-                                id_feedback: id_feedback,
+                                id_pengaduan: id_pengaduan,
                                 _method: 'DELETE'
                             },
                             dataType: 'json',
                             success: function(response) {
-                                if (response.success) {
+                                if (response.status === 'success') {
                                     Swal.fire({
                                         title: "Dihapus!",
-                                        text: response.success,
+                                        text: response.message,
                                         icon: "success"
                                     }).then(() => {
-                                        location.reload();
+                                        location.reload(); // Refresh halaman setelah sukses menghapus
                                     });
-                                } else if (response.error) {
+                                } else if (response.status === 'error') {
                                     Swal.fire({
                                         title: "Gagal!",
-                                        text: response.error,
+                                        text: response.message,
                                         icon: "error"
                                     });
                                 }

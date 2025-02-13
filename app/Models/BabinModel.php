@@ -126,4 +126,18 @@ class BabinModel extends Model
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }
+
+    public function getNamaBabin($id_babin)
+    {
+        $builder = $this->db->table('tb_babin');
+        $builder->select('nama_lengkap');
+        $builder->where('id_babin', $id_babin);
+        $query = $builder->get();
+
+        if ($query->getNumRows() > 0) {
+            return $query->getRow()->nama_lengkap;
+        }
+
+        return null;
+    }
 }

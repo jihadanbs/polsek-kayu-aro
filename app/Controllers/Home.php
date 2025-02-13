@@ -7,7 +7,7 @@ class Home extends BaseController
     public function index()
     {
         // WAJIB //
-        $tb_feedback = $this->m_feedback->getFeedback();
+        $tb_pengaduan = $this->m_pengaduan->getPengaduan();
         $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser();
         $tb_foto = $this->m_galeri->getFotoWithFile();
         $tb_faq = $this->m_faq->getAllData();
@@ -21,7 +21,7 @@ class Home extends BaseController
             'title' => 'Polsek Kayu Aro',
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
             // WAJIB //
-            'tb_feedback' => $tb_feedback,
+            'tb_pengaduan' => $tb_pengaduan,
             'tb_informasi_edukasi' => $tb_informasi_edukasi,
             'tb_foto' => $tb_foto,
             'tb_faq' => $tb_faq,

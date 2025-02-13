@@ -22,7 +22,7 @@
                     <li><a href="/#layanan">Layanan</a></li>
                     <li><a href="/#galeri">Galeri</a></li>
                     <li><a href="/#informasi-edukasi">Informasi-Edukasi</a></li>
-                    <li><a href="/#kontak">Kontak</a></li>
+                    <li><a href="/#pengaduan">Pengaduan</a></li>
                 </ul>
             </div>
 

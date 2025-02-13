@@ -176,7 +176,7 @@ class PengaduanController extends BaseController
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_pengaduan = $this->m_pengaduan->getPengaduan($id_pengaduan);
+        $tb_pengaduan = $this->m_pengaduan->getCekPengaduan($id_pengaduan);
 
         $data = [
             'title' => 'Admin | Halaman Cek Data Pengaduan Masyarakat',
@@ -208,7 +208,7 @@ class PengaduanController extends BaseController
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_pengaduan = $this->m_pengaduan->getPengaduan($id_pengaduan);
+        $tb_pengaduan = $this->m_pengaduan->getCekPengaduan($id_pengaduan);
 
         $data = [
             'title' => 'Admin | Halaman Balas Pengaduan Masyarakat',
@@ -236,18 +236,23 @@ class PengaduanController extends BaseController
         }
 
         // Ambil data dari form
-        $nama = $this->request->getVar('nama');
-        $email = $this->request->getVar('email');
-        $subjek = $this->request->getVar('subjek');
-        $pesan = $this->request->getVar('pesan');
-        $balasan = $this->request->getVar('balasan');
+        $nama = $this->request->getPost('nama');
+        $no_telepon = $this->request->getPost('no_telepon');
+        $nama_desa = $this->request->getPost('nama_desa');
+        $nama_lengkap = $this->request->getPost('nama_lengkap');
+        $kode_pengaduan = $this->request->getPost('kode_pengaduan');
+        $email = $this->request->getPost('email');
+        $subjek = $this->request->getPost('subjek');
+        $pesan = $this->request->getPost('pesan');
+        $balasan = $this->request->getPost('balasan');
 
         // Validasi input
         if (!$this->validate([
             'balasan' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[10]',
                 'errors' => [
                     'required' => 'Kolom balasan Tidak Boleh Kosong !',
+                    'min_length' => 'Isi Konten tidak boleh kurang dari 10 karakter !',
                 ]
             ],
         ])) {
@@ -257,16 +262,20 @@ class PengaduanController extends BaseController
         }
 
         // Ambil nama masyarakat dari database
-        $tb_pengaduan = $this->m_pengaduan->getPengaduan($id_pengaduan);
+        $tb_pengaduan = $this->m_pengaduan->getCekPengaduan($id_pengaduan);
         if (!$tb_pengaduan) {
             session()->setFlashdata('gagal', 'Data masyarakat tidak ditemukan.');
             return redirect()->to('/admin/pengaduan');
         }
 
-        $nama = $tb_pengaduan->nama;
-        $email = $tb_pengaduan->email;
-        $subjek = $tb_pengaduan->subjek;
-        $pesan = $tb_pengaduan->pesan;
+        $nama = $tb_pengaduan['nama'];
+        $no_telepon = $tb_pengaduan['no_telepon'];
+        $nama_desa = $tb_pengaduan['nama_desa'];
+        $nama_lengkap = $tb_pengaduan['nama_lengkap'];
+        $kode_pengaduan = $tb_pengaduan['kode_pengaduan'];
+        $email = $tb_pengaduan['email'];
+        $subjek = $tb_pengaduan['subjek'];
+        $pesan = $tb_pengaduan['pesan'];
 
         $data = [
             'id_pengaduan' => $id_pengaduan,
@@ -277,6 +286,10 @@ class PengaduanController extends BaseController
         // Buat template email dengan data
         $emailData = [
             'nama' => $nama,
+            'no_telepon' => $no_telepon,
+            'nama_desa' => $nama_desa,
+            'nama_lengkap' => $nama_lengkap,
+            'kode_pengaduan' => $kode_pengaduan,
             'email' => $email,
             'subjek' => $subjek,
             'pesan' => $pesan,
@@ -295,7 +308,7 @@ class PengaduanController extends BaseController
 
         // Kirim email
         if ($this->email->send()) {
-            session()->setFlashdata('pesan', 'Anda telah melakukan pemberian tanggapan ' . htmlspecialchars($nama) . ' dan pengiriman email ke alamat ' . htmlspecialchars($email) . ' &#128077;');
+            session()->setFlashdata('pesan', 'Anda telah melakukan pemberian tanggapan ' . htmlspecialchars($nama) . ' dan pengiriman email ke alamat ' . htmlspecialchars($email) . ' !');
         } else {
             session()->setFlashdata('gagal', 'Gagal Mengirim Email ke alamat' . htmlspecialchars($email) . 'Silakan Coba Lagi Atau Mungkin Email Tidak Aktif');
         }
@@ -309,10 +322,18 @@ class PengaduanController extends BaseController
     public function send()
     {
         // Ambil data dari form
-        $nama = $this->request->getVar('nama');
-        $email = $this->request->getVar('email');
-        $subjek = $this->request->getVar('subjek');
-        $pesan = $this->request->getVar('pesan');
+        $nama = $this->request->getPost('nama');
+        $id_desa = $this->request->getPost('id_desa');
+        $id_babin = $this->request->getPost('id_babin');
+        $no_telepon = $this->request->getPost('no_telepon');
+        $email = $this->request->getPost('email');
+        $subjek = $this->request->getPost('subjek');
+        $pesan = $this->request->getPost('pesan');
+        $dokumentasi = uploadFileUmum('dokumentasi', 'dokumen/dokumentasi-masyarakat/');
+        $kode_pengaduan = $this->m_pengaduan->generateKodePengaduan();
+
+        $nama_desa = $this->m_desa->getNamaDesa($id_desa);
+        $nama_babin = $this->m_babin->getNamaBabin($id_babin);
 
         // Validasi input dasar
         $validationRules = [
@@ -320,6 +341,24 @@ class PengaduanController extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Kolom Nama Tidak Boleh Kosong',
+                ]
+            ],
+            'id_babin' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom Nama Babin Tidak Boleh Kosong',
+                ]
+            ],
+            'id_desa' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom Nama Desa Tidak Boleh Kosong',
+                ]
+            ],
+            'no_telepon' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom No Telepon Tidak Boleh Kosong',
                 ]
             ],
             'email' => [
@@ -354,16 +393,25 @@ class PengaduanController extends BaseController
         $data = [
             'nama' => $nama,
             'subjek' => $subjek,
+            'id_desa' => $id_desa,
+            'id_babin' => $id_babin,
+            'no_telepon' => $no_telepon,
             'email' => $email,
             'pesan' => $pesan,
+            'dokumentasi' => $dokumentasi,
+            'kode_pengaduan' => $kode_pengaduan
         ];
 
         // Buat template email dengan data
         $emailData = [
             'nama' => $nama,
+            'nama_desa' => $nama_desa,
+            'nama_lengkap' => $nama_babin,
+            'no_telepon' => $no_telepon,
             'email' => $email,
             'subjek' => $subjek,
             'pesan' => $pesan,
+            'kode_pengaduan' => $kode_pengaduan
         ];
 
         // Load view template email
@@ -383,53 +431,98 @@ class PengaduanController extends BaseController
 
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Pengaduan Berhasil Diajukan Dan Email Telah Dikirim'
+                'message' => 'Pengaduan Berhasil Diajukan Dan Email Telah Dikirim !',
+                'kode_pengaduan' => $kode_pengaduan
             ]);
         } else {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Gagal Mengirim Email. Silakan Coba Lagi'
+                'message' => 'Gagal Mengirim Email. Silakan Coba Lagi !'
             ]);
         }
     }
 
     public function delete()
     {
-        // Cek session
-        if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
-        }
-
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
-        }
-
         $id_pengaduan = $this->request->getPost('id_pengaduan');
 
-        if ($this->m_pengaduan->delete($id_pengaduan)) {
-            return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
-        } else {
-            return $this->response->setJSON(['error' => 'Gagal menghapus data']);
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        try {
+            $dataFiles = $this->m_pengaduan->getFilesById($id_pengaduan);
+
+            if (empty($dataFiles)) {
+                throw new \Exception('Tidak ada file yang ditemukan untuk pengaduan.');
+            }
+
+            foreach ($dataFiles[0] as $fileColumn => $filePath) {
+                if (!empty($filePath)) {
+                    $fullFilePath = ROOTPATH . 'public/' . $filePath;
+                    if (is_file($fullFilePath)) {
+                        if (!unlink($fullFilePath)) {
+                            throw new \Exception('Gagal menghapus file: ' . $fullFilePath);
+                        }
+                    }
+                }
+            }
+
+            $this->m_pengaduan->deleteById($id_pengaduan);
+
+            $db->transComplete();
+
+            if ($db->transStatus() === false) {
+                $db->transRollback();
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menghapus file dan data']);
+            }
+
+            $db->transCommit();
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Semua file dan data berhasil dihapus']);
+        } catch (\Exception $e) {
+            $db->transRollback();
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menghapus file dan data', 'error' => $e->getMessage()]);
         }
     }
 
     public function delete2()
     {
-        // Cek session
-        if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
-        }
-
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login');
-        }
-
         $id_pengaduan = $this->request->getPost('id_pengaduan');
 
-        if ($this->m_pengaduan->delete($id_pengaduan)) {
-            return $this->response->setJSON(['success' => 'Data berhasil dihapus']);
-        } else {
-            return $this->response->setJSON(['error' => 'Gagal menghapus data']);
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        try {
+            $dataFiles = $this->m_pengaduan->getFilesById($id_pengaduan);
+
+            if (empty($dataFiles)) {
+                throw new \Exception('Tidak ada file yang ditemukan untuk pengaduan.');
+            }
+
+            foreach ($dataFiles[0] as $fileColumn => $filePath) {
+                if (!empty($filePath)) {
+                    $fullFilePath = ROOTPATH . 'public/' . $filePath;
+                    if (is_file($fullFilePath)) {
+                        if (!unlink($fullFilePath)) {
+                            throw new \Exception('Gagal menghapus file: ' . $fullFilePath);
+                        }
+                    }
+                }
+            }
+
+            $this->m_pengaduan->deleteById($id_pengaduan);
+
+            $db->transComplete();
+
+            if ($db->transStatus() === false) {
+                $db->transRollback();
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menghapus file dan data']);
+            }
+
+            $db->transCommit();
+            return $this->response->setJSON(['status' => 'success', 'message' => 'Semua file dan data berhasil dihapus']);
+        } catch (\Exception $e) {
+            $db->transRollback();
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Gagal menghapus file dan data', 'error' => $e->getMessage()]);
         }
     }
 

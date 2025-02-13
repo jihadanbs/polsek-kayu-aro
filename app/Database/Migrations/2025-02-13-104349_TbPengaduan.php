@@ -57,6 +57,10 @@ class TbPengaduan extends Migration
                 'type' => 'BOOLEAN',
                 'default' => TRUE
             ],
+            'kode_pengaduan' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255
+            ],
             'dokumentasi' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255

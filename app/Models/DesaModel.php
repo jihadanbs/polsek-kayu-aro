@@ -43,4 +43,18 @@ class DesaModel extends Model
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }
+
+    public function getNamaDesa($id_desa)
+    {
+        $builder = $this->db->table('tb_desa');
+        $builder->select('nama_desa');
+        $builder->where('id_desa', $id_desa);
+        $query = $builder->get();
+
+        if ($query->getNumRows() > 0) {
+            return $query->getRow()->nama_desa;
+        }
+
+        return null;
+    }
 }

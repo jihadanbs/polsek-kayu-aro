@@ -81,7 +81,7 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Data Feedback Pengunjung</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Data Pengaduan Masyarakat</a></li>
                                     <li class="breadcrumb-item active">Formulir Cek Data</li>
                                 </ol>
                             </div>
@@ -124,32 +124,57 @@
                         ?>
 
                         <table class="table table-borderless table-sm">
-                            <h4 class="text-center mb-3"><b>Formulir Cek Data Feedback Pengunjung</b></h4>
-                            <?php if (!empty($tb_feedback)) : ?>
+                            <h4 class="text-center"><b>Formulir Cek Data Pengaduan Masyarakat</b></h4>
+                            <h4 class="text-center mb-3 text-success" style="width: 200px; margin-left: 480px"><b>"<?= $tb_pengaduan['kode_pengaduan'] ?? '' ?>"</b></h4>
+                            <?php if (!empty($tb_pengaduan)) : ?>
                                 <tr>
                                     <td rowspan="50" width="250px" class="text-center">
                                         <img src="<?= base_url('assets/img/binmas.png') ?>" id="gambar_load" width="250px" height="200">
                                     </td>
                                     <th width="170px">Nama Lengkap</th>
                                     <th width="30px" class="text-center">:</th>
-                                    <td><strong><?= $tb_feedback->nama ?? '' ?></strong> </td>
+                                    <td><strong><?= $tb_pengaduan['nama'] ?? '' ?></strong> </td>
+                                </tr>
+                                <tr>
+                                    <th width="150px">No Telepon</th>
+                                    <th width="30px" class="text-center">:</th>
+                                    <td><strong><?= $tb_pengaduan['no_telepon'] ?? '' ?></strong></td>
                                 </tr>
                                 <tr>
                                     <th width="150px">Email</th>
                                     <th width="30px" class="text-center">:</th>
-                                    <td><strong><?= $tb_feedback->email ?? '' ?></strong></td>
+                                    <td><strong><?= $tb_pengaduan['email'] ?? '' ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <th width="150px">Nama Desa</th>
+                                    <th width="30px" class="text-center">:</th>
+                                    <td><strong><?= $tb_pengaduan['nama_desa'] ?? '' ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <th width="150px">Nama Babin</th>
+                                    <th width="30px" class="text-center">:</th>
+                                    <td><strong><?= $tb_pengaduan['nama_lengkap'] ?? '' ?></strong></td>
                                 </tr>
                                 <tr>
                                     <th>Subjek</th>
                                     <th class="text-center">:</th>
-                                    <td><strong><?= $tb_feedback->subjek ?? '' ?></strong></td>
+                                    <td><strong><?= $tb_pengaduan['subjek'] ?? '' ?></strong></td>
                                 </tr>
                                 <tr>
                                     <th>Isi Pesan</th>
                                     <th class="text-center">:</th>
-                                    <td class="readmore"><?= truncateText($tb_feedback->pesan, 50) ?? 'Data tidak ditemukan'; ?>
-                                        <?php if (strlen(strip_tags($tb_feedback->pesan)) > 50) : ?>
-                                            <a href="#" class="read-more-link" data-text="<?= htmlspecialchars(strip_tags($tb_feedback->pesan), ENT_QUOTES, 'UTF-8') ?>">Read more..</a>
+                                    <td class="readmore"><?= truncateText($tb_pengaduan['pesan'] ?? '', 70) ?? 'Data tidak ditemukan'; ?>
+                                        <?php if (strlen(strip_tags($tb_pengaduan['pesan'] ?? '')) > 70) : ?>
+                                            <a href="#" class="read-more-link" data-text="<?= htmlspecialchars(strip_tags($tb_pengaduan['pesan']), ENT_QUOTES, 'UTF-8') ?>">Read more..</a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Balasan Pesan</th>
+                                    <th class="text-center">:</th>
+                                    <td class="readmore"><?= truncateText($tb_pengaduan['balasan'] ?? '', 70) ?? '', 'Pesan Belum Mendapatkan Balasan'; ?>
+                                        <?php if (strlen(strip_tags($tb_pengaduan['balasan'] ?? '')) > 70) : ?>
+                                            <a href="#" class="read-more-link" data-text="<?= htmlspecialchars(strip_tags($tb_pengaduan['balasan']), ENT_QUOTES, 'UTF-8') ?>">Read more..</a>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -157,8 +182,8 @@
                                     <th>Status</th>
                                     <th class="text-center">:</th>
                                     <td>
-                                        <strong class="<?= getStatusClass($tb_feedback->status) ?>">
-                                            <?= empty($tb_feedback->status) ? 'Belum dibalas' : $tb_feedback->status ?>
+                                        <strong class="<?= getStatusClass($tb_pengaduan['status'] ?? '') ?>">
+                                            <?= empty($tb_pengaduan['status'] ?? '') ? 'Belum dibalas' : $tb_pengaduan['status'] ?? '' ?>
                                         </strong>
                                     </td>
                                 </tr>
@@ -173,15 +198,44 @@
                             <?php endif; ?>
                         </table>
 
+                        <table class="table table-bordered table-sm">
+                            <thead class="text-center">
+                                <tr>
+                                    <th width="50px">NO</th>
+                                    <th>DOKUMENTASI PENGADUAN MASYARAKAT</th>
+                                    <th width="100px">AKSI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($tb_pengaduan)) : ?>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><?= esc($tb_pengaduan['subjek'] ?? '', 'html') ?></td>
+                                        <td class="text-center">
+                                            <?php if ($tb_pengaduan['dokumentasi'] ?? '') : ?>
+                                                <a href="<?= esc(base_url($tb_pengaduan['dokumentasi'] ?? ''), 'attr') ?>" class="btn btn-info btn-sm view" target="_blank">
+                                                    <i class="fas fa-eye"></i> View File
+                                                </a>
+                                            <?php else : ?>
+                                                <a href="#" class="btn btn-info btn-sm view disabled" title="File tidak tersedia">
+                                                    <i class="fas fa-eye"></i> View File
+                                                </a>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+
                         <div class="form-group mb-4 mt-4">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="<?= site_url('/admin/feedback'); ?>" class="btn btn-secondary btn-md ml-3">
+                                <a href="<?= site_url('/admin/pengaduan'); ?>" class="btn btn-secondary btn-md ml-3">
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
-                                <a href="<?= site_url('/admin/feedback/balas/' . $tb_pengaduan->id_feedback); ?>" class="btn btn-success btn-md ml-3 <?= $tb_feedback->status == 'Sudah Ditanggapi' ? 'disabled' : '' ?>">
+                                <a href="<?= site_url('/admin/pengaduan/balas/' . $tb_pengaduan['id_pengaduan']); ?>" class="btn btn-success btn-md ml-3 <?= $tb_pengaduan['status'] == 'Sudah Ditanggapi' ? 'disabled' : '' ?>">
                                     <i class="fas fa-reply"></i> Balas
                                 </a>
-                                <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_feedback->id_feedback ?>">
+                                <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_pengaduan['id_pengaduan'] ?>">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </button>
                             </div>
@@ -228,7 +282,7 @@
     $(document).ready(function() {
         $('.sa-warning').click(function(e) {
             e.preventDefault();
-            var id_feedback = $(this).data('id');
+            var id_pengaduan = $(this).data('id');
 
             Swal.fire({
                 title: "Anda Yakin Ingin Menghapus?",
@@ -242,25 +296,26 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: '<?= site_url('/admin/feedback/delete2') ?>',
+                        url: "<?= site_url('/admin/pengaduan/delete2'); ?>",
                         data: {
-                            id_feedback: id_feedback,
+                            id_pengaduan: id_pengaduan,
                             _method: 'DELETE'
                         },
                         dataType: 'json',
                         success: function(response) {
-                            if (response.success) {
+                            if (response.status === 'success') {
                                 Swal.fire({
                                     title: "Dihapus!",
-                                    text: response.success,
+                                    text: response.message,
                                     icon: "success"
                                 }).then(() => {
-                                    window.location.href = '/admin/feedback';
+                                    // Redirect ke halaman /admin/pengaduan setelah sukses menghapus
+                                    window.location.href = '<?= site_url('/admin/pengaduan'); ?>';
                                 });
-                            } else if (response.error) {
+                            } else if (response.status === 'error') {
                                 Swal.fire({
                                     title: "Gagal!",
-                                    text: response.error,
+                                    text: response.message,
                                     icon: "error"
                                 });
                             }

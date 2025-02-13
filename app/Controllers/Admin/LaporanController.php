@@ -90,9 +90,6 @@ class LaporanController extends BaseController
             return redirect()->to('authentication/login');
         }
 
-        // Ambil data dari request
-        $id_babin = $this->request->getPost('id_babin');
-
         //validasi input 
         if (!$this->validate([
             'id_babin' => [
@@ -145,7 +142,7 @@ class LaporanController extends BaseController
 
 
         $this->m_laporan->save([
-            'id_babin' => $id_babin,
+            'id_babin' => $this->request->getPost('id_babin'),
             'judul_laporan' => $this->request->getPost('judul_laporan'),
             'tanggal_laporan' => $this->request->getPost('tanggal_laporan'),
             'jenis_kegiatan' => $this->request->getPost('jenis_kegiatan'),

@@ -590,12 +590,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <td align="center" class="es-m-txt-c es-text-2968" style="padding:0;Margin:0;padding-bottom:10px">
-                                                                    <h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:36px;font-style:normal;font-weight:bold;line-height:54px;color:#333333" align="center">Terima Kasih Atas Feedback Yang Anda Berikan</h1>
+                                                                    <h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:36px;font-style:normal;font-weight:bold;line-height:54px;color:#333333" align="center">Terima Kasih Atas Pengaduan Yang Anda Berikan</h1>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="center" class="es-m-p0r es-m-p0l es-text-9928" style="Margin:0;padding-top:5px;padding-right:40px;padding-bottom:5px;padding-left:40px">
-                                                                    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Kami senang Anda telah memberikan feedback yang sangat berguna bagi kami, <strong>Makasih Yo</strong></p>
+                                                                    <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Kami senang Anda telah memberikan pengaduan yang sangat berguna bagi kami, <strong>Makasih Yo</strong></p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -609,13 +609,16 @@
                                                             </tr>
                                                             <tr>
                                                                 <td align="left" class="es-text-5833" style="padding:0;Margin:0">
-                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:24px !important;color:#333333" align="center" class="es-text-mobile-size-16  es-m-txt-c"><span style="line-height:100% !important">DATA PENGUNJUNG</span></h3>
+                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:24px !important;color:#333333" align="center" class="es-text-mobile-size-16  es-m-txt-c"><span style="line-height:100% !important">DATA MASYARAKAT</span></h3>
                                                                     <p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">​</p>
                                                                     <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="left" class="es-text-mobile-size-14">NAMA : <?= $nama ?></h3>
+                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="left" class="es-text-mobile-size-14">NO TELEPON : <?= $no_telepon ?></h3>
                                                                     <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" class="es-text-mobile-size-14">EMAIL : <?= $email ?></h3>
+                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="left" class="es-text-mobile-size-14">NAMA DESA : <?= $nama_desa ?></h3>
+                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="left" class="es-text-mobile-size-14">NAMA BABIN : <?= $nama_lengkap ?></h3>
                                                                     <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="justify" class="es-text-mobile-size-14">SUBJEK : <?= $subjek ?></h3>
-                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="justify" class="es-text-mobile-size-14">ISI PESAN : <?= $pesan ?></h3>
-                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="justify" class="es-text-mobile-size-14">BALASAN FEEDBACK : <?= $balasan ?></h3>
+                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="justify" class="es-text-mobile-size-14">ISI PESAN : <?= $pesan ?></h3><br>
+                                                                    <h3 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:20px;font-style:normal;font-weight:bold;line-height:30px !important;color:#333333;margin-left:40px" align="justify" class="es-text-mobile-size-14">BALASAN PENGADUAN : <?= $balasan ?></h3>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -625,6 +628,16 @@
                                                                             <td style="padding:0;Margin:0;border-bottom:1px solid #cccccc;background:none;height:1px;width:100%;margin:0px"></td>
                                                                         </tr>
                                                                     </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="center" class="es-m-txt-c es-text-4060" style="padding:0;Margin:0;padding-right:20px;padding-left:20px;padding-top:20px">
+                                                                    <h2 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:26px;font-style:normal;font-weight:bold;line-height:31px;color:#333333">KODE PENGADUAN</h2>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="center" class="es-m-txt-c es-text-4952" style="Margin:0;padding-top:10px;padding-right:20px;padding-left:20px;padding-bottom:20px">
+                                                                    <h1 style="Margin:0;font-family:arial, 'helvetica neue', helvetica, sans-serif;mso-line-height-rule:exactly;letter-spacing:0;font-size:46px;font-style:normal;font-weight:bold;line-height:55px;color:#5c68e2"><strong>"<?= $kode_pengaduan ?>"</strong></h1>
                                                                 </td>
                                                             </tr>
                                                         </table>
