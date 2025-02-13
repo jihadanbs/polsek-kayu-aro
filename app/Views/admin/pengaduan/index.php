@@ -113,7 +113,7 @@
                                             </td>
                                             <td style="width: 155px">
                                                 <a href="<?= site_url('admin/pengaduan/cek_data/' . $row->id_pengaduan); ?>" class="btn btn-info btn-sm view"><i class="fa fa-eye"></i> Cek</a>
-                                                <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= $row->id_pengaduan ?>">
+                                                <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning <?= $row->status == 'Belum dibalas' ? 'disabled' : '' ?>" data-id="<?= $row->id_pengaduan ?>">
                                                     <i class="fas fa-trash-alt"></i> Hapus
                                                 </button>
                                             </td>
