@@ -259,7 +259,7 @@
                     <h2 class="text-center mb-4 mt-4 widget-title" style="font-size: 42px;">POLSEK KAYU ARO</h2>
                     <section id="blog-details" class="pengaduan-card">
                         <div class="pengaduan-header">
-                            <h3 class="pengaduan-title">Cek Status Pengaduan</h3>
+                            <h3 class="pengaduan-title">Cek Status Pengaduan<span style="color: red;">*</span></h3>
                             <p class="pengaduan-subtitle">Masukkan kode pengaduan Anda untuk melihat status</p>
                         </div>
 
@@ -267,7 +267,7 @@
                             <svg class="error-icon" width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                             </svg>
-                            <span id="errorText">Kode pengaduan tidak ditemukan</span>
+                            <span id="errorText">Kode pengaduan tidak ditemukan !</span>
                         </div>
 
                         <form id="formCekPengaduan" autocomplete="off">
@@ -284,7 +284,7 @@
                         </form>
 
                         <div id="hasilPengaduan" class="hasil-pengaduan hidden">
-                            <h4 class="hasil-title">Detail Pengaduan</h4>
+                            <h4 class="hasil-title">Detail Pengaduan<span style="color: red;">*</span></h4>
                             <div class="detail-item">
                                 <span class="detail-label">Nama Lengkap</span>
                                 <span id="nama" class="detail-value"></span>
@@ -364,7 +364,7 @@
                                 // document.getElementById('status').textContent = data.pengaduan.status;
                                 document.getElementById('subjek').textContent = data.pengaduan.subjek;
 
-                                document.getElementById('balasan').textContent = data.pengaduan.balasan || '-';
+                                document.getElementById('balasan').textContent = data.pengaduan.balasan || 'Belum diproses, Mohon Cek Secara Berkala. Terima Kasih !';
 
                                 hasilDiv.classList.remove('hidden');
                                 errorDiv.classList.add('hidden');
