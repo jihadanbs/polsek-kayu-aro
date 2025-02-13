@@ -489,39 +489,6 @@
             </div>
             <!-- End Section Title -->
 
-            <!-- format tanggal -->
-            <?php
-
-            if (!function_exists('formatTanggal')) {
-                function formatTanggal($date)
-                {
-                    $bulanIndonesia = [
-                        1 => 'Januari',
-                        2 => 'Februari',
-                        3 => 'Maret',
-                        4 => 'April',
-                        5 => 'Mei',
-                        6 => 'Juni',
-                        7 => 'Juli',
-                        8 => 'Agustus',
-                        9 => 'September',
-                        10 => 'Oktober',
-                        11 => 'November',
-                        12 => 'Desember'
-                    ];
-
-                    $timestamp = strtotime($date);
-                    $day = date('d', $timestamp);
-                    $month = date('n', $timestamp);
-                    $year = date('Y', $timestamp);
-
-                    return "$day " . $bulanIndonesia[$month] . " $year";
-                }
-            }
-
-            ?>
-            <!-- end format tanggal -->
-
             <?php
             // Jumlah item per halaman
             $itemsPerPage = 6;
@@ -566,18 +533,18 @@
                                             <?php endforeach; ?>
                                         </div>
                                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<?= $index ?>" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #28527A; border-radius: 50px;"></span>
+                                            <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #FF204E; border-radius: 50px;"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
                                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<?= $index ?>" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #28527A; border-radius: 50px;"></span>
+                                            <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #FF204E; border-radius: 50px;"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
                                     </div>
                                     <div class="galeri-info">
                                         <h4 class="text-center fw-bold"><?= esc($row['judul_foto'], 'html') ?></h4>
                                         <p class="post-date">
-                                            <time datetime="<?= esc($row['tanggal_foto'], 'html'); ?>"><?= esc(formatTanggal($row['tanggal_foto']), 'html'); ?></time>
+                                            <time datetime="<?= esc($row['tanggal_foto'], 'html'); ?>"><?= esc(formatTanggalIndo($row['tanggal_foto']), 'html'); ?></time>
                                         </p>
                                         <p><?= esc($row['deskripsi'], 'html') ?></p>
                                     </div>
@@ -639,7 +606,7 @@
                             <?php if (empty($tb_faq)) : ?>
                                 <!-- Jika faq kosong, tampilkan gambar 404 -->
                                 <div class="col-12 text-center">
-                                    <img src="assets/img/404.gif" alt="faq Kosong" class="img-fluid" style="max-width: 300px;">
+                                    <img src="<?= base_url('assets/img/404.gif'); ?>" alt="faq Kosong" class="img-fluid" style="max-width: 300px;">
                                     <p class="fw-bold">Tidak ada faq saat ini</p>
                                 </div>
                             <?php else : ?>
@@ -672,45 +639,12 @@
                 <?php if (empty($tb_informasi_edukasi)) : ?>
                     <!-- Jika informasi-edukasi kosong, tampilkan gambar 404 -->
                     <div class="col-12 text-center">
-                        <img src="assets/img/404.gif" alt="informasi-edukasi Kosong" class="img-fluid" style="max-width: 300px;">
+                        <img src="<?= base_url('assets/img/404.gif'); ?>" alt="informasi-edukasi Kosong" class="img-fluid" style="max-width: 300px;">
                         <p class="fw-bold">Tidak ada informasi-edukasi saat ini</p>
                     </div>
                 <?php else : ?>
                 <?php endif; ?>
             </div><!-- End Section Title -->
-
-            <!-- format tanggal -->
-            <?php
-
-            if (!function_exists('formatTanggal')) {
-                function formatTanggal($date)
-                {
-                    $bulanIndonesia = [
-                        1 => 'Januari',
-                        2 => 'Februari',
-                        3 => 'Maret',
-                        4 => 'April',
-                        5 => 'Mei',
-                        6 => 'Juni',
-                        7 => 'Juli',
-                        8 => 'Agustus',
-                        9 => 'September',
-                        10 => 'Oktober',
-                        11 => 'November',
-                        12 => 'Desember'
-                    ];
-
-                    $timestamp = strtotime($date);
-                    $day = date('d', $timestamp);
-                    $month = date('n', $timestamp);
-                    $year = date('Y', $timestamp);
-
-                    return "$day " . $bulanIndonesia[$month] . " $year";
-                }
-            }
-
-            ?>
-            <!-- end format tanggal -->
 
             <div class="container">
                 <div class="row gy-4">
@@ -760,7 +694,7 @@
                                     <div class="post-meta">
                                         <p class="post-author"><?= esc($row['penulis'], 'html'); ?></p>
                                         <p class="post-date">
-                                            <time datetime="<?= esc($row['tanggal_diterbitkan'], 'html'); ?>"><?= esc(formatTanggal($row['tanggal_diterbitkan']), 'html'); ?></time>
+                                            <time datetime="<?= esc($row['tanggal_diterbitkan'], 'html'); ?>"><?= esc(formatTanggalIndo($row['tanggal_diterbitkan']), 'html'); ?></time>
                                         </p>
                                     </div>
                                 </div>

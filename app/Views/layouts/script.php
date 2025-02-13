@@ -49,7 +49,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <title>Polsek Kayu Aro</title>
     <meta name="keywords" content="polsek, kabupaten kerinci, kayu aro, kerinci, polsek kayu aro">
     <meta http-equiv="Accept-CH" content="Sec-CH-UA-Platform-Version, Sec-CH-UA-Model" />
     <!-- Favicon -->
@@ -149,7 +148,7 @@
 
                 // Jika ada field yang belum diisi, tampilkan pesan peringatan
                 if (fieldsKosong.length > 0) {
-                    var pesanPeringatan = "Kolom " + fieldsKosong.join(", ") + " belum diisi. Mohon isi terlebih dahulu.";
+                    var pesanPeringatan = "Kolom " + fieldsKosong.join(", ") + " Belum diisi, Mohon isi terlebih dahulu !";
                     Swal.fire({
                         icon: 'warning',
                         title: 'Peringatan',

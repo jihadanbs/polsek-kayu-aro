@@ -118,4 +118,34 @@ class Home extends BaseController
 
         return redirect()->to('review');
     }
+
+    public function cekPengaduan()
+    {
+        $data = [
+            'title' => 'Cek Pengaduan Masyarakat'
+        ];
+
+        return view('cek-pengaduan', $data);
+    }
+
+    public function cek()
+    {
+        $kode_pengaduan = $this->request->getPost('kode_pengaduan');
+
+        $pengaduan = $this->m_pengaduan->cekPengaduan($kode_pengaduan);
+
+        if ($pengaduan) {
+            $data = [
+                'status_pengecekan' => 'success',
+                'pengaduan' => $pengaduan
+            ];
+        } else {
+            $data = [
+                'status_pengecekan' => 'error',
+                'message' => 'Kode pengaduan tidak ditemukan !'
+            ];
+        }
+
+        return $this->response->setJSON($data);
+    }
 }

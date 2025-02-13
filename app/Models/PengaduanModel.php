@@ -25,6 +25,22 @@ class PengaduanModel extends Model
         return $this->where('id_pengaduan', $id_pengaduan)->delete();
     }
 
+    public function CekPengaduan($kode_pengaduan = false)
+    {
+        $builder = $this->db->table('tb_pengaduan');
+        $builder->select('tb_pengaduan.*, tb_desa.nama_desa, tb_babin.nama_lengkap');
+        $builder->join('tb_desa', 'tb_desa.id_desa = tb_pengaduan.id_desa');
+        $builder->join('tb_babin', 'tb_babin.id_babin = tb_pengaduan.id_babin');
+
+        if ($kode_pengaduan !== false) {
+            $builder->where('tb_pengaduan.kode_pengaduan', $kode_pengaduan);
+            return $builder->get()->getRowArray(); // Ubah menjadi getRowArray()
+        }
+
+        $builder->orderBy('tb_pengaduan.kode_pengaduan', 'DESC');
+        return $builder->get()->getResult();
+    }
+
     public function getCekPengaduan($id_pengaduan = false)
     {
         $builder = $this->db->table('tb_pengaduan');
