@@ -51,22 +51,7 @@
 
                         <div class="card-body">
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (session()->getFlashdata('gagal')) : ?>
-                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                        <?= session()->getFlashdata('gagal') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
+                                <?= $this->include('alert/alert'); ?>
                                 <!-- TRUNCATE TEXT -->
                                 <?php
                                 function truncateText($text, $maxLength)
@@ -115,7 +100,7 @@
                                             <td><?= $row->no_telepon; ?></td>
                                             <td><?= $row->email; ?></td>
                                             <td><?= truncateText($row->subjek, 70); ?></td>
-                                            <td data-field="status">
+                                            <td>
                                                 <?php
                                                 $statusClass = '';
                                                 if ($row->status === 'Belum dibalas') {
@@ -129,7 +114,7 @@
                                             <td style="width: 155px">
                                                 <a href="<?= site_url('admin/pengaduan/cek_data/' . $row->id_pengaduan); ?>" class="btn btn-info btn-sm view"><i class="fa fa-eye"></i> Cek</a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= $row->id_pengaduan ?>">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                    <i class="fas fa-trash-alt"></i> Hapus
                                                 </button>
                                             </td>
                                         </tr>

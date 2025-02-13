@@ -93,22 +93,7 @@
 
                         <div class="card-body">
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (session()->getFlashdata('gagal')) : ?>
-                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                        <?= session()->getFlashdata('gagal') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
+                                <?= $this->include('alert/alert'); ?>
                                 <!-- script truncate -->
                                 <?php
                                 function truncateText($text, $maxLength)
@@ -139,7 +124,7 @@
                                 <thead>
                                     <tr class="highlight text-center" style="background-color: #28527A; color: white;">
                                         <th>Nomor</th>
-                                        <th>Nama</th>
+                                        <th>Nama Lengkap</th>
                                         <th>NRP</th>
                                         <th>Jabatan</th>
                                         <th>Desa Yang Diampu</th>
@@ -152,16 +137,16 @@
                                     <?php foreach ($tb_babin as $row) : ?>
                                         <tr>
                                             <td data-field="id_babin" style="width: 10px" scope="row"><?= esc($i++, 'html'); ?></td>
-                                            <td data-field="nama_lengkap"><?= esc($row['nama_lengkap'], 'html'); ?></td>
-                                            <td data-field="nrp"><?= esc($row['nrp'], 'html'); ?></td>
-                                            <td data-field="jabatan"><?= esc($row['jabatan'], 'html'); ?></td>
-                                            <td data-field="nama_desa"><?= esc(truncateText($row['nama_desa'], 20), 'html'); ?></td>
+                                            <td><?= esc($row['nama_lengkap'], 'html'); ?></td>
+                                            <td><?= esc($row['nrp'], 'html'); ?></td>
+                                            <td><?= esc($row['jabatan'], 'html'); ?></td>
+                                            <td><?= esc(truncateText($row['nama_desa'], 20), 'html'); ?></td>
                                             <td style="width: 155px">
                                                 <a href="<?= esc(site_url('admin/babin/cek_data/' . urlencode($row['id_babin'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_babin'], 'attr') ?>">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                    <i class="fas fa-trash-alt"></i> Hapus
                                                 </button>
                                             </td>
                                         </tr>
@@ -194,31 +179,31 @@
                 "buttons": [{
                         extend: 'copy',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     'colvis'

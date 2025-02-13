@@ -48,40 +48,13 @@
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('pertanyaan'); ?>
                                     </div>
-                                    <!-- CKEditor Initialization -->
                                     <script>
-                                        document.addEventListener("DOMContentLoaded", function() {
-                                            CKEDITOR.replace('pertanyaan', {
-                                                toolbar: [{
-                                                        name: 'clipboard',
-                                                        groups: ['clipboard', 'undo'],
-                                                        items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
-                                                    },
-                                                    {
-                                                        name: 'editing',
-                                                        groups: ['find', 'selection', 'spellchecker'],
-                                                        items: ['Find', 'Replace']
-                                                    },
-                                                    {
-                                                        name: 'basicstyles',
-                                                        groups: ['basicstyles', 'cleanup'],
-                                                        items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
-                                                    },
-                                                    {
-                                                        name: 'paragraph',
-                                                        groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
-                                                        items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
-                                                    },
-                                                    {
-                                                        name: 'styles',
-                                                        items: ['Styles', 'Format', 'Font', 'FontSize']
-                                                    },
-                                                    {
-                                                        name: 'others',
-                                                        items: ['-']
-                                                    },
-                                                ]
-                                            });
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            if (typeof initEditor === 'function') {
+                                                initEditor('#pertanyaan');
+                                            } else {
+                                                console.error('initEditor function is not available.');
+                                            }
                                         });
                                     </script>
                                 </div>
@@ -95,48 +68,21 @@
                                         <?= $validation->getError('jawaban'); ?>
                                     </div>
                                     <script>
-                                        CKEDITOR.replace('jawaban', {
-                                            toolbar: [{
-                                                    name: 'clipboard',
-                                                    groups: ['clipboard', 'undo'],
-                                                    items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
-                                                },
-                                                {
-                                                    name: 'editing',
-                                                    groups: ['find', 'selection', 'spellchecker'],
-                                                    items: ['Find', 'Replace']
-                                                },
-                                                {
-                                                    name: 'basicstyles',
-                                                    groups: ['basicstyles', 'cleanup'],
-                                                    items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
-                                                },
-                                                {
-                                                    name: 'paragraph',
-                                                    groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
-                                                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
-                                                },
-                                                // { name: 'links', items: [ 'Link', 'Unlink' ] },
-                                                // { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar' ] },
-                                                {
-                                                    name: 'styles',
-                                                    items: ['Styles', 'Format', 'Font', 'FontSize']
-                                                },
-                                                // { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-                                                {
-                                                    name: 'others',
-                                                    items: ['-']
-                                                },
-                                            ]
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            if (typeof initEditor === 'function') {
+                                                initEditor('#jawaban');
+                                            } else {
+                                                console.error('initEditor function is not available.');
+                                            }
                                         });
                                     </script>
                                 </div>
 
                                 <div class="modal-footer">
                                     <a href="<?= site_url('/admin/faq') ?>" class="btn btn-secondary btn-md ml-3">
-                                        <i class="fas fa-arrow-left"></i> Batal
+                                        <i class="fas fa-times"></i> Batal Tambah
                                     </a>
-                                    <button type="submit" class="btn btn-primary" style="background-color: #28527A; color:white; margin-left: 10px;">Tambah</button>
+                                    <button type="submit" class="btn btn-primary" style="background-color: #28527A; color: white; margin-left: 10px;"><i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah Data FAQ</button>
                                 </div>
 
                             </form>

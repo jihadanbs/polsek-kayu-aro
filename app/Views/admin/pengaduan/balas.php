@@ -45,11 +45,8 @@
 
                             <form action="<?= site_url('admin/pengaduan/kirim/' . $tb_pengaduan['id_pengaduan']); ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
-
                                 <input type="hidden" name="kode_pengajuan" id="id_pengajuan" value="<?= old('kode_pengaduan', $tb_pengaduan['kode_pengaduan']); ?>">
-
                                 <label class="col-form-label" style="font-size: 25px;">A. Data Masyarakat</label>
-
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
                                         <label for="nama" class="col-form-label">Nama Lengkap</label><span style="color: red;">*</span>
@@ -134,7 +131,7 @@
 
                                 <div class="mb-3">
                                     <label for="balasan" class="col-form-label">Isi Balasan Atas Pengaduan</label><span style="color: red;">*</span>
-                                    <textarea class="form-control custom-border <?= ($validation->hasError('balasan')) ? 'is-invalid' : ''; ?>" required name="balasan" placeholder="Masukkan Isi Balasan Pengaduan" id="balasan" cols="30" rows="5" style="background-color: white;"><?php echo old('balasan'); ?></textarea>
+                                    <textarea class="form-control custom-border <?= ($validation->hasError('balasan')) ? 'is-invalid' : ''; ?>" name="balasan" placeholder="Masukkan Isi Balasan Pengaduan" autofocus id="balasan" cols="30" rows="5" style="background-color: white;"><?php echo old('balasan'); ?></textarea>
 
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('balasan'); ?>
@@ -143,10 +140,10 @@
 
                                 <div class="modal-footer">
                                     <a href="<?= site_url('admin/pengaduan/cek_data/' .  $tb_pengaduan['id_pengaduan']); ?>" class="btn btn-secondary btn-md ml-3">
-                                        <i class="fas fa-arrow-left"></i> Batal
+                                        <i class="fas fa-times"></i> Batal Kirim
                                     </a>
-                                    <button type="submit" class="btn btn-primary btn-md ml-3" style="margin-left: 10px;">
-                                        <i class="fas fa-paper-plane"></i> Kirim
+                                    <button type="submit" class="btn btn-success btn-md ml-3" style="margin-left: 10px;">
+                                        <i class="fas fa-paper-plane"></i> Kirim Balasan Pengaduan
                                     </button>
                                 </div>
 

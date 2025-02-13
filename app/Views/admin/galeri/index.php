@@ -88,21 +88,7 @@
                         <div class="card-body">
 
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (session()->getFlashdata('gagal')) : ?>
-                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                        <?= session()->getFlashdata('gagal') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
+                                <?= $this->include('alert/alert'); ?>
                                 <div class="col-md-3 mb-3">
                                     <a href="<?= esc(site_url('admin/galeri/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
                                         <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
@@ -113,6 +99,7 @@
                                         <th>Nomor</th>
                                         <th>Foto Galeri</th>
                                         <th>Judul</th>
+                                        <th>Tanggal</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -123,36 +110,32 @@
                                         <tr>
                                             <td data-field="id_foto" style="width: 10px" scope="row"><?= esc($i++, 'html'); ?></td>
                                             <td>
-                                                <div class="carousel slide" data-bs-ride="carousel">
+                                                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                                                     <div class="carousel-inner">
-                                                        <?php
-                                                        $files = explode(', ', $row['file_foto']);
-                                                        $isActive = true;
-                                                        ?>
-                                                        <?php foreach ($files as $file) : ?>
-                                                            <div class="carousel-item <?= $isActive ? 'active' : '' ?>">
-                                                                <img src="<?= esc(base_url($file), 'attr') ?>" class="carousel-img" alt="...">
+                                                        <?php foreach (explode(', ', $row['file_foto'] ?? '') as $index => $file) : ?>
+                                                            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                                                                <img src="<?= esc(base_url($file), 'attr'); ?>" class="carousel-img" alt="...">
                                                             </div>
-                                                            <?php $isActive = false; ?>
                                                         <?php endforeach; ?>
                                                     </div>
-                                                    <button class="carousel-control-prev" type="button" data-bs-target=".carousel" data-bs-slide="prev">
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                         <span class="visually-hidden">Previous</span>
                                                     </button>
-                                                    <button class="carousel-control-next" type="button" data-bs-target=".carousel" data-bs-slide="next">
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                         <span class="visually-hidden">Next</span>
                                                     </button>
                                                 </div>
                                             </td>
                                             <td><?= esc($row['judul_foto'], 'html'); ?></td>
+                                            <td><?= formatTanggalIndo($row['tanggal_foto'], 'html'); ?></td>
                                             <td style="width: 155px">
                                                 <a href="<?= esc(site_url('admin/galeri/cek_data/' . urlencode($row['id_foto'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_foto'], 'attr') ?>">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                    <i class="fas fa-trash-alt"></i> Hapus
                                                 </button>
                                             </td>
                                         </tr>

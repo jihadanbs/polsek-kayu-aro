@@ -98,6 +98,7 @@ abstract class BaseController extends Controller
 
         // Helper
         helper("upload_helper");
+        helper("date_helper");
 
         // Model 
         $this->m_jabatan = new JabatanModel();

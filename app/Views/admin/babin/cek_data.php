@@ -68,32 +68,6 @@
                         <h3 class="card-title">POLSEK KAYU ARO</h3>
                     </div>
 
-                    <?php
-                    // Contoh format tanggal dari database
-                    $tanggal_mulai_tugas = $tb_babin['tanggal_mulai_tugas'] ?? '';
-
-                    if (!empty($tanggal_mulai_tugas)) {
-                        $date = new DateTime($tanggal_mulai_tugas);
-                        $bulan = [
-                            'January' => 'Januari',
-                            'February' => 'Februari',
-                            'March' => 'Maret',
-                            'April' => 'April',
-                            'May' => 'Mei',
-                            'June' => 'Juni',
-                            'July' => 'Juli',
-                            'August' => 'Agustus',
-                            'September' => 'September',
-                            'October' => 'Oktober',
-                            'November' => 'November',
-                            'December' => 'Desember',
-                        ];
-                        $formatted_date = $date->format('d') . ' ' . $bulan[$date->format('F')] . ' ' . $date->format('Y');
-                    } else {
-                        $formatted_date = '';
-                    }
-                    ?>
-
                     <div class="card-body">
                         <table class="table table-borderless table-sm">
                             <h4 class="text-center mb-3"><b>Formulir Cek Data Bhabin</b></h4>
@@ -135,7 +109,7 @@
                                 <tr>
                                     <th style="font-size: 1.0rem;">Tanggal Mulai Tugas</th>
                                     <th class="text-center" style="font-size: 1.0rem;">:</th>
-                                    <td style="font-size: 1.0rem;"><?= esc($formatted_date) ?></td>
+                                    <td style="font-size: 1.0rem;"><?= formatTanggalIndo($tb_babin['tanggal_mulai_tugas'] ?? '') ?></td>
                                 </tr>
 
                                 <tr>
@@ -166,7 +140,7 @@
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
                                 <a href="<?= esc(site_url('/admin/babin/edit/' . $tb_babin['id_babin']), 'attr') ?>" class="btn btn-warning btn-md edit">
-                                    <i class="fas fa-pencil-alt"></i> Edit
+                                    <i class="fas fa-edit"></i> Ubah Data Babin
                                 </a>
                             </div>
                         </div>

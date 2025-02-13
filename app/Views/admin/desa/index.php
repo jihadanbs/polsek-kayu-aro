@@ -93,23 +93,7 @@
 
                         <div class="card-body">
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
-
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (session()->getFlashdata('gagal')) : ?>
-                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                        <?= session()->getFlashdata('gagal') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
+                                <?= $this->include('alert/alert'); ?>
                                 <div class="col-md-3 mb-3">
                                     <a href="<?= esc(base_url('admin/desa/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
                                         <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
@@ -132,11 +116,11 @@
                                     <?php foreach ($tb_desa as $row) : ?>
                                         <tr>
                                             <td data-field="id_desa" style="width: 10px" scope="row"><?= esc($i++, 'html'); ?></td>
-                                            <td data-field="nama_desa"><?= esc($row['nama_desa'], 'html'); ?></td>
-                                            <td data-field="kecamatan"><?= esc($row['kecamatan'], 'html'); ?></td>
-                                            <td data-field="kabupaten"><?= esc($row['kabupaten'], 'html'); ?></td>
-                                            <td data-field="kode_pos"><?= esc($row['kode_pos'], 'html'); ?></td>
-                                            <td data-field="jumlah_penduduk">
+                                            <td><?= esc($row['nama_desa'], 'html'); ?></td>
+                                            <td><?= esc($row['kecamatan'], 'html'); ?></td>
+                                            <td><?= esc($row['kabupaten'], 'html'); ?></td>
+                                            <td><?= esc($row['kode_pos'], 'html'); ?></td>
+                                            <td>
                                                 <span class="text-success"><?= isset($row['jumlah_penduduk']) ? number_format(esc($row['jumlah_penduduk'], 'html'), 0, ',', '.') : '' ?> Jiwa</span>
                                             </td>
                                             <td style="width: 155px">
@@ -144,7 +128,7 @@
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_desa'], 'attr') ?>">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                    <i class="fas fa-trash-alt"></i> Hapus
                                                 </button>
                                             </td>
                                         </tr>

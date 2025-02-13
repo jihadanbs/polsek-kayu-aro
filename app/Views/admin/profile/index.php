@@ -197,17 +197,10 @@
                                     <i class="fas fa-arrow-left" style="font-size: 16px;"></i> Dashboard
                                 </a>
                                 <h5 class="card-title">Informasi Pribadi</h5>
-
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
+                                <?= $this->include('alert/alert'); ?>
                             </div>
 
-                            <form action="<?= site_url('admin/profile/update/' . session('id_user')); ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
+                            <form action="<?= site_url('/admin/profile/update/' . session('id_user')); ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="mb-3">

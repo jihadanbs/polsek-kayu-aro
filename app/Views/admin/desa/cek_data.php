@@ -293,7 +293,7 @@
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
                                 <a href="<?= esc(site_url('admin/desa/edit/' . ($tb_desa['id_desa'] ?? '')), 'attr') ?>" class="btn btn-warning btn-md edit">
-                                    <i class="fas fa-pencil-alt"></i> Edit
+                                    <i class="fas fa-edit"></i> Ubah Data Desa
                                 </a>
                             </div>
                         </div>

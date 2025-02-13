@@ -49,39 +49,12 @@
                                         <?= $validation->getError('pertanyaan'); ?>
                                     </div>
                                     <script>
-                                        CKEDITOR.replace('pertanyaan', {
-                                            toolbar: [{
-                                                    name: 'clipboard',
-                                                    groups: ['clipboard', 'undo'],
-                                                    items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
-                                                },
-                                                {
-                                                    name: 'editing',
-                                                    groups: ['find', 'selection', 'spellchecker'],
-                                                    items: ['Find', 'Replace']
-                                                },
-                                                {
-                                                    name: 'basicstyles',
-                                                    groups: ['basicstyles', 'cleanup'],
-                                                    items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
-                                                },
-                                                {
-                                                    name: 'paragraph',
-                                                    groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
-                                                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
-                                                },
-                                                // { name: 'links', items: [ 'Link', 'Unlink' ] },
-                                                // { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar' ] },
-                                                {
-                                                    name: 'styles',
-                                                    items: ['Styles', 'Format', 'Font', 'FontSize']
-                                                },
-                                                // { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-                                                {
-                                                    name: 'others',
-                                                    items: ['-']
-                                                },
-                                            ]
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            if (typeof initEditor === 'function') {
+                                                initEditor('#pertanyaan');
+                                            } else {
+                                                console.error('initEditor function is not available.');
+                                            }
                                         });
                                     </script>
                                 </div>
@@ -95,39 +68,12 @@
                                         <?= $validation->getError('jawaban'); ?>
                                     </div>
                                     <script>
-                                        CKEDITOR.replace('jawaban', {
-                                            toolbar: [{
-                                                    name: 'clipboard',
-                                                    groups: ['clipboard', 'undo'],
-                                                    items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
-                                                },
-                                                {
-                                                    name: 'editing',
-                                                    groups: ['find', 'selection', 'spellchecker'],
-                                                    items: ['Find', 'Replace']
-                                                },
-                                                {
-                                                    name: 'basicstyles',
-                                                    groups: ['basicstyles', 'cleanup'],
-                                                    items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
-                                                },
-                                                {
-                                                    name: 'paragraph',
-                                                    groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
-                                                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
-                                                },
-                                                // { name: 'links', items: [ 'Link', 'Unlink' ] },
-                                                // { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar' ] },
-                                                {
-                                                    name: 'styles',
-                                                    items: ['Styles', 'Format', 'Font', 'FontSize']
-                                                },
-                                                // { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-                                                {
-                                                    name: 'others',
-                                                    items: ['-']
-                                                },
-                                            ]
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            if (typeof initEditor === 'function') {
+                                                initEditor('#jawaban');
+                                            } else {
+                                                console.error('initEditor function is not available.');
+                                            }
                                         });
                                     </script>
                                 </div>
@@ -135,9 +81,9 @@
                                 <div class="form-group mb-4 mt-4">
                                     <div class="d-grid gap-2 d-md-flex justify-content-end">
                                         <a href="<?= site_url('/admin/faq/cek_data/' . $tb_faq['id_faq']); ?>" class="btn btn-secondary btn-md ml-3">
-                                            <i class="fas fa-arrow-left"></i> Kembali
+                                            <i class="fas fa-times"></i> Batal Ubah
                                         </a>
-                                        <button type="submit" class="btn btn-primary ">Ubah Data</button>
+                                        <button type="submit" class="btn btn-warning btn-md edit"><i class="fas fa-save"></i> Simpan Perubahan Data</button>
                                     </div>
                                 </div>
 

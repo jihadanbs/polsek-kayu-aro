@@ -80,22 +80,7 @@
                             <div class="card-body">
 
                                 <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
-                                    <?php if (session()->getFlashdata('pesan')) : ?>
-                                        <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                            <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                            <?= session()->getFlashdata('pesan') ?>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <?php if (session()->getFlashdata('gagal')) : ?>
-                                        <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                            <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                            <?= session()->getFlashdata('gagal') ?>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    <?php endif; ?>
-
+                                    <?= $this->include('alert/alert'); ?>
                                     <div class="col-md-3">
                                         <button type="button" class="btn waves-effect waves-light mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #28527A; color:white;">
                                             <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
@@ -147,10 +132,10 @@
                                                 <td data-field="nama_kategori"><?= esc($row['nama_kategori'], 'html'); ?></td>
                                                 <td style="width: 150px">
                                                     <button type="button" class="btn btn-warning btn-sm edit waves-effect waves-light" data-id="<?= esc($row['id_kategori_informasi'], 'attr'); ?>" title="Edit">
-                                                        <i class="fas fa-pencil-alt"></i> <span class="btn-text">Edit</span>
+                                                        <i class="fas fa-edit"></i> <span class="btn-text">Ubah</span>
                                                     </button>
                                                     <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_kategori_informasi'], 'attr'); ?>">
-                                                        <i class="fas fa-trash-alt"></i> <span class="btn-text">Delete</span>
+                                                        <i class="fas fa-trash-alt"></i> <span class="btn-text">Hapus</span>
                                                     </button>
                                                     <button type="button" class="btn btn-success btn-sm save waves-effect waves-light d-none" data-id="<?= esc($row['id_kategori_informasi'], 'attr'); ?>">
                                                         <i class="fas fa-save"></i> <span class="btn-text">Simpan</span>

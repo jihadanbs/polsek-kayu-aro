@@ -233,15 +233,15 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <i class="fas fa-user"></i>
-                                <a href="/admin/profile"><span>Profil</span></a>
+                                <a href="<?= site_url('/admin/profile'); ?>"><span>Profil</span></a>
                             </li>
                             <li class="list-group-item">
                                 <i class="fas fa-lock"></i>
-                                <a href="profile/resetpassword"><span>Ganti Kata Sandi</span></a>
+                                <a href="<?= site_url('/profile/resetpassword'); ?>"><span>Ganti Kata Sandi</span></a>
                             </li>
                             <li class="list-group-item">
                                 <i class="fas fa-sign-out-alt"></i>
-                                <a href="/authentication/logout"><span>Keluar</span></a>
+                                <a href="<?= site_url('/authentication/logout'); ?>"><span>Keluar</span></a>
                             </li>
                         </ul>
                     </div>
@@ -255,25 +255,10 @@
                                     <i class="fas fa-arrow-left" style="font-size: 16px;"></i> Kembali
                                 </a>
                                 <h5 class="card-title">Ubah Kata Sandi</h5>
-
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (session()->getFlashdata('gagal')) : ?>
-                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                        <?= session()->getFlashdata('gagal') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
+                                <?= $this->include('alert/alert'); ?>
                             </div>
 
-                            <form action="/admin/profile/updateSandi/<?= session('id_user'); ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
+                            <form action="<?= site_url('/admin/profile/updateSandi/' . session('id_user')); ?>" method="post" enctype="multipart/form-data" id="validationForm" class="needs-validation" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
 
                                 <div class="custom-form-group">

@@ -183,7 +183,7 @@
                             <thead class="text-center">
                                 <tr>
                                     <th width="50px">NO</th>
-                                    <th>Dokumen Foto Informasi-Edukasi</th>
+                                    <th>DOKUMEN FOTO INFORMASI-EDUKASI</th>
                                     <th width="100px">Aksi</th>
                                 </tr>
                             </thead>
@@ -215,10 +215,10 @@
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
                                 <a href="<?= esc(site_url('admin/informasi/edit/' . $value->id_informasi), 'attr') ?>" class="btn btn-warning btn-md edit">
-                                    <i class="fas fa-pencil-alt"></i> Edit
+                                    <i class="fas fa-edit"></i> Ubah Data Informasi
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $value->id_informasi ?>">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                    <i class="fas fa-trash-alt"></i> Hapus Data Informasi
                                 </button>
                             </div>
                         </div>

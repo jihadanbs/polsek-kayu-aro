@@ -42,12 +42,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Data Desa</h4>
+                        <h4 class="mb-sm-0 font-size-18">Data Review</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Master Bhabin</a></li>
-                                <li class="breadcrumb-item active">Data Desa</li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Review</a></li>
+                                <li class="breadcrumb-item active">Data Review</li>
                             </ol>
                         </div>
 
@@ -64,22 +64,7 @@
 
                         <div class="card-body">
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
-
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (session()->getFlashdata('gagal')) : ?>
-                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                        <?= session()->getFlashdata('gagal') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
+                                <?= $this->include('alert/alert'); ?>
                                 <thead>
                                     <tr class="highlight text-center" style="background-color: #28527A; color: white;">
                                         <th>Nomor</th>
@@ -95,9 +80,9 @@
                                     <?php foreach ($tb_review as $row) : ?>
                                         <tr>
                                             <td data-field="id_reviewer" style="width: 10px" scope="row"><?= esc($n++, 'html'); ?></td>
-                                            <td data-field="nama_lengkap"><?= esc($row['nama_lengkap'], 'html'); ?></td>
-                                            <td data-field="pekerjaan"><?= esc($row['pekerjaan'], 'html'); ?></td>
-                                            <td data-field="rating">
+                                            <td><?= esc($row['nama_lengkap'], 'html'); ?></td>
+                                            <td><?= esc($row['pekerjaan'], 'html'); ?></td>
+                                            <td>
                                                 <?php
                                                 $rating = (float) $row['rating']; // Mengkonversi rating menjadi float
                                                 $fullStars = floor($rating); // Menghitung bintang penuh
@@ -125,7 +110,7 @@
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_reviewer'], 'attr') ?>">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                    <i class="fas fa-trash-alt"></i> Hapus
                                                 </button>
                                             </td>
                                         </tr>
@@ -157,31 +142,31 @@
                 "buttons": [{
                         extend: 'copy',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     'colvis'

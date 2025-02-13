@@ -123,7 +123,7 @@
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_review['id_reviewer'] ?>">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                    <i class="fas fa-trash-alt"></i> Hapus Review
                                 </button>
                             </div>
                         </div>

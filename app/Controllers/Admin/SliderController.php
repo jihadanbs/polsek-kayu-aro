@@ -107,7 +107,7 @@ class SliderController extends BaseController
             'gambar_slider' => $uploadFile,
         ]);
 
-        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Di Tambahkan !');
 
         return redirect()->to('/admin/slider');
     }
@@ -248,7 +248,7 @@ class SliderController extends BaseController
         ]);
 
         // Set flash message untuk sukses
-        session()->setFlashdata('pesan', 'Data Berhasil Diubah &#128077;');
+        session()->setFlashdata('pesan', 'Data Berhasil Diubah !');
 
         return redirect()->to('/admin/slider');
     }

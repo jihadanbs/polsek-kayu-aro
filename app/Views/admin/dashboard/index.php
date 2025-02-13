@@ -93,13 +93,7 @@
                 <!-- Greeting Card -->
                 <div class="row mb-4">
                     <div class="col-12">
-                        <?php if (session()->getFlashdata('pesan')) : ?>
-                            <div class="alert alert-success alert-border-left alert-dismissible fade show custom-alert" role="alert">
-                                <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                <?= session()->getFlashdata('pesan') ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php endif; ?>
+                        <?= $this->include('alert/alert'); ?>
                         <div class="greeting-card">
                             <div class="row align-items-center">
                                 <div class="col-md-10">

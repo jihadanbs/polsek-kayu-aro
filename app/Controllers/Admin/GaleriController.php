@@ -169,11 +169,11 @@ class GaleriController extends BaseController
         //END WAJIB//
 
         // Ambil data foto berdasarkan id_foto
-        $tb_foto = $this->m_galeri->getFotoById();
+        $tb_foto = $this->m_galeri->getFotoById($id_foto);
 
         // Jika data foto tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
         if (!$tb_foto) {
-            return redirect()->back()->with('gagal', 'Data Foto Tidak Ditemukan dan Anda Tidak Memiliki Akses Foto Tersebut &#128540');
+            return redirect()->back()->with('gagal', 'Data Foto Tidak Ditemukan dan Anda Tidak Memiliki Akses Foto Tersebut !');
         }
 
         $data = [

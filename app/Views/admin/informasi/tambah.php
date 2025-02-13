@@ -81,39 +81,12 @@
                                         <?= esc($validation->getError('konten'), 'html') ?>
                                     </div>
                                     <script>
-                                        CKEDITOR.replace('konten', {
-                                            toolbar: [{
-                                                    name: 'clipboard',
-                                                    groups: ['clipboard', 'undo'],
-                                                    items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
-                                                },
-                                                {
-                                                    name: 'editing',
-                                                    groups: ['find', 'selection', 'spellchecker'],
-                                                    items: ['Find', 'Replace']
-                                                },
-                                                {
-                                                    name: 'basicstyles',
-                                                    groups: ['basicstyles', 'cleanup'],
-                                                    items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
-                                                },
-                                                {
-                                                    name: 'paragraph',
-                                                    groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
-                                                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
-                                                },
-                                                // { name: 'links', items: [ 'Link', 'Unlink' ] },
-                                                // { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar' ] },
-                                                {
-                                                    name: 'styles',
-                                                    items: ['Styles', 'Format', 'Font', 'FontSize']
-                                                },
-                                                // { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-                                                {
-                                                    name: 'others',
-                                                    items: ['-']
-                                                },
-                                            ]
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            if (typeof initEditor === 'function') {
+                                                initEditor('#konten');
+                                            } else {
+                                                console.error('initEditor function is not available.');
+                                            }
                                         });
                                     </script>
                                 </div>
@@ -150,10 +123,10 @@
 
                                 <div class="mb-3">
                                     <label for="profile_penulis" class="col-form-label">Foto Profile Penulis<span style="color: red;">*</span></label>
-                                    <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('profile_penulis')) ? 'is-invalid' : ''; ?>" id="profile_penulis" name="profile_penulis" style="background-color: white;" <?= (old('profile_penulis')) ? 'disabled' : 'required'; ?> onchange="previewImage(event)">
+                                    <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('profile_penulis')) ? 'is-invalid' : ''; ?>" id="profile_penulis" name="profile_penulis" style="background-color: white;" <?= (old('profile_penulis')) ? 'disabled' : 'required'; ?> onchange="previewImageProfile(event)">
                                     <small class="form-text text-muted">Pastikan Foto Profile Yang Diunggah Tidak Lebih Dari 5MB</small>
                                     <br>
-                                    <img id="preview" src="#" alt="Pratinjau profile_penulis" style="display: none; max-width: 200px; max-height: 200px; margin-top: 10px;">
+                                    <img id="previewProfile" src="#" alt="Pratinjau profile_penulis" style="display: none; max-width: 200px; max-height: 200px; margin-top: 10px;">
                                     <div class="invalid-feedback">
                                         <?= esc($validation->getError('profile_penulis'), 'html') ?>
                                     </div>
@@ -172,9 +145,9 @@
 
                                 <div class="modal-footer">
                                     <a href="<?= esc(site_url('admin/informasi'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
-                                        <i class="fas fa-arrow-left"></i> Batal
+                                        <i class="fas fa-times"></i> Batal Tambah
                                     </a>
-                                    <button type="submit" class="btn btn-primary" style="background-color: #28527A; color:white; margin-left: 10px;">Tambah</button>
+                                    <button type="submit" class="btn btn-primary" style="background-color: #28527A; color: white; margin-left: 10px;"><i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah Data Informasi</button>
                                 </div>
                             </form>
 
@@ -201,6 +174,21 @@
         reader.onload = function() {
             var dataURL = reader.result;
             var preview = document.getElementById('preview');
+            preview.src = dataURL;
+            preview.style.display = 'block';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
+<script>
+    function previewImageProfile(event) {
+        var input = event.target;
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            var dataURL = reader.result;
+            var preview = document.getElementById('previewProfile');
             preview.src = dataURL;
             preview.style.display = 'block';
         };

@@ -62,22 +62,7 @@
 
                         <div class="card-body">
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
-                                <?php if (session()->getFlashdata('pesan')) : ?>
-                                    <div class="alert alert-success alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-check-all me-3 align-middle"></i><strong>Sukses</strong> -
-                                        <?= session()->getFlashdata('pesan') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (session()->getFlashdata('gagal')) : ?>
-                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show" role="alert">
-                                        <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Gagal</strong> -
-                                        <?= session()->getFlashdata('gagal') ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                <?php endif; ?>
-
+                                <?= $this->include('alert/alert'); ?>
                                 <div class="col-md-3 mb-3">
                                     <a href="<?= esc(site_url('admin/laporan/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
                                         <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
@@ -108,6 +93,8 @@
                                         <th>Nomor</th>
                                         <th>Penanggung Jawab</th>
                                         <th>Judul Laporan</th>
+                                        <th>Tanggal</th>
+                                        <th>Jenis Kegiatan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -117,14 +104,16 @@
                                     <?php foreach ($tb_laporan_babin as $row) : ?>
                                         <tr>
                                             <td data-field="id_laporan_babin" style="width: 10px" scope="row"><?= esc($i++, 'html'); ?></td>
-                                            <td data-field="nama_lengkap"><?= esc($row['nama_lengkap'], 'html'); ?></td>
-                                            <td data-field="judul_laporan"><?= esc($row['judul_laporan'], 'html'); ?></td>
+                                            <td><?= esc($row['nama_lengkap'], 'html'); ?></td>
+                                            <td><?= esc($row['judul_laporan'], 'html'); ?></td>
+                                            <td><?= formatTanggalIndo($row['tanggal_laporan'], 'html'); ?></td>
+                                            <td><?= esc($row['jenis_kegiatan'], 'html'); ?></td>
                                             <td style="width: 155px">
                                                 <a href="<?= esc(site_url('admin/laporan/cek_data/' . urlencode($row['id_laporan_babin'])), 'attr') ?>" class="btn btn-info btn-sm view">
                                                     <i class="fa fa-eye"></i> Cek
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= esc($row['id_laporan_babin'], 'attr') ?>">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                    <i class="fas fa-trash-alt"></i> Hapus
                                                 </button>
                                             </td>
                                         </tr>
@@ -157,31 +146,31 @@
                 "buttons": [{
                         extend: 'copy',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'csv',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'excel',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'pdf',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     'colvis'

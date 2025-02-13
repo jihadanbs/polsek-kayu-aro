@@ -102,36 +102,12 @@
                                         <?= $validation->getError('konten'); ?>
                                     </div>
                                     <script>
-                                        CKEDITOR.replace('konten', {
-                                            toolbar: [{
-                                                    name: 'clipboard',
-                                                    groups: ['clipboard', 'undo'],
-                                                    items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo']
-                                                },
-                                                {
-                                                    name: 'editing',
-                                                    groups: ['find', 'selection', 'spellchecker'],
-                                                    items: ['Find', 'Replace']
-                                                },
-                                                {
-                                                    name: 'basicstyles',
-                                                    groups: ['basicstyles', 'cleanup'],
-                                                    items: ['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
-                                                },
-                                                {
-                                                    name: 'paragraph',
-                                                    groups: ['list', 'indent', 'blocks', 'align', 'bidi'],
-                                                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
-                                                },
-                                                {
-                                                    name: 'styles',
-                                                    items: ['Styles', 'Format', 'Font', 'FontSize']
-                                                },
-                                                {
-                                                    name: 'others',
-                                                    items: ['-']
-                                                },
-                                            ]
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            if (typeof initEditor === 'function') {
+                                                initEditor('#konten');
+                                            } else {
+                                                console.error('initEditor function is not available.');
+                                            }
                                         });
                                     </script>
                                 </div>
@@ -172,9 +148,9 @@
                                 <div class="form-group mb-4 mt-4">
                                     <div class="d-grid gap-2 d-md-flex justify-content-end">
                                         <a href="<?= esc(site_url('/admin/informasi/cek_data/' . $tb_informasi_edukasi['slug']), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
-                                            <i class="fas fa-arrow-left"></i> Kembali
+                                            <i class="fas fa-times"></i> Batal Ubah
                                         </a>
-                                        <button type="submit" class="btn btn-primary ">Ubah Data</button>
+                                        <button type="submit" class="btn btn-warning btn-md edit"><i class="fas fa-save"></i> Simpan Perubahan Data</button>
                                     </div>
                                 </div>
                             </form>

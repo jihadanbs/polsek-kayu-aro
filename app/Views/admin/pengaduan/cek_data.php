@@ -233,10 +233,10 @@
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
                                 <a href="<?= site_url('/admin/pengaduan/balas/' . $tb_pengaduan['id_pengaduan']); ?>" class="btn btn-success btn-md ml-3 <?= $tb_pengaduan['status'] == 'Sudah Ditanggapi' ? 'disabled' : '' ?>">
-                                    <i class="fas fa-reply"></i> Balas
+                                    <i class="fas fa-reply"></i> Balas Pengaduan
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_pengaduan['id_pengaduan'] ?>">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                    <i class="fas fa-trash-alt"></i> Hapus Data Pengaduan
                                 </button>
                             </div>
                         </div>

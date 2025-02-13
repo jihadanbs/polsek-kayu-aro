@@ -1,11 +1,6 @@
 <?= $this->include('admin/layouts/script') ?>
 
 <style>
-    .tabel-kanan {
-        display: flex;
-        margin-left: 20px;
-    }
-
     /* CSS untuk readmore */
     .jendela {
         display: none;
@@ -110,61 +105,54 @@
                             <?php if (!empty($tb_foto)) : ?>
                                 <tr>
                                     <td rowspan="1" width="250px" class="text-center">
-                                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="text-align: center;">
+                                        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
                                             <div class="carousel-inner">
                                                 <?php foreach (explode(', ', $tb_foto['file_foto'] ?? '') as $index => $file) : ?>
                                                     <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                                                        <img src="<?= esc(base_url($file), 'attr'); ?>" class="d-block mx-auto file_foto" alt="..." style="max-width: 150px; max-height: 100px;">
+                                                        <img src="<?= esc(base_url($file), 'attr'); ?>" class="d-block w-100" alt="..." style="max-height: 300px; object-fit: cover;">
                                                     </div>
                                                 <?php endforeach; ?>
                                             </div>
-                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="background-color: black; border-radius: 10px;">
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Previous</span>
                                             </button>
-                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="background-color: black; border-radius: 10px;">
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Next</span>
                                             </button>
                                         </div>
                                     </td>
 
-                                    <td>
+                                    <td style="padding-left: 50px;">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label class="fw-bold text-black">Judul Foto :</label>
-                                                </div>
+                                            <div class="col-md-2">
+                                                <label class="fw-bold text-black">Judul Foto</label>
                                             </div>
-                                            <div class="col-md-9">
-                                                <div class="form-group">
-                                                    <p><?= esc($tb_foto['judul_foto'] ?? '', 'html'); ?></p>
-                                                </div>
+                                            <div class="col-auto">:</div>
+                                            <div class="col-md-8">
+                                                <p><?= esc($tb_foto['judul_foto'] ?? '', 'html'); ?></p>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label class="fw-bold text-black">Tanggal Upload Foto :</label>
-                                                </div>
+
+                                            <div class="col-md-2">
+                                                <label class="fw-bold text-black">Tanggal Upload Foto</label>
                                             </div>
-                                            <div class="col-md-9">
-                                                <div class="form-group">
-                                                    <p><?= esc($tb_foto['tanggal_foto'] ?? '', 'html'); ?></p>
-                                                </div>
+                                            <div class="col-auto">:</div>
+                                            <div class="col-md-8">
+                                                <p><?= formatTanggalIndo($tb_foto['tanggal_foto'] ?? '', 'html'); ?></p>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label class="fw-bold text-black">Deskripsi Foto :</label>
-                                                </div>
+
+                                            <div class="col-md-2">
+                                                <label class="fw-bold text-black">Deskripsi Foto</label>
                                             </div>
-                                            <div class="col-md-9">
-                                                <div class="form-group">
-                                                    <strong>
-                                                        <?= truncateText($tb_foto['deskripsi'] ?? 'Belum ada deskripsi lebih lanjut', 50); ?>
-                                                        <?php if (strlen(strip_tags($tb_foto['deskripsi'] ?? '')) > 50) : ?>
-                                                            <a href="#" class="read-more-link" data-text="<?= htmlspecialchars(strip_tags($tb_foto['deskripsi']), ENT_QUOTES, 'UTF-8') ?>">Read more..</a>
-                                                        <?php endif; ?>
-                                                    </strong>
-                                                </div>
+                                            <div class="col-auto">:</div>
+                                            <div class="col-md-8">
+                                                <strong>
+                                                    <?= truncateText($tb_foto['deskripsi'] ?? 'Belum ada deskripsi lebih lanjut', 50); ?>
+                                                    <?php if (strlen(strip_tags($tb_foto['deskripsi'] ?? '')) > 50) : ?>
+                                                        <a href="#" class="read-more-link" data-text="<?= htmlspecialchars(strip_tags($tb_foto['deskripsi']), ENT_QUOTES, 'UTF-8') ?>">Read more..</a>
+                                                    <?php endif; ?>
+                                                </strong>
                                             </div>
 
                                             <!-- script read more -->
@@ -223,6 +211,7 @@
                                     <tr>
                                         <td class="text-center"><?= esc($no++, 'html'); ?>.</td>
                                         <td><?= esc($tb_foto['judul_foto'] ?? '', 'html'); ?></td>
+
                                         <td class="text-center">
                                             <?php if (!empty($tb_foto['file_foto'])) : ?>
                                                 <button type="button" class="btn btn-info btn-sm view" data-bs-toggle="modal" data-bs-target="#exampleModal<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>">
@@ -234,19 +223,32 @@
                                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-body">
-                                                                <div id="carouselExampleControls<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>" class="carousel slide" data-bs-ride="carousel">
+                                                                <div id="carouselExampleIndicators<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>" class="carousel slide" data-bs-ride="carousel">
+                                                                    <!-- Carousel Indicators -->
+                                                                    <div class="carousel-indicators">
+                                                                        <?php
+                                                                        $files = explode(', ', $tb_foto['file_foto']);
+                                                                        foreach ($files as $index => $file) :
+                                                                        ?>
+                                                                            <button type="button" data-bs-target="#carouselExampleIndicators<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>" data-bs-slide-to="<?= $index; ?>" class="<?= $index === 0 ? 'active' : ''; ?>" aria-current="<?= $index === 0 ? 'true' : 'false'; ?>" aria-label="Slide <?= $index + 1 ?>"></button>
+                                                                        <?php endforeach; ?>
+                                                                    </div>
+
+                                                                    <!-- Carousel Items -->
                                                                     <div class="carousel-inner">
-                                                                        <?php foreach (explode(', ', $tb_foto['file_foto']) as $index => $file) : ?>
+                                                                        <?php foreach ($files as $index => $file) : ?>
                                                                             <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
                                                                                 <img src="<?= esc(base_url($file), 'attr'); ?>" class="d-block w-100" alt="..." style="max-width: 800px; max-height: 600px; margin: 0 auto;">
                                                                             </div>
                                                                         <?php endforeach; ?>
                                                                     </div>
-                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>" data-bs-slide="prev" style="background-color: black; border-radius: 10px;">
+
+                                                                    <!-- Carousel Controls -->
+                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>" data-bs-slide="prev">
                                                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                                         <span class="visually-hidden">Previous</span>
                                                                     </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>" data-bs-slide="next" style="background-color: black; border-radius: 10px;">
+                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<?= esc($tb_foto['id_foto'] ?? '', 'attr'); ?>" data-bs-slide="next">
                                                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                                         <span class="visually-hidden">Next</span>
                                                                     </button>
@@ -255,8 +257,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             <?php else : ?>
-                                                <a href="#" class="btn btn-info btn-sm view disabled" title="File tidak tersedia">
+                                                <a href="javascript: void(0);" class="btn btn-info btn-sm view disabled" title="Gambar tidak tersedia">
                                                     <i class="fas fa-eye"></i> View File
                                                 </a>
                                             <?php endif; ?>
@@ -272,10 +275,10 @@
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
                                 <a href="<?= esc(site_url('admin/galeri/edit/' . urlencode($tb_foto['slug'])), 'attr') ?>" class="btn btn-warning btn-md edit">
-                                    <i class="fas fa-pencil-alt"></i> Edit
+                                    <i class="fas fa-edit"></i> Ubah Data Foto
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_foto['id_foto'] ?>">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                    <i class="fas fa-trash-alt"></i> Hapus Foto
                                 </button>
                             </div>
                         </div>
@@ -317,7 +320,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "/admin/galeri/delete2", // Ubah sesuai dengan URL
+                        url: "<?= site_url('/admin/galeri/delete2'); ?>", // Ubah sesuai dengan URL
                         data: {
                             id_foto: id_foto,
                             _method: 'DELETE'
@@ -331,7 +334,7 @@
                                     icon: "success"
                                 }).then(() => {
                                     // Redirect ke halaman /admin/galeri setelah sukses menghapus
-                                    window.location.href = '/admin/galeri';
+                                    window.location.href = <?= site_url('/admin/galeri'); ?>
                                 });
                             } else if (response.status === 'error') {
                                 Swal.fire({

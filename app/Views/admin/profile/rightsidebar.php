@@ -32,15 +32,15 @@ foreach ($tb_jabatan as $jabatan) {
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <i class="fas fa-user"></i>
-                <a href="<?= site_url('profile'); ?>"><span>Profil</span></a>
+                <a href="<?= site_url('/profile'); ?>"><span>Profil</span></a>
             </li>
             <li class="list-group-item">
                 <i class="fas fa-lock"></i>
-                <a href="<?= site_url('profile/resetpassword'); ?>"><span>Ganti Kata Sandi</span></a>
+                <a href="<?= site_url('/profile/resetpassword'); ?>"><span>Ganti Kata Sandi</span></a>
             </li>
             <li class="list-group-item">
                 <i class="fas fa-sign-out-alt"></i>
-                <a href="<?= site_url('authentication/logout'); ?>"><span>Keluar</span></a>
+                <a href="<?= site_url('/authentication/logout'); ?>"><span>Keluar</span></a>
             </li>
         </ul>
     </div>

@@ -51,10 +51,10 @@
 
 
                                 <div class="modal-footer">
-                                    <a href="/admin/slider" class="btn btn-secondary btn-md ml-3">
-                                        <i class="fas fa-arrow-left"></i> Batal
+                                    <a href="<?= site_url('/admin/slider'); ?>" class="btn btn-secondary btn-md ml-3">
+                                        <i class="fas fa-arrow-left"></i> Batal Tambah
                                     </a>
-                                    <button type="submit" class="btn btn-primary" style="background-color: #28527A; color:white; margin-left: 10px;">Tambah</button>
+                                    <button type="submit" class="btn btn-primary" style="background-color: #28527A; color: white; margin-left: 10px;"><i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah Data Slider</button>
                                 </div>
 
                             </form>
