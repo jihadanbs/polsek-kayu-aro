@@ -4,7 +4,7 @@
 <style>
     .greeting-card {
         position: relative;
-        background-color: #28527a;
+        background-color: #686D76;
         border-radius: 15px;
         padding: 20px;
         color: #f4d160;
@@ -112,8 +112,8 @@
                     <!-- Desa -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -143,8 +143,8 @@
                     <!-- Babin -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -174,8 +174,8 @@
                     <!-- Laporan -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -205,8 +205,8 @@
                     <!-- Total Foto -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -236,8 +236,8 @@
                     <!-- Total Informasi -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -267,8 +267,8 @@
                     <!-- Total Pengaduan -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -299,8 +299,8 @@
                     <!-- Total Belum Dibalas dan Sudah Ditanggapi -->
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -329,8 +329,8 @@
 
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
-                        <div class="card card-h-100" style="background-color: #28527a;">
-                            <div style="background-color: #28527a;"></div>
+                        <div class="card card-h-100" style="background-color: #686D76;">
+                            <div style="background-color: #686D76;"></div>
                             <ul class="bg-bubbles">
                                 <li></li>
                                 <li></li>
@@ -380,15 +380,21 @@
             updateTotal();
 
             function updateTotal() {
+                var id_user = "<?= $id_user ?>"; // Mendapatkan ID pengguna dari PHP
+                getTotalFeedback("/admin/desa/totalData/" + id_user, function(responsePemohon) {
+                    // Update nilai total pada elemen dengan id "totalCounter"
+                    var total = parseInt(responsePemohon.total);
+                    $("#totalDesaCounter").attr("data-target", total);
+                    $("#totalDesaCounter").text(total);
+                });
+            }
+
+            function getTotalFeedback(url, callback) {
                 $.ajax({
-                    url: "<?= site_url('admin/desa/totalData'); ?>",
+                    url: url, // URL untuk total Desa
                     type: "GET",
-                    success: function(responseInformasi) {
-                        // Hitung total gabungan
-                        var total = parseInt(responseInformasi.total);
-                        // Update nilai total pada elemen dengan id "totalDesaCounter"
-                        $("#totalDesaCounter").attr("data-target", total);
-                        $("#totalDesaCounter").text(total);
+                    success: function(response) {
+                        callback(response);
                     },
                     error: function(xhr, status, error) {
                         console.error("Error:", error);
@@ -404,7 +410,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/babin/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/babin/totalData/" + id_user, function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalBabinCounter").attr("data-target", total);
@@ -433,7 +440,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/laporan/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/laporan/totalData/" + id_user, function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalLaporanCounter").attr("data-target", total);
@@ -462,7 +470,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/galeri/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/galeri/totalData/" + id_user, function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalFotoCounter").attr("data-target", total);
@@ -491,7 +500,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/informasi/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/informasi/totalData/" + id_user, function(responsePemohon) {
                     // Update nilai total pada elemen dengan id "totalCounter"
                     var total = parseInt(responsePemohon.total);
                     $("#totalInformasiCounter").attr("data-target", total);

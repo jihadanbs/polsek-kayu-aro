@@ -40,9 +40,9 @@
     }
 
     .pagination a.active {
-        background-color: #28527A;
+        background-color: #dc3545;
         color: white;
-        border: 1px solid #28527A;
+        border: 1px solid #dc3545;
     }
 
     .pagination a:hover:not(.active) {
@@ -937,7 +937,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/desa/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/desa/totalData/" + id_user, function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalDesaCounter").attr("data-purecounter-end", total);
                     $("#totalDesaCounter").text(total);
@@ -968,7 +969,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/laporan/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/laporan/totalData/" + id_user, function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalLaporanCounter").attr("data-purecounter-end", total);
                     $("#totalLaporanCounter").text(total);
@@ -999,7 +1001,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/pengaduan/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/babin/totalData/" + id_user, function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalFeedbackCounter").attr("data-purecounter-end", total);
                     $("#totalFeedbackCounter").text(total);
@@ -1030,7 +1033,8 @@
             updateTotal();
 
             function updateTotal() {
-                getTotalFeedback("/admin/babin/totalData", function(responsePemohon) {
+                var id_user = "<?= $id_user ?>";
+                getTotalFeedback("/admin/babin/totalData/" + id_user, function(responsePemohon) {
                     var total = parseInt(responsePemohon.total);
                     $("#totalBabinCounter").attr("data-purecounter-end", total);
                     $("#totalBabinCounter").text(total);

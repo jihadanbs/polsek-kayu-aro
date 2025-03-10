@@ -10,14 +10,17 @@ class KategoriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
-        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser();
+        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser($id_user);
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
@@ -52,6 +55,7 @@ class KategoriController extends BaseController
         if ($this->request->isAJAX()) {
             // Ambil data dari request AJAX
             $nama_kategori = $this->request->getPost('nama_kategori');
+            $id_user = session()->get('id_user');
 
             // Validasi data
             if (empty($nama_kategori)) {
@@ -59,7 +63,7 @@ class KategoriController extends BaseController
             }
 
             // Cek apakah nama_kategori sudah ada dalam database
-            $existing_data = $this->m_kategori_informasi->where('nama_kategori', $nama_kategori)->first();
+            $existing_data = $this->m_kategori_informasi->where('nama_kategori', $nama_kategori)->where('id_user', $id_user)->first();
 
             if ($existing_data) {
                 // Jika nama_kategori sudah ada dalam database, kirim pesan error
@@ -69,6 +73,7 @@ class KategoriController extends BaseController
             // Simpan data ke dalam database dengan id_user
             $this->m_kategori_informasi->save([
                 'nama_kategori' => $nama_kategori,
+                'id_user' => $id_user
             ]);
 
             // Berikan respons jika berhasil
@@ -90,12 +95,13 @@ class KategoriController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
+        $id_user = session()->get('id_user');
         $id_kategori_informasi = $this->request->getPost('id_kategori_informasi');
 
         // Cek apakah kategori informasi tersebut milik user yang sedang login
         $kategori_informasi = $this->m_kategori_informasi->find($id_kategori_informasi);
 
-        if (!$kategori_informasi) {
+        if (!$kategori_informasi || $kategori_informasi['id_user'] != $id_user) {
             return $this->response->setJSON(['error' => 'Anda tidak memiliki akses untuk menghapus data ini atau data tidak ditemukan.']);
         }
 
@@ -117,6 +123,7 @@ class KategoriController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
+        $id_user = session()->get('id_user');
         $dataToSave = $this->request->getPost('dataToSave');
 
         // Looping untuk validasi dan penyimpanan data
@@ -128,7 +135,7 @@ class KategoriController extends BaseController
             $kategori_informasi = $this->m_kategori_informasi->find($id_kategori_informasi);
 
             // Cek apakah kategori informasi tersebut milik user yang sedang login
-            if (!$kategori_informasi) {
+            if (!$kategori_informasi || $kategori_informasi['id_user'] != $id_user) {
                 return $this->response->setJSON(['success' => false, 'message' => 'Anda tidak memiliki akses untuk mengubah data ini atau data tidak ditemukan.']);
             }
 

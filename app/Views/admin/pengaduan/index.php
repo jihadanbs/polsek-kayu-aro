@@ -73,12 +73,6 @@
                                 ?>
                                 <!-- END TRUNCATE TEXT -->
 
-                                <!-- <div class="col-md-3 mb-3">
-                                    <a href="/admin/feedback/tambah/" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
-                                        <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
-                                    </a>
-                                </div> -->
-
                                 <thead>
                                     <tr class="highlight text-center" style="background-color: #28527A; color: white;">
                                         <th>Nomor</th>
@@ -97,7 +91,24 @@
                                         <tr>
                                             <td data-field="id_pengaduan" style="width: 10px" scope="row"><?= $i++; ?></td>
                                             <td><?= truncateText($row->nama, 70); ?></td>
-                                            <td><?= $row->no_telepon; ?></td>
+                                            <td><?php
+                                                // Ambil nomor telepon dari database
+                                                $no_telepon = $row->no_telepon;
+
+                                                // Konversi nomor telepon ke format internasional
+                                                if (substr($no_telepon, 0, 1) == '0') {
+                                                    $no_telepon_wa = '+62' . substr($no_telepon, 1);
+                                                } else {
+                                                    $no_telepon_wa = $no_telepon;
+                                                }
+
+                                                // Buat link WhatsApp
+                                                $link_wa = "https://wa.me/{$no_telepon_wa}";
+                                                ?>
+                                                <a href="<?= esc($link_wa, 'attr'); ?>" target="_blank" class="text-success">
+                                                    <?= esc($no_telepon); ?>
+                                                </a>
+                                            </td>
                                             <td><?= $row->email; ?></td>
                                             <td><?= truncateText($row->subjek, 70); ?></td>
                                             <td>

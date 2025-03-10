@@ -1,6 +1,6 @@
 <div class="col-xxl-9 col-lg-8 col-md-7">
     <div class="auth-bg pt-md-5 p-4 d-flex">
-        <div class="bg-overlay bg-primary"></div>
+        <div class="bg-overlay" style="background-color: #dc3545;"></div>
         <ul class="bg-bubbles">
             <li></li>
             <li></li>

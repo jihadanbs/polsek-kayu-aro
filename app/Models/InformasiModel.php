@@ -18,11 +18,12 @@ class InformasiModel extends Model
         return $this->where('id_user', $id_user)->orderBy('id_informasi', 'DESC')->findAll();
     }
 
-    public function getAllDataByUser()
+    public function getAllDataByUser($id_user)
     {
         return $this->db->table('tb_informasi_edukasi')
             ->select('tb_informasi_edukasi.*, GROUP_CONCAT(tb_kategori_informasi.nama_kategori SEPARATOR ", ") as nama_kategori')
             ->join('tb_kategori_informasi', 'tb_informasi_edukasi.id_kategori_informasi = tb_kategori_informasi.id_kategori_informasi')
+            ->where('tb_informasi_edukasi.id_user', $id_user)
             ->groupBy('tb_informasi_edukasi.id_informasi')
             ->orderBy('tb_informasi_edukasi.id_informasi', 'DESC')
             ->get()
@@ -125,9 +126,9 @@ class InformasiModel extends Model
         return $this->where('id_informasi', $id_informasi)->delete();
     }
 
-    public function getTotalInformasi()
+    public function getTotalInformasi($id_user)
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }
@@ -143,10 +144,11 @@ class InformasiModel extends Model
         return $query->getResult();
     }
 
-    public function getRecentPosts()
+    public function getRecentPosts($id_user)
     {
         $builder = $this->db->table('tb_informasi_edukasi');
         $builder->select('tb_informasi_edukasi.judul, tb_informasi_edukasi.slug, tb_informasi_edukasi.tanggal_diterbitkan, tb_informasi_edukasi.gambar');
+        $builder->where('tb_informasi_edukasi.id_user', $id_user);
         $builder->orderBy('tb_informasi_edukasi.tanggal_diterbitkan', 'DESC');
         $builder->limit(5);
         $query = $builder->get();

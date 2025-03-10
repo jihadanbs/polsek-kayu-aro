@@ -33,7 +33,7 @@
                     <li><a href="/#galeri">Galeri</a></li>
                     <li><a href="/#informasi-edukasi">Informasi-Edukasi</a></li>
                     <li><a href="/#pengaduan">Pengaduan</a></li>
-                    <li><a href="cek-pengaduan">Cek Pengaduan</a></li>
+                    <li><a href="/cek-pengaduan">Cek Pengaduan</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

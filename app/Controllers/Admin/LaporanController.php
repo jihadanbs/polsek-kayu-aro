@@ -10,20 +10,24 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
+
+        $tb_laporan_babin = $this->m_laporan->getAllDataByUser($id_user);
+        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_laporan_babin = $this->m_laporan->getAllDataByUser();
-        $tb_babin = $this->m_babin->getBabinByUserId();
 
         $data = [
             'title' => 'Admin | Halaman Laporan',
@@ -43,20 +47,24 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
+
+        $tb_laporan_babin = $this->m_laporan->getAllDataByUser($id_user);
+        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_laporan_babin = $this->m_laporan->getAllDataByUser();
-        $tb_babin = $this->m_babin->getBabinByUserId();
 
         $data = [
             'title' => 'Admin | Halaman Tambah Laporan',
@@ -85,7 +93,7 @@ class LaporanController extends BaseController
         }
 
         //validasi input 
-        if (!$this->validate([
+        $rules = [
             'id_babin' => [
                 'rules' => 'required',
                 'errors' => [
@@ -126,16 +134,30 @@ class LaporanController extends BaseController
                     'required' => 'Kolom Hasil Kegiatan Tidak Boleh Kosong !',
                 ]
             ],
-        ])) {
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->back()->withInput();
+            'file_foto' => [
+                'rules' => 'uploaded[file_foto]|max_size[file_foto,2048]|is_image[file_foto]',
+                'errors' => [
+                    'uploaded' => 'Foto Laporan Wajib Diunggah !',
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
+
+        $id_user = session()->get('id_user');
 
         // Upload gambar
         $uploadFotoKegiatan = uploadMultiple('file_foto', 'dokumen/laporan_foto_kegiatan/');
 
-
         $this->m_laporan->save([
+            'id_user' => $id_user,
             'id_babin' => $this->request->getPost('id_babin'),
             'judul_laporan' => $this->request->getPost('judul_laporan'),
             'tanggal_laporan' => $this->request->getPost('tanggal_laporan'),
@@ -173,12 +195,18 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
+        // Pastikan hanya admin yang dapat mengakses halaman ini
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
+
+        // Ambil data user
+        $id_user = session()->get('id_user');
+
+        $tb_laporan_babin = $this->m_laporan->getLaporanById($id_laporan_babin);
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
@@ -186,10 +214,8 @@ class LaporanController extends BaseController
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
-        $tb_laporan_babin = $this->m_laporan->getLaporanById();
-
         // Jika data foto tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_laporan_babin) {
+        if (!$tb_laporan_babin || $tb_laporan_babin['id_user'] != $id_user) {
             return redirect()->back()->with('gagal', 'Data Laporan Tidak Ditemukan dan Anda Tidak Memiliki Akses Laporan Tersebut !');
         }
 
@@ -211,12 +237,16 @@ class LaporanController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
+        // Pastikan hanya admin yang dapat mengakses halaman ini
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
+
+        // Ambil data user
+        $id_user = session()->get('id_user');
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
@@ -226,13 +256,12 @@ class LaporanController extends BaseController
 
         // Ambil data laporan berdasarkan id_laporan
         $tb_laporan_babin = $this->m_laporan->getLaporanById($id_laporan_babin);
+        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
 
         // Jika data laporan tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_laporan_babin) {
+        if (!$tb_laporan_babin || $tb_laporan_babin['id_user'] != $id_user) {
             return redirect()->back()->with('gagal', 'Data laporan Tidak Ditemukan dan Anda Tidak Memiliki Akses laporan Tersebut &#128540');
         }
-
-        $tb_babin = $this->m_babin->getBabinByUserId();
 
         $data = [
             'title' => 'Admin | Halaman Ubah Data Laporan',
@@ -261,7 +290,7 @@ class LaporanController extends BaseController
         }
 
         // Validasi input
-        if (!$this->validate([
+        $rules = [
             'id_babin' => [
                 'rules' => 'required',
                 'errors' => [
@@ -302,10 +331,20 @@ class LaporanController extends BaseController
                     'required' => 'Kolom Hasil Kegiatan Tidak Boleh Kosong !',
                 ]
             ],
-        ])) {
-            // Jika terjadi kesalahan validasi, kembalikan dengan pesan validasi
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->back()->withInput();
+            'file_foto' => [
+                'rules' => 'max_size[file_foto,2048]|is_image[file_foto]',
+                'errors' => [
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
         // Panggil helper updateFile untuk multiple files
@@ -314,7 +353,7 @@ class LaporanController extends BaseController
         // Jika ada file yang diunggah, simpan data file yang diunggah ke tb_file_foto dan relasinya ke tb_galeri
         if (!empty($uploadedFiles)) {
             // Hapus file lama jika ada file baru yang diunggah
-            $oldFileNames = explode(', ', $this->request->getPost('old_file_foto'));
+            $oldFileNames = explode(', ', $this->request->getVar('old_file_foto'));
             foreach ($oldFileNames as $oldFileName) {
                 if (file_exists(ROOTPATH . 'public/' . $oldFileName)) {
                     unlink(ROOTPATH . 'public/' . $oldFileName);
@@ -342,11 +381,14 @@ class LaporanController extends BaseController
             }
         } else {
             // Jika tidak ada file baru yang diunggah, gunakan file lama
-            $uploadedFiles = explode(', ', $this->request->getPost('old_file_foto'));
+            $uploadedFiles = explode(', ', $this->request->getVar('old_file_foto'));
         }
+
+        $id_user = session()->get('id_user');
 
         // Simpan data ke dalam database
         $this->m_laporan->update($id_laporan_babin, [
+            'id_user' => $id_user,
             'id_babin' => $this->request->getPost('id_babin'),
             'judul_laporan' => $this->request->getPost('judul_laporan'),
             'tanggal_laporan' => $this->request->getPost('tanggal_laporan'),
@@ -493,9 +535,9 @@ class LaporanController extends BaseController
         }
     }
 
-    public function totalData()
+    public function totalData($id_user)
     {
-        $totalData = $this->m_laporan->getTotalLaporan();
+        $totalData = $this->m_laporan->getTotalLaporan($id_user);
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }

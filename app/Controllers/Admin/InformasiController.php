@@ -10,11 +10,14 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
         //WAJIB//
@@ -23,8 +26,8 @@ class InformasiController extends BaseController
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
-        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser();
-        $tb_kategori_informasi = $this->m_kategori_informasi->getAllData();
+        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
+        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser($id_user);
 
         $data = [
             'title' => 'Admin | Halaman Informasi Edukasi',
@@ -44,11 +47,14 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
         //WAJIB//
@@ -57,8 +63,8 @@ class InformasiController extends BaseController
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
-        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser();
-        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser();
+        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
+        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser($id_user);
 
         $data = [
             'title' => 'Admin | Halaman Tambah Informasi-Edukasi',
@@ -87,7 +93,7 @@ class InformasiController extends BaseController
         }
 
         //validasi input 
-        if (!$this->validate([
+        $rules = [
             'id_kategori_informasi' => [
                 'rules' => 'required',
                 'errors' => [
@@ -105,7 +111,7 @@ class InformasiController extends BaseController
             'konten' => [
                 'rules' => 'required|trim|min_length[5]',
                 'errors' => [
-                    'required' => 'Kolom Isi Konten Tidak Boleh Kosong',
+                    'required' => 'Kolom Isi Konten Tidak Boleh Kosong !',
                     'min_length' => 'Isi Konten tidak boleh kurang dari 5 karakter !',
                 ]
             ],
@@ -121,12 +127,35 @@ class InformasiController extends BaseController
                     'required' => 'Silahkan Masukkan Nama Si Penulis Konten !'
                 ]
             ],
-        ])) {
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->back()->withInput();
+            'profile_penulis' => [
+                'rules' => 'uploaded[profile_penulis]|max_size[profile_penulis,2048]|is_image[profile_penulis]',
+                'errors' => [
+                    'uploaded' => 'Foto Profile Penulis Informasi Wajib Diunggah !',
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+            'gambar' => [
+                'rules' => 'uploaded[gambar]|max_size[gambar,2048]|is_image[gambar]',
+                'errors' => [
+                    'uploaded' => 'Gambar Informasi Wajib Diunggah !',
+                    'max_size' => 'Ukuran Gambar Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
+        $id_user = session()->get('id_user');
+
         $this->m_informasi->save([
+            'id_user' => $id_user,
             'id_kategori_informasi' => $this->request->getPost('id_kategori_informasi'),
             'judul' => $this->request->getPost('judul'),
             'konten' => $this->request->getPost('konten'),
@@ -248,15 +277,20 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+            return redirect()->to('authentication/login');
         }
 
-        // Pastikan data desa milik user yang login
-        $tb_informasi_edukasi = $this->m_informasi->find($id_informasi);
+        // Ambil id_user dari session
+        $id_user = session()->get('id_user');
+
+        // Pastikan data informasi milik user yang login
+        $tb_informasi_edukasi = $this->m_informasi->where('id_user', $id_user)->find($id_informasi);
+        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser($id_user);
+
         if (!$tb_informasi_edukasi) {
             return redirect()->back()->with('gagal', 'Data informasi tidak ditemukan atau Anda tidak memiliki akses');
         }
@@ -266,7 +300,6 @@ class InformasiController extends BaseController
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_kategori_informasi = $this->m_kategori_informasi->getAllDataByUser();
 
         $data = [
             'title' => 'Admin | Halaman Edit Informasi-Edukasi',
@@ -294,7 +327,7 @@ class InformasiController extends BaseController
         }
 
         //validasi input 
-        if (!$this->validate([
+        $rules = [
             'id_kategori_informasi' => [
                 'rules' => 'required',
                 'errors' => [
@@ -327,16 +360,37 @@ class InformasiController extends BaseController
                     'required' => 'Silahkan Masukkan Nama Si Penulis Konten !'
                 ]
             ],
-        ])) {
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->back()->withInput();
+            'profile_penulis' => [
+                'rules' => 'max_size[profile_penulis,2048]|is_image[profile_penulis]',
+                'errors' => [
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+            'gambar' => [
+                'rules' => 'max_size[gambar,2048]|is_image[gambar]',
+                'errors' => [
+                    'max_size' => 'Ukuran Gambar Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
         // Handle file upload
         $oldFileName = $this->request->getPost('current_gambar'); // Nama file lama dari input hidden
         $oldFileProfile = $this->request->getPost('current_profile_penulis'); // Nama file lama dari input hidden
 
+        $id_user = session()->get('id_user');
+
         $this->m_informasi->update($id_informasi, [
+            'id_user' => $id_user,
             'judul' => $this->request->getPost('judul'),
             'konten' => $this->request->getPost('konten'),
             'penulis' => $this->request->getPost('penulis'),
@@ -357,18 +411,23 @@ class InformasiController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
+        // Cek apakah user adalah admin
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+            return redirect()->to('authentication/login');
         }
+
+        // Ambil id_user dari session
+        $id_user_session = session()->get('id_user');
 
         // Ambil informasi berdasarkan id_informasi
         $informasi = $this->m_informasi->getInformasi($id_informasi);
+        $tb_kategori_informasi = $this->m_kategori_informasi->getAllData();
 
         // Cek apakah informasi ada dan id_user yang login sama dengan id_user dari informasi
-        if (!$informasi) {
+        if (!$informasi || $informasi->id_user != $id_user_session) {
             return redirect()->back()->with('gagal', 'Data informasi tidak ditemukan atau Anda tidak memiliki akses');
         }
 
@@ -377,7 +436,6 @@ class InformasiController extends BaseController
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_kategori_informasi = $this->m_kategori_informasi->getAllData();
 
         $data = [
             'title' => 'Admin | Halaman Cek Data',
@@ -394,9 +452,9 @@ class InformasiController extends BaseController
         return view('admin/informasi/cek_data', $data);
     }
 
-    public function totalData()
+    public function totalData($id_user)
     {
-        $totalData = $this->m_informasi->getTotalInformasi();
+        $totalData = $this->m_informasi->getTotalInformasi($id_user);
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }

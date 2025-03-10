@@ -10,16 +10,19 @@ class BabinController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
         // Ambil data babin dan desa berdasarkan id_user
-        $tb_babin = $this->m_babin->getBabinByUserId();
-        $tb_desa = $this->m_desa->getAllData();
+        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
@@ -44,16 +47,19 @@ class BabinController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
 
         // Ambil data babin dan desa berdasarkan id_user
-        $tb_babin = $this->m_babin->getBabinByUserId();
-        $tb_desa = $this->m_desa->getAllData();
+        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
@@ -87,10 +93,10 @@ class BabinController extends BaseController
         }
 
         // Ambil data dari request
-        $id_desa = $this->request->getPost('id_desa'); // Mengambil sebagai array
+        $id_desa = $this->request->getPost('id_desa');
 
         // Validasi input
-        if (!$this->validate([
+        $rules = [
             'id_desa' => [
                 'rules' => 'required',
                 'errors' => [
@@ -147,13 +153,28 @@ class BabinController extends BaseController
                     'required' => 'Silahkan masukkan tanggal mulai tugas !',
                 ]
             ],
-        ])) {
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->to('/admin/babin/tambah/')->withInput();
+            'foto' => [
+                'rules' => 'uploaded[foto]|max_size[foto,2048]|is_image[foto]',
+                'errors' => [
+                    'uploaded' => 'Foto Wajib Diunggah !',
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
+
+        $id_user = session()->get('id_user');
 
         // Simpan data ke tabel tb_babin
         $this->m_babin->save([
+            'id_user' => $id_user,
             'nama_lengkap' => $this->request->getPost('nama_lengkap'),
             'nrp' => $this->request->getPost('nrp'),
             'jabatan' => $this->request->getPost('jabatan'),
@@ -173,6 +194,7 @@ class BabinController extends BaseController
             $this->db->table('tb_babin_desa')->insert([
                 'id_babin' => $id_babin,
                 'id_desa' => $desa,
+                'id_user' => $id_user
             ]);
         }
 
@@ -185,23 +207,26 @@ class BabinController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
+        // Pastikan hanya admin yang dapat mengakses halaman ini
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
+
+        $id_user = session()->get('id_user');
 
         // Ambil data babin berdasarkan id_babin
         $tb_babin = $this->m_babin->getBabinById($id_babin);
 
         // Jika data babin tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_babin) {
+        if (!$tb_babin || $tb_babin['id_user'] != $id_user) {
             return redirect()->back()->with('gagal', 'Data Bhabin tidak ditemukan atau Anda tidak memiliki akses');
         }
 
         // Ambil data desa dan user
-        $tb_desa = $this->m_desa->getAllData(); // Filter berdasarkan id_user
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user); // Filter berdasarkan id_user
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
@@ -233,16 +258,18 @@ class BabinController extends BaseController
             return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
         }
 
+        $id_user = session()->get('id_user');
+
         // Ambil data babin berdasarkan id_babin
         $tb_babin = $this->m_babin->getBabinById($id_babin);
 
         // Jika data babin tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_babin) {
+        if (!$tb_babin || $tb_babin['id_user'] != $id_user) {
             return redirect()->back()->with('gagal', 'Data Bhabin tidak ditemukan atau Anda tidak memiliki akses');
         }
 
         // Ambil data desa dan user
-        $tb_desa = $this->m_desa->getAllData(); // Filter berdasarkan id_user
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user); // Filter berdasarkan id_user
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
@@ -268,7 +295,6 @@ class BabinController extends BaseController
         return view('admin/babin/edit', $data);
     }
 
-
     public function update($id_babin)
     {
         // Cek session
@@ -283,7 +309,7 @@ class BabinController extends BaseController
         // Ambil data dari request
         $id_desa = $this->request->getPost('id_desa');
         // Validasi input
-        if (!$this->validate([
+        $rules = [
             'id_desa' => [
                 'rules' => 'required',
                 'errors' => [
@@ -340,16 +366,30 @@ class BabinController extends BaseController
                     'required' => 'Silahkan masukkan tanggal mulai tugas !',
                 ]
             ],
-        ])) {
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->to('/admin/babin/edit/' . $id_babin)->withInput();
+            'foto' => [
+                'rules' => 'max_size[foto,2048]|is_image[foto]',
+                'errors' => [
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
         // Handle file upload
-        $oldFileName = $this->request->getPost('current_foto'); // Nama file lama dari input hidden
+        $oldFileName = $this->request->getVar('current_foto'); // Nama file lama dari input hidden
+
+        $id_user = session()->get('id_user');
 
         // Update data di tb_babin
         $this->m_babin->update($id_babin, [
+            'id_user' => $id_user,
             'nama_lengkap' => $this->request->getPost('nama_lengkap'),
             'nrp' => $this->request->getPost('nrp'),
             'jabatan' => $this->request->getPost('jabatan'),
@@ -370,6 +410,7 @@ class BabinController extends BaseController
             $this->db->table('tb_babin_desa')->insert([
                 'id_babin' => $id_babin,
                 'id_desa' => $desa,
+                'id_user' => $id_user
             ]);
         }
 
@@ -430,9 +471,9 @@ class BabinController extends BaseController
         }
     }
 
-    public function totalData()
+    public function totalData($id_user)
     {
-        $totalData = $this->m_babin->getTotalBabin();
+        $totalData = $this->m_babin->getTotalBabin($id_user);
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }

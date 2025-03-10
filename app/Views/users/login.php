@@ -113,12 +113,12 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Login</button>
+                                            <button class="btn w-100 waves-effect waves-light" type="submit" style="background-color: #dc3545; color: #fff;">Login</button>
                                         </div>
                                     </form>
 
                                     <div class="mt-5 text-center">
-                                        <p class="text-muted mb-0">Belum Punya Akun ? <a href="<?= site_url('/authentication/registrasi'); ?>" class="text-primary fw-semibold"> Registrasi Sekarang </a> </p>
+                                        <p class="text-muted mb-0">Belum Punya Akun ? <a href="<?= site_url('/authentication/registrasi'); ?>" class="text-danger fw-semibold"> Registrasi Sekarang </a> </p>
                                     </div>
                                 </div>
                                 <div class="mt-4 mt-md-5 text-center">

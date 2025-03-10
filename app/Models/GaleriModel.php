@@ -13,12 +13,13 @@ class GaleriModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = false;
 
-    public function getFotoWithFile()
+    public function getFotoWithFile($id_user)
     {
         return $this->db->table('tb_foto')
             ->select('tb_foto.*, GROUP_CONCAT(tb_file_foto.file_foto SEPARATOR ", ") as file_foto')
             ->join('tb_galeri', 'tb_foto.id_foto = tb_galeri.id_foto')
             ->join('tb_file_foto', 'tb_galeri.id_file_foto = tb_file_foto.id_file_foto')
+            ->where('tb_foto.id_user', $id_user)
             ->groupBy('tb_foto.id_foto')
             ->orderBy('tb_foto.id_foto', 'DESC')
             ->get()
@@ -83,9 +84,9 @@ class GaleriModel extends Model
             ->delete();
     }
 
-    public function getTotalGaleri()
+    public function getTotalGaleri($id_user)
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }

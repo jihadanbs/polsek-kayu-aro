@@ -16,11 +16,11 @@ class TbBabin extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
-            // 'id_user' => [
-            //     'type' => 'INT',
-            //     'constraint' => 11,
-            //     'unsigned' => true,
-            // ],
+            'id_user' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+            ],
             'nama_lengkap' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -68,7 +68,7 @@ class TbBabin extends Migration
         ]);
 
         $this->forge->addKey('id_babin', TRUE);
-        // $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tb_babin');
     }
 

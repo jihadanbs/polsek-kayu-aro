@@ -125,6 +125,7 @@
                                     <tr class="highlight text-center" style="background-color: #28527A; color: white;">
                                         <th>Nomor</th>
                                         <th>Nama Lengkap</th>
+                                        <th>No Telepon</th>
                                         <th>NRP</th>
                                         <th>Jabatan</th>
                                         <th>Desa Yang Diampu</th>
@@ -137,7 +138,25 @@
                                     <?php foreach ($tb_babin as $row) : ?>
                                         <tr>
                                             <td data-field="id_babin" style="width: 10px" scope="row"><?= esc($i++, 'html'); ?></td>
-                                            <td><?= esc($row['nama_lengkap'], 'html'); ?></td>
+                                            <td><?= esc(truncateText($row['nama_lengkap'], 10), 'html'); ?></td>
+                                            <td><?php
+                                                // Ambil nomor telepon dari database
+                                                $no_telepon = $row['no_telepon'];
+
+                                                // Konversi nomor telepon ke format internasional
+                                                if (substr($no_telepon, 0, 1) == '0') {
+                                                    $no_telepon_wa = '+62' . substr($no_telepon, 1);
+                                                } else {
+                                                    $no_telepon_wa = $no_telepon;
+                                                }
+
+                                                // Buat link WhatsApp
+                                                $link_wa = "https://wa.me/{$no_telepon_wa}";
+                                                ?>
+                                                <a href="<?= esc($link_wa, 'attr'); ?>" target="_blank" class="text-success">
+                                                    <?= esc($no_telepon); ?>
+                                                </a>
+                                            </td>
                                             <td><?= esc($row['nrp'], 'html'); ?></td>
                                             <td><?= esc($row['jabatan'], 'html'); ?></td>
                                             <td><?= esc(truncateText($row['nama_desa'], 20), 'html'); ?></td>

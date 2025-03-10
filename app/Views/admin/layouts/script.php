@@ -14,7 +14,7 @@
     <!-- Responsive datatable examples -->
     <link href="<?= base_url('assets/admin/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') ?>" rel="stylesheet" type="text/css" />
     <!-- preloader css -->
-    <link rel="stylesheet" href="<?= base_url('assets/admin/css/preloader.min.css') ?>" type="text/css" />
+    <link rel="stylesheet" href="<?= base_url('assets/admin2/css/preloader.min.css') ?>" type="text/css" />
     <!-- SweetAlert -->
     <link href="<?= base_url('assets/admin/libs/sweetalert2/sweetalert2.min.css') ?>" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
@@ -23,7 +23,7 @@
     <!-- Icons Css -->
     <link href="<?= base_url('assets/admin/css/icons.min.css') ?>" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="<?= base_url('assets/admin/css/app.min.css') ?>" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/admin2/css/app.min.css') ?>" id="app-style" rel="stylesheet" type="text/css" />
     <!-- CKEditor 5 -->
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.0/ckeditor5.css" />
     <script src="https://cdn.ckeditor.com/ckeditor5/43.3.0/ckeditor5.umd.js"></script>

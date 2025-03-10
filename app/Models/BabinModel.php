@@ -24,12 +24,13 @@ class BabinModel extends Model
             ->getResultArray();
     }
 
-    public function getBabinByUserId()
+    public function getBabinByUserId($id_user)
     {
         return $this->db->table('tb_babin')
             ->select('tb_babin.*, GROUP_CONCAT(tb_desa.nama_desa SEPARATOR ", ") as nama_desa')
             ->join('tb_babin_desa', 'tb_babin.id_babin = tb_babin_desa.id_babin')
             ->join('tb_desa', 'tb_babin_desa.id_desa = tb_desa.id_desa')
+            ->where('tb_babin.id_user', $id_user)
             ->groupBy('tb_babin.id_babin')
             ->orderBy('tb_babin.id_babin', 'DESC')
             ->get()
@@ -120,9 +121,9 @@ class BabinModel extends Model
         return $this->where('id_babin', $id_babin)->delete();
     }
 
-    public function getTotalBabin()
+    public function getTotalBabin($id_user)
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }

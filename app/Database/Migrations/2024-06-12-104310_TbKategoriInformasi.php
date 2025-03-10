@@ -16,11 +16,11 @@ class TbKategoriInformasi extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
-            // 'id_user' => [
-            //     'type' => 'INT',
-            //     'constraint' => 11,
-            //     'unsigned' => true,
-            // ],
+            'id_user' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+            ],
             'nama_kategori' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -30,7 +30,7 @@ class TbKategoriInformasi extends Migration
         ]);
 
         $this->forge->addKey('id_kategori_informasi', TRUE);
-        // $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tb_kategori_informasi');
     }
 

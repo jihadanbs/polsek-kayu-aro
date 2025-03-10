@@ -16,11 +16,11 @@ class TbFoto extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
-            // 'id_user' => [
-            //     'type' => 'INT',
-            //     'constraint' => 11,
-            //     'unsigned' => true,
-            // ],
+            'id_user' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+            ],
             'judul_foto' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -41,7 +41,7 @@ class TbFoto extends Migration
         ]);
 
         $this->forge->addKey('id_foto', TRUE);
-        // $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tb_foto');
     }
 

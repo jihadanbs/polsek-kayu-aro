@@ -55,31 +55,68 @@
                                     <div class="col-md-6 mb-3 separator">
                                         <label for="judul" class="col-form-label">Judul Informasi<span style="color: red;">*</span></label>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : ''; ?>" id="judul" name="judul" placeholder="Masukkan Judul Informasi-Edukasi" style="background-color: white;" value="<?= esc(old('judul'), 'attr') ?>" required>
-                                            <small class="form-text text-muted">Cek Kembali Judul Anda</small>
+                                            <input type="text" class="form-control <?= session('errors.judul') ? 'is-invalid' : '' ?>" id="judul" name="judul" placeholder="Masukkan Judul Informasi-Edukasi" style="background-color: white;" value="<?= esc(old('judul'), 'attr') ?>" required>
+                                            <?php if (session('errors.judul')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.judul') ?>
+                                                </div>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_kategori_informasi" class="col-form-label">Nama Kategori Informasi<span style="color: red;">*</span></label><a href="<?= esc(site_url('/admin/kategori'), 'attr') ?>">
+                                            <i class="fas fa-plus" style="color: black; margin-left: 2px;"></i>
+                                        </a>
+                                        <select class="form-select custom-border <?= session('errors.id_kategori_informasi') ? 'is-invalid' : '' ?>" id="id_kategori_informasi" name="id_kategori_informasi" aria-label="Default select example" style="background-color: white;" required>
+                                            <option value="" selected disabled>~ Silahkan Pilih Nama Kategori Informasi ~</option>
+                                            <!-- Populasi opsi dropdown dengan data dari controller -->
+                                            <?php foreach ($tb_kategori_informasi as $value) : ?>
+                                                <option value="<?= esc($value['id_kategori_informasi'], 'attr') ?>" <?= old('id_kategori_informasi') == $value['id_kategori_informasi'] ? 'selected' : ''; ?>>
+                                                    <?= esc($value['nama_kategori'], 'html') ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <?php if (session('errors.id_kategori_informasi')) : ?>
                                             <div class="invalid-feedback">
-                                                <?= esc($validation->getError('judul'), 'html') ?>
+                                                <?= session('errors.id_kategori_informasi') ?>
                                             </div>
+                                        <?php endif ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3 separator">
+                                        <label for="penulis" class="col-form-label">Penulis<span style="color: red;">*</span></label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control <?= session('errors.penulis') ? 'is-invalid' : '' ?>" id="penulis" name="penulis" placeholder="Masukkan Penulis Konten" style="background-color: white;" value="<?= esc(old('penulis'), 'attr') ?>" required>
+                                            <?php if (session('errors.penulis')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.penulis') ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="tanggal_diterbitkan" class="col-form-label">Tanggal Diterbitkan<span style="color: red;">*</span></label>
-                                        <input type="date" class="form-control <?= ($validation->hasError('tanggal_diterbitkan')) ? 'is-invalid' : ''; ?>" name="tanggal_diterbitkan" id="tanggal_diterbitkan" style="background-color: white;" value="<?= esc(old('tanggal_diterbitkan'), 'attr') ?>" required>
-                                        <div class="invalid-feedback">
-                                            <?= esc($validation->getError('tanggal_diterbitkan'), 'html') ?>
-                                        </div>
+                                        <input type="date" class="form-control <?= session('errors.tanggal_diterbitkan') ? 'is-invalid' : '' ?>" name="tanggal_diterbitkan" id="tanggal_diterbitkan" style="background-color: white;" value="<?= esc(old('tanggal_diterbitkan'), 'attr') ?>" required>
+                                        <?php if (session('errors.tanggal_diterbitkan')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.tanggal_diterbitkan') ?>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="konten" class="col-form-label">Isi Konten<span style="color: red;">*</span></label>
-                                    <textarea class="form-control <?= ($validation->hasError('value')) ? 'is-invalid' : ''; ?>" name="konten" id="konten" required><?php echo esc(old('konten'), 'html'); ?></textarea>
-
-                                    <!-- Menambahkan div untuk menampilkan pesan validasi -->
-                                    <div class="invalid-feedback">
-                                        <?= esc($validation->getError('konten'), 'html') ?>
-                                    </div>
+                                    <textarea class="form-control <?= session('errors.konten') ? 'is-invalid' : '' ?>" name="konten" id="konten" required><?php echo esc(old('konten'), 'html'); ?></textarea>
+                                    <?php if (session('errors.konten')) : ?>
+                                        <div class="invalid-feedback">
+                                            <?= session('errors.konten') ?>
+                                        </div>
+                                    <?php endif ?>
                                     <script>
                                         document.addEventListener('DOMContentLoaded', function() {
                                             if (typeof initEditor === 'function') {
@@ -91,56 +128,26 @@
                                     </script>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6 mb-3 separator">
-                                        <label for="penulis" class="col-form-label">Penulis<span style="color: red;">*</span></label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control <?= ($validation->hasError('penulis')) ? 'is-invalid' : ''; ?>" id="penulis" name="penulis" placeholder="Masukkan Penulis Konten" style="background-color: white;" value="<?= esc(old('penulis'), 'attr') ?>" required>
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('penulis'), 'html') ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label for="id_kategori_informasi" class="col-form-label">Nama Kategori Informasi<span style="color: red;">*</span></label><a href="<?= esc(site_url('/admin/kategori'), 'attr') ?>">
-                                            <i class="fas fa-plus" style="color: black; margin-left: 2px;"></i>
-                                        </a>
-                                        <select class="form-select custom-border <?= ($validation->hasError('id_kategori_informasi')) ? 'is-invalid' : ''; ?>" id="id_kategori_informasi" name="id_kategori_informasi" aria-label="Default select example" style="background-color: white;" required>
-                                            <option value="" selected disabled>~ Silahkan Pilih Nama Kategori Informasi ~</option>
-                                            <!-- Populasi opsi dropdown dengan data dari controller -->
-                                            <?php foreach ($tb_kategori_informasi as $value) : ?>
-                                                <option value="<?= esc($value['id_kategori_informasi'], 'attr') ?>" <?= old('id_kategori_informasi') == $value['id_kategori_informasi'] ? 'selected' : ''; ?>>
-                                                    <?= esc($value['nama_kategori'], 'html') ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            <?= esc($validation->getError('id_kategori_informasi'), 'html') ?>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="mb-3">
                                     <label for="profile_penulis" class="col-form-label">Foto Profile Penulis<span style="color: red;">*</span></label>
-                                    <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('profile_penulis')) ? 'is-invalid' : ''; ?>" id="profile_penulis" name="profile_penulis" style="background-color: white;" <?= (old('profile_penulis')) ? 'disabled' : 'required'; ?> onchange="previewImageProfile(event)">
-                                    <small class="form-text text-muted">Pastikan Foto Profile Yang Diunggah Tidak Lebih Dari 5MB</small>
-                                    <br>
+                                    <input type="file" accept="image/*" class="form-control <?= session('errors.profile_penulis') ? 'is-invalid' : '' ?>" id="profile_penulis" name="profile_penulis" style="background-color: white;" <?= (old('profile_penulis')) ? 'disabled' : 'required'; ?> onchange="previewImageProfile(event)">
+                                    <?php if (session('errors.profile_penulis')) : ?>
+                                        <div class="invalid-feedback">
+                                            <?= session('errors.profile_penulis') ?>
+                                        </div>
+                                    <?php endif ?>
                                     <img id="previewProfile" src="#" alt="Pratinjau profile_penulis" style="display: none; max-width: 200px; max-height: 200px; margin-top: 10px;">
-                                    <div class="invalid-feedback">
-                                        <?= esc($validation->getError('profile_penulis'), 'html') ?>
-                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="gambar" class="col-form-label">Upload Gambar Thumbnail<span style="color: red;">*</span></label>
-                                    <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('gambar')) ? 'is-invalid' : ''; ?>" id="gambar" name="gambar" style="background-color: white;" <?= (old('gambar')) ? 'disabled' : 'required'; ?> onchange="previewImage(event)">
-                                    <small class="form-text text-muted">Pastikan Gambar Yang Diunggah Tidak Lebih Dari 5MB</small>
-                                    <br>
+                                    <input type="file" accept="image/*" class="form-control <?= session('errors.gambar') ? 'is-invalid' : '' ?>" id="gambar" name="gambar" style="background-color: white;" <?= (old('gambar')) ? 'disabled' : 'required'; ?> onchange="previewImage(event)">
+                                    <?php if (session('errors.gambar')) : ?>
+                                        <div class="invalid-feedback">
+                                            <?= session('errors.gambar') ?>
+                                        </div>
+                                    <?php endif ?>
                                     <img id="preview" src="#" alt="Pratinjau Gambar" style="display: none; max-width: 200px; max-height: 200px; margin-top: 10px;">
-                                    <div class="invalid-feedback">
-                                        <?= esc($validation->getError('gambar'), 'html') ?>
-                                    </div>
                                 </div>
 
                                 <div class="modal-footer">

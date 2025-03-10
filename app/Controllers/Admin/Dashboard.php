@@ -14,6 +14,11 @@ class Dashboard extends BaseController
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         // END WAJIB //
 
+        $id_user = session()->get('id_user');
+
+        $totalDataDesa = $this->m_desa->getTotalDesa($id_user);
+        $totalDataBabin = $this->m_babin->getTotalBabin($id_user);
+
         $data = [
             'title' => 'Admin | Dashboard',
             'validation' => session()->getFlashdata('validation') ?? \Config\Services::validation(),
@@ -22,6 +27,9 @@ class Dashboard extends BaseController
             'unread' => $unread,
             'unreadCount' => $unreadCount,
             // END WAJIB //
+            'totalDataDesa' => $totalDataDesa,
+            'totalDataBabin' => $totalDataBabin,
+            'id_user' => $id_user
         ];
 
         // Jika pengguna tidak login dan mencoba mengakses halaman admin dashboard, arahkan kembali dan beri pesan

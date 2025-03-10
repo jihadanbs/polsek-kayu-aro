@@ -10,20 +10,23 @@ class GaleriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login!');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini !');
         }
+
+        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-
-        $tb_foto = $this->m_galeri->getFotoWithFile();
 
         $data = [
             'title' => 'Admin | Halaman Galeri',
@@ -42,19 +45,22 @@ class GaleriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login!');
+        }
+        $id_user = session()->get('id_user');
+
+        // Pastikan hanya pengguna dengan id_user yang sesuai yang dapat mengakses halaman
+        if (session()->get('id_user') != $id_user) {
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini !');
         }
 
-        if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
-        }
+        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
         $unread = $this->m_pengaduan->getUnreadEntries();
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
-        $tb_foto = $this->m_galeri->getFotoWithFile();
 
         $data = [
             'title' => 'Admin | Halaman Tambah Galeri Foto',
@@ -82,7 +88,7 @@ class GaleriController extends BaseController
         }
 
         // Validasi input
-        if (!$this->validate([
+        $rules = [
             'judul_foto' => [
                 'rules' => 'required|trim|max_length[90]|min_length[5]',
                 'errors' => [
@@ -103,11 +109,22 @@ class GaleriController extends BaseController
                 'errors' => [
                     'required' => 'Kolom Tanggal Tidak Boleh Kosong !',
                 ]
-            ]
-        ])) {
-            // Jika terjadi kesalahan validasi, kembalikan dengan pesan validasi
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->to('/admin/galeri/tambah/' . $this->request->getPost('slug'))->withInput();
+            ],
+            'file_foto' => [
+                'rules' => 'uploaded[file_foto]|max_size[file_foto,2048]|is_image[file_foto]',
+                'errors' => [
+                    'uploaded' => 'Foto Galeri Wajib Diunggah !',
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
         // Panggil helper uploadFile untuk multiple files
@@ -119,8 +136,11 @@ class GaleriController extends BaseController
             return redirect()->back()->withInput();
         }
 
+        $id_user = session()->get('id_user');
+
         // Simpan data foto
         $this->m_galeri->save([
+            'id_user' => $id_user,
             'judul_foto' => $this->request->getPost('judul_foto'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'tanggal_foto' => $this->request->getPost('tanggal_foto'),
@@ -155,12 +175,18 @@ class GaleriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
+        // Pastikan hanya admin yang dapat mengakses halaman ini
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
+
+        // Ambil data user
+        $id_user = session()->get('id_user');
+
+        $tb_foto = $this->m_galeri->getFotoById($id_foto);
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
@@ -168,11 +194,8 @@ class GaleriController extends BaseController
         $unreadCount = $this->m_pengaduan->countUnreadEntries();
         //END WAJIB//
 
-        // Ambil data foto berdasarkan id_foto
-        $tb_foto = $this->m_galeri->getFotoById($id_foto);
-
         // Jika data foto tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_foto) {
+        if (!$tb_foto || $tb_foto['id_user'] != $id_user) {
             return redirect()->back()->with('gagal', 'Data Foto Tidak Ditemukan dan Anda Tidak Memiliki Akses Foto Tersebut !');
         }
 
@@ -194,12 +217,16 @@ class GaleriController extends BaseController
     {
         // Cek session
         if (!$this->session->has('islogin')) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda belum login');
         }
 
+        // Pastikan hanya admin yang dapat mengakses halaman ini
         if (session()->get('id_jabatan') != 1) {
-            return redirect()->to('authentication/login')->with('gagal', 'Anda Tidak Memiliki Akses !');
+            return redirect()->to('authentication/login')->with('gagal', 'Anda tidak memiliki akses ke halaman ini');
         }
+
+        // Ambil data user
+        $id_user = session()->get('id_user');
 
         //WAJIB//
         $tb_user = $this->m_user->getAll();
@@ -211,7 +238,7 @@ class GaleriController extends BaseController
         $tb_foto = $this->m_galeri->getFotoBySlug($slug);
 
         // Jika data foto tidak ditemukan, atau id_user tidak sesuai, redirect ke halaman sebelumnya
-        if (!$tb_foto) {
+        if (!$tb_foto || $tb_foto['id_user'] != $id_user) {
             return redirect()->back()->with('gagal', 'Data Foto Tidak Ditemukan dan Anda Tidak Memiliki Akses Foto Tersebut !');
         }
 
@@ -241,7 +268,7 @@ class GaleriController extends BaseController
         }
 
         // Validasi input
-        if (!$this->validate([
+        $rules = [
             'judul_foto' => [
                 'rules' => 'required|trim|max_length[90]|min_length[5]',
                 'errors' => [
@@ -262,11 +289,21 @@ class GaleriController extends BaseController
                 'errors' => [
                     'required' => 'Kolom Tanggal Tidak Boleh Kosong !',
                 ]
-            ]
-        ])) {
-            // Jika terjadi kesalahan validasi, kembalikan dengan pesan validasi
-            session()->setFlashdata('validation', \Config\Services::validation());
-            return redirect()->back()->withInput();
+            ],
+            'file_foto' => [
+                'rules' => 'max_size[file_foto,2048]|is_image[file_foto]',
+                'errors' => [
+                    'max_size' => 'Ukuran Foto Tidak Boleh Lebih Dari 2MB !',
+                    'is_image' => 'File Harus Berupa Gambar (JPEG, PNG, dll) !',
+                ],
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            // Kirim kembali ke form dengan error validasi
+            return redirect()->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
 
         // Panggil helper updateFile untuk multiple files
@@ -275,7 +312,7 @@ class GaleriController extends BaseController
         // Jika ada file yang diunggah, simpan data file yang diunggah ke tb_file_foto dan relasinya ke tb_galeri
         if (!empty($uploadedFiles)) {
             // Hapus file lama jika ada file baru yang diunggah
-            $oldFileNames = explode(', ', $this->request->getPost('old_file_foto'));
+            $oldFileNames = explode(', ', $this->request->getVar('old_file_foto'));
             foreach ($oldFileNames as $oldFileName) {
                 if (file_exists(ROOTPATH . 'public/' . $oldFileName)) {
                     unlink(ROOTPATH . 'public/' . $oldFileName);
@@ -303,11 +340,14 @@ class GaleriController extends BaseController
             }
         } else {
             // Jika tidak ada file baru yang diunggah, gunakan file lama
-            $uploadedFiles = explode(', ', $this->request->getPost('old_file_foto'));
+            $uploadedFiles = explode(', ', $this->request->getVar('old_file_foto'));
         }
+
+        $id_user = session()->get('id_user');
 
         // Simpan data ke dalam database
         $this->m_galeri->update($id_foto, [
+            'id_user' => $id_user,
             'judul_foto' => $this->request->getPost('judul_foto'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'tanggal_foto' => $this->request->getPost('tanggal_foto'),
@@ -451,9 +491,9 @@ class GaleriController extends BaseController
         }
     }
 
-    public function totalData()
+    public function totalData($id_user)
     {
-        $totalData = $this->m_galeri->getTotalGaleri();
+        $totalData = $this->m_galeri->getTotalGaleri($id_user);
         // Keluarkan total data sebagai JSON response
         return $this->response->setJSON(['total' => $totalData]);
     }

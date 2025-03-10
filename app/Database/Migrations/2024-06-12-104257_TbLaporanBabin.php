@@ -16,11 +16,11 @@ class TbLaporanBabin extends Migration
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ],
-            // 'id_user' => [
-            //     'type' => 'INT',
-            //     'constraint' => 11,
-            //     'unsigned' => TRUE
-            // ],
+            'id_user' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE
+            ],
             'id_babin' => [
                 'type' => 'INT',
                 'constraint' => 11,
@@ -58,7 +58,7 @@ class TbLaporanBabin extends Migration
         $this->forge->addKey('id_laporan_babin', TRUE);
         // Menambahkan foreign key
         $this->forge->addForeignKey('id_babin', 'tb_babin', 'id_babin', 'CASCADE', 'CASCADE');
-        // $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_user', 'tb_user', 'id_user', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tb_laporan_babin');
     }
 

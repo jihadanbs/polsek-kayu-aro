@@ -133,32 +133,50 @@
                                     </td>
                                     <th width="170px">Nama Lengkap</th>
                                     <th width="30px" class="text-center">:</th>
-                                    <td><strong><?= $tb_pengaduan['nama'] ?? '' ?></strong> </td>
+                                    <td><?= $tb_pengaduan['nama'] ?? '' ?></td>
                                 </tr>
                                 <tr>
                                     <th width="150px">No Telepon</th>
                                     <th width="30px" class="text-center">:</th>
-                                    <td><strong><?= $tb_pengaduan['no_telepon'] ?? '' ?></strong></td>
+                                    <td>
+                                        <?php
+                                        // Ambil nomor telepon dari database
+                                        $no_telepon = $tb_pengaduan['no_telepon'] ?? '';
+
+                                        // Konversi nomor telepon ke format internasional
+                                        if (substr($no_telepon, 0, 1) == '0') {
+                                            $no_telepon_wa = '+62' . substr($no_telepon, 1);
+                                        } else {
+                                            $no_telepon_wa = $no_telepon;
+                                        }
+
+                                        // Buat link WhatsApp
+                                        $link_wa = "https://wa.me/{$no_telepon_wa}";
+                                        ?>
+                                        <a href="<?= esc($link_wa, 'attr'); ?>" target="_blank" class="text-success">
+                                            <?= esc($no_telepon); ?>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th width="150px">Email</th>
                                     <th width="30px" class="text-center">:</th>
-                                    <td><strong><?= $tb_pengaduan['email'] ?? '' ?></strong></td>
+                                    <td><?= $tb_pengaduan['email'] ?? '' ?></td>
                                 </tr>
                                 <tr>
                                     <th width="150px">Nama Desa</th>
                                     <th width="30px" class="text-center">:</th>
-                                    <td><strong><?= $tb_pengaduan['nama_desa'] ?? '' ?></strong></td>
+                                    <td><?= $tb_pengaduan['nama_desa'] ?? '' ?></td>
                                 </tr>
                                 <tr>
                                     <th width="150px">Nama Babin</th>
                                     <th width="30px" class="text-center">:</th>
-                                    <td><strong><?= $tb_pengaduan['nama_lengkap'] ?? '' ?></strong></td>
+                                    <td><?= $tb_pengaduan['nama_lengkap'] ?? '' ?></td>
                                 </tr>
                                 <tr>
                                     <th>Subjek</th>
                                     <th class="text-center">:</th>
-                                    <td><strong><?= $tb_pengaduan['subjek'] ?? '' ?></strong></td>
+                                    <td><?= $tb_pengaduan['subjek'] ?? '' ?></td>
                                 </tr>
                                 <tr>
                                     <th>Isi Pesan</th>

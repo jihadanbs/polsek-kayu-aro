@@ -13,28 +13,30 @@ class LaporanModel extends Model
     protected $useTimestamps = true;
     protected $useSoftDeletes = false;
 
-    public function getAllDataByUser()
+    public function getAllDataByUser($id_user)
     {
         return $this->db->table('tb_laporan_babin')
             ->select('tb_laporan_babin.*, GROUP_CONCAT(tb_babin.nama_lengkap SEPARATOR ", ") as nama_lengkap')
             ->join('tb_babin', 'tb_laporan_babin.id_babin = tb_babin.id_babin')
+            ->where('tb_laporan_babin.id_user', $id_user)
             ->groupBy('tb_laporan_babin.id_laporan_babin')
             ->orderBy('tb_laporan_babin.id_laporan_babin', 'DESC')
             ->get()
             ->getResultArray();
     }
 
-    public function getLaporanById1()
+    public function getLaporanById1($id_laporan_babin)
     {
         return $this->db->table('tb_laporan_babin')
             ->select('tb_laporan_babin.*, GROUP_CONCAT(tb_babin.nama_lengkap SEPARATOR ", ") as nama_lengkap')
             ->join('tb_babin', 'tb_laporan_babin.id_babin = tb_babin.id_babin')
+            ->where('tb_laporan_babin.id_laporan_babin', $id_laporan_babin)
             ->groupBy('tb_laporan_babin.id_laporan_babin')
             ->get()
             ->getRowArray();
     }
 
-    public function getLaporanById()
+    public function getLaporanById($id_laporan_babin)
     {
         return $this->db->table('tb_laporan_babin')
             ->select('tb_laporan_babin.*, 
@@ -43,6 +45,7 @@ class LaporanModel extends Model
             ->join('tb_babin', 'tb_laporan_babin.id_babin = tb_babin.id_babin', 'left')
             ->join('tb_galeri_laporan', 'tb_laporan_babin.id_laporan_babin = tb_galeri_laporan.id_laporan_babin', 'left')
             ->join('tb_file_foto_laporan', 'tb_galeri_laporan.id_file_foto_laporan = tb_file_foto_laporan.id_file_foto_laporan', 'left')
+            ->where('tb_laporan_babin.id_laporan_babin', $id_laporan_babin)
             ->groupBy('tb_laporan_babin.id_laporan_babin')
             ->get()
             ->getRowArray();
@@ -79,9 +82,9 @@ class LaporanModel extends Model
             ->delete();
     }
 
-    public function getTotalLaporan()
+    public function getTotalLaporan($id_user)
     {
-        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table);
+        $query = $this->db->query('SELECT COUNT(*) as total FROM ' . $this->table . ' WHERE id_user = ?', [$id_user]);
         $result = $query->getRow();
         return $result ? $result->total : 0;
     }

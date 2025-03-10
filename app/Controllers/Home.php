@@ -6,15 +6,17 @@ class Home extends BaseController
 {
     public function index()
     {
+        $id_user = 1;
+
         // WAJIB //
         $tb_pengaduan = $this->m_pengaduan->getPengaduan();
-        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser();
-        $tb_foto = $this->m_galeri->getFotoWithFile();
+        $tb_informasi_edukasi = $this->m_informasi->getAllDataByUser($id_user);
+        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
         $tb_faq = $this->m_faq->getAllData();
         $tb_slider_beranda = $this->m_slider->getAllData();
         $tb_review = $this->m_review->getAllData();
-        $tb_babin = $this->m_babin->getBabinByUserId();
-        $tb_desa = $this->m_desa->getAllData();
+        $tb_babin = $this->m_babin->getBabinByUserId($id_user);
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
         // END WAJIB //
 
         $data = [
@@ -29,6 +31,7 @@ class Home extends BaseController
             'tb_review' => $tb_review,
             'tb_babin' => $tb_babin,
             'tb_desa' => $tb_desa,
+            'id_user' => $id_user
             // END WAJIB //
         ];
 
@@ -37,11 +40,13 @@ class Home extends BaseController
 
     public function detailInformasi($id_informasi)
     {
+        $id_user = 1;
+
         // WAJIB //
-        $informasi = $this->m_informasi->getAllDataByUser();
+        $informasi = $this->m_informasi->getAllDataByUser($id_user);
         $tb_informasi_edukasi = $this->m_informasi->getInformasi($id_informasi);
         $categories = $this->m_informasi->getCategoriesWithCount();
-        $recent_posts = $this->m_informasi->getRecentPosts();
+        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
         // END WAJIB //
 
         $data = [
@@ -51,7 +56,8 @@ class Home extends BaseController
             'informasi' => $informasi,
             'categories' => $categories,
             'recent_posts' => $recent_posts,
-            'tb_informasi_edukasi' => $tb_informasi_edukasi
+            'tb_informasi_edukasi' => $tb_informasi_edukasi,
+            'id_user' => $id_user,
             // END WAJIB //
         ];
 
@@ -60,12 +66,13 @@ class Home extends BaseController
 
     public function statistik()
     {
-        $tb_desa = $this->m_desa->getAllData();
+        $id_user = 1;
+        $tb_desa = $this->m_desa->getAllDataByUser($id_user);
 
         // WAJIB //
-        $informasi = $this->m_informasi->getAllDataByUser();
+        $informasi = $this->m_informasi->getAllDataByUser($id_user);
         $categories = $this->m_informasi->getCategoriesWithCount();
-        $recent_posts = $this->m_informasi->getRecentPosts();
+        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
         // END WAJIB //
 
         $data = [
@@ -75,6 +82,7 @@ class Home extends BaseController
             'informasi' => $informasi,
             'categories' => $categories,
             'recent_posts' => $recent_posts,
+            'id_user' => $id_user,
             // END WAJIB //
         ];
 
@@ -83,11 +91,13 @@ class Home extends BaseController
 
     public function review()
     {
+        $id_user = 1;
+
         // WAJIB //
-        $informasi = $this->m_informasi->getAllDataByUser();
+        $informasi = $this->m_informasi->getAllDataByUser($id_user);
         $categories = $this->m_informasi->getCategoriesWithCount();
-        $recent_posts = $this->m_informasi->getRecentPosts();
-        $tb_foto = $this->m_galeri->getFotoWithFile();
+        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
+        $tb_foto = $this->m_galeri->getFotoWithFile($id_user);
         // END WAJIB //
 
         $data = [
@@ -98,6 +108,7 @@ class Home extends BaseController
             'categories' => $categories,
             'recent_posts' => $recent_posts,
             'tb_foto' => $tb_foto,
+            'id_user' => $id_user,
             // END WAJIB //
         ];
 
@@ -121,8 +132,22 @@ class Home extends BaseController
 
     public function cekPengaduan()
     {
+        $id_user = 1;
+
+        // WAJIB //
+        $informasi = $this->m_informasi->getAllDataByUser($id_user);
+        $categories = $this->m_informasi->getCategoriesWithCount();
+        $recent_posts = $this->m_informasi->getRecentPosts($id_user);
+        // END WAJIB //
+
         $data = [
-            'title' => 'Cek Pengaduan Masyarakat'
+            'title' => 'Cek Pengaduan Masyarakat',
+            // WAJIB //
+            'informasi' => $informasi,
+            'categories' => $categories,
+            'recent_posts' => $recent_posts,
+            'id_user' => $id_user,
+            // END WAJIB //
         ];
 
         return view('cek-pengaduan', $data);

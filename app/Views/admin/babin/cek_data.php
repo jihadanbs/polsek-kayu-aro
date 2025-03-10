@@ -98,7 +98,24 @@
                                 <tr>
                                     <th>No Telepon</th>
                                     <th class="text-center">:</th>
-                                    <td><?= esc($tb_babin['no_telepon'] ?? '') ?></td>
+                                    <td><?php
+                                        // Ambil nomor telepon dari database
+                                        $no_telepon = $tb_babin['no_telepon'] ?? '';
+
+                                        // Konversi nomor telepon ke format internasional
+                                        if (substr($no_telepon, 0, 1) == '0') {
+                                            $no_telepon_wa = '+62' . substr($no_telepon, 1);
+                                        } else {
+                                            $no_telepon_wa = $no_telepon;
+                                        }
+
+                                        // Buat link WhatsApp
+                                        $link_wa = "https://wa.me/{$no_telepon_wa}";
+                                        ?>
+                                        <a href="<?= esc($link_wa, 'attr'); ?>" target="_blank" class="text-success">
+                                            <?= esc($no_telepon); ?>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Email</th>

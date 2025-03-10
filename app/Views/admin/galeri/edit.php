@@ -40,7 +40,7 @@
                 <div class="col-10">
                     <div class="card border border-secondary rounded p-4">
                         <div class="card-body">
-                            <h2 class="text-center mb-4">Formulir Ubah Data Foto</h2>
+                            <h2 class="text-center mb-4">Formulir Ubah Data Foto Galeri</h2>
 
                             <form action="<?= esc(site_url('admin/galeri/update/' . urlencode($tb_foto['id_foto'])), 'attr') ?>" method="post" enctype="multipart/form-data" id="validationForm" novalidate autocomplete="off">
                                 <?= csrf_field(); ?>
@@ -51,41 +51,47 @@
                                 <div class="mb-3">
                                     <label for="judul_foto" class="col-form-label">Judul Foto</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control <?= ($validation->hasError('judul_foto')) ? 'is-invalid' : ''; ?>" id="judul_foto" style="background-color: white;" placeholder="Masukkan Judul Foto" name="judul_foto" value="<?= esc(old('judul_foto', $tb_foto['judul_foto']), 'attr'); ?>" autocomplete="off">
-                                        <small class="form-text text-muted">Judul Singkat Saja Maksimal 2-3 Kalimat. Cth: Kegiatan Warga Kerinci, Jambi</small>
-                                        <div class="invalid-feedback">
-                                            <?= $validation->getError('judul_foto'); ?>
-                                        </div>
+                                        <input type="text" class="form-control <?= session('errors.judul_foto') ? 'is-invalid' : '' ?>" id="judul_foto" style="background-color: white;" placeholder="Masukkan Judul Foto" name="judul_foto" value="<?= esc(old('judul_foto', $tb_foto['judul_foto']), 'attr'); ?>" autocomplete="off">
+                                        <?php if (session('errors.judul_foto')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.judul_foto') ?>
+                                            </div>
+                                        <?php endif ?>
+                                        <small class="form-text text-muted">Judul Singkat Saja Maksimal 2-4 Kalimat. Cth: Kegiatan Warga Kerinci, Jambi</small>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="deskripsi" class="col-form-label">Deskripsi</label><span style="color: red;">*</span>
-                                    <textarea class="form-control custom-border <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>" id="deskripsi" cols="30" rows="5" style="background-color: white;" placeholder="Masukkan Deskripsi" name="deskripsi" autocomplete="off"><?= esc(old('deskripsi', $tb_foto['deskripsi']), 'attr'); ?></textarea>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('deskripsi'); ?>
-                                    </div>
+                                    <textarea class="form-control custom-border <?= session('errors.deskripsi') ? 'is-invalid' : '' ?>" id="deskripsi" cols="30" rows="5" style="background-color: white;" placeholder="Masukkan Deskripsi" name="deskripsi" autocomplete="off"><?= esc(old('deskripsi', $tb_foto['deskripsi']), 'attr'); ?></textarea>
+                                    <?php if (session('errors.deskripsi')) : ?>
+                                        <div class="invalid-feedback">
+                                            <?= session('errors.deskripsi') ?>
+                                        </div>
+                                    <?php endif ?>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
                                         <label for="file_foto" class="col-form-label">File Foto</label><span style="color: red;">*</span>
-                                        <input type="file" accept="image/*" class="form-control custom-border" id="file_foto" name="file_foto[]" style="background-color: white;" <?= (old('file_foto')) ? 'disabled' : 'required'; ?> multiple>
-                                        <small class="form-text text-muted">
-                                            <span style="color: blue;">NOTE : Untuk Menginputkan 3 Foto atau Lebih Anda Dapat Menggunakan CTRL Pada Keyboard Lalu<span style="color: red;"> TAHAN CTRL nya </span> Sambil Pilih Gambar yang Dimau Lalu Klik Kiri pada MOUSE ataupun TOUCHPAD (CTRL Masih Tetap Ditahan Ya!). Lakukan Hal Yang Sama Untuk Memilih Foto Lainnya.</span>
-                                        </small>
-                                        <?php if (!empty($tb_foto['file_foto'])) : ?>
-                                            <input type="hidden" name="old_file_foto" value="<?= esc($tb_foto['file_foto'], 'attr'); ?>">
-                                        <?php endif; ?>
+                                        <input type="file" accept="image/*" class="form-control custom-border <?= session('errors.file_foto') ? 'is-invalid' : '' ?>" id="file_foto" name="file_foto[]" style="background-color: white;" <?= (old('file_foto')) ? 'disabled' : 'required'; ?> multiple>
+                                        <?php if (session('errors.file_foto')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.file_foto') ?>
+                                            </div>
+                                        <?php endif ?>
+                                        <small class="form-text text-muted">Tidak perlu menginputkan ulang, jika tidak ingin mengubah foto</small>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="tanggal_foto" class="col-form-label">Tanggal Ubah Upload Foto</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
-                                            <input type="date" class="form-control <?= ($validation->hasError('tanggal_foto')) ? 'is-invalid' : ''; ?>" id="tanggal_foto" style="background-color: white;" name="tanggal_foto" value="<?= esc(old('tanggal_foto', $tb_foto['tanggal_foto']), 'attr'); ?>">
-                                            <div class="invalid-feedback">
-                                                <?= $validation->getError('tanggal_foto'); ?>
-                                            </div>
+                                            <input type="date" class="form-control <?= session('errors.tanggal_foto') ? 'is-invalid' : '' ?>" id="tanggal_foto" style="background-color: white;" name="tanggal_foto" value="<?= esc(old('tanggal_foto', $tb_foto['tanggal_foto']), 'attr'); ?>">
+                                            <?php if (session('errors.tanggal_foto')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.tanggal_foto') ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </div>

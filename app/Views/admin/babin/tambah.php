@@ -54,10 +54,12 @@
                                 <div class="mb-3">
                                     <label for="nama_lengkap" class="col-form-label">Nama Lengkap</label><span style="color: red;">*</span>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control <?= ($validation->hasError('nama_lengkap')) ? 'is-invalid' : ''; ?>" id="nama_lengkap" autofocus name="nama_lengkap" placeholder="Masukkan Nama Lengkap Anda" style="background-color: white;" value="<?= esc(old('nama_lengkap'), 'attr'); ?>">
-                                        <div class="invalid-feedback">
-                                            <?= esc($validation->getError('nama_lengkap'), 'html'); ?>
-                                        </div>
+                                        <input type="text" class="form-control <?= session('errors.nama_lengkap') ? 'is-invalid' : '' ?>" id="nama_lengkap" autofocus name="nama_lengkap" placeholder="Masukkan Nama Lengkap Anda" style="background-color: white;" value="<?= esc(old('nama_lengkap'), 'attr'); ?>">
+                                        <?php if (session('errors.nama_lengkap')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.nama_lengkap') ?>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
 
@@ -65,21 +67,25 @@
                                     <div class="col-md-6 mb-3 separator">
                                         <label for="nrp" class="col-form-label">NRP (Nomor Registrasi Pokok)</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control <?= ($validation->hasError('nrp')) ? 'is-invalid' : ''; ?>" id="nrp" name="nrp" placeholder="Masukkan NRP Anda" style="background-color: white;" value="<?= esc(old('nrp'), 'attr'); ?>" required>
+                                            <input type="text" class="form-control <?= session('errors.nrp') ? 'is-invalid' : '' ?>" id="nrp" name="nrp" placeholder="Masukkan NRP Anda" style="background-color: white;" value="<?= esc(old('nrp'), 'attr'); ?>" required>
                                             <small class="form-text text-muted">Cek Kembali NRP Anda</small>
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('nrp'), 'html'); ?>
-                                            </div>
+                                            <?php if (session('errors.nrp')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.nrp') ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mb-3 ">
                                         <label for="pangkat" class="col-form-label">Pangkat</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control <?= ($validation->hasError('pangkat')) ? 'is-invalid' : ''; ?>" id="pangkat" name="pangkat" placeholder="Masukkan Pangkat Anda" style="background-color: white;" value="<?= esc(old('pangkat'), 'attr'); ?>">
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('pangkat'), 'html'); ?>
-                                            </div>
+                                            <input type="text" class="form-control <?= session('errors.pangkat') ? 'is-invalid' : '' ?>" id="pangkat" name="pangkat" placeholder="Masukkan Pangkat Anda" style="background-color: white;" value="<?= esc(old('pangkat'), 'attr'); ?>">
+                                            <?php if (session('errors.pangkat')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.pangkat') ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </div>
@@ -88,61 +94,73 @@
                                     <div class="col-md-6 mb-3 separator">
                                         <label for="jabatan" class="col-form-label">Jabatan</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : ''; ?>" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan Anda" style="background-color: white;" value="<?= esc(old('jabatan'), 'attr'); ?>" required>
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('jabatan'), 'html'); ?>
-                                            </div>
+                                            <input type="text" class="form-control <?= session('errors.jabatan') ? 'is-invalid' : '' ?>" id="jabatan" name="jabatan" placeholder="Masukkan Jabatan Anda" style="background-color: white;" value="<?= esc(old('jabatan'), 'attr'); ?>" required>
+                                            <?php if (session('errors.jabatan')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.jabatan') ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="no_telepon" class="col-form-label">Nomor Telepon</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
-                                            <input type="text" class="form-control <?= ($validation->hasError('no_telepon')) ? 'is-invalid' : ''; ?>" id="no_telepon" name="no_telepon" placeholder="Masukkan Nomor Telepon Aktif Anda (Cth : 0812345678)" style="background-color: white;" value="<?= esc(old('no_telepon'), 'attr'); ?>">
+                                            <input type="text" class="form-control <?= session('errors.no_telepon') ? 'is-invalid' : '' ?>" id="no_telepon" name="no_telepon" placeholder="Masukkan Nomor Telepon Aktif Anda (Cth : 0812345678)" style="background-color: white;" value="<?= esc(old('no_telepon'), 'attr'); ?>">
                                             <small class="form-text text-muted">Pastikan Nomor Telepon Anda Aktif (Bisa No HP / Whatsapp)</small>
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('no_telepon'), 'html'); ?>
-                                            </div>
+                                            <?php if (session('errors.no_telepon')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.no_telepon') ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="alamat" class="col-form-label">Alamat</label><span style="color: red;">*</span>
-                                    <textarea class="form-control custom-border <?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?>" required name="alamat" placeholder="Masukkan Alamat Lengkap Anda" id="alamat" cols="30" rows="5" style="background-color: white;"><?= esc(old('alamat'), 'html'); ?></textarea>
-                                    <div class="invalid-feedback">
-                                        <?= esc($validation->getError('alamat'), 'html'); ?>
-                                    </div>
+                                    <textarea class="form-control custom-border <?= session('errors.alamat') ? 'is-invalid' : '' ?>" required name="alamat" placeholder="Masukkan Alamat Lengkap Anda" id="alamat" cols="30" rows="5" style="background-color: white;"><?= esc(old('alamat'), 'html'); ?></textarea>
+                                    <?php if (session('errors.alamat')) : ?>
+                                        <div class="invalid-feedback">
+                                            <?= session('errors.alamat') ?>
+                                        </div>
+                                    <?php endif ?>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3 separator">
                                         <label for="email" class="col-form-label">Email</label><span style="color: red;">*</span>
                                         <div class="col-sm-12">
-                                            <input type="email" class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="email" name="email" placeholder="Masukkan Alamat Email Aktif Anda" style="background-color: white;" value="<?= esc(old('email'), 'attr'); ?>">
+                                            <input type="email" class="form-control <?= session('errors.email') ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Masukkan Alamat Email Aktif Anda" style="background-color: white;" value="<?= esc(old('email'), 'attr'); ?>">
                                             <small class="form-text text-muted">Pastikan Email Anda Aktif</small>
-                                            <div class="invalid-feedback">
-                                                <?= esc($validation->getError('email'), 'html'); ?>
-                                            </div>
+                                            <?php if (session('errors.email')) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= session('errors.email') ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="tanggal_mulai_tugas" class="col-form-label">Tanggal Mulai Tugas</label><span style="color: red;">*</span>
-                                        <input type="date" class="form-control <?= ($validation->hasError('tanggal_mulai_tugas')) ? 'is-invalid' : ''; ?>" name="tanggal_mulai_tugas" id="tanggal_mulai_tugas" style="background-color: white;" value="<?= esc(old('tanggal_mulai_tugas'), 'attr'); ?>">
-                                        <div class="invalid-feedback">
-                                            <?= esc($validation->getError('tanggal_mulai_tugas'), 'html'); ?>
-                                        </div>
+                                        <input type="date" class="form-control <?= session('errors.tanggal_mulai_tugas') ? 'is-invalid' : '' ?>" name="tanggal_mulai_tugas" id="tanggal_mulai_tugas" style="background-color: white;" value="<?= esc(old('tanggal_mulai_tugas'), 'attr'); ?>">
+                                        <?php if (session('errors.tanggal_mulai_tugas')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.tanggal_mulai_tugas') ?>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="foto" class="col-form-label">Upload Foto</label><span style="color: red;">*</span>
-                                    <input type="file" accept="image/*" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" name="foto" style="background-color: white;" <?= (old('foto')) ? 'disabled' : 'required'; ?>>
+                                    <input type="file" accept="image/*" class="form-control <?= session('errors.foto') ? 'is-invalid' : '' ?>" id="foto" name="foto" style="background-color: white;" <?= (old('foto')) ? 'disabled' : 'required'; ?>>
                                     <small class="form-text text-muted">Pastikan Foto Yang Diunggah Tidak Lebih Dari 5MB</small>
-                                    <div class="invalid-feedback">
-                                        <?= esc($validation->getError('foto'), 'html'); ?>
-                                    </div>
+                                    <?php if (session('errors.foto')) : ?>
+                                        <div class="invalid-feedback">
+                                            <?= session('errors.foto') ?>
+                                        </div>
+                                    <?php endif ?>
                                 </div>
 
                                 <div class="mb-3">
@@ -157,7 +175,7 @@
                                         <?php endif; ?>
                                         <div class="col-md-2">
                                             <div class="form-check">
-                                                <input class="form-check-input <?= ($validation->hasError('id_desa')) ? 'is-invalid' : ''; ?>" type="checkbox" id="id_desa_<?= esc($value['id_desa'], 'attr'); ?>" name="id_desa[]" value="<?= esc($value['id_desa'], 'attr'); ?>" <?= in_array($value['id_desa'], old('id_desa', [])) ? 'checked' : ''; ?>>
+                                                <input class="form-check-input <?= session('errors.id_desa') ? 'is-invalid' : '' ?>" type="checkbox" id="id_desa_<?= esc($value['id_desa'], 'attr'); ?>" name="id_desa[]" value="<?= esc($value['id_desa'], 'attr'); ?>" <?= in_array($value['id_desa'], old('id_desa', [])) ? 'checked' : ''; ?>>
                                                 <label class="form-check-label" for="id_desa_<?= esc($value['id_desa'], 'attr'); ?>">
                                                     <?= esc($value['nama_desa'], 'html'); ?>
                                                 </label>
@@ -165,9 +183,11 @@
                                         </div>
                                     <?php endforeach; ?>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            <?= esc($validation->getError('id_desa'), 'html'); ?>
-                                        </div>
+                                        <?php if (session('errors.id_desa')) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= session('errors.id_desa') ?>
+                                            </div>
+                                        <?php endif ?>
                                         <p id="selected-count">Jumlah Desa yang Dipilih: <span id="count">0</span></p>
                                     </div>
                                 </div>
