@@ -119,7 +119,7 @@
 
                         <div class="form-group mb-4 mt-4">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="<?= esc(site_url('admin/review'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
+                                <a href="<?= esc(site_url('/admin/review'), 'attr') ?>" class="btn btn-secondary btn-md ml-3">
                                     <i class="fas fa-arrow-left"></i> Kembali
                                 </a>
                                 <button type="button" class="btn btn-danger btn-md ml-3 waves-effect waves-light sa-warning" data-id="<?= $tb_review['id_reviewer'] ?>">

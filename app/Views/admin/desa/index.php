@@ -95,7 +95,7 @@
                             <table id="example1" class="table table-bordered dt-responsive nowrap w-100">
                                 <?= $this->include('alert/alert'); ?>
                                 <div class="col-md-3 mb-3">
-                                    <a href="<?= esc(site_url('admin/desa/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
+                                    <a href="<?= esc(site_url('/admin/desa/tambah'), 'attr') ?>" class="btn waves-effect waves-light" style="background-color: #28527A; color:white;">
                                         <i class="fas fa-plus font-size-16 align-middle me-2"></i> Tambah
                                     </a>
                                 </div>

@@ -116,7 +116,7 @@
             <nav class="breadcrumbs">
                 <div class="container">
                     <ol>
-                        <li><a href="/">Beranda</a></li>
+                        <li><a href="<?= site_url('/') ?>">Beranda</a></li>
                         <li class="current">Review Pengunjung</li>
                     </ol>
                 </div>

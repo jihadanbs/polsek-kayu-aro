@@ -18,7 +18,7 @@
     <div class="branding d-flex align-items-cente">
 
         <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="<?= site_url('/') ?>" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">Polsek Kayu Aro</h1>
@@ -27,13 +27,13 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/#">Beranda<br></a></li>
-                    <li><a href="/#tentang-kami">Tentang Kami</a></li>
-                    <li><a href="/#layanan">Layanan</a></li>
-                    <li><a href="/#galeri">Galeri</a></li>
-                    <li><a href="/#informasi-edukasi">Informasi-Edukasi</a></li>
-                    <li><a href="/#pengaduan">Pengaduan</a></li>
-                    <li><a href="/cek-pengaduan">Cek Pengaduan</a></li>
+                    <li><a href="<?= site_url('/#') ?>" class="active">Beranda<br></a></li>
+                    <li><a href="<?= site_url('/#tentang-kami') ?>">Tentang Kami</a></li>
+                    <li><a href="<?= site_url('/#layanan') ?>">Layanan</a></li>
+                    <li><a href="<?= site_url('/#galeri') ?>">Galeri</a></li>
+                    <li><a href="<?= site_url('/#informasi-edukasi') ?>">Informasi-Edukasi</a></li>
+                    <li><a href="<?= site_url('/#pengaduan') ?>">Pengaduan</a></li>
+                    <li><a href="<?= site_url('/cek-pengaduan') ?>">Cek Pengaduan</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

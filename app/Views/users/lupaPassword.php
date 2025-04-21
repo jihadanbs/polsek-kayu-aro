@@ -16,7 +16,7 @@
                         <div class="w-100">
                             <div class="d-flex flex-column h-100">
                                 <div class="mb-4 mb-md-5 text-center">
-                                    <a href="/" class="d-block auth-logo" target="_blank">
+                                    <a href="<?= site_url('/') ?>" class="d-block auth-logo" target="_blank">
                                         <img src="<?= base_url('assets/img/binmas.png') ?>" alt="" height="28"> <span class="logo-txt">Polsek Kayu Aro</span>
                                     </a>
                                 </div>

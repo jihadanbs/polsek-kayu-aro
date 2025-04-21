@@ -3,14 +3,14 @@
     <div class="container footer-top">
         <div class="row gy-4">
             <div class="col-lg-5 col-md-12 footer-about">
-                <a href="/" class="logo d-flex align-items-center">
+                <a href="<?= site_url('/') ?>" class="logo d-flex align-items-center">
                     <span class="sitename">Polsek Kayu Aro</span>
                 </a>
                 <p>Polsek Kayu Aro hadir untuk melayani dan melindungi masyarakat dengan sepenuh hati. Kami berdedikasi untuk menjaga keamanan dan ketertiban di wilayah Kayu Aro, serta siap memberikan pelayanan terbaik kepada seluruh warga. Bersama, kita ciptakan lingkungan yang aman dan nyaman.</p>
                 <div class="social-links d-flex mt-4">
-                    <a href="/"><i class="bi bi-twitter-x"></i></a>
-                    <a href="/"><i class="bi bi-facebook"></i></a>
-                    <a href="/"><i class="bi bi-instagram"></i></a>
+                    <a href="<?= site_url('/') ?>"><i class="bi bi-twitter-x"></i></a>
+                    <a href="<?= site_url('/') ?>"><i class="bi bi-facebook"></i></a>
+                    <a href="<?= site_url('/') ?>"><i class="bi bi-instagram"></i></a>
                 </div>
             </div>
 

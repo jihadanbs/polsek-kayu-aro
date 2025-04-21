@@ -108,7 +108,7 @@
             <div class="navbar">
                 <!-- LOGO -->
                 <div class="navbar-brand-box">
-                    <a href="dashboard" class="logo logo-dark">
+                    <a href="<?= esc(site_url('/dashboard'), 'attr') ?>" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="<?= base_url('assets/img/binmas.png') ?>" alt="" height="24">
                         </span>
@@ -117,7 +117,7 @@
                         </span>
                     </a>
 
-                    <a href="dashboard" class="logo logo-light">
+                    <a href="<?= esc(site_url('/dashboard'), 'attr') ?>" class="logo logo-light">
                         <span class="logo-sm">
                             <img src="<?= base_url('assets/img/binmas.png') ?>" alt="" height="24">
                         </span>
@@ -192,7 +192,7 @@
                         <?php else : ?>
                             <?php foreach ($unread as $pengaduan) : ?>
                                 <?php if ($pengaduan->status == 'Belum dibalas') : ?>
-                                    <a href="<?= base_url('/admin/pengaduan/cek_data/' . $pengaduan->id_pengaduan) ?>" class="text-reset notification-item">
+                                    <a href="<?= site_url('/admin/pengaduan/cek_data/' . $pengaduan->id_pengaduan) ?>" class="text-reset notification-item">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <img src="<?= base_url('assets/img/internalserver.gif') ?>" class="rounded-circle avatar-sm" alt="user-pic">

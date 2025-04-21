@@ -132,7 +132,7 @@
                                             </a>
                                         <?php else : ?>
                                             <a href="#" title="File tidak tersedia">
-                                                <img src="<?= base_url('path/to/default/image.jpg') ?>" width="250px" height="200px" alt="Gambar tidak tersedia" id="gambar_load">
+                                                <img src="<?= base_url('assets/img/404.gif') ?>" width="250px" height="200px" alt="Gambar tidak tersedia" id="gambar_load">
                                             </a>
                                         <?php endif; ?>
                                     </td>

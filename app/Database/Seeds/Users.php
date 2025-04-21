@@ -17,7 +17,7 @@ class Users extends Seeder
                 'password' => password_hash('1234', PASSWORD_BCRYPT),
                 'status' => 'aktif',
                 'email' => 'jihadanb@gmail.com',
-                'no_telepon' => '088215212122',
+                'no_telepon' => '082282061449',
                 'file_profil' => ''
             ],
             [

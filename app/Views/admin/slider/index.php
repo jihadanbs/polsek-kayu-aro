@@ -113,7 +113,7 @@
                                                 <img src="<?= base_url($row['gambar_slider']); ?>" alt="Gambar Slider" style="width: 100px; height: 60px;">
                                             </td>
                                             <td style="width: 155px">
-                                                <a href="/admin/slider/edit/<?= $row['id_slider_beranda'] ?>" class="btn btn-warning btn-sm edit">
+                                                <a href="<?= esc(site_url('/admin/slider/edit/' . $row['id_slider_beranda']), 'attr') ?>" class="btn btn-warning btn-sm edit">
                                                     <i class="fas fa-edit"></i> Ubah</a>
                                                 </a>
                                                 <button type="button" class="btn btn-danger btn-sm waves-effect waves-light sa-warning" data-id="<?= $row['id_slider_beranda'] ?>">
